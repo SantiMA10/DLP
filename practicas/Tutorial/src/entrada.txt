@@ -1,1 +1,9 @@
-;
+// Comentario
+/* Prueba del otro comentario */
+DATA
+	float precio;
+	int ancho;
+CODE
+	precio = (ancho - 3.0) * 1.18;
+	print precio + 2 / 5;
+
