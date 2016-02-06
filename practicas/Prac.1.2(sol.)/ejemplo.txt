@@ -1,0 +1,13 @@
+main() {
+	i:int;
+	v:[10] real;
+	
+	i = 0;
+	while (i<10) {
+		read v[i];
+		if (v[i] > 0) {
+			write v[i];
+		}
+		i = i + 1;
+	}
+}
