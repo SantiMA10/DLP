@@ -1,0 +1,685 @@
+   0  $accept : programa $end
+
+   1  programa : seccion_data seccion_code
+
+   2  seccion_data : "DATA" definiciones
+
+   3  definiciones : definicion
+   4               | definiciones definicion
+
+   5  definicion : tipo "IDENT" ';'
+
+   6  tipo : "REAL"
+   7       | "INT"
+
+   8  seccion_code : "CODE" sentencias
+
+   9  sentencias : sentencia
+  10             | sentencias sentencia
+
+  11  sentencia : "PRINT" expr ';'
+  12            | "READ" "IDENT" ';'
+  13            | "IDENT" '=' expr ';'
+  14            | while
+  15            | if
+
+  16  expr : "LITENT"
+  17       | "IDENT"
+  18       | "LITREAL"
+  19       | expr '+' expr
+  20       | expr '<' expr
+  21       | expr '>' expr
+  22       | '(' expr ')'
+  23       | '<' tipo '>' '(' expr ')'
+
+  24  if : "IF" '(' expr ')' '{' sentencias '}'
+  25     | "IF" '(' expr ')' '{' sentencias '}' "ELSE" '{' sentencias '}'
+
+  26  while : "WHILE" '(' expr ')' '{' sentencias '}'
+
+state 0
+	$accept : . programa $end  (0)
+
+	"DATA"  shift 1
+	.  error
+
+	programa  goto 2
+	seccion_data  goto 3
+
+
+state 1
+	seccion_data : "DATA" . definiciones  (2)
+
+	"REAL"  shift 4
+	"INT"  shift 5
+	.  error
+
+	definiciones  goto 6
+	definicion  goto 7
+	tipo  goto 8
+
+
+state 2
+	$accept : programa . $end  (0)
+
+	$end  accept
+
+
+state 3
+	programa : seccion_data . seccion_code  (1)
+
+	"CODE"  shift 9
+	.  error
+
+	seccion_code  goto 10
+
+
+state 4
+	tipo : "REAL" .  (6)
+
+	.  reduce 6
+
+
+state 5
+	tipo : "INT" .  (7)
+
+	.  reduce 7
+
+
+state 6
+	seccion_data : "DATA" definiciones .  (2)
+	definiciones : definiciones . definicion  (4)
+
+	"REAL"  shift 4
+	"INT"  shift 5
+	"CODE"  reduce 2
+
+	definicion  goto 11
+	tipo  goto 8
+
+
+state 7
+	definiciones : definicion .  (3)
+
+	.  reduce 3
+
+
+state 8
+	definicion : tipo . "IDENT" ';'  (5)
+
+	"IDENT"  shift 12
+	.  error
+
+
+state 9
+	seccion_code : "CODE" . sentencias  (8)
+
+	"IDENT"  shift 13
+	"PRINT"  shift 14
+	"READ"  shift 15
+	"IF"  shift 16
+	"WHILE"  shift 17
+	.  error
+
+	sentencias  goto 18
+	sentencia  goto 19
+	while  goto 20
+	if  goto 21
+
+
+state 10
+	programa : seccion_data seccion_code .  (1)
+
+	.  reduce 1
+
+
+state 11
+	definiciones : definiciones definicion .  (4)
+
+	.  reduce 4
+
+
+state 12
+	definicion : tipo "IDENT" . ';'  (5)
+
+	';'  shift 22
+	.  error
+
+
+state 13
+	sentencia : "IDENT" . '=' expr ';'  (13)
+
+	'='  shift 23
+	.  error
+
+
+state 14
+	sentencia : "PRINT" . expr ';'  (11)
+
+	'<'  shift 24
+	"IDENT"  shift 25
+	"LITENT"  shift 26
+	"LITREAL"  shift 27
+	'('  shift 28
+	.  error
+
+	expr  goto 29
+
+
+state 15
+	sentencia : "READ" . "IDENT" ';'  (12)
+
+	"IDENT"  shift 30
+	.  error
+
+
+state 16
+	if : "IF" . '(' expr ')' '{' sentencias '}'  (24)
+	if : "IF" . '(' expr ')' '{' sentencias '}' "ELSE" '{' sentencias '}'  (25)
+
+	'('  shift 31
+	.  error
+
+
+state 17
+	while : "WHILE" . '(' expr ')' '{' sentencias '}'  (26)
+
+	'('  shift 32
+	.  error
+
+
+state 18
+	seccion_code : "CODE" sentencias .  (8)
+	sentencias : sentencias . sentencia  (10)
+
+	"IDENT"  shift 13
+	"PRINT"  shift 14
+	"READ"  shift 15
+	"IF"  shift 16
+	"WHILE"  shift 17
+	$end  reduce 8
+
+	sentencia  goto 33
+	while  goto 20
+	if  goto 21
+
+
+state 19
+	sentencias : sentencia .  (9)
+
+	.  reduce 9
+
+
+state 20
+	sentencia : while .  (14)
+
+	.  reduce 14
+
+
+state 21
+	sentencia : if .  (15)
+
+	.  reduce 15
+
+
+state 22
+	definicion : tipo "IDENT" ';' .  (5)
+
+	.  reduce 5
+
+
+state 23
+	sentencia : "IDENT" '=' . expr ';'  (13)
+
+	'<'  shift 24
+	"IDENT"  shift 25
+	"LITENT"  shift 26
+	"LITREAL"  shift 27
+	'('  shift 28
+	.  error
+
+	expr  goto 34
+
+
+state 24
+	expr : '<' . tipo '>' '(' expr ')'  (23)
+
+	"REAL"  shift 4
+	"INT"  shift 5
+	.  error
+
+	tipo  goto 35
+
+
+state 25
+	expr : "IDENT" .  (17)
+
+	.  reduce 17
+
+
+state 26
+	expr : "LITENT" .  (16)
+
+	.  reduce 16
+
+
+state 27
+	expr : "LITREAL" .  (18)
+
+	.  reduce 18
+
+
+state 28
+	expr : '(' . expr ')'  (22)
+
+	'<'  shift 24
+	"IDENT"  shift 25
+	"LITENT"  shift 26
+	"LITREAL"  shift 27
+	'('  shift 28
+	.  error
+
+	expr  goto 36
+
+
+state 29
+	sentencia : "PRINT" expr . ';'  (11)
+	expr : expr . '+' expr  (19)
+	expr : expr . '<' expr  (20)
+	expr : expr . '>' expr  (21)
+
+	'<'  shift 37
+	'>'  shift 38
+	'+'  shift 39
+	';'  shift 40
+	.  error
+
+
+state 30
+	sentencia : "READ" "IDENT" . ';'  (12)
+
+	';'  shift 41
+	.  error
+
+
+state 31
+	if : "IF" '(' . expr ')' '{' sentencias '}'  (24)
+	if : "IF" '(' . expr ')' '{' sentencias '}' "ELSE" '{' sentencias '}'  (25)
+
+	'<'  shift 24
+	"IDENT"  shift 25
+	"LITENT"  shift 26
+	"LITREAL"  shift 27
+	'('  shift 28
+	.  error
+
+	expr  goto 42
+
+
+state 32
+	while : "WHILE" '(' . expr ')' '{' sentencias '}'  (26)
+
+	'<'  shift 24
+	"IDENT"  shift 25
+	"LITENT"  shift 26
+	"LITREAL"  shift 27
+	'('  shift 28
+	.  error
+
+	expr  goto 43
+
+
+state 33
+	sentencias : sentencias sentencia .  (10)
+
+	.  reduce 10
+
+
+state 34
+	sentencia : "IDENT" '=' expr . ';'  (13)
+	expr : expr . '+' expr  (19)
+	expr : expr . '<' expr  (20)
+	expr : expr . '>' expr  (21)
+
+	'<'  shift 37
+	'>'  shift 38
+	'+'  shift 39
+	';'  shift 44
+	.  error
+
+
+state 35
+	expr : '<' tipo . '>' '(' expr ')'  (23)
+
+	'>'  shift 45
+	.  error
+
+
+state 36
+	expr : expr . '+' expr  (19)
+	expr : expr . '<' expr  (20)
+	expr : expr . '>' expr  (21)
+	expr : '(' expr . ')'  (22)
+
+	'<'  shift 37
+	'>'  shift 38
+	'+'  shift 39
+	')'  shift 46
+	.  error
+
+
+state 37
+	expr : expr '<' . expr  (20)
+
+	'<'  shift 24
+	"IDENT"  shift 25
+	"LITENT"  shift 26
+	"LITREAL"  shift 27
+	'('  shift 28
+	.  error
+
+	expr  goto 47
+
+
+state 38
+	expr : expr '>' . expr  (21)
+
+	'<'  shift 24
+	"IDENT"  shift 25
+	"LITENT"  shift 26
+	"LITREAL"  shift 27
+	'('  shift 28
+	.  error
+
+	expr  goto 48
+
+
+state 39
+	expr : expr '+' . expr  (19)
+
+	'<'  shift 24
+	"IDENT"  shift 25
+	"LITENT"  shift 26
+	"LITREAL"  shift 27
+	'('  shift 28
+	.  error
+
+	expr  goto 49
+
+
+state 40
+	sentencia : "PRINT" expr ';' .  (11)
+
+	.  reduce 11
+
+
+state 41
+	sentencia : "READ" "IDENT" ';' .  (12)
+
+	.  reduce 12
+
+
+state 42
+	expr : expr . '+' expr  (19)
+	expr : expr . '<' expr  (20)
+	expr : expr . '>' expr  (21)
+	if : "IF" '(' expr . ')' '{' sentencias '}'  (24)
+	if : "IF" '(' expr . ')' '{' sentencias '}' "ELSE" '{' sentencias '}'  (25)
+
+	'<'  shift 37
+	'>'  shift 38
+	'+'  shift 39
+	')'  shift 50
+	.  error
+
+
+state 43
+	expr : expr . '+' expr  (19)
+	expr : expr . '<' expr  (20)
+	expr : expr . '>' expr  (21)
+	while : "WHILE" '(' expr . ')' '{' sentencias '}'  (26)
+
+	'<'  shift 37
+	'>'  shift 38
+	'+'  shift 39
+	')'  shift 51
+	.  error
+
+
+state 44
+	sentencia : "IDENT" '=' expr ';' .  (13)
+
+	.  reduce 13
+
+
+state 45
+	expr : '<' tipo '>' . '(' expr ')'  (23)
+
+	'('  shift 52
+	.  error
+
+
+state 46
+	expr : '(' expr ')' .  (22)
+
+	.  reduce 22
+
+
+state 47
+	expr : expr . '+' expr  (19)
+	expr : expr . '<' expr  (20)
+	expr : expr '<' expr .  (20)
+	expr : expr . '>' expr  (21)
+
+	'+'  shift 39
+	'<'  reduce 20
+	'>'  reduce 20
+	';'  reduce 20
+	')'  reduce 20
+
+
+state 48
+	expr : expr . '+' expr  (19)
+	expr : expr . '<' expr  (20)
+	expr : expr . '>' expr  (21)
+	expr : expr '>' expr .  (21)
+
+	'+'  shift 39
+	'<'  reduce 21
+	'>'  reduce 21
+	';'  reduce 21
+	')'  reduce 21
+
+
+state 49
+	expr : expr . '+' expr  (19)
+	expr : expr '+' expr .  (19)
+	expr : expr . '<' expr  (20)
+	expr : expr . '>' expr  (21)
+
+	.  reduce 19
+
+
+state 50
+	if : "IF" '(' expr ')' . '{' sentencias '}'  (24)
+	if : "IF" '(' expr ')' . '{' sentencias '}' "ELSE" '{' sentencias '}'  (25)
+
+	'{'  shift 53
+	.  error
+
+
+state 51
+	while : "WHILE" '(' expr ')' . '{' sentencias '}'  (26)
+
+	'{'  shift 54
+	.  error
+
+
+state 52
+	expr : '<' tipo '>' '(' . expr ')'  (23)
+
+	'<'  shift 24
+	"IDENT"  shift 25
+	"LITENT"  shift 26
+	"LITREAL"  shift 27
+	'('  shift 28
+	.  error
+
+	expr  goto 55
+
+
+state 53
+	if : "IF" '(' expr ')' '{' . sentencias '}'  (24)
+	if : "IF" '(' expr ')' '{' . sentencias '}' "ELSE" '{' sentencias '}'  (25)
+
+	"IDENT"  shift 13
+	"PRINT"  shift 14
+	"READ"  shift 15
+	"IF"  shift 16
+	"WHILE"  shift 17
+	.  error
+
+	sentencias  goto 56
+	sentencia  goto 19
+	while  goto 20
+	if  goto 21
+
+
+state 54
+	while : "WHILE" '(' expr ')' '{' . sentencias '}'  (26)
+
+	"IDENT"  shift 13
+	"PRINT"  shift 14
+	"READ"  shift 15
+	"IF"  shift 16
+	"WHILE"  shift 17
+	.  error
+
+	sentencias  goto 57
+	sentencia  goto 19
+	while  goto 20
+	if  goto 21
+
+
+state 55
+	expr : expr . '+' expr  (19)
+	expr : expr . '<' expr  (20)
+	expr : expr . '>' expr  (21)
+	expr : '<' tipo '>' '(' expr . ')'  (23)
+
+	'<'  shift 37
+	'>'  shift 38
+	'+'  shift 39
+	')'  shift 58
+	.  error
+
+
+state 56
+	sentencias : sentencias . sentencia  (10)
+	if : "IF" '(' expr ')' '{' sentencias . '}'  (24)
+	if : "IF" '(' expr ')' '{' sentencias . '}' "ELSE" '{' sentencias '}'  (25)
+
+	"IDENT"  shift 13
+	"PRINT"  shift 14
+	"READ"  shift 15
+	"IF"  shift 16
+	'}'  shift 59
+	"WHILE"  shift 17
+	.  error
+
+	sentencia  goto 33
+	while  goto 20
+	if  goto 21
+
+
+state 57
+	sentencias : sentencias . sentencia  (10)
+	while : "WHILE" '(' expr ')' '{' sentencias . '}'  (26)
+
+	"IDENT"  shift 13
+	"PRINT"  shift 14
+	"READ"  shift 15
+	"IF"  shift 16
+	'}'  shift 60
+	"WHILE"  shift 17
+	.  error
+
+	sentencia  goto 33
+	while  goto 20
+	if  goto 21
+
+
+state 58
+	expr : '<' tipo '>' '(' expr ')' .  (23)
+
+	.  reduce 23
+
+
+state 59
+	if : "IF" '(' expr ')' '{' sentencias '}' .  (24)
+	if : "IF" '(' expr ')' '{' sentencias '}' . "ELSE" '{' sentencias '}'  (25)
+
+	"ELSE"  shift 61
+	$end  reduce 24
+	"IDENT"  reduce 24
+	"PRINT"  reduce 24
+	"READ"  reduce 24
+	"IF"  reduce 24
+	'}'  reduce 24
+	"WHILE"  reduce 24
+
+
+state 60
+	while : "WHILE" '(' expr ')' '{' sentencias '}' .  (26)
+
+	.  reduce 26
+
+
+state 61
+	if : "IF" '(' expr ')' '{' sentencias '}' "ELSE" . '{' sentencias '}'  (25)
+
+	'{'  shift 62
+	.  error
+
+
+state 62
+	if : "IF" '(' expr ')' '{' sentencias '}' "ELSE" '{' . sentencias '}'  (25)
+
+	"IDENT"  shift 13
+	"PRINT"  shift 14
+	"READ"  shift 15
+	"IF"  shift 16
+	"WHILE"  shift 17
+	.  error
+
+	sentencias  goto 63
+	sentencia  goto 19
+	while  goto 20
+	if  goto 21
+
+
+state 63
+	sentencias : sentencias . sentencia  (10)
+	if : "IF" '(' expr ')' '{' sentencias '}' "ELSE" '{' sentencias . '}'  (25)
+
+	"IDENT"  shift 13
+	"PRINT"  shift 14
+	"READ"  shift 15
+	"IF"  shift 16
+	'}'  shift 64
+	"WHILE"  shift 17
+	.  error
+
+	sentencia  goto 33
+	while  goto 20
+	if  goto 21
+
+
+state 64
+	if : "IF" '(' expr ')' '{' sentencias '}' "ELSE" '{' sentencias '}' .  (25)
+
+	.  reduce 25
+
+
+23 terminals, 12 nonterminals
+27 grammar rules, 65 states
