@@ -39,7 +39,7 @@ import ast.Position;
 
 /* -- Modificar aquí. Añadir reglas en esta sección ----------------------------------------- */
 
-[";+-/*><!{}()"]			{ return yytext().charAt(0); }
+[";+-/*><!{}()[]"]			{ return yytext().charAt(0); }
 "<="						{ return Tokens.MENOR_IGUAL; }
 ">="						{ return Tokens.MAYOR_IGUAL; }
 "=="						{ return Tokens.IGUAL; }
