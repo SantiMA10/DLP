@@ -39,7 +39,15 @@ import ast.Position;
 
 /* -- Modificar aquí. Añadir reglas en esta sección ----------------------------------------- */
 
-;		{ return ';' ; }
+;					{ return ';' ; }
+[0-9]+				{ return Tokens.LITENT; }
+[0-9]+.[0-9]+		{ return Tokens.LITREAL; }
+'[a-zA-Z"\n"ñÑ0-9]'	{ return Tokens.LITCHAR; }
+
+int 				{ return Tokens.INT; }
+float				{ return Tokens.FLOAT; }
+char				{ return Tokens.CHAR; }
+
 
 
 /* -- Se aconseja dejar estas reglas al final ----------------------------------------------- */
