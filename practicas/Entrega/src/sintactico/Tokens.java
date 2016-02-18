@@ -11,6 +11,7 @@ public interface Tokens {
 	static final int IF = 261;
 	static final int ELSE = 274;
 
+
 	static final int PRINT = 262;
 	static final int READ = 263;
 
@@ -24,5 +25,10 @@ public interface Tokens {
 	static final int MENOR_IGUAL = 271;
 	static final int AND = 272;
 	static final int OR = 273;
+	
+	static final int STRUCT = 275;
+	static final int VAR = 276;
+	static final int CAST = 277;
+	static final int RETURN = 278;
 	
 }

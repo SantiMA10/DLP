@@ -39,7 +39,7 @@ import ast.Position;
 
 /* -- Modificar aquí. Añadir reglas en esta sección ----------------------------------------- */
 
-[";+-/*><!{}()[]"]			{ return yytext().charAt(0); }
+[";:+-/*><!{}()[].=,"]			{ return yytext().charAt(0); }
 "<="						{ return Tokens.MENOR_IGUAL; }
 ">="						{ return Tokens.MAYOR_IGUAL; }
 "=="						{ return Tokens.IGUAL; }
@@ -58,8 +58,12 @@ else 						{ return Tokens.ELSE; }
 while						{ return Tokens.WHILE; }
 read 						{ return Tokens.READ; }
 print 						{ return Tokens.PRINT; }
+struct						{ return Tokens.STRUCT; }
+var 						{ return Tokens.VAR; }
+cast 						{ return Tokens.CAST; }
+return 						{ return Tokens.RETURN; }
 
-
+[a-zA-zñÑ]					{ return Tokens.IDENT; }
 
 /* -- Se aconseja dejar estas reglas al final ----------------------------------------------- */
 
