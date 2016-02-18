@@ -11,7 +11,6 @@ public interface Tokens {
 	static final int IF = 261;
 	static final int ELSE = 274;
 
-
 	static final int PRINT = 262;
 	static final int READ = 263;
 
