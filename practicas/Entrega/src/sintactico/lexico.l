@@ -39,31 +39,31 @@ import ast.Position;
 
 /* -- Modificar aquÌ. AÒadir reglas en esta secciÛn ----------------------------------------- */
 
-[";:+-/*><!{}()[].=,"]			{ return yytext().charAt(0); }
-"<="						{ return Tokens.MENOR_IGUAL; }
-">="						{ return Tokens.MAYOR_IGUAL; }
-"=="						{ return Tokens.IGUAL; }
-"!="						{ return Tokens.DISTINTO; }
-"&&"						{ return Tokens.AND; }
-"||"						{ return Tokens.OR; }
-[0-9]+						{ return Tokens.LITENT; }
-[0-9]+.[0-9]+				{ return Tokens.LITREAL; }
-'[a-zA-ZÒ—0-9]'	| '\\n'		{ return Tokens.LITCHAR; }
+[";:+-/*><!{}()[].=,"]		{ return yytext().charAt(0); }
+"<="						{ return Parser.MENOR_IGUAL; }
+">="						{ return Parser.MAYOR_IGUAL; }
+"=="						{ return Parser.IGUAL; }
+"!="						{ return Parser.DISTINTO; }
+"&&"						{ return Parser.AND; }
+"||"						{ return Parser.OR; }
+[0-9]+						{ return Parser.LITENT; }
+[0-9]+.[0-9]+				{ return Parser.LITREAL; }
+'[a-zA-ZÒ—0-9]'	| '\\n'		{ return Parser.LITCHAR; }
 
-int 						{ return Tokens.INT; }
-float						{ return Tokens.FLOAT; }
-char						{ return Tokens.CHAR; }
-if 							{ return Tokens.IF; }
-else 						{ return Tokens.ELSE; }
-while						{ return Tokens.WHILE; }
-read 						{ return Tokens.READ; }
-print 						{ return Tokens.PRINT; }
-struct						{ return Tokens.STRUCT; }
-var 						{ return Tokens.VAR; }
-cast 						{ return Tokens.CAST; }
-return 						{ return Tokens.RETURN; }
+int 						{ return Parser.INT; }
+float						{ return Parser.FLOAT; }
+char						{ return Parser.CHAR; }
+if 							{ return Parser.IF; }
+else 						{ return Parser.ELSE; }
+while						{ return Parser.WHILE; }
+read 						{ return Parser.READ; }
+print 						{ return Parser.PRINT; }
+struct						{ return Parser.STRUCT; }
+var 						{ return Parser.VAR; }
+cast 						{ return Parser.CAST; }
+return 						{ return Parser.RETURN; }
 
-[a-zA-zÒ—]					{ return Tokens.IDENT; }
+[a-zA-zÒ—]					{ return Parser.IDENT; }
 
 /* -- Se aconseja dejar estas reglas al final ----------------------------------------------- */
 

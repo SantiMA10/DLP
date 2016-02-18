@@ -1,0 +1,140 @@
+   0  $accept : programa $end
+
+   1  programa : declaraciones programa
+   2           | funciones programa
+
+   3  declaraciones : declaracion declaraciones
+   4                | declaracion
+
+   5  declaracion : "VAR" "IDENT" ':' tipo
+
+   6  tipo : "INT"
+   7       | "FLOAT"
+   8       | "CHAR"
+
+state 0
+	$accept : . programa $end  (0)
+
+	funciones  shift 1
+	"VAR"  shift 2
+	.  error
+
+	programa  goto 3
+	declaraciones  goto 4
+	declaracion  goto 5
+
+
+state 1
+	programa : funciones . programa  (2)
+
+	funciones  shift 1
+	"VAR"  shift 2
+	.  error
+
+	programa  goto 6
+	declaraciones  goto 4
+	declaracion  goto 5
+
+
+state 2
+	declaracion : "VAR" . "IDENT" ':' tipo  (5)
+
+	"IDENT"  shift 7
+	.  error
+
+
+state 3
+	$accept : programa . $end  (0)
+
+	$end  accept
+
+
+state 4
+	programa : declaraciones . programa  (1)
+
+	funciones  shift 1
+	"VAR"  shift 2
+	.  error
+
+	programa  goto 8
+	declaraciones  goto 4
+	declaracion  goto 5
+
+
+5: shift/reduce conflict (shift 2, reduce 4) on "VAR"
+state 5
+	declaraciones : declaracion . declaraciones  (3)
+	declaraciones : declaracion .  (4)
+
+	"VAR"  shift 2
+	funciones  reduce 4
+
+	declaraciones  goto 9
+	declaracion  goto 5
+
+
+state 6
+	programa : funciones programa .  (2)
+
+	.  reduce 2
+
+
+state 7
+	declaracion : "VAR" "IDENT" . ':' tipo  (5)
+
+	':'  shift 10
+	.  error
+
+
+state 8
+	programa : declaraciones programa .  (1)
+
+	.  reduce 1
+
+
+state 9
+	declaraciones : declaracion declaraciones .  (3)
+
+	.  reduce 3
+
+
+state 10
+	declaracion : "VAR" "IDENT" ':' . tipo  (5)
+
+	"INT"  shift 11
+	"FLOAT"  shift 12
+	"CHAR"  shift 13
+	.  error
+
+	tipo  goto 14
+
+
+state 11
+	tipo : "INT" .  (6)
+
+	.  reduce 6
+
+
+state 12
+	tipo : "FLOAT" .  (7)
+
+	.  reduce 7
+
+
+state 13
+	tipo : "CHAR" .  (8)
+
+	.  reduce 8
+
+
+state 14
+	declaracion : "VAR" "IDENT" ':' tipo .  (5)
+
+	.  reduce 5
+
+
+State 5 contains 1 shift/reduce conflict.
+
+
+13 terminals, 5 nonterminals
+9 grammar rules, 15 states

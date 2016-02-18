@@ -18,11 +18,21 @@ import main.*;
 
 /* Añadir las reglas en esta sección ----------------------- */
 
-program: ';' 
+programa: declaraciones programa
+		| funciones programa 
+		;
+
+declaraciones: declaracion declaraciones
+			 | declaracion
+			 ;
+
+declaracion: 'VAR' 'IDENT' ':' tipo
+		   ;
+
+tipo: 'INT'
+	| 'FLOAT'
+	| 'CHAR'
 	;
-
-
-
 
 
 

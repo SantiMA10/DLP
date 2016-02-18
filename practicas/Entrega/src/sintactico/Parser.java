@@ -16,7 +16,7 @@
 
 
 
-//#line 3 "sintac.y"
+//#line 5 "sintac.y"
 package sintactico;
 
 import java.io.*;
@@ -148,53 +148,89 @@ final Object val_peek(int relative)
   return valstk[valptr-relative];
 }
 //#### end semantic value section ####
+public final static short funciones=257;
+public final static short VAR=258;
+public final static short IDENT=259;
+public final static short INT=260;
+public final static short FLOAT=261;
+public final static short CHAR=262;
 public final static short YYERRCODE=256;
 final static short yylhs[] = {                           -1,
-    0,
+    0,    0,    1,    1,    2,    3,    3,    3,
 };
 final static short yylen[] = {                            2,
-    1,
+    2,    2,    2,    1,    4,    1,    1,    1,
 };
 final static short yydefred[] = {                         0,
-    1,    0,
+    0,    0,    0,    0,    0,    2,    0,    1,    3,    0,
+    6,    7,    8,    5,
 };
-final static short yydgoto[] = {                          2,
+final static short yydgoto[] = {                          3,
+    4,    5,   14,
 };
-final static short yysindex[] = {                       -59,
-    0,    0,
+final static short yysindex[] = {                      -250,
+ -250, -258,    0, -250, -249,    0,  -56,    0,    0, -256,
+    0,    0,    0,    0,
 };
 final static short yyrindex[] = {                         0,
-    0,    0,
+    0,    0,    0,    0, -247,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,
 };
-final static short yygindex[] = {                         0,
+final static short yygindex[] = {                        -1,
+    6,    0,    0,
 };
-final static int YYTABLESIZE=0;
+final static int YYTABLESIZE=11;
 static short yytable[];
 static { yytable();}
 static void yytable(){
-yytable = new short[]{                          1,
+yytable = new short[]{                          6,
+    7,   10,    8,   11,   12,   13,    1,    2,    2,    4,
+    9,
 };
 }
 static short yycheck[];
 static { yycheck(); }
 static void yycheck() {
-yycheck = new short[] {                         59,
+yycheck = new short[] {                          1,
+  259,   58,    4,  260,  261,  262,  257,  258,  258,  257,
+    5,
 };
 }
-final static short YYFINAL=2;
-final static short YYMAXTOKEN=59;
+final static short YYFINAL=3;
+final static short YYMAXTOKEN=262;
 final static String yyname[] = {
 "end-of-file",null,null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,null,null,"'*'","'+'",null,
-"'-'",null,"'/'",null,null,null,null,null,null,null,null,null,null,null,"';'",
+"'-'",null,"'/'",null,null,null,null,null,null,null,null,null,null,"':'",null,
+null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+null,null,null,null,null,"funciones","\"VAR\"","\"IDENT\"","\"INT\"",
+"\"FLOAT\"","\"CHAR\"",
 };
 final static String yyrule[] = {
-"$accept : program",
-"program : ';'",
+"$accept : programa",
+"programa : declaraciones programa",
+"programa : funciones programa",
+"declaraciones : declaracion declaraciones",
+"declaraciones : declaracion",
+"declaracion : \"VAR\" \"IDENT\" ':' tipo",
+"tipo : \"INT\"",
+"tipo : \"FLOAT\"",
+"tipo : \"CHAR\"",
 };
 
-//#line 29 "sintac.y"
+//#line 41 "sintac.y"
 /* No es necesario modificar esta sección ------------------ */
 
 public Parser(Yylex lex, GestorErrores gestor, boolean debug) {
@@ -226,7 +262,7 @@ int yylex() {
 private Yylex lex;
 private GestorErrores gestor;
 private AST raiz;
-//#line 171 "Parser.java"
+//#line 207 "Parser.java"
 //###############################################################
 // method: yylexdebug : check lexer state
 //###############################################################
