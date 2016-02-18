@@ -9,6 +9,7 @@ public interface Tokens {
 
 	static final int WHILE = 260;
 	static final int IF = 261;
+	static final int ELSE = 274;
 
 	static final int WRITE = 262;
 	static final int READ = 263;

@@ -39,20 +39,23 @@ import ast.Position;
 
 /* -- Modificar aquÌ. AÒadir reglas en esta secciÛn ----------------------------------------- */
 
-[";+-/*><!"]			{ return yytext().charAt(0); }
+[";+-/*><!{}()"]			{ return yytext().charAt(0); }
 "<="						{ return Tokens.MENOR_IGUAL; }
 ">="						{ return Tokens.MAYOR_IGUAL; }
 "=="						{ return Tokens.IGUAL; }
 "!="						{ return Tokens.DISTINTO; }
 "&&"						{ return Tokens.AND; }
 "||"						{ return Tokens.OR; }
-[0-9]+					{ return Tokens.LITENT; }
-[0-9]+.[0-9]+			{ return Tokens.LITREAL; }
-'[a-zA-Z"\n"Ò—0-9]'		{ return Tokens.LITCHAR; }
+[0-9]+						{ return Tokens.LITENT; }
+[0-9]+.[0-9]+				{ return Tokens.LITREAL; }
+'[a-zA-Z"\n"Ò—0-9]'			{ return Tokens.LITCHAR; }
 
-int 					{ return Tokens.INT; }
-float					{ return Tokens.FLOAT; }
-char					{ return Tokens.CHAR; }
+int 						{ return Tokens.INT; }
+float						{ return Tokens.FLOAT; }
+char						{ return Tokens.CHAR; }
+if 							{ return Tokens.IF; }
+else 						{ return Tokens.ELSE; }
+while						{ return Tokens.WHILE; }
 
 
 
