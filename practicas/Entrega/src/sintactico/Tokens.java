@@ -17,4 +17,11 @@ public interface Tokens {
 	static final int FLOAT = 265;
 	static final int CHAR = 267;
 	
+	static final int IGUAL = 268;
+	static final int DISTINTO = 269;
+	static final int MAYOR_IGUAL = 270;
+	static final int MENOR_IGUAL = 271;
+	static final int AND = 272;
+	static final int OR = 273;
+	
 }
