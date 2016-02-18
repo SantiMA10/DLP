@@ -48,7 +48,7 @@ import ast.Position;
 "||"						{ return Tokens.OR; }
 [0-9]+						{ return Tokens.LITENT; }
 [0-9]+.[0-9]+				{ return Tokens.LITREAL; }
-'[a-zA-Z"\n"Ò—0-9]'			{ return Tokens.LITCHAR; }
+'[a-zA-ZÒ—0-9]'	| '\\n'		{ return Tokens.LITCHAR; }
 
 int 						{ return Tokens.INT; }
 float						{ return Tokens.FLOAT; }
@@ -56,6 +56,8 @@ char						{ return Tokens.CHAR; }
 if 							{ return Tokens.IF; }
 else 						{ return Tokens.ELSE; }
 while						{ return Tokens.WHILE; }
+read 						{ return Tokens.READ; }
+print 						{ return Tokens.PRINT; }
 
 
 
