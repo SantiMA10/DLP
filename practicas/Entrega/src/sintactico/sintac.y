@@ -1,4 +1,5 @@
 // @author Raúl Izquierdo
+// @author Santiago Martin
 
 /* No es necesario modificar esta sección ------------------ */
 %{
@@ -18,8 +19,44 @@ import main.*;
 
 /* Añadir las reglas en esta sección ----------------------- */
 
-programa: ';'
+programa: 
+		| sentencias programa 
 		;
+
+sentencias: declaraciones
+		  | funciones
+		  ;
+
+declaraciones: definicion
+			 | struct
+			 ;
+
+struct: 'STRUCT' 'IDENT' '{' definiciones '}'
+	  ;
+
+definiciones:  definicion
+			 | definicion definiciones
+			 ;
+
+definicion: 'VAR' 'IDENT' ':' size tipo ';'
+			;
+
+size: 
+	| '[' 'LINENT' ']' size
+	;
+
+tipo: 'INT'
+	| 'FLOAT'
+	| 'CHAR'
+	;			
+
+funciones: funcion
+		 | funcion funciones
+		 ;
+
+funcion: 'IDENT' '(' ')' '{' '}'
+		;
+
 
 %%
 /* No es necesario modificar esta sección ------------------ */

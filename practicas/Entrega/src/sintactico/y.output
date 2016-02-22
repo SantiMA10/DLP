@@ -1,27 +1,315 @@
    0  $accept : programa $end
 
-   1  programa : ';'
+   1  programa :
+   2           | sentencias programa
+
+   3  sentencias : declaraciones
+   4             | funciones
+
+   5  declaraciones : definicion
+   6                | struct
+
+   7  struct : "STRUCT" "IDENT" '{' definiciones '}'
+
+   8  definiciones : definicion
+   9               | definicion definiciones
+
+  10  definicion : "VAR" "IDENT" ':' size tipo ';'
+
+  11  size :
+  12       | '[' "LINENT" ']' size
+
+  13  tipo : "INT"
+  14       | "FLOAT"
+  15       | "CHAR"
+
+  16  funciones : funcion
+  17            | funcion funciones
+
+  18  funcion : "IDENT" '(' ')' '{' '}'
 
 state 0
 	$accept : . programa $end  (0)
+	programa : .  (1)
 
-	';'  shift 1
-	.  error
+	"STRUCT"  shift 1
+	"IDENT"  shift 2
+	"VAR"  shift 3
+	$end  reduce 1
 
-	programa  goto 2
+	programa  goto 4
+	sentencias  goto 5
+	declaraciones  goto 6
+	funciones  goto 7
+	definicion  goto 8
+	struct  goto 9
+	funcion  goto 10
 
 
 state 1
-	programa : ';' .  (1)
+	struct : "STRUCT" . "IDENT" '{' definiciones '}'  (7)
 
-	.  reduce 1
+	"IDENT"  shift 11
+	.  error
 
 
 state 2
+	funcion : "IDENT" . '(' ')' '{' '}'  (18)
+
+	'('  shift 12
+	.  error
+
+
+state 3
+	definicion : "VAR" . "IDENT" ':' size tipo ';'  (10)
+
+	"IDENT"  shift 13
+	.  error
+
+
+state 4
 	$accept : programa . $end  (0)
 
 	$end  accept
 
 
-7 terminals, 2 nonterminals
-2 grammar rules, 3 states
+state 5
+	programa : sentencias . programa  (2)
+	programa : .  (1)
+
+	"STRUCT"  shift 1
+	"IDENT"  shift 2
+	"VAR"  shift 3
+	$end  reduce 1
+
+	programa  goto 14
+	sentencias  goto 5
+	declaraciones  goto 6
+	funciones  goto 7
+	definicion  goto 8
+	struct  goto 9
+	funcion  goto 10
+
+
+state 6
+	sentencias : declaraciones .  (3)
+
+	.  reduce 3
+
+
+state 7
+	sentencias : funciones .  (4)
+
+	.  reduce 4
+
+
+state 8
+	declaraciones : definicion .  (5)
+
+	.  reduce 5
+
+
+state 9
+	declaraciones : struct .  (6)
+
+	.  reduce 6
+
+
+10: shift/reduce conflict (shift 2, reduce 16) on "IDENT"
+state 10
+	funciones : funcion .  (16)
+	funciones : funcion . funciones  (17)
+
+	"IDENT"  shift 2
+	$end  reduce 16
+	"STRUCT"  reduce 16
+	"VAR"  reduce 16
+
+	funciones  goto 15
+	funcion  goto 10
+
+
+state 11
+	struct : "STRUCT" "IDENT" . '{' definiciones '}'  (7)
+
+	'{'  shift 16
+	.  error
+
+
+state 12
+	funcion : "IDENT" '(' . ')' '{' '}'  (18)
+
+	')'  shift 17
+	.  error
+
+
+state 13
+	definicion : "VAR" "IDENT" . ':' size tipo ';'  (10)
+
+	':'  shift 18
+	.  error
+
+
+state 14
+	programa : sentencias programa .  (2)
+
+	.  reduce 2
+
+
+state 15
+	funciones : funcion funciones .  (17)
+
+	.  reduce 17
+
+
+state 16
+	struct : "STRUCT" "IDENT" '{' . definiciones '}'  (7)
+
+	"VAR"  shift 3
+	.  error
+
+	definicion  goto 19
+	definiciones  goto 20
+
+
+state 17
+	funcion : "IDENT" '(' ')' . '{' '}'  (18)
+
+	'{'  shift 21
+	.  error
+
+
+state 18
+	definicion : "VAR" "IDENT" ':' . size tipo ';'  (10)
+	size : .  (11)
+
+	'['  shift 22
+	"INT"  reduce 11
+	"FLOAT"  reduce 11
+	"CHAR"  reduce 11
+
+	size  goto 23
+
+
+state 19
+	definiciones : definicion .  (8)
+	definiciones : definicion . definiciones  (9)
+
+	"VAR"  shift 3
+	'}'  reduce 8
+
+	definicion  goto 19
+	definiciones  goto 24
+
+
+state 20
+	struct : "STRUCT" "IDENT" '{' definiciones . '}'  (7)
+
+	'}'  shift 25
+	.  error
+
+
+state 21
+	funcion : "IDENT" '(' ')' '{' . '}'  (18)
+
+	'}'  shift 26
+	.  error
+
+
+state 22
+	size : '[' . "LINENT" ']' size  (12)
+
+	"LINENT"  shift 27
+	.  error
+
+
+state 23
+	definicion : "VAR" "IDENT" ':' size . tipo ';'  (10)
+
+	"INT"  shift 28
+	"FLOAT"  shift 29
+	"CHAR"  shift 30
+	.  error
+
+	tipo  goto 31
+
+
+state 24
+	definiciones : definicion definiciones .  (9)
+
+	.  reduce 9
+
+
+state 25
+	struct : "STRUCT" "IDENT" '{' definiciones '}' .  (7)
+
+	.  reduce 7
+
+
+state 26
+	funcion : "IDENT" '(' ')' '{' '}' .  (18)
+
+	.  reduce 18
+
+
+state 27
+	size : '[' "LINENT" . ']' size  (12)
+
+	']'  shift 32
+	.  error
+
+
+state 28
+	tipo : "INT" .  (13)
+
+	.  reduce 13
+
+
+state 29
+	tipo : "FLOAT" .  (14)
+
+	.  reduce 14
+
+
+state 30
+	tipo : "CHAR" .  (15)
+
+	.  reduce 15
+
+
+state 31
+	definicion : "VAR" "IDENT" ':' size tipo . ';'  (10)
+
+	';'  shift 33
+	.  error
+
+
+state 32
+	size : '[' "LINENT" ']' . size  (12)
+	size : .  (11)
+
+	'['  shift 22
+	"INT"  reduce 11
+	"FLOAT"  reduce 11
+	"CHAR"  reduce 11
+
+	size  goto 34
+
+
+state 33
+	definicion : "VAR" "IDENT" ':' size tipo ';' .  (10)
+
+	.  reduce 10
+
+
+state 34
+	size : '[' "LINENT" ']' size .  (12)
+
+	.  reduce 12
+
+
+State 10 contains 1 shift/reduce conflict.
+
+
+21 terminals, 11 nonterminals
+19 grammar rules, 35 states

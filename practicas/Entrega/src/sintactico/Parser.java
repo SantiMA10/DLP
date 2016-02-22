@@ -16,7 +16,7 @@
 
 
 
-//#line 5 "sintac.y"
+//#line 6 "sintac.y"
 package sintactico;
 
 import java.io.*;
@@ -148,53 +148,156 @@ final Object val_peek(int relative)
   return valstk[valptr-relative];
 }
 //#### end semantic value section ####
+public final static short STRUCT=257;
+public final static short IDENT=258;
+public final static short VAR=259;
+public final static short LINENT=260;
+public final static short INT=261;
+public final static short FLOAT=262;
+public final static short CHAR=263;
 public final static short YYERRCODE=256;
 final static short yylhs[] = {                           -1,
-    0,
+    0,    0,    1,    1,    2,    2,    5,    6,    6,    4,
+    7,    7,    8,    8,    8,    3,    3,    9,
 };
 final static short yylen[] = {                            2,
-    1,
+    0,    2,    1,    1,    1,    1,    5,    1,    2,    6,
+    0,    4,    1,    1,    1,    1,    2,    5,
 };
 final static short yydefred[] = {                         0,
-    1,    0,
+    0,    0,    0,    0,    0,    3,    4,    5,    6,    0,
+    0,    0,    0,    2,   17,    0,    0,    0,    0,    0,
+    0,    0,    0,    9,    7,   18,    0,   13,   14,   15,
+    0,    0,   10,   12,
 };
-final static short yydgoto[] = {                          2,
+final static short yydgoto[] = {                          4,
+    5,    6,    7,    8,    9,   20,   23,   31,   10,
 };
-final static short yysindex[] = {                       -59,
-    0,    0,
+final static short yysindex[] = {                      -253,
+ -256,  -27, -244,    0, -253,    0,    0,    0,    0, -243,
+ -107,  -24,  -40,    0,    0, -240, -103,  -70, -240, -102,
+ -101, -238, -254,    0,    0,    0,  -68,    0,    0,    0,
+  -33,  -70,    0,    0,
 };
-final static short yyrindex[] = {                         0,
-    0,    0,
+final static short yyrindex[] = {                        27,
+    0,    0,    0,    0,   27,    0,    0,    0,    0,    1,
+    0,    0,    0,    0,    0,    0,    0, -251,  -97,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0, -251,    0,    0,
 };
-final static short yygindex[] = {                         0,
+final static short yygindex[] = {                        24,
+    0,    0,   20,  -16,    0,   12,    2,    0,    0,
 };
-final static int YYTABLESIZE=0;
+final static int YYTABLESIZE=260;
 static short yytable[];
 static { yytable();}
 static void yytable(){
-yytable = new short[]{                          1,
+yytable = new short[]{                         19,
+   16,   11,   19,    1,    2,    3,   28,   29,   30,   11,
+   11,   11,   12,   13,    2,   16,   17,   18,    3,   21,
+   22,   27,   25,   26,   32,   33,    1,    8,   14,   15,
+   24,    0,    0,   34,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
+    0,    0,    0,    0,    0,    0,    0,   16,    0,   16,
 };
 }
 static short yycheck[];
 static { yycheck(); }
 static void yycheck() {
-yycheck = new short[] {                         59,
+yycheck = new short[] {                         16,
+    0,  258,   19,  257,  258,  259,  261,  262,  263,  261,
+  262,  263,   40,  258,  258,  123,   41,   58,  259,  123,
+   91,  260,  125,  125,   93,   59,    0,  125,    5,   10,
+   19,   -1,   -1,   32,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
+   -1,   -1,   -1,   -1,   -1,   -1,   -1,  257,   -1,  259,
 };
 }
-final static short YYFINAL=2;
-final static short YYMAXTOKEN=59;
+final static short YYFINAL=4;
+final static short YYMAXTOKEN=263;
 final static String yyname[] = {
 "end-of-file",null,null,null,null,null,null,null,null,null,null,null,null,null,
 null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
-null,null,null,null,null,null,null,null,null,null,null,null,"'*'","'+'",null,
-"'-'",null,"'/'",null,null,null,null,null,null,null,null,null,null,null,"';'",
+null,null,null,null,null,null,null,null,null,null,"'('","')'","'*'","'+'",null,
+"'-'",null,"'/'",null,null,null,null,null,null,null,null,null,null,"':'","';'",
+null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+"'['",null,"']'",null,null,null,null,null,null,null,null,null,null,null,null,
+null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+null,"'{'",null,"'}'",null,null,null,null,null,null,null,null,null,null,null,
+null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,
+null,null,null,null,null,null,null,null,"\"STRUCT\"","\"IDENT\"","\"VAR\"",
+"\"LINENT\"","\"INT\"","\"FLOAT\"","\"CHAR\"",
 };
 final static String yyrule[] = {
 "$accept : programa",
-"programa : ';'",
+"programa :",
+"programa : sentencias programa",
+"sentencias : declaraciones",
+"sentencias : funciones",
+"declaraciones : definicion",
+"declaraciones : struct",
+"struct : \"STRUCT\" \"IDENT\" '{' definiciones '}'",
+"definiciones : definicion",
+"definiciones : definicion definiciones",
+"definicion : \"VAR\" \"IDENT\" ':' size tipo ';'",
+"size :",
+"size : '[' \"LINENT\" ']' size",
+"tipo : \"INT\"",
+"tipo : \"FLOAT\"",
+"tipo : \"CHAR\"",
+"funciones : funcion",
+"funciones : funcion funciones",
+"funcion : \"IDENT\" '(' ')' '{' '}'",
 };
 
-//#line 25 "sintac.y"
+//#line 62 "sintac.y"
 /* No es necesario modificar esta sección ------------------ */
 
 public Parser(Yylex lex, GestorErrores gestor, boolean debug) {
@@ -226,7 +329,7 @@ int yylex() {
 private Yylex lex;
 private GestorErrores gestor;
 private AST raiz;
-//#line 171 "Parser.java"
+//#line 274 "Parser.java"
 //###############################################################
 // method: yylexdebug : check lexer state
 //###############################################################
