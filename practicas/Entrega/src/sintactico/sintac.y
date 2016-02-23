@@ -18,6 +18,8 @@ import main.*;
 %left 'MAYOR_IGUAL' 'MENOR_IGUAL'
 %left 'IGUAL' 'DISTINTO'
 %left 'AND' 'OR' 'NOT'
+%left '.'
+%left '[' ']'
 %left '(' ')'
 
 %%
@@ -46,7 +48,7 @@ definicion: 'IDENT' ':' tipo ';'
 		  | 'IDENT' ':' tam_array tipo ';'
 		  ;
 
-funcion: 'IDENT' '(' parametros_ ')' ':' tipo_basico '{' definiciones_funcion sentencias_locales 'RETURN' expr ';' '}'
+funcion: 'IDENT' '(' parametros_ ')' ':' tipo_basico '{' definiciones_funcion sentencias_locales '}'
 		| 'IDENT' '(' parametros_ ')' '{' definiciones_funcion sentencias_locales '}'
 		;
 
@@ -81,17 +83,21 @@ tam_array: '[' expr ']'
 sentencias_locales : sentencia_local
 				   | sentencia_local sentencias_locales;
 
-sentencia_local: 'IDENT' '=' expr ';'
+sentencia_local: expr '=' expr ';'
 			   | 'PRINT' expr ';'
 			   | 'READ' expr ';'
 			   | 'IF' '(' expr ')' '{' sentencias_locales '}'
 			   | 'IF' '(' expr ')' '{' sentencias_locales '}' 'ELSE' '{' sentencias_locales '}'
 			   | 'WHILE' '(' expr ')' '{' sentencias_locales '}'
+			   | 'IDENT' '(' paso_parametros_ ')' ';'
+			   | 'RETURN' expr ';'
+			   | 'RETURN' ';'
 			   ;
 
 expr: 'LITENT'
 	| 'LITREAL'
 	| 'LITCHAR'
+	| 'IDENT'
 	| 'CAST' '<' tipo_basico '>' '(' expr ')'
 	| expr '*' expr
 	| expr '/' expr
@@ -107,7 +113,18 @@ expr: 'LITENT'
 	| expr 'OR' expr
 	| expr 'NOT' expr
 	| '(' expr ')'
+	| expr '.' expr
+	| expr '[' expr ']'
+	| 'IDENT' '(' paso_parametros_ ')'
 	;
+
+paso_parametros_: paso_parametros
+			|
+			;
+
+paso_parametros: expr
+		  | expr ',' paso_parametros
+		  ;
 
 %%
 /* No es necesario modificar esta sección ------------------ */
