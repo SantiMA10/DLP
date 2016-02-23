@@ -63,7 +63,7 @@ var 						{ return Parser.VAR; }
 cast 						{ return Parser.CAST; }
 return 						{ return Parser.RETURN; }
 
-[a-zA-zñÑ]					{ return Parser.IDENT; }
+[a-zA-zñÑ]+					{ return Parser.IDENT; }
 
 /* -- Se aconseja dejar estas reglas al final ----------------------------------------------- */
 

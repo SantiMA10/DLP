@@ -43,7 +43,7 @@ definicion: 'VAR' 'IDENT' ':' size tipo ';'
 			;
 
 size: 
-	| '[' 'LINENT' ']' size
+	| '[' expr_num ']' size
 	;
 
 tipo: 'INT'
