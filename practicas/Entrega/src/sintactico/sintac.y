@@ -18,114 +18,77 @@ import main.*;
 %left 'MAYOR_IGUAL' 'MENOR_IGUAL'
 %left 'IGUAL' 'DISTINTO'
 %left 'AND' 'OR' 'NOT'
+%left '(' ')'
 
 %%
 
 /* Añadir las reglas en esta sección ----------------------- */
 
 programa: sentencias
-		| sentencias programa 
 		;
 
-sentencias: definiciones
-		  | struct
-		  | funciones
-		  ;
+sentencias: 
+		  | sentencia sentencias;
 
-struct: 'STRUCT' 'IDENT' '{' definiciones_struct '}' ';'
+sentencia: 'VAR' definicion
+		 | struct
+		 | funcion
+		 ;
+
+struct: 'STRUCT' 'IDENT' '{' definiciones '}' ';'
 	  ;
 
-definiciones_struct:  definicion_struct
-			 	   | definicion_struct definiciones_struct
-			 	   ;
-
-definicion_struct: 'IDENT' ':' size tipo
- ';'
+definiciones: definicion
+			| definicion definiciones
 			;
 
-definiciones:  
-			 | definicion definiciones
-			 ;
+definicion: 'IDENT' ':' tipo ';'
+		  | 'IDENT' ':' tipo tam_array ';'
+		  ;
 
-definicion: 'VAR' 'IDENT' ':' size tipo ';'
-			;
-
-size: 
-	| '[' expr_num ']' size
+tipo: 'IDENT'
+	| tipo_basico
 	;
-
-tipo : tipo_basico
-	 | 'IDENT'
-	 ;
 
 tipo_basico: 'INT'
-	| 'FLOAT'
-	| 'CHAR'
-	;			
+			| 'FLOAT'
+			| 'CHAR'
+			;
 
-funciones: funcion
-		 | funcion funciones
+tam_array: '[' expr ']'
+		 | '[' expr ']' tam_array
 		 ;
 
-funcion: 'IDENT' '(' parametrosP ')' ':' tipo_basico '{' definiciones sentencias 'RETURN' expr ';' '}'
-	   | 'IDENT' '(' parametrosP ')' '{' definiciones sentencias '}'
-	   ;
+sentencias_locales : sentencia_local
+				   | sentencia_local sentencias_locales;
 
-parametrosP: parametros
-		  | 
-		  ;
+sentencia_local: 'IDENT' '=' expr ';'
+			   | 'PRINT' expr ';'
+			   | 'READ' expr ';'
+			   | 'IF' '(' expr ')' '{' sentencias_locales '}'
+			   | 'IF' '(' expr ')' '{' sentencias_locales '}' 'ELSE' '{' sentencias_locales '}'
+			   | 'WHILE' '(' expr ')' '{' sentencias_locales '}'
+			   ;
 
-parametros: parametro
-		  | parametro ',' parametros
-		  ;
-
-parametro: 'IDENT' ':' tipo_basico
-		 ;
-
-sentencias: sentencia
-		  | sentencia sentencias
-		  ;
-
-sentencia: 'PRINT' expr ';'
-		 | 'READ'  expr ';'
-		 | 'IDENT' '=' expr ';'
-		 | while
-		 | if
-		 ;   
-
-expr: 'LITCHAR'
-	|  expr '[' expr_num ']'
-	|  expr 'PUNTO' expr
-	|  expr_num
-	|  'CAST' '<' tipo_basico '>' '(' expr ')'
+expr: 'LITENT'
+	| 'LITREAL'
+	| 'LITCHAR'
+	| 'CAST' '<' tipo_basico '>' '(' expr ')'
+	| expr '*' expr
+	| expr '/' expr
+	| expr '+' expr
+	| expr '-' expr
+	| expr '<' expr
+	| expr '>' expr
+	| expr 'MAYOR_IGUAL' expr
+	| expr 'MENOR_IGUAL' expr
+	| expr 'IGUAL' expr
+	| expr 'DISTINTO' expr
+	| expr 'AND' expr
+	| expr 'OR' expr
+	| expr 'NOT' expr
+	| '(' expr ')'
 	;
-
-expr_num: 'LITENT'
-		| 'LITREAL'
-		| 'IDENT'
-	 	| expr_num '*' expr_num
-		| expr_num '/' expr_num
-		| expr_num '-' expr_num
-		| expr_num '+' expr_num
-		| expr_num '>' expr_num
-		| expr_num 'MAYOR_IGUAL' expr_num
-		| expr_num '<' expr_num
-		| expr_num 'MENOR_IGUAL' expr_num
-		| expr_num 'IGUAL' expr_num
-		| expr_num 'DISTINTO' expr_num
-		| expr_num 'AND' expr_num
-		| expr_num 'OR' expr_num
-		| expr_num 'NOT' expr_num
-		| '(' expr_num  ')'
-		;
-
-
-if: 'IF' '(' expr_num ')' '{' sentencias '}'
-  | 'IF' '(' expr_num ')' '{' sentencias '}' 'ELSE' '{' sentencias '}'
-  ;
-
-while: 'WHILE' '(' expr ')' '{' sentencias '}'
-	 ;
 
 %%
 /* No es necesario modificar esta sección ------------------ */
