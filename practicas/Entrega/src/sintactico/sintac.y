@@ -43,7 +43,26 @@ definiciones: definicion
 			;
 
 definicion: 'IDENT' ':' tipo ';'
-		  | 'IDENT' ':' tipo tam_array ';'
+		  | 'IDENT' ':' tam_array tipo ';'
+		  ;
+
+funcion: 'IDENT' '(' parametros_ ')' ':' tipo_basico '{' definiciones_funcion sentencias_locales 'RETURN' expr ';' '}'
+		| 'IDENT' '(' parametros_ ')' '{' definiciones_funcion sentencias_locales '}'
+		;
+
+definiciones_funcion: 
+			| 'VAR' definicion definiciones_funcion
+			;
+
+parametros_: parametros
+			|
+			;
+
+parametros: parametro
+		  | parametro ',' parametros
+		  ;
+
+parametro: 'IDENT' ':' tipo_basico
 		  ;
 
 tipo: 'IDENT'
