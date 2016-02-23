@@ -46,6 +46,7 @@ import ast.Position;
 "!="						{ return Parser.DISTINTO; }
 "&&"						{ return Parser.AND; }
 "||"						{ return Parser.OR; }
+"."							{ return Parser.PUNTO; }
 [0-9]+						{ return Parser.LITENT; }
 [0-9]+.[0-9]+				{ return Parser.LITREAL; }
 '[a-zA-ZÒ—0-9]'	| '\\n'		{ return Parser.LITCHAR; }
@@ -63,7 +64,7 @@ var 						{ return Parser.VAR; }
 cast 						{ return Parser.CAST; }
 return 						{ return Parser.RETURN; }
 
-[a-zA-zÒ—]+					{ return Parser.IDENT; }
+[a-zA-ZÒ—][a-zA-Z0-9Ò—]*	{ return Parser.IDENT; }
 
 /* -- Se aconseja dejar estas reglas al final ----------------------------------------------- */
 

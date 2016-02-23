@@ -7,1595 +7,1976 @@
    4             | struct
    5             | funciones
 
-   6  struct : "STRUCT" "IDENT" '{' definiciones '}'
+   6  struct : "STRUCT" "IDENT" '{' definiciones_struct '}' ';'
 
-   7  definiciones : definicion
-   8               | definicion definiciones
+   7  definiciones_struct : definicion_struct
+   8                      | definicion_struct definiciones_struct
 
-   9  definicion : "VAR" "IDENT" ':' size tipo ';'
+   9  definicion_struct : "IDENT" ':' size tipo ';'
 
-  10  size :
-  11       | '[' expr_num ']' size
+  10  definiciones :
+  11               | definicion definiciones
 
-  12  tipo : "INT"
-  13       | "FLOAT"
-  14       | "CHAR"
+  12  definicion : "VAR" "IDENT" ':' size tipo ';'
 
-  15  funciones : funcion
-  16            | funcion funciones
+  13  size :
+  14       | '[' expr_num ']' size
 
-  17  funcion : "IDENT" '(' parametrosP ')' ':' tipo '{' expr "RETURN" expr '}'
-  18          | "IDENT" '(' parametrosP ')' '{' expr '}'
+  15  tipo : tipo_basico
+  16       | "IDENT"
 
-  19  parametrosP : parametros
-  20              |
+  17  tipo_basico : "INT"
+  18              | "FLOAT"
+  19              | "CHAR"
 
-  21  parametros : parametro
-  22             | parametro ',' parametros
+  20  funciones : funcion
+  21            | funcion funciones
 
-  23  parametro : "IDENT" ':' tipo
+  22  funcion : "IDENT" '(' parametrosP ')' ':' tipo_basico '{' definiciones sentencias "RETURN" expr ';' '}'
+  23          | "IDENT" '(' parametrosP ')' '{' definiciones sentencias '}'
 
-  24  expr : "LITCHAR"
-  25       | "READ" expr ';'
-  26       | "PRINT" expr ';'
-  27       | expr '=' expr ';'
-  28       | punto
-  29       | if
-  30       | while
-  31       | expr_num
-  32       | "CAST" '<' tipo '>' '(' expr ')'
+  24  parametrosP : parametros
+  25              |
 
-  33  expr_num : "LITENT"
-  34           | "LITREAL"
-  35           | expr_num '*' expr_num
-  36           | expr_num '/' expr_num
-  37           | expr_num '-' expr_num
-  38           | expr_num '+' expr_num
-  39           | expr_num '>' expr_num
-  40           | expr_num "MAYOR_IGUAL" expr_num
-  41           | expr_num '<' expr_num
-  42           | expr_num "MENOR_IGUAL" expr_num
-  43           | expr_num "IGUAL" expr_num
-  44           | expr_num "DISTINTO" expr_num
-  45           | expr_num "AND" expr_num
-  46           | expr_num "OR" expr_num
-  47           | expr_num "NOT" expr_num
+  26  parametros : parametro
+  27             | parametro ',' parametros
 
-  48  punto : "IDENT"
-  49        | "IDENT" '.' punto
+  28  parametro : "IDENT" ':' tipo_basico
 
-  50  if : "IF" '(' expr_num ')' '{' sentencias '}'
-  51     | "IF" '(' expr_num ')' '{' sentencias '}' "ELSE" '{' sentencias '}'
+  29  sentencias : sentencia
+  30             | sentencia sentencias
 
-  52  while : "WHILE" '(' expr ')' '{' sentencias '}'
+  31  sentencia : "PRINT" expr ';'
+  32            | "READ" expr ';'
+  33            | "IDENT" '=' expr ';'
+  34            | while
+  35            | if
+
+  36  expr : "LITCHAR"
+  37       | expr '[' expr_num ']'
+  38       | expr "PUNTO" expr
+  39       | expr_num
+  40       | "CAST" '<' tipo_basico '>' '(' expr ')'
+
+  41  expr_num : "LITENT"
+  42           | "LITREAL"
+  43           | "IDENT"
+  44           | expr_num '*' expr_num
+  45           | expr_num '/' expr_num
+  46           | expr_num '-' expr_num
+  47           | expr_num '+' expr_num
+  48           | expr_num '>' expr_num
+  49           | expr_num "MAYOR_IGUAL" expr_num
+  50           | expr_num '<' expr_num
+  51           | expr_num "MENOR_IGUAL" expr_num
+  52           | expr_num "IGUAL" expr_num
+  53           | expr_num "DISTINTO" expr_num
+  54           | expr_num "AND" expr_num
+  55           | expr_num "OR" expr_num
+  56           | expr_num "NOT" expr_num
+  57           | '(' expr_num ')'
+
+  58  if : "IF" '(' expr_num ')' '{' sentencias '}'
+  59     | "IF" '(' expr_num ')' '{' sentencias '}' "ELSE" '{' sentencias '}'
+
+  60  while : "WHILE" '(' expr ')' '{' sentencias '}'
 
+0: shift/reduce conflict (shift 1, reduce 10) on "STRUCT"
+0: shift/reduce conflict (shift 2, reduce 10) on "IDENT"
+0: shift/reduce conflict (shift 3, reduce 10) on "VAR"
+0: shift/reduce conflict (shift 4, reduce 10) on "PRINT"
+0: shift/reduce conflict (shift 5, reduce 10) on "READ"
+0: shift/reduce conflict (shift 6, reduce 10) on "IF"
+0: shift/reduce conflict (shift 7, reduce 10) on "WHILE"
 state 0
 	$accept : . programa $end  (0)
+	definiciones : .  (10)
 
 	"STRUCT"  shift 1
 	"IDENT"  shift 2
 	"VAR"  shift 3
-	.  error
+	"PRINT"  shift 4
+	"READ"  shift 5
+	"IF"  shift 6
+	"WHILE"  shift 7
+	$end  reduce 10
 
-	programa  goto 4
-	sentencias  goto 5
-	definiciones  goto 6
-	struct  goto 7
-	funciones  goto 8
-	definicion  goto 9
-	funcion  goto 10
+	programa  goto 8
+	sentencias  goto 9
+	definiciones  goto 10
+	struct  goto 11
+	funciones  goto 12
+	definicion  goto 13
+	funcion  goto 14
+	sentencia  goto 15
+	while  goto 16
+	if  goto 17
 
 
 state 1
-	struct : "STRUCT" . "IDENT" '{' definiciones '}'  (6)
+	struct : "STRUCT" . "IDENT" '{' definiciones_struct '}' ';'  (6)
 
-	"IDENT"  shift 11
+	"IDENT"  shift 18
 	.  error
 
 
 state 2
-	funcion : "IDENT" . '(' parametrosP ')' ':' tipo '{' expr "RETURN" expr '}'  (17)
-	funcion : "IDENT" . '(' parametrosP ')' '{' expr '}'  (18)
+	funcion : "IDENT" . '(' parametrosP ')' ':' tipo_basico '{' definiciones sentencias "RETURN" expr ';' '}'  (22)
+	funcion : "IDENT" . '(' parametrosP ')' '{' definiciones sentencias '}'  (23)
+	sentencia : "IDENT" . '=' expr ';'  (33)
 
-	'('  shift 12
+	'('  shift 19
+	'='  shift 20
 	.  error
 
 
 state 3
-	definicion : "VAR" . "IDENT" ':' size tipo ';'  (9)
+	definicion : "VAR" . "IDENT" ':' size tipo ';'  (12)
 
-	"IDENT"  shift 13
+	"IDENT"  shift 21
 	.  error
 
 
 state 4
+	sentencia : "PRINT" . expr ';'  (31)
+
+	"IDENT"  shift 22
+	'('  shift 23
+	"LITCHAR"  shift 24
+	"CAST"  shift 25
+	"LITENT"  shift 26
+	"LITREAL"  shift 27
+	.  error
+
+	expr_num  goto 28
+	expr  goto 29
+
+
+state 5
+	sentencia : "READ" . expr ';'  (32)
+
+	"IDENT"  shift 22
+	'('  shift 23
+	"LITCHAR"  shift 24
+	"CAST"  shift 25
+	"LITENT"  shift 26
+	"LITREAL"  shift 27
+	.  error
+
+	expr_num  goto 28
+	expr  goto 30
+
+
+state 6
+	if : "IF" . '(' expr_num ')' '{' sentencias '}'  (58)
+	if : "IF" . '(' expr_num ')' '{' sentencias '}' "ELSE" '{' sentencias '}'  (59)
+
+	'('  shift 31
+	.  error
+
+
+state 7
+	while : "WHILE" . '(' expr ')' '{' sentencias '}'  (60)
+
+	'('  shift 32
+	.  error
+
+
+state 8
 	$accept : programa . $end  (0)
 
 	$end  accept
 
 
-state 5
+9: reduce/reduce conflict (reduce 1, reduce 10) on $end
+9: shift/reduce conflict (shift 1, reduce 10) on "STRUCT"
+9: shift/reduce conflict (shift 2, reduce 10) on "IDENT"
+9: shift/reduce conflict (shift 3, reduce 10) on "VAR"
+9: shift/reduce conflict (shift 4, reduce 10) on "PRINT"
+9: shift/reduce conflict (shift 5, reduce 10) on "READ"
+9: shift/reduce conflict (shift 6, reduce 10) on "IF"
+9: shift/reduce conflict (shift 7, reduce 10) on "WHILE"
+state 9
 	programa : sentencias .  (1)
 	programa : sentencias . programa  (2)
+	definiciones : .  (10)
 
 	"STRUCT"  shift 1
 	"IDENT"  shift 2
 	"VAR"  shift 3
+	"PRINT"  shift 4
+	"READ"  shift 5
+	"IF"  shift 6
+	"WHILE"  shift 7
 	$end  reduce 1
 
-	programa  goto 14
-	sentencias  goto 5
-	definiciones  goto 6
-	struct  goto 7
-	funciones  goto 8
-	definicion  goto 9
-	funcion  goto 10
+	programa  goto 33
+	sentencias  goto 9
+	definiciones  goto 10
+	struct  goto 11
+	funciones  goto 12
+	definicion  goto 13
+	funcion  goto 14
+	sentencia  goto 15
+	while  goto 16
+	if  goto 17
 
 
-state 6
+state 10
 	sentencias : definiciones .  (3)
 
 	.  reduce 3
 
 
-state 7
+state 11
 	sentencias : struct .  (4)
 
 	.  reduce 4
 
 
-state 8
+state 12
 	sentencias : funciones .  (5)
 
 	.  reduce 5
 
 
-9: shift/reduce conflict (shift 3, reduce 7) on "VAR"
-state 9
-	definiciones : definicion .  (7)
-	definiciones : definicion . definiciones  (8)
+13: shift/reduce conflict (shift 3, reduce 10) on "VAR"
+state 13
+	definiciones : definicion . definiciones  (11)
+	definiciones : .  (10)
 
 	"VAR"  shift 3
-	$end  reduce 7
-	"STRUCT"  reduce 7
-	"IDENT"  reduce 7
-	'}'  reduce 7
+	$end  reduce 10
+	"STRUCT"  reduce 10
+	"IDENT"  reduce 10
+	'}'  reduce 10
+	"RETURN"  reduce 10
+	"PRINT"  reduce 10
+	"READ"  reduce 10
+	"IF"  reduce 10
+	"WHILE"  reduce 10
 
-	definiciones  goto 15
-	definicion  goto 9
-
-
-10: shift/reduce conflict (shift 2, reduce 15) on "IDENT"
-state 10
-	funciones : funcion .  (15)
-	funciones : funcion . funciones  (16)
-
-	"IDENT"  shift 2
-	$end  reduce 15
-	"STRUCT"  reduce 15
-	'}'  reduce 15
-	"VAR"  reduce 15
-
-	funciones  goto 16
-	funcion  goto 10
+	definiciones  goto 34
+	definicion  goto 13
 
 
-state 11
-	struct : "STRUCT" "IDENT" . '{' definiciones '}'  (6)
-
-	'{'  shift 17
-	.  error
-
-
-state 12
-	funcion : "IDENT" '(' . parametrosP ')' ':' tipo '{' expr "RETURN" expr '}'  (17)
-	funcion : "IDENT" '(' . parametrosP ')' '{' expr '}'  (18)
-	parametrosP : .  (20)
-
-	"IDENT"  shift 18
-	')'  reduce 20
-
-	parametrosP  goto 19
-	parametros  goto 20
-	parametro  goto 21
-
-
-state 13
-	definicion : "VAR" "IDENT" . ':' size tipo ';'  (9)
-
-	':'  shift 22
-	.  error
-
-
+14: shift/reduce conflict (shift 35, reduce 20) on "IDENT"
 state 14
+	funciones : funcion .  (20)
+	funciones : funcion . funciones  (21)
+
+	"IDENT"  shift 35
+	$end  reduce 20
+	"STRUCT"  reduce 20
+	'}'  reduce 20
+	"VAR"  reduce 20
+	"RETURN"  reduce 20
+	"PRINT"  reduce 20
+	"READ"  reduce 20
+	"IF"  reduce 20
+	"WHILE"  reduce 20
+
+	funciones  goto 36
+	funcion  goto 14
+
+
+15: reduce/reduce conflict (reduce 10, reduce 29) on $end
+15: shift/reduce conflict (shift 1, reduce 10) on "STRUCT"
+15: shift/reduce conflict (shift 1, reduce 29) on "STRUCT"
+15: shift/reduce conflict (shift 2, reduce 10) on "IDENT"
+15: shift/reduce conflict (shift 2, reduce 29) on "IDENT"
+15: reduce/reduce conflict (reduce 10, reduce 29) on '}'
+15: shift/reduce conflict (shift 3, reduce 10) on "VAR"
+15: shift/reduce conflict (shift 3, reduce 29) on "VAR"
+15: reduce/reduce conflict (reduce 10, reduce 29) on "RETURN"
+15: shift/reduce conflict (shift 4, reduce 10) on "PRINT"
+15: shift/reduce conflict (shift 4, reduce 29) on "PRINT"
+15: shift/reduce conflict (shift 5, reduce 10) on "READ"
+15: shift/reduce conflict (shift 5, reduce 29) on "READ"
+15: shift/reduce conflict (shift 6, reduce 10) on "IF"
+15: shift/reduce conflict (shift 6, reduce 29) on "IF"
+15: shift/reduce conflict (shift 7, reduce 10) on "WHILE"
+15: shift/reduce conflict (shift 7, reduce 29) on "WHILE"
+state 15
+	sentencias : sentencia .  (29)
+	sentencias : sentencia . sentencias  (30)
+	definiciones : .  (10)
+
+	"STRUCT"  shift 1
+	"IDENT"  shift 2
+	"VAR"  shift 3
+	"PRINT"  shift 4
+	"READ"  shift 5
+	"IF"  shift 6
+	"WHILE"  shift 7
+	$end  reduce 10
+	'}'  reduce 10
+	"RETURN"  reduce 10
+
+	sentencias  goto 37
+	definiciones  goto 10
+	struct  goto 11
+	funciones  goto 12
+	definicion  goto 13
+	funcion  goto 14
+	sentencia  goto 15
+	while  goto 16
+	if  goto 17
+
+
+state 16
+	sentencia : while .  (34)
+
+	.  reduce 34
+
+
+state 17
+	sentencia : if .  (35)
+
+	.  reduce 35
+
+
+state 18
+	struct : "STRUCT" "IDENT" . '{' definiciones_struct '}' ';'  (6)
+
+	'{'  shift 38
+	.  error
+
+
+state 19
+	funcion : "IDENT" '(' . parametrosP ')' ':' tipo_basico '{' definiciones sentencias "RETURN" expr ';' '}'  (22)
+	funcion : "IDENT" '(' . parametrosP ')' '{' definiciones sentencias '}'  (23)
+	parametrosP : .  (25)
+
+	"IDENT"  shift 39
+	')'  reduce 25
+
+	parametrosP  goto 40
+	parametros  goto 41
+	parametro  goto 42
+
+
+state 20
+	sentencia : "IDENT" '=' . expr ';'  (33)
+
+	"IDENT"  shift 22
+	'('  shift 23
+	"LITCHAR"  shift 24
+	"CAST"  shift 25
+	"LITENT"  shift 26
+	"LITREAL"  shift 27
+	.  error
+
+	expr_num  goto 28
+	expr  goto 43
+
+
+state 21
+	definicion : "VAR" "IDENT" . ':' size tipo ';'  (12)
+
+	':'  shift 44
+	.  error
+
+
+state 22
+	expr_num : "IDENT" .  (43)
+
+	.  reduce 43
+
+
+state 23
+	expr_num : '(' . expr_num ')'  (57)
+
+	"IDENT"  shift 22
+	'('  shift 23
+	"LITENT"  shift 26
+	"LITREAL"  shift 27
+	.  error
+
+	expr_num  goto 45
+
+
+state 24
+	expr : "LITCHAR" .  (36)
+
+	.  reduce 36
+
+
+state 25
+	expr : "CAST" . '<' tipo_basico '>' '(' expr ')'  (40)
+
+	'<'  shift 46
+	.  error
+
+
+state 26
+	expr_num : "LITENT" .  (41)
+
+	.  reduce 41
+
+
+state 27
+	expr_num : "LITREAL" .  (42)
+
+	.  reduce 42
+
+
+state 28
+	expr : expr_num .  (39)
+	expr_num : expr_num . '*' expr_num  (44)
+	expr_num : expr_num . '/' expr_num  (45)
+	expr_num : expr_num . '-' expr_num  (46)
+	expr_num : expr_num . '+' expr_num  (47)
+	expr_num : expr_num . '>' expr_num  (48)
+	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (49)
+	expr_num : expr_num . '<' expr_num  (50)
+	expr_num : expr_num . "MENOR_IGUAL" expr_num  (51)
+	expr_num : expr_num . "IGUAL" expr_num  (52)
+	expr_num : expr_num . "DISTINTO" expr_num  (53)
+	expr_num : expr_num . "AND" expr_num  (54)
+	expr_num : expr_num . "OR" expr_num  (55)
+	expr_num : expr_num . "NOT" expr_num  (56)
+
+	'+'  shift 47
+	'-'  shift 48
+	'*'  shift 49
+	'/'  shift 50
+	'<'  shift 51
+	'>'  shift 52
+	"MAYOR_IGUAL"  shift 53
+	"MENOR_IGUAL"  shift 54
+	"IGUAL"  shift 55
+	"DISTINTO"  shift 56
+	"AND"  shift 57
+	"OR"  shift 58
+	"NOT"  shift 59
+	';'  reduce 39
+	'['  reduce 39
+	')'  reduce 39
+	"PUNTO"  reduce 39
+
+
+state 29
+	sentencia : "PRINT" expr . ';'  (31)
+	expr : expr . '[' expr_num ']'  (37)
+	expr : expr . "PUNTO" expr  (38)
+
+	';'  shift 60
+	'['  shift 61
+	"PUNTO"  shift 62
+	.  error
+
+
+state 30
+	sentencia : "READ" expr . ';'  (32)
+	expr : expr . '[' expr_num ']'  (37)
+	expr : expr . "PUNTO" expr  (38)
+
+	';'  shift 63
+	'['  shift 61
+	"PUNTO"  shift 62
+	.  error
+
+
+state 31
+	if : "IF" '(' . expr_num ')' '{' sentencias '}'  (58)
+	if : "IF" '(' . expr_num ')' '{' sentencias '}' "ELSE" '{' sentencias '}'  (59)
+
+	"IDENT"  shift 22
+	'('  shift 23
+	"LITENT"  shift 26
+	"LITREAL"  shift 27
+	.  error
+
+	expr_num  goto 64
+
+
+state 32
+	while : "WHILE" '(' . expr ')' '{' sentencias '}'  (60)
+
+	"IDENT"  shift 22
+	'('  shift 23
+	"LITCHAR"  shift 24
+	"CAST"  shift 25
+	"LITENT"  shift 26
+	"LITREAL"  shift 27
+	.  error
+
+	expr_num  goto 28
+	expr  goto 65
+
+
+state 33
 	programa : sentencias programa .  (2)
 
 	.  reduce 2
 
 
-state 15
-	definiciones : definicion definiciones .  (8)
-
-	.  reduce 8
-
-
-state 16
-	funciones : funcion funciones .  (16)
-
-	.  reduce 16
-
-
-state 17
-	struct : "STRUCT" "IDENT" '{' . definiciones '}'  (6)
-
-	"VAR"  shift 3
-	.  error
-
-	definiciones  goto 23
-	definicion  goto 9
-
-
-state 18
-	parametro : "IDENT" . ':' tipo  (23)
-
-	':'  shift 24
-	.  error
-
-
-state 19
-	funcion : "IDENT" '(' parametrosP . ')' ':' tipo '{' expr "RETURN" expr '}'  (17)
-	funcion : "IDENT" '(' parametrosP . ')' '{' expr '}'  (18)
-
-	')'  shift 25
-	.  error
-
-
-state 20
-	parametrosP : parametros .  (19)
-
-	.  reduce 19
-
-
-state 21
-	parametros : parametro .  (21)
-	parametros : parametro . ',' parametros  (22)
-
-	','  shift 26
-	')'  reduce 21
-
-
-state 22
-	definicion : "VAR" "IDENT" ':' . size tipo ';'  (9)
-	size : .  (10)
-
-	'['  shift 27
-	"INT"  reduce 10
-	"FLOAT"  reduce 10
-	"CHAR"  reduce 10
-
-	size  goto 28
-
-
-state 23
-	struct : "STRUCT" "IDENT" '{' definiciones . '}'  (6)
-
-	'}'  shift 29
-	.  error
-
-
-state 24
-	parametro : "IDENT" ':' . tipo  (23)
-
-	"INT"  shift 30
-	"FLOAT"  shift 31
-	"CHAR"  shift 32
-	.  error
-
-	tipo  goto 33
-
-
-state 25
-	funcion : "IDENT" '(' parametrosP ')' . ':' tipo '{' expr "RETURN" expr '}'  (17)
-	funcion : "IDENT" '(' parametrosP ')' . '{' expr '}'  (18)
-
-	'{'  shift 34
-	':'  shift 35
-	.  error
-
-
-state 26
-	parametros : parametro ',' . parametros  (22)
-
-	"IDENT"  shift 18
-	.  error
-
-	parametros  goto 36
-	parametro  goto 21
-
-
-state 27
-	size : '[' . expr_num ']' size  (11)
-
-	"LITENT"  shift 37
-	"LITREAL"  shift 38
-	.  error
-
-	expr_num  goto 39
-
-
-state 28
-	definicion : "VAR" "IDENT" ':' size . tipo ';'  (9)
-
-	"INT"  shift 30
-	"FLOAT"  shift 31
-	"CHAR"  shift 32
-	.  error
-
-	tipo  goto 40
-
-
-state 29
-	struct : "STRUCT" "IDENT" '{' definiciones '}' .  (6)
-
-	.  reduce 6
-
-
-state 30
-	tipo : "INT" .  (12)
-
-	.  reduce 12
-
-
-state 31
-	tipo : "FLOAT" .  (13)
-
-	.  reduce 13
-
-
-state 32
-	tipo : "CHAR" .  (14)
-
-	.  reduce 14
-
-
-state 33
-	parametro : "IDENT" ':' tipo .  (23)
-
-	.  reduce 23
-
-
 state 34
-	funcion : "IDENT" '(' parametrosP ')' '{' . expr '}'  (18)
+	definiciones : definicion definiciones .  (11)
 
-	"IDENT"  shift 41
-	"LITCHAR"  shift 42
-	"READ"  shift 43
-	"PRINT"  shift 44
-	"CAST"  shift 45
-	"LITENT"  shift 37
-	"LITREAL"  shift 38
-	"IF"  shift 46
-	"WHILE"  shift 47
-	.  error
-
-	expr_num  goto 48
-	expr  goto 49
-	punto  goto 50
-	if  goto 51
-	while  goto 52
+	.  reduce 11
 
 
 state 35
-	funcion : "IDENT" '(' parametrosP ')' ':' . tipo '{' expr "RETURN" expr '}'  (17)
+	funcion : "IDENT" . '(' parametrosP ')' ':' tipo_basico '{' definiciones sentencias "RETURN" expr ';' '}'  (22)
+	funcion : "IDENT" . '(' parametrosP ')' '{' definiciones sentencias '}'  (23)
 
-	"INT"  shift 30
-	"FLOAT"  shift 31
-	"CHAR"  shift 32
+	'('  shift 19
 	.  error
-
-	tipo  goto 53
 
 
 state 36
-	parametros : parametro ',' parametros .  (22)
+	funciones : funcion funciones .  (21)
 
-	.  reduce 22
+	.  reduce 21
 
 
 state 37
-	expr_num : "LITENT" .  (33)
-
-	.  reduce 33
-
-
-state 38
-	expr_num : "LITREAL" .  (34)
-
-	.  reduce 34
-
-
-state 39
-	size : '[' expr_num . ']' size  (11)
-	expr_num : expr_num . '*' expr_num  (35)
-	expr_num : expr_num . '/' expr_num  (36)
-	expr_num : expr_num . '-' expr_num  (37)
-	expr_num : expr_num . '+' expr_num  (38)
-	expr_num : expr_num . '>' expr_num  (39)
-	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (40)
-	expr_num : expr_num . '<' expr_num  (41)
-	expr_num : expr_num . "MENOR_IGUAL" expr_num  (42)
-	expr_num : expr_num . "IGUAL" expr_num  (43)
-	expr_num : expr_num . "DISTINTO" expr_num  (44)
-	expr_num : expr_num . "AND" expr_num  (45)
-	expr_num : expr_num . "OR" expr_num  (46)
-	expr_num : expr_num . "NOT" expr_num  (47)
-
-	'+'  shift 54
-	'-'  shift 55
-	'*'  shift 56
-	'/'  shift 57
-	'<'  shift 58
-	'>'  shift 59
-	"MAYOR_IGUAL"  shift 60
-	"MENOR_IGUAL"  shift 61
-	"IGUAL"  shift 62
-	"DISTINTO"  shift 63
-	"AND"  shift 64
-	"OR"  shift 65
-	"NOT"  shift 66
-	']'  shift 67
-	.  error
-
-
-state 40
-	definicion : "VAR" "IDENT" ':' size tipo . ';'  (9)
-
-	';'  shift 68
-	.  error
-
-
-state 41
-	punto : "IDENT" .  (48)
-	punto : "IDENT" . '.' punto  (49)
-
-	'.'  shift 69
-	'}'  reduce 48
-	';'  reduce 48
-	')'  reduce 48
-	"RETURN"  reduce 48
-	'='  reduce 48
-
-
-state 42
-	expr : "LITCHAR" .  (24)
-
-	.  reduce 24
-
-
-state 43
-	expr : "READ" . expr ';'  (25)
-
-	"IDENT"  shift 41
-	"LITCHAR"  shift 42
-	"READ"  shift 43
-	"PRINT"  shift 44
-	"CAST"  shift 45
-	"LITENT"  shift 37
-	"LITREAL"  shift 38
-	"IF"  shift 46
-	"WHILE"  shift 47
-	.  error
-
-	expr_num  goto 48
-	expr  goto 70
-	punto  goto 50
-	if  goto 51
-	while  goto 52
-
-
-state 44
-	expr : "PRINT" . expr ';'  (26)
-
-	"IDENT"  shift 41
-	"LITCHAR"  shift 42
-	"READ"  shift 43
-	"PRINT"  shift 44
-	"CAST"  shift 45
-	"LITENT"  shift 37
-	"LITREAL"  shift 38
-	"IF"  shift 46
-	"WHILE"  shift 47
-	.  error
-
-	expr_num  goto 48
-	expr  goto 71
-	punto  goto 50
-	if  goto 51
-	while  goto 52
-
-
-state 45
-	expr : "CAST" . '<' tipo '>' '(' expr ')'  (32)
-
-	'<'  shift 72
-	.  error
-
-
-state 46
-	if : "IF" . '(' expr_num ')' '{' sentencias '}'  (50)
-	if : "IF" . '(' expr_num ')' '{' sentencias '}' "ELSE" '{' sentencias '}'  (51)
-
-	'('  shift 73
-	.  error
-
-
-state 47
-	while : "WHILE" . '(' expr ')' '{' sentencias '}'  (52)
-
-	'('  shift 74
-	.  error
-
-
-state 48
-	expr : expr_num .  (31)
-	expr_num : expr_num . '*' expr_num  (35)
-	expr_num : expr_num . '/' expr_num  (36)
-	expr_num : expr_num . '-' expr_num  (37)
-	expr_num : expr_num . '+' expr_num  (38)
-	expr_num : expr_num . '>' expr_num  (39)
-	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (40)
-	expr_num : expr_num . '<' expr_num  (41)
-	expr_num : expr_num . "MENOR_IGUAL" expr_num  (42)
-	expr_num : expr_num . "IGUAL" expr_num  (43)
-	expr_num : expr_num . "DISTINTO" expr_num  (44)
-	expr_num : expr_num . "AND" expr_num  (45)
-	expr_num : expr_num . "OR" expr_num  (46)
-	expr_num : expr_num . "NOT" expr_num  (47)
-
-	'+'  shift 54
-	'-'  shift 55
-	'*'  shift 56
-	'/'  shift 57
-	'<'  shift 58
-	'>'  shift 59
-	"MAYOR_IGUAL"  shift 60
-	"MENOR_IGUAL"  shift 61
-	"IGUAL"  shift 62
-	"DISTINTO"  shift 63
-	"AND"  shift 64
-	"OR"  shift 65
-	"NOT"  shift 66
-	'}'  reduce 31
-	';'  reduce 31
-	')'  reduce 31
-	"RETURN"  reduce 31
-	'='  reduce 31
-
-
-state 49
-	funcion : "IDENT" '(' parametrosP ')' '{' expr . '}'  (18)
-	expr : expr . '=' expr ';'  (27)
-
-	'}'  shift 75
-	'='  shift 76
-	.  error
-
-
-state 50
-	expr : punto .  (28)
-
-	.  reduce 28
-
-
-state 51
-	expr : if .  (29)
-
-	.  reduce 29
-
-
-state 52
-	expr : while .  (30)
+	sentencias : sentencia sentencias .  (30)
 
 	.  reduce 30
 
 
-state 53
-	funcion : "IDENT" '(' parametrosP ')' ':' tipo . '{' expr "RETURN" expr '}'  (17)
+state 38
+	struct : "STRUCT" "IDENT" '{' . definiciones_struct '}' ';'  (6)
 
-	'{'  shift 77
+	"IDENT"  shift 66
+	.  error
+
+	definiciones_struct  goto 67
+	definicion_struct  goto 68
+
+
+state 39
+	parametro : "IDENT" . ':' tipo_basico  (28)
+
+	':'  shift 69
 	.  error
 
 
-state 54
-	expr_num : expr_num '+' . expr_num  (38)
+state 40
+	funcion : "IDENT" '(' parametrosP . ')' ':' tipo_basico '{' definiciones sentencias "RETURN" expr ';' '}'  (22)
+	funcion : "IDENT" '(' parametrosP . ')' '{' definiciones sentencias '}'  (23)
 
-	"LITENT"  shift 37
-	"LITREAL"  shift 38
+	')'  shift 70
 	.  error
 
-	expr_num  goto 78
+
+state 41
+	parametrosP : parametros .  (24)
+
+	.  reduce 24
 
 
-state 55
-	expr_num : expr_num '-' . expr_num  (37)
+state 42
+	parametros : parametro .  (26)
+	parametros : parametro . ',' parametros  (27)
 
-	"LITENT"  shift 37
-	"LITREAL"  shift 38
+	','  shift 71
+	')'  reduce 26
+
+
+state 43
+	sentencia : "IDENT" '=' expr . ';'  (33)
+	expr : expr . '[' expr_num ']'  (37)
+	expr : expr . "PUNTO" expr  (38)
+
+	';'  shift 72
+	'['  shift 61
+	"PUNTO"  shift 62
 	.  error
 
-	expr_num  goto 79
+
+state 44
+	definicion : "VAR" "IDENT" ':' . size tipo ';'  (12)
+	size : .  (13)
+
+	'['  shift 73
+	"IDENT"  reduce 13
+	"INT"  reduce 13
+	"FLOAT"  reduce 13
+	"CHAR"  reduce 13
+
+	size  goto 74
 
 
-state 56
-	expr_num : expr_num '*' . expr_num  (35)
+state 45
+	expr_num : expr_num . '*' expr_num  (44)
+	expr_num : expr_num . '/' expr_num  (45)
+	expr_num : expr_num . '-' expr_num  (46)
+	expr_num : expr_num . '+' expr_num  (47)
+	expr_num : expr_num . '>' expr_num  (48)
+	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (49)
+	expr_num : expr_num . '<' expr_num  (50)
+	expr_num : expr_num . "MENOR_IGUAL" expr_num  (51)
+	expr_num : expr_num . "IGUAL" expr_num  (52)
+	expr_num : expr_num . "DISTINTO" expr_num  (53)
+	expr_num : expr_num . "AND" expr_num  (54)
+	expr_num : expr_num . "OR" expr_num  (55)
+	expr_num : expr_num . "NOT" expr_num  (56)
+	expr_num : '(' expr_num . ')'  (57)
 
-	"LITENT"  shift 37
-	"LITREAL"  shift 38
+	'+'  shift 47
+	'-'  shift 48
+	'*'  shift 49
+	'/'  shift 50
+	'<'  shift 51
+	'>'  shift 52
+	"MAYOR_IGUAL"  shift 53
+	"MENOR_IGUAL"  shift 54
+	"IGUAL"  shift 55
+	"DISTINTO"  shift 56
+	"AND"  shift 57
+	"OR"  shift 58
+	"NOT"  shift 59
+	')'  shift 75
+	.  error
+
+
+state 46
+	expr : "CAST" '<' . tipo_basico '>' '(' expr ')'  (40)
+
+	"INT"  shift 76
+	"FLOAT"  shift 77
+	"CHAR"  shift 78
+	.  error
+
+	tipo_basico  goto 79
+
+
+state 47
+	expr_num : expr_num '+' . expr_num  (47)
+
+	"IDENT"  shift 22
+	'('  shift 23
+	"LITENT"  shift 26
+	"LITREAL"  shift 27
 	.  error
 
 	expr_num  goto 80
 
 
-state 57
-	expr_num : expr_num '/' . expr_num  (36)
+state 48
+	expr_num : expr_num '-' . expr_num  (46)
 
-	"LITENT"  shift 37
-	"LITREAL"  shift 38
+	"IDENT"  shift 22
+	'('  shift 23
+	"LITENT"  shift 26
+	"LITREAL"  shift 27
 	.  error
 
 	expr_num  goto 81
 
 
-state 58
-	expr_num : expr_num '<' . expr_num  (41)
+state 49
+	expr_num : expr_num '*' . expr_num  (44)
 
-	"LITENT"  shift 37
-	"LITREAL"  shift 38
+	"IDENT"  shift 22
+	'('  shift 23
+	"LITENT"  shift 26
+	"LITREAL"  shift 27
 	.  error
 
 	expr_num  goto 82
 
 
-state 59
-	expr_num : expr_num '>' . expr_num  (39)
+state 50
+	expr_num : expr_num '/' . expr_num  (45)
 
-	"LITENT"  shift 37
-	"LITREAL"  shift 38
+	"IDENT"  shift 22
+	'('  shift 23
+	"LITENT"  shift 26
+	"LITREAL"  shift 27
 	.  error
 
 	expr_num  goto 83
 
 
-state 60
-	expr_num : expr_num "MAYOR_IGUAL" . expr_num  (40)
+state 51
+	expr_num : expr_num '<' . expr_num  (50)
 
-	"LITENT"  shift 37
-	"LITREAL"  shift 38
+	"IDENT"  shift 22
+	'('  shift 23
+	"LITENT"  shift 26
+	"LITREAL"  shift 27
 	.  error
 
 	expr_num  goto 84
 
 
-state 61
-	expr_num : expr_num "MENOR_IGUAL" . expr_num  (42)
+state 52
+	expr_num : expr_num '>' . expr_num  (48)
 
-	"LITENT"  shift 37
-	"LITREAL"  shift 38
+	"IDENT"  shift 22
+	'('  shift 23
+	"LITENT"  shift 26
+	"LITREAL"  shift 27
 	.  error
 
 	expr_num  goto 85
 
 
-state 62
-	expr_num : expr_num "IGUAL" . expr_num  (43)
+state 53
+	expr_num : expr_num "MAYOR_IGUAL" . expr_num  (49)
 
-	"LITENT"  shift 37
-	"LITREAL"  shift 38
+	"IDENT"  shift 22
+	'('  shift 23
+	"LITENT"  shift 26
+	"LITREAL"  shift 27
 	.  error
 
 	expr_num  goto 86
 
 
-state 63
-	expr_num : expr_num "DISTINTO" . expr_num  (44)
+state 54
+	expr_num : expr_num "MENOR_IGUAL" . expr_num  (51)
 
-	"LITENT"  shift 37
-	"LITREAL"  shift 38
+	"IDENT"  shift 22
+	'('  shift 23
+	"LITENT"  shift 26
+	"LITREAL"  shift 27
 	.  error
 
 	expr_num  goto 87
 
 
-state 64
-	expr_num : expr_num "AND" . expr_num  (45)
+state 55
+	expr_num : expr_num "IGUAL" . expr_num  (52)
 
-	"LITENT"  shift 37
-	"LITREAL"  shift 38
+	"IDENT"  shift 22
+	'('  shift 23
+	"LITENT"  shift 26
+	"LITREAL"  shift 27
 	.  error
 
 	expr_num  goto 88
 
 
-state 65
-	expr_num : expr_num "OR" . expr_num  (46)
+state 56
+	expr_num : expr_num "DISTINTO" . expr_num  (53)
 
-	"LITENT"  shift 37
-	"LITREAL"  shift 38
+	"IDENT"  shift 22
+	'('  shift 23
+	"LITENT"  shift 26
+	"LITREAL"  shift 27
 	.  error
 
 	expr_num  goto 89
 
 
-state 66
-	expr_num : expr_num "NOT" . expr_num  (47)
+state 57
+	expr_num : expr_num "AND" . expr_num  (54)
 
-	"LITENT"  shift 37
-	"LITREAL"  shift 38
+	"IDENT"  shift 22
+	'('  shift 23
+	"LITENT"  shift 26
+	"LITREAL"  shift 27
 	.  error
 
 	expr_num  goto 90
 
 
+state 58
+	expr_num : expr_num "OR" . expr_num  (55)
+
+	"IDENT"  shift 22
+	'('  shift 23
+	"LITENT"  shift 26
+	"LITREAL"  shift 27
+	.  error
+
+	expr_num  goto 91
+
+
+state 59
+	expr_num : expr_num "NOT" . expr_num  (56)
+
+	"IDENT"  shift 22
+	'('  shift 23
+	"LITENT"  shift 26
+	"LITREAL"  shift 27
+	.  error
+
+	expr_num  goto 92
+
+
+state 60
+	sentencia : "PRINT" expr ';' .  (31)
+
+	.  reduce 31
+
+
+state 61
+	expr : expr '[' . expr_num ']'  (37)
+
+	"IDENT"  shift 22
+	'('  shift 23
+	"LITENT"  shift 26
+	"LITREAL"  shift 27
+	.  error
+
+	expr_num  goto 93
+
+
+state 62
+	expr : expr "PUNTO" . expr  (38)
+
+	"IDENT"  shift 22
+	'('  shift 23
+	"LITCHAR"  shift 24
+	"CAST"  shift 25
+	"LITENT"  shift 26
+	"LITREAL"  shift 27
+	.  error
+
+	expr_num  goto 28
+	expr  goto 94
+
+
+state 63
+	sentencia : "READ" expr ';' .  (32)
+
+	.  reduce 32
+
+
+state 64
+	expr_num : expr_num . '*' expr_num  (44)
+	expr_num : expr_num . '/' expr_num  (45)
+	expr_num : expr_num . '-' expr_num  (46)
+	expr_num : expr_num . '+' expr_num  (47)
+	expr_num : expr_num . '>' expr_num  (48)
+	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (49)
+	expr_num : expr_num . '<' expr_num  (50)
+	expr_num : expr_num . "MENOR_IGUAL" expr_num  (51)
+	expr_num : expr_num . "IGUAL" expr_num  (52)
+	expr_num : expr_num . "DISTINTO" expr_num  (53)
+	expr_num : expr_num . "AND" expr_num  (54)
+	expr_num : expr_num . "OR" expr_num  (55)
+	expr_num : expr_num . "NOT" expr_num  (56)
+	if : "IF" '(' expr_num . ')' '{' sentencias '}'  (58)
+	if : "IF" '(' expr_num . ')' '{' sentencias '}' "ELSE" '{' sentencias '}'  (59)
+
+	'+'  shift 47
+	'-'  shift 48
+	'*'  shift 49
+	'/'  shift 50
+	'<'  shift 51
+	'>'  shift 52
+	"MAYOR_IGUAL"  shift 53
+	"MENOR_IGUAL"  shift 54
+	"IGUAL"  shift 55
+	"DISTINTO"  shift 56
+	"AND"  shift 57
+	"OR"  shift 58
+	"NOT"  shift 59
+	')'  shift 95
+	.  error
+
+
+state 65
+	expr : expr . '[' expr_num ']'  (37)
+	expr : expr . "PUNTO" expr  (38)
+	while : "WHILE" '(' expr . ')' '{' sentencias '}'  (60)
+
+	'['  shift 61
+	')'  shift 96
+	"PUNTO"  shift 62
+	.  error
+
+
+state 66
+	definicion_struct : "IDENT" . ':' size tipo ';'  (9)
+
+	':'  shift 97
+	.  error
+
+
 state 67
-	size : '[' expr_num ']' . size  (11)
-	size : .  (10)
+	struct : "STRUCT" "IDENT" '{' definiciones_struct . '}' ';'  (6)
 
-	'['  shift 27
-	"INT"  reduce 10
-	"FLOAT"  reduce 10
-	"CHAR"  reduce 10
-
-	size  goto 91
+	'}'  shift 98
+	.  error
 
 
 state 68
-	definicion : "VAR" "IDENT" ':' size tipo ';' .  (9)
+	definiciones_struct : definicion_struct .  (7)
+	definiciones_struct : definicion_struct . definiciones_struct  (8)
 
-	.  reduce 9
+	"IDENT"  shift 66
+	'}'  reduce 7
+
+	definiciones_struct  goto 99
+	definicion_struct  goto 68
 
 
 state 69
-	punto : "IDENT" '.' . punto  (49)
+	parametro : "IDENT" ':' . tipo_basico  (28)
 
-	"IDENT"  shift 41
+	"INT"  shift 76
+	"FLOAT"  shift 77
+	"CHAR"  shift 78
 	.  error
 
-	punto  goto 92
+	tipo_basico  goto 100
 
 
 state 70
-	expr : "READ" expr . ';'  (25)
-	expr : expr . '=' expr ';'  (27)
+	funcion : "IDENT" '(' parametrosP ')' . ':' tipo_basico '{' definiciones sentencias "RETURN" expr ';' '}'  (22)
+	funcion : "IDENT" '(' parametrosP ')' . '{' definiciones sentencias '}'  (23)
 
-	';'  shift 93
-	'='  shift 76
+	'{'  shift 101
+	':'  shift 102
 	.  error
 
 
 state 71
-	expr : "PRINT" expr . ';'  (26)
-	expr : expr . '=' expr ';'  (27)
+	parametros : parametro ',' . parametros  (27)
 
-	';'  shift 94
-	'='  shift 76
+	"IDENT"  shift 39
 	.  error
+
+	parametros  goto 103
+	parametro  goto 42
 
 
 state 72
-	expr : "CAST" '<' . tipo '>' '(' expr ')'  (32)
+	sentencia : "IDENT" '=' expr ';' .  (33)
 
-	"INT"  shift 30
-	"FLOAT"  shift 31
-	"CHAR"  shift 32
-	.  error
-
-	tipo  goto 95
+	.  reduce 33
 
 
 state 73
-	if : "IF" '(' . expr_num ')' '{' sentencias '}'  (50)
-	if : "IF" '(' . expr_num ')' '{' sentencias '}' "ELSE" '{' sentencias '}'  (51)
+	size : '[' . expr_num ']' size  (14)
 
-	"LITENT"  shift 37
-	"LITREAL"  shift 38
+	"IDENT"  shift 22
+	'('  shift 23
+	"LITENT"  shift 26
+	"LITREAL"  shift 27
 	.  error
 
-	expr_num  goto 96
+	expr_num  goto 104
 
 
 state 74
-	while : "WHILE" '(' . expr ')' '{' sentencias '}'  (52)
+	definicion : "VAR" "IDENT" ':' size . tipo ';'  (12)
 
-	"IDENT"  shift 41
-	"LITCHAR"  shift 42
-	"READ"  shift 43
-	"PRINT"  shift 44
-	"CAST"  shift 45
-	"LITENT"  shift 37
-	"LITREAL"  shift 38
-	"IF"  shift 46
-	"WHILE"  shift 47
+	"IDENT"  shift 105
+	"INT"  shift 76
+	"FLOAT"  shift 77
+	"CHAR"  shift 78
 	.  error
 
-	expr_num  goto 48
-	expr  goto 97
-	punto  goto 50
-	if  goto 51
-	while  goto 52
+	tipo  goto 106
+	tipo_basico  goto 107
 
 
 state 75
-	funcion : "IDENT" '(' parametrosP ')' '{' expr '}' .  (18)
+	expr_num : '(' expr_num ')' .  (57)
+
+	.  reduce 57
+
+
+state 76
+	tipo_basico : "INT" .  (17)
+
+	.  reduce 17
+
+
+state 77
+	tipo_basico : "FLOAT" .  (18)
 
 	.  reduce 18
 
 
-state 76
-	expr : expr '=' . expr ';'  (27)
-
-	"IDENT"  shift 41
-	"LITCHAR"  shift 42
-	"READ"  shift 43
-	"PRINT"  shift 44
-	"CAST"  shift 45
-	"LITENT"  shift 37
-	"LITREAL"  shift 38
-	"IF"  shift 46
-	"WHILE"  shift 47
-	.  error
-
-	expr_num  goto 48
-	expr  goto 98
-	punto  goto 50
-	if  goto 51
-	while  goto 52
-
-
-state 77
-	funcion : "IDENT" '(' parametrosP ')' ':' tipo '{' . expr "RETURN" expr '}'  (17)
-
-	"IDENT"  shift 41
-	"LITCHAR"  shift 42
-	"READ"  shift 43
-	"PRINT"  shift 44
-	"CAST"  shift 45
-	"LITENT"  shift 37
-	"LITREAL"  shift 38
-	"IF"  shift 46
-	"WHILE"  shift 47
-	.  error
-
-	expr_num  goto 48
-	expr  goto 99
-	punto  goto 50
-	if  goto 51
-	while  goto 52
-
-
 state 78
-	expr_num : expr_num . '*' expr_num  (35)
-	expr_num : expr_num . '/' expr_num  (36)
-	expr_num : expr_num . '-' expr_num  (37)
-	expr_num : expr_num . '+' expr_num  (38)
-	expr_num : expr_num '+' expr_num .  (38)
-	expr_num : expr_num . '>' expr_num  (39)
-	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (40)
-	expr_num : expr_num . '<' expr_num  (41)
-	expr_num : expr_num . "MENOR_IGUAL" expr_num  (42)
-	expr_num : expr_num . "IGUAL" expr_num  (43)
-	expr_num : expr_num . "DISTINTO" expr_num  (44)
-	expr_num : expr_num . "AND" expr_num  (45)
-	expr_num : expr_num . "OR" expr_num  (46)
-	expr_num : expr_num . "NOT" expr_num  (47)
+	tipo_basico : "CHAR" .  (19)
 
-	'*'  shift 56
-	'/'  shift 57
-	'<'  shift 58
-	'>'  shift 59
-	"MAYOR_IGUAL"  shift 60
-	"MENOR_IGUAL"  shift 61
-	"IGUAL"  shift 62
-	"DISTINTO"  shift 63
-	"AND"  shift 64
-	"OR"  shift 65
-	"NOT"  shift 66
-	'+'  reduce 38
-	'-'  reduce 38
-	'}'  reduce 38
-	';'  reduce 38
-	']'  reduce 38
-	')'  reduce 38
-	"RETURN"  reduce 38
-	'='  reduce 38
+	.  reduce 19
 
 
 state 79
-	expr_num : expr_num . '*' expr_num  (35)
-	expr_num : expr_num . '/' expr_num  (36)
-	expr_num : expr_num . '-' expr_num  (37)
-	expr_num : expr_num '-' expr_num .  (37)
-	expr_num : expr_num . '+' expr_num  (38)
-	expr_num : expr_num . '>' expr_num  (39)
-	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (40)
-	expr_num : expr_num . '<' expr_num  (41)
-	expr_num : expr_num . "MENOR_IGUAL" expr_num  (42)
-	expr_num : expr_num . "IGUAL" expr_num  (43)
-	expr_num : expr_num . "DISTINTO" expr_num  (44)
-	expr_num : expr_num . "AND" expr_num  (45)
-	expr_num : expr_num . "OR" expr_num  (46)
-	expr_num : expr_num . "NOT" expr_num  (47)
+	expr : "CAST" '<' tipo_basico . '>' '(' expr ')'  (40)
 
-	'*'  shift 56
-	'/'  shift 57
-	'<'  shift 58
-	'>'  shift 59
-	"MAYOR_IGUAL"  shift 60
-	"MENOR_IGUAL"  shift 61
-	"IGUAL"  shift 62
-	"DISTINTO"  shift 63
-	"AND"  shift 64
-	"OR"  shift 65
-	"NOT"  shift 66
-	'+'  reduce 37
-	'-'  reduce 37
-	'}'  reduce 37
-	';'  reduce 37
-	']'  reduce 37
-	')'  reduce 37
-	"RETURN"  reduce 37
-	'='  reduce 37
+	'>'  shift 108
+	.  error
 
 
 state 80
-	expr_num : expr_num . '*' expr_num  (35)
-	expr_num : expr_num '*' expr_num .  (35)
-	expr_num : expr_num . '/' expr_num  (36)
-	expr_num : expr_num . '-' expr_num  (37)
-	expr_num : expr_num . '+' expr_num  (38)
-	expr_num : expr_num . '>' expr_num  (39)
-	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (40)
-	expr_num : expr_num . '<' expr_num  (41)
-	expr_num : expr_num . "MENOR_IGUAL" expr_num  (42)
-	expr_num : expr_num . "IGUAL" expr_num  (43)
-	expr_num : expr_num . "DISTINTO" expr_num  (44)
-	expr_num : expr_num . "AND" expr_num  (45)
-	expr_num : expr_num . "OR" expr_num  (46)
-	expr_num : expr_num . "NOT" expr_num  (47)
+	expr_num : expr_num . '*' expr_num  (44)
+	expr_num : expr_num . '/' expr_num  (45)
+	expr_num : expr_num . '-' expr_num  (46)
+	expr_num : expr_num . '+' expr_num  (47)
+	expr_num : expr_num '+' expr_num .  (47)
+	expr_num : expr_num . '>' expr_num  (48)
+	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (49)
+	expr_num : expr_num . '<' expr_num  (50)
+	expr_num : expr_num . "MENOR_IGUAL" expr_num  (51)
+	expr_num : expr_num . "IGUAL" expr_num  (52)
+	expr_num : expr_num . "DISTINTO" expr_num  (53)
+	expr_num : expr_num . "AND" expr_num  (54)
+	expr_num : expr_num . "OR" expr_num  (55)
+	expr_num : expr_num . "NOT" expr_num  (56)
 
-	'<'  shift 58
-	'>'  shift 59
-	"MAYOR_IGUAL"  shift 60
-	"MENOR_IGUAL"  shift 61
-	"IGUAL"  shift 62
-	"DISTINTO"  shift 63
-	"AND"  shift 64
-	"OR"  shift 65
-	"NOT"  shift 66
-	'+'  reduce 35
-	'-'  reduce 35
-	'*'  reduce 35
-	'/'  reduce 35
-	'}'  reduce 35
-	';'  reduce 35
-	']'  reduce 35
-	')'  reduce 35
-	"RETURN"  reduce 35
-	'='  reduce 35
+	'*'  shift 49
+	'/'  shift 50
+	'<'  shift 51
+	'>'  shift 52
+	"MAYOR_IGUAL"  shift 53
+	"MENOR_IGUAL"  shift 54
+	"IGUAL"  shift 55
+	"DISTINTO"  shift 56
+	"AND"  shift 57
+	"OR"  shift 58
+	"NOT"  shift 59
+	'+'  reduce 47
+	'-'  reduce 47
+	';'  reduce 47
+	'['  reduce 47
+	']'  reduce 47
+	')'  reduce 47
+	"PUNTO"  reduce 47
 
 
 state 81
-	expr_num : expr_num . '*' expr_num  (35)
-	expr_num : expr_num . '/' expr_num  (36)
-	expr_num : expr_num '/' expr_num .  (36)
-	expr_num : expr_num . '-' expr_num  (37)
-	expr_num : expr_num . '+' expr_num  (38)
-	expr_num : expr_num . '>' expr_num  (39)
-	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (40)
-	expr_num : expr_num . '<' expr_num  (41)
-	expr_num : expr_num . "MENOR_IGUAL" expr_num  (42)
-	expr_num : expr_num . "IGUAL" expr_num  (43)
-	expr_num : expr_num . "DISTINTO" expr_num  (44)
-	expr_num : expr_num . "AND" expr_num  (45)
-	expr_num : expr_num . "OR" expr_num  (46)
-	expr_num : expr_num . "NOT" expr_num  (47)
+	expr_num : expr_num . '*' expr_num  (44)
+	expr_num : expr_num . '/' expr_num  (45)
+	expr_num : expr_num . '-' expr_num  (46)
+	expr_num : expr_num '-' expr_num .  (46)
+	expr_num : expr_num . '+' expr_num  (47)
+	expr_num : expr_num . '>' expr_num  (48)
+	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (49)
+	expr_num : expr_num . '<' expr_num  (50)
+	expr_num : expr_num . "MENOR_IGUAL" expr_num  (51)
+	expr_num : expr_num . "IGUAL" expr_num  (52)
+	expr_num : expr_num . "DISTINTO" expr_num  (53)
+	expr_num : expr_num . "AND" expr_num  (54)
+	expr_num : expr_num . "OR" expr_num  (55)
+	expr_num : expr_num . "NOT" expr_num  (56)
 
-	'<'  shift 58
-	'>'  shift 59
-	"MAYOR_IGUAL"  shift 60
-	"MENOR_IGUAL"  shift 61
-	"IGUAL"  shift 62
-	"DISTINTO"  shift 63
-	"AND"  shift 64
-	"OR"  shift 65
-	"NOT"  shift 66
-	'+'  reduce 36
-	'-'  reduce 36
-	'*'  reduce 36
-	'/'  reduce 36
-	'}'  reduce 36
-	';'  reduce 36
-	']'  reduce 36
-	')'  reduce 36
-	"RETURN"  reduce 36
-	'='  reduce 36
+	'*'  shift 49
+	'/'  shift 50
+	'<'  shift 51
+	'>'  shift 52
+	"MAYOR_IGUAL"  shift 53
+	"MENOR_IGUAL"  shift 54
+	"IGUAL"  shift 55
+	"DISTINTO"  shift 56
+	"AND"  shift 57
+	"OR"  shift 58
+	"NOT"  shift 59
+	'+'  reduce 46
+	'-'  reduce 46
+	';'  reduce 46
+	'['  reduce 46
+	']'  reduce 46
+	')'  reduce 46
+	"PUNTO"  reduce 46
 
 
 state 82
-	expr_num : expr_num . '*' expr_num  (35)
-	expr_num : expr_num . '/' expr_num  (36)
-	expr_num : expr_num . '-' expr_num  (37)
-	expr_num : expr_num . '+' expr_num  (38)
-	expr_num : expr_num . '>' expr_num  (39)
-	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (40)
-	expr_num : expr_num . '<' expr_num  (41)
-	expr_num : expr_num '<' expr_num .  (41)
-	expr_num : expr_num . "MENOR_IGUAL" expr_num  (42)
-	expr_num : expr_num . "IGUAL" expr_num  (43)
-	expr_num : expr_num . "DISTINTO" expr_num  (44)
-	expr_num : expr_num . "AND" expr_num  (45)
-	expr_num : expr_num . "OR" expr_num  (46)
-	expr_num : expr_num . "NOT" expr_num  (47)
+	expr_num : expr_num . '*' expr_num  (44)
+	expr_num : expr_num '*' expr_num .  (44)
+	expr_num : expr_num . '/' expr_num  (45)
+	expr_num : expr_num . '-' expr_num  (46)
+	expr_num : expr_num . '+' expr_num  (47)
+	expr_num : expr_num . '>' expr_num  (48)
+	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (49)
+	expr_num : expr_num . '<' expr_num  (50)
+	expr_num : expr_num . "MENOR_IGUAL" expr_num  (51)
+	expr_num : expr_num . "IGUAL" expr_num  (52)
+	expr_num : expr_num . "DISTINTO" expr_num  (53)
+	expr_num : expr_num . "AND" expr_num  (54)
+	expr_num : expr_num . "OR" expr_num  (55)
+	expr_num : expr_num . "NOT" expr_num  (56)
 
-	"MAYOR_IGUAL"  shift 60
-	"MENOR_IGUAL"  shift 61
-	"IGUAL"  shift 62
-	"DISTINTO"  shift 63
-	"AND"  shift 64
-	"OR"  shift 65
-	"NOT"  shift 66
-	'+'  reduce 41
-	'-'  reduce 41
-	'*'  reduce 41
-	'/'  reduce 41
-	'<'  reduce 41
-	'>'  reduce 41
-	'}'  reduce 41
-	';'  reduce 41
-	']'  reduce 41
-	')'  reduce 41
-	"RETURN"  reduce 41
-	'='  reduce 41
-
-
-state 83
-	expr_num : expr_num . '*' expr_num  (35)
-	expr_num : expr_num . '/' expr_num  (36)
-	expr_num : expr_num . '-' expr_num  (37)
-	expr_num : expr_num . '+' expr_num  (38)
-	expr_num : expr_num . '>' expr_num  (39)
-	expr_num : expr_num '>' expr_num .  (39)
-	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (40)
-	expr_num : expr_num . '<' expr_num  (41)
-	expr_num : expr_num . "MENOR_IGUAL" expr_num  (42)
-	expr_num : expr_num . "IGUAL" expr_num  (43)
-	expr_num : expr_num . "DISTINTO" expr_num  (44)
-	expr_num : expr_num . "AND" expr_num  (45)
-	expr_num : expr_num . "OR" expr_num  (46)
-	expr_num : expr_num . "NOT" expr_num  (47)
-
-	"MAYOR_IGUAL"  shift 60
-	"MENOR_IGUAL"  shift 61
-	"IGUAL"  shift 62
-	"DISTINTO"  shift 63
-	"AND"  shift 64
-	"OR"  shift 65
-	"NOT"  shift 66
-	'+'  reduce 39
-	'-'  reduce 39
-	'*'  reduce 39
-	'/'  reduce 39
-	'<'  reduce 39
-	'>'  reduce 39
-	'}'  reduce 39
-	';'  reduce 39
-	']'  reduce 39
-	')'  reduce 39
-	"RETURN"  reduce 39
-	'='  reduce 39
-
-
-state 84
-	expr_num : expr_num . '*' expr_num  (35)
-	expr_num : expr_num . '/' expr_num  (36)
-	expr_num : expr_num . '-' expr_num  (37)
-	expr_num : expr_num . '+' expr_num  (38)
-	expr_num : expr_num . '>' expr_num  (39)
-	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (40)
-	expr_num : expr_num "MAYOR_IGUAL" expr_num .  (40)
-	expr_num : expr_num . '<' expr_num  (41)
-	expr_num : expr_num . "MENOR_IGUAL" expr_num  (42)
-	expr_num : expr_num . "IGUAL" expr_num  (43)
-	expr_num : expr_num . "DISTINTO" expr_num  (44)
-	expr_num : expr_num . "AND" expr_num  (45)
-	expr_num : expr_num . "OR" expr_num  (46)
-	expr_num : expr_num . "NOT" expr_num  (47)
-
-	"IGUAL"  shift 62
-	"DISTINTO"  shift 63
-	"AND"  shift 64
-	"OR"  shift 65
-	"NOT"  shift 66
-	'+'  reduce 40
-	'-'  reduce 40
-	'*'  reduce 40
-	'/'  reduce 40
-	'<'  reduce 40
-	'>'  reduce 40
-	"MAYOR_IGUAL"  reduce 40
-	"MENOR_IGUAL"  reduce 40
-	'}'  reduce 40
-	';'  reduce 40
-	']'  reduce 40
-	')'  reduce 40
-	"RETURN"  reduce 40
-	'='  reduce 40
-
-
-state 85
-	expr_num : expr_num . '*' expr_num  (35)
-	expr_num : expr_num . '/' expr_num  (36)
-	expr_num : expr_num . '-' expr_num  (37)
-	expr_num : expr_num . '+' expr_num  (38)
-	expr_num : expr_num . '>' expr_num  (39)
-	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (40)
-	expr_num : expr_num . '<' expr_num  (41)
-	expr_num : expr_num . "MENOR_IGUAL" expr_num  (42)
-	expr_num : expr_num "MENOR_IGUAL" expr_num .  (42)
-	expr_num : expr_num . "IGUAL" expr_num  (43)
-	expr_num : expr_num . "DISTINTO" expr_num  (44)
-	expr_num : expr_num . "AND" expr_num  (45)
-	expr_num : expr_num . "OR" expr_num  (46)
-	expr_num : expr_num . "NOT" expr_num  (47)
-
-	"IGUAL"  shift 62
-	"DISTINTO"  shift 63
-	"AND"  shift 64
-	"OR"  shift 65
-	"NOT"  shift 66
-	'+'  reduce 42
-	'-'  reduce 42
-	'*'  reduce 42
-	'/'  reduce 42
-	'<'  reduce 42
-	'>'  reduce 42
-	"MAYOR_IGUAL"  reduce 42
-	"MENOR_IGUAL"  reduce 42
-	'}'  reduce 42
-	';'  reduce 42
-	']'  reduce 42
-	')'  reduce 42
-	"RETURN"  reduce 42
-	'='  reduce 42
-
-
-state 86
-	expr_num : expr_num . '*' expr_num  (35)
-	expr_num : expr_num . '/' expr_num  (36)
-	expr_num : expr_num . '-' expr_num  (37)
-	expr_num : expr_num . '+' expr_num  (38)
-	expr_num : expr_num . '>' expr_num  (39)
-	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (40)
-	expr_num : expr_num . '<' expr_num  (41)
-	expr_num : expr_num . "MENOR_IGUAL" expr_num  (42)
-	expr_num : expr_num . "IGUAL" expr_num  (43)
-	expr_num : expr_num "IGUAL" expr_num .  (43)
-	expr_num : expr_num . "DISTINTO" expr_num  (44)
-	expr_num : expr_num . "AND" expr_num  (45)
-	expr_num : expr_num . "OR" expr_num  (46)
-	expr_num : expr_num . "NOT" expr_num  (47)
-
-	"AND"  shift 64
-	"OR"  shift 65
-	"NOT"  shift 66
-	'+'  reduce 43
-	'-'  reduce 43
-	'*'  reduce 43
-	'/'  reduce 43
-	'<'  reduce 43
-	'>'  reduce 43
-	"MAYOR_IGUAL"  reduce 43
-	"MENOR_IGUAL"  reduce 43
-	"IGUAL"  reduce 43
-	"DISTINTO"  reduce 43
-	'}'  reduce 43
-	';'  reduce 43
-	']'  reduce 43
-	')'  reduce 43
-	"RETURN"  reduce 43
-	'='  reduce 43
-
-
-state 87
-	expr_num : expr_num . '*' expr_num  (35)
-	expr_num : expr_num . '/' expr_num  (36)
-	expr_num : expr_num . '-' expr_num  (37)
-	expr_num : expr_num . '+' expr_num  (38)
-	expr_num : expr_num . '>' expr_num  (39)
-	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (40)
-	expr_num : expr_num . '<' expr_num  (41)
-	expr_num : expr_num . "MENOR_IGUAL" expr_num  (42)
-	expr_num : expr_num . "IGUAL" expr_num  (43)
-	expr_num : expr_num . "DISTINTO" expr_num  (44)
-	expr_num : expr_num "DISTINTO" expr_num .  (44)
-	expr_num : expr_num . "AND" expr_num  (45)
-	expr_num : expr_num . "OR" expr_num  (46)
-	expr_num : expr_num . "NOT" expr_num  (47)
-
-	"AND"  shift 64
-	"OR"  shift 65
-	"NOT"  shift 66
+	'<'  shift 51
+	'>'  shift 52
+	"MAYOR_IGUAL"  shift 53
+	"MENOR_IGUAL"  shift 54
+	"IGUAL"  shift 55
+	"DISTINTO"  shift 56
+	"AND"  shift 57
+	"OR"  shift 58
+	"NOT"  shift 59
 	'+'  reduce 44
 	'-'  reduce 44
 	'*'  reduce 44
 	'/'  reduce 44
-	'<'  reduce 44
-	'>'  reduce 44
-	"MAYOR_IGUAL"  reduce 44
-	"MENOR_IGUAL"  reduce 44
-	"IGUAL"  reduce 44
-	"DISTINTO"  reduce 44
-	'}'  reduce 44
 	';'  reduce 44
+	'['  reduce 44
 	']'  reduce 44
 	')'  reduce 44
-	"RETURN"  reduce 44
-	'='  reduce 44
+	"PUNTO"  reduce 44
+
+
+state 83
+	expr_num : expr_num . '*' expr_num  (44)
+	expr_num : expr_num . '/' expr_num  (45)
+	expr_num : expr_num '/' expr_num .  (45)
+	expr_num : expr_num . '-' expr_num  (46)
+	expr_num : expr_num . '+' expr_num  (47)
+	expr_num : expr_num . '>' expr_num  (48)
+	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (49)
+	expr_num : expr_num . '<' expr_num  (50)
+	expr_num : expr_num . "MENOR_IGUAL" expr_num  (51)
+	expr_num : expr_num . "IGUAL" expr_num  (52)
+	expr_num : expr_num . "DISTINTO" expr_num  (53)
+	expr_num : expr_num . "AND" expr_num  (54)
+	expr_num : expr_num . "OR" expr_num  (55)
+	expr_num : expr_num . "NOT" expr_num  (56)
+
+	'<'  shift 51
+	'>'  shift 52
+	"MAYOR_IGUAL"  shift 53
+	"MENOR_IGUAL"  shift 54
+	"IGUAL"  shift 55
+	"DISTINTO"  shift 56
+	"AND"  shift 57
+	"OR"  shift 58
+	"NOT"  shift 59
+	'+'  reduce 45
+	'-'  reduce 45
+	'*'  reduce 45
+	'/'  reduce 45
+	';'  reduce 45
+	'['  reduce 45
+	']'  reduce 45
+	')'  reduce 45
+	"PUNTO"  reduce 45
+
+
+state 84
+	expr_num : expr_num . '*' expr_num  (44)
+	expr_num : expr_num . '/' expr_num  (45)
+	expr_num : expr_num . '-' expr_num  (46)
+	expr_num : expr_num . '+' expr_num  (47)
+	expr_num : expr_num . '>' expr_num  (48)
+	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (49)
+	expr_num : expr_num . '<' expr_num  (50)
+	expr_num : expr_num '<' expr_num .  (50)
+	expr_num : expr_num . "MENOR_IGUAL" expr_num  (51)
+	expr_num : expr_num . "IGUAL" expr_num  (52)
+	expr_num : expr_num . "DISTINTO" expr_num  (53)
+	expr_num : expr_num . "AND" expr_num  (54)
+	expr_num : expr_num . "OR" expr_num  (55)
+	expr_num : expr_num . "NOT" expr_num  (56)
+
+	"MAYOR_IGUAL"  shift 53
+	"MENOR_IGUAL"  shift 54
+	"IGUAL"  shift 55
+	"DISTINTO"  shift 56
+	"AND"  shift 57
+	"OR"  shift 58
+	"NOT"  shift 59
+	'+'  reduce 50
+	'-'  reduce 50
+	'*'  reduce 50
+	'/'  reduce 50
+	'<'  reduce 50
+	'>'  reduce 50
+	';'  reduce 50
+	'['  reduce 50
+	']'  reduce 50
+	')'  reduce 50
+	"PUNTO"  reduce 50
+
+
+state 85
+	expr_num : expr_num . '*' expr_num  (44)
+	expr_num : expr_num . '/' expr_num  (45)
+	expr_num : expr_num . '-' expr_num  (46)
+	expr_num : expr_num . '+' expr_num  (47)
+	expr_num : expr_num . '>' expr_num  (48)
+	expr_num : expr_num '>' expr_num .  (48)
+	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (49)
+	expr_num : expr_num . '<' expr_num  (50)
+	expr_num : expr_num . "MENOR_IGUAL" expr_num  (51)
+	expr_num : expr_num . "IGUAL" expr_num  (52)
+	expr_num : expr_num . "DISTINTO" expr_num  (53)
+	expr_num : expr_num . "AND" expr_num  (54)
+	expr_num : expr_num . "OR" expr_num  (55)
+	expr_num : expr_num . "NOT" expr_num  (56)
+
+	"MAYOR_IGUAL"  shift 53
+	"MENOR_IGUAL"  shift 54
+	"IGUAL"  shift 55
+	"DISTINTO"  shift 56
+	"AND"  shift 57
+	"OR"  shift 58
+	"NOT"  shift 59
+	'+'  reduce 48
+	'-'  reduce 48
+	'*'  reduce 48
+	'/'  reduce 48
+	'<'  reduce 48
+	'>'  reduce 48
+	';'  reduce 48
+	'['  reduce 48
+	']'  reduce 48
+	')'  reduce 48
+	"PUNTO"  reduce 48
+
+
+state 86
+	expr_num : expr_num . '*' expr_num  (44)
+	expr_num : expr_num . '/' expr_num  (45)
+	expr_num : expr_num . '-' expr_num  (46)
+	expr_num : expr_num . '+' expr_num  (47)
+	expr_num : expr_num . '>' expr_num  (48)
+	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (49)
+	expr_num : expr_num "MAYOR_IGUAL" expr_num .  (49)
+	expr_num : expr_num . '<' expr_num  (50)
+	expr_num : expr_num . "MENOR_IGUAL" expr_num  (51)
+	expr_num : expr_num . "IGUAL" expr_num  (52)
+	expr_num : expr_num . "DISTINTO" expr_num  (53)
+	expr_num : expr_num . "AND" expr_num  (54)
+	expr_num : expr_num . "OR" expr_num  (55)
+	expr_num : expr_num . "NOT" expr_num  (56)
+
+	"IGUAL"  shift 55
+	"DISTINTO"  shift 56
+	"AND"  shift 57
+	"OR"  shift 58
+	"NOT"  shift 59
+	'+'  reduce 49
+	'-'  reduce 49
+	'*'  reduce 49
+	'/'  reduce 49
+	'<'  reduce 49
+	'>'  reduce 49
+	"MAYOR_IGUAL"  reduce 49
+	"MENOR_IGUAL"  reduce 49
+	';'  reduce 49
+	'['  reduce 49
+	']'  reduce 49
+	')'  reduce 49
+	"PUNTO"  reduce 49
+
+
+state 87
+	expr_num : expr_num . '*' expr_num  (44)
+	expr_num : expr_num . '/' expr_num  (45)
+	expr_num : expr_num . '-' expr_num  (46)
+	expr_num : expr_num . '+' expr_num  (47)
+	expr_num : expr_num . '>' expr_num  (48)
+	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (49)
+	expr_num : expr_num . '<' expr_num  (50)
+	expr_num : expr_num . "MENOR_IGUAL" expr_num  (51)
+	expr_num : expr_num "MENOR_IGUAL" expr_num .  (51)
+	expr_num : expr_num . "IGUAL" expr_num  (52)
+	expr_num : expr_num . "DISTINTO" expr_num  (53)
+	expr_num : expr_num . "AND" expr_num  (54)
+	expr_num : expr_num . "OR" expr_num  (55)
+	expr_num : expr_num . "NOT" expr_num  (56)
+
+	"IGUAL"  shift 55
+	"DISTINTO"  shift 56
+	"AND"  shift 57
+	"OR"  shift 58
+	"NOT"  shift 59
+	'+'  reduce 51
+	'-'  reduce 51
+	'*'  reduce 51
+	'/'  reduce 51
+	'<'  reduce 51
+	'>'  reduce 51
+	"MAYOR_IGUAL"  reduce 51
+	"MENOR_IGUAL"  reduce 51
+	';'  reduce 51
+	'['  reduce 51
+	']'  reduce 51
+	')'  reduce 51
+	"PUNTO"  reduce 51
 
 
 state 88
-	expr_num : expr_num . '*' expr_num  (35)
-	expr_num : expr_num . '/' expr_num  (36)
-	expr_num : expr_num . '-' expr_num  (37)
-	expr_num : expr_num . '+' expr_num  (38)
-	expr_num : expr_num . '>' expr_num  (39)
-	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (40)
-	expr_num : expr_num . '<' expr_num  (41)
-	expr_num : expr_num . "MENOR_IGUAL" expr_num  (42)
-	expr_num : expr_num . "IGUAL" expr_num  (43)
-	expr_num : expr_num . "DISTINTO" expr_num  (44)
-	expr_num : expr_num . "AND" expr_num  (45)
-	expr_num : expr_num "AND" expr_num .  (45)
-	expr_num : expr_num . "OR" expr_num  (46)
-	expr_num : expr_num . "NOT" expr_num  (47)
+	expr_num : expr_num . '*' expr_num  (44)
+	expr_num : expr_num . '/' expr_num  (45)
+	expr_num : expr_num . '-' expr_num  (46)
+	expr_num : expr_num . '+' expr_num  (47)
+	expr_num : expr_num . '>' expr_num  (48)
+	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (49)
+	expr_num : expr_num . '<' expr_num  (50)
+	expr_num : expr_num . "MENOR_IGUAL" expr_num  (51)
+	expr_num : expr_num . "IGUAL" expr_num  (52)
+	expr_num : expr_num "IGUAL" expr_num .  (52)
+	expr_num : expr_num . "DISTINTO" expr_num  (53)
+	expr_num : expr_num . "AND" expr_num  (54)
+	expr_num : expr_num . "OR" expr_num  (55)
+	expr_num : expr_num . "NOT" expr_num  (56)
 
-	.  reduce 45
+	"AND"  shift 57
+	"OR"  shift 58
+	"NOT"  shift 59
+	'+'  reduce 52
+	'-'  reduce 52
+	'*'  reduce 52
+	'/'  reduce 52
+	'<'  reduce 52
+	'>'  reduce 52
+	"MAYOR_IGUAL"  reduce 52
+	"MENOR_IGUAL"  reduce 52
+	"IGUAL"  reduce 52
+	"DISTINTO"  reduce 52
+	';'  reduce 52
+	'['  reduce 52
+	']'  reduce 52
+	')'  reduce 52
+	"PUNTO"  reduce 52
 
 
 state 89
-	expr_num : expr_num . '*' expr_num  (35)
-	expr_num : expr_num . '/' expr_num  (36)
-	expr_num : expr_num . '-' expr_num  (37)
-	expr_num : expr_num . '+' expr_num  (38)
-	expr_num : expr_num . '>' expr_num  (39)
-	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (40)
-	expr_num : expr_num . '<' expr_num  (41)
-	expr_num : expr_num . "MENOR_IGUAL" expr_num  (42)
-	expr_num : expr_num . "IGUAL" expr_num  (43)
-	expr_num : expr_num . "DISTINTO" expr_num  (44)
-	expr_num : expr_num . "AND" expr_num  (45)
-	expr_num : expr_num . "OR" expr_num  (46)
-	expr_num : expr_num "OR" expr_num .  (46)
-	expr_num : expr_num . "NOT" expr_num  (47)
+	expr_num : expr_num . '*' expr_num  (44)
+	expr_num : expr_num . '/' expr_num  (45)
+	expr_num : expr_num . '-' expr_num  (46)
+	expr_num : expr_num . '+' expr_num  (47)
+	expr_num : expr_num . '>' expr_num  (48)
+	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (49)
+	expr_num : expr_num . '<' expr_num  (50)
+	expr_num : expr_num . "MENOR_IGUAL" expr_num  (51)
+	expr_num : expr_num . "IGUAL" expr_num  (52)
+	expr_num : expr_num . "DISTINTO" expr_num  (53)
+	expr_num : expr_num "DISTINTO" expr_num .  (53)
+	expr_num : expr_num . "AND" expr_num  (54)
+	expr_num : expr_num . "OR" expr_num  (55)
+	expr_num : expr_num . "NOT" expr_num  (56)
 
-	.  reduce 46
+	"AND"  shift 57
+	"OR"  shift 58
+	"NOT"  shift 59
+	'+'  reduce 53
+	'-'  reduce 53
+	'*'  reduce 53
+	'/'  reduce 53
+	'<'  reduce 53
+	'>'  reduce 53
+	"MAYOR_IGUAL"  reduce 53
+	"MENOR_IGUAL"  reduce 53
+	"IGUAL"  reduce 53
+	"DISTINTO"  reduce 53
+	';'  reduce 53
+	'['  reduce 53
+	']'  reduce 53
+	')'  reduce 53
+	"PUNTO"  reduce 53
 
 
 state 90
-	expr_num : expr_num . '*' expr_num  (35)
-	expr_num : expr_num . '/' expr_num  (36)
-	expr_num : expr_num . '-' expr_num  (37)
-	expr_num : expr_num . '+' expr_num  (38)
-	expr_num : expr_num . '>' expr_num  (39)
-	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (40)
-	expr_num : expr_num . '<' expr_num  (41)
-	expr_num : expr_num . "MENOR_IGUAL" expr_num  (42)
-	expr_num : expr_num . "IGUAL" expr_num  (43)
-	expr_num : expr_num . "DISTINTO" expr_num  (44)
-	expr_num : expr_num . "AND" expr_num  (45)
-	expr_num : expr_num . "OR" expr_num  (46)
-	expr_num : expr_num . "NOT" expr_num  (47)
-	expr_num : expr_num "NOT" expr_num .  (47)
+	expr_num : expr_num . '*' expr_num  (44)
+	expr_num : expr_num . '/' expr_num  (45)
+	expr_num : expr_num . '-' expr_num  (46)
+	expr_num : expr_num . '+' expr_num  (47)
+	expr_num : expr_num . '>' expr_num  (48)
+	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (49)
+	expr_num : expr_num . '<' expr_num  (50)
+	expr_num : expr_num . "MENOR_IGUAL" expr_num  (51)
+	expr_num : expr_num . "IGUAL" expr_num  (52)
+	expr_num : expr_num . "DISTINTO" expr_num  (53)
+	expr_num : expr_num . "AND" expr_num  (54)
+	expr_num : expr_num "AND" expr_num .  (54)
+	expr_num : expr_num . "OR" expr_num  (55)
+	expr_num : expr_num . "NOT" expr_num  (56)
 
-	.  reduce 47
+	.  reduce 54
 
 
 state 91
-	size : '[' expr_num ']' size .  (11)
+	expr_num : expr_num . '*' expr_num  (44)
+	expr_num : expr_num . '/' expr_num  (45)
+	expr_num : expr_num . '-' expr_num  (46)
+	expr_num : expr_num . '+' expr_num  (47)
+	expr_num : expr_num . '>' expr_num  (48)
+	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (49)
+	expr_num : expr_num . '<' expr_num  (50)
+	expr_num : expr_num . "MENOR_IGUAL" expr_num  (51)
+	expr_num : expr_num . "IGUAL" expr_num  (52)
+	expr_num : expr_num . "DISTINTO" expr_num  (53)
+	expr_num : expr_num . "AND" expr_num  (54)
+	expr_num : expr_num . "OR" expr_num  (55)
+	expr_num : expr_num "OR" expr_num .  (55)
+	expr_num : expr_num . "NOT" expr_num  (56)
 
-	.  reduce 11
+	.  reduce 55
 
 
 state 92
-	punto : "IDENT" '.' punto .  (49)
+	expr_num : expr_num . '*' expr_num  (44)
+	expr_num : expr_num . '/' expr_num  (45)
+	expr_num : expr_num . '-' expr_num  (46)
+	expr_num : expr_num . '+' expr_num  (47)
+	expr_num : expr_num . '>' expr_num  (48)
+	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (49)
+	expr_num : expr_num . '<' expr_num  (50)
+	expr_num : expr_num . "MENOR_IGUAL" expr_num  (51)
+	expr_num : expr_num . "IGUAL" expr_num  (52)
+	expr_num : expr_num . "DISTINTO" expr_num  (53)
+	expr_num : expr_num . "AND" expr_num  (54)
+	expr_num : expr_num . "OR" expr_num  (55)
+	expr_num : expr_num . "NOT" expr_num  (56)
+	expr_num : expr_num "NOT" expr_num .  (56)
 
-	.  reduce 49
+	.  reduce 56
 
 
 state 93
-	expr : "READ" expr ';' .  (25)
+	expr : expr '[' expr_num . ']'  (37)
+	expr_num : expr_num . '*' expr_num  (44)
+	expr_num : expr_num . '/' expr_num  (45)
+	expr_num : expr_num . '-' expr_num  (46)
+	expr_num : expr_num . '+' expr_num  (47)
+	expr_num : expr_num . '>' expr_num  (48)
+	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (49)
+	expr_num : expr_num . '<' expr_num  (50)
+	expr_num : expr_num . "MENOR_IGUAL" expr_num  (51)
+	expr_num : expr_num . "IGUAL" expr_num  (52)
+	expr_num : expr_num . "DISTINTO" expr_num  (53)
+	expr_num : expr_num . "AND" expr_num  (54)
+	expr_num : expr_num . "OR" expr_num  (55)
+	expr_num : expr_num . "NOT" expr_num  (56)
 
-	.  reduce 25
+	'+'  shift 47
+	'-'  shift 48
+	'*'  shift 49
+	'/'  shift 50
+	'<'  shift 51
+	'>'  shift 52
+	"MAYOR_IGUAL"  shift 53
+	"MENOR_IGUAL"  shift 54
+	"IGUAL"  shift 55
+	"DISTINTO"  shift 56
+	"AND"  shift 57
+	"OR"  shift 58
+	"NOT"  shift 59
+	']'  shift 109
+	.  error
 
 
+94: shift/reduce conflict (shift 61, reduce 38) on '['
+94: shift/reduce conflict (shift 62, reduce 38) on "PUNTO"
 state 94
-	expr : "PRINT" expr ';' .  (26)
+	expr : expr . '[' expr_num ']'  (37)
+	expr : expr . "PUNTO" expr  (38)
+	expr : expr "PUNTO" expr .  (38)
 
-	.  reduce 26
+	'['  shift 61
+	"PUNTO"  shift 62
+	';'  reduce 38
+	')'  reduce 38
 
 
 state 95
-	expr : "CAST" '<' tipo . '>' '(' expr ')'  (32)
+	if : "IF" '(' expr_num ')' . '{' sentencias '}'  (58)
+	if : "IF" '(' expr_num ')' . '{' sentencias '}' "ELSE" '{' sentencias '}'  (59)
 
-	'>'  shift 100
+	'{'  shift 110
 	.  error
 
 
 state 96
-	expr_num : expr_num . '*' expr_num  (35)
-	expr_num : expr_num . '/' expr_num  (36)
-	expr_num : expr_num . '-' expr_num  (37)
-	expr_num : expr_num . '+' expr_num  (38)
-	expr_num : expr_num . '>' expr_num  (39)
-	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (40)
-	expr_num : expr_num . '<' expr_num  (41)
-	expr_num : expr_num . "MENOR_IGUAL" expr_num  (42)
-	expr_num : expr_num . "IGUAL" expr_num  (43)
-	expr_num : expr_num . "DISTINTO" expr_num  (44)
-	expr_num : expr_num . "AND" expr_num  (45)
-	expr_num : expr_num . "OR" expr_num  (46)
-	expr_num : expr_num . "NOT" expr_num  (47)
-	if : "IF" '(' expr_num . ')' '{' sentencias '}'  (50)
-	if : "IF" '(' expr_num . ')' '{' sentencias '}' "ELSE" '{' sentencias '}'  (51)
+	while : "WHILE" '(' expr ')' . '{' sentencias '}'  (60)
 
-	'+'  shift 54
-	'-'  shift 55
-	'*'  shift 56
-	'/'  shift 57
-	'<'  shift 58
-	'>'  shift 59
-	"MAYOR_IGUAL"  shift 60
-	"MENOR_IGUAL"  shift 61
-	"IGUAL"  shift 62
-	"DISTINTO"  shift 63
-	"AND"  shift 64
-	"OR"  shift 65
-	"NOT"  shift 66
-	')'  shift 101
+	'{'  shift 111
 	.  error
 
 
 state 97
-	expr : expr . '=' expr ';'  (27)
-	while : "WHILE" '(' expr . ')' '{' sentencias '}'  (52)
+	definicion_struct : "IDENT" ':' . size tipo ';'  (9)
+	size : .  (13)
 
-	')'  shift 102
-	'='  shift 76
-	.  error
+	'['  shift 73
+	"IDENT"  reduce 13
+	"INT"  reduce 13
+	"FLOAT"  reduce 13
+	"CHAR"  reduce 13
+
+	size  goto 112
 
 
 state 98
-	expr : expr . '=' expr ';'  (27)
-	expr : expr '=' expr . ';'  (27)
+	struct : "STRUCT" "IDENT" '{' definiciones_struct '}' . ';'  (6)
 
-	';'  shift 103
-	'='  shift 76
+	';'  shift 113
 	.  error
 
 
 state 99
-	funcion : "IDENT" '(' parametrosP ')' ':' tipo '{' expr . "RETURN" expr '}'  (17)
-	expr : expr . '=' expr ';'  (27)
+	definiciones_struct : definicion_struct definiciones_struct .  (8)
 
-	"RETURN"  shift 104
-	'='  shift 76
-	.  error
+	.  reduce 8
 
 
 state 100
-	expr : "CAST" '<' tipo '>' . '(' expr ')'  (32)
+	parametro : "IDENT" ':' tipo_basico .  (28)
 
-	'('  shift 105
-	.  error
+	.  reduce 28
 
 
+101: shift/reduce conflict (shift 3, reduce 10) on "VAR"
 state 101
-	if : "IF" '(' expr_num ')' . '{' sentencias '}'  (50)
-	if : "IF" '(' expr_num ')' . '{' sentencias '}' "ELSE" '{' sentencias '}'  (51)
+	funcion : "IDENT" '(' parametrosP ')' '{' . definiciones sentencias '}'  (23)
+	definiciones : .  (10)
 
-	'{'  shift 106
-	.  error
+	"VAR"  shift 3
+	"STRUCT"  reduce 10
+	"IDENT"  reduce 10
+	'}'  reduce 10
+	"PRINT"  reduce 10
+	"READ"  reduce 10
+	"IF"  reduce 10
+	"WHILE"  reduce 10
+
+	definiciones  goto 114
+	definicion  goto 13
 
 
 state 102
-	while : "WHILE" '(' expr ')' . '{' sentencias '}'  (52)
+	funcion : "IDENT" '(' parametrosP ')' ':' . tipo_basico '{' definiciones sentencias "RETURN" expr ';' '}'  (22)
 
-	'{'  shift 107
+	"INT"  shift 76
+	"FLOAT"  shift 77
+	"CHAR"  shift 78
 	.  error
+
+	tipo_basico  goto 115
 
 
 state 103
-	expr : expr '=' expr ';' .  (27)
+	parametros : parametro ',' parametros .  (27)
 
 	.  reduce 27
 
 
 state 104
-	funcion : "IDENT" '(' parametrosP ')' ':' tipo '{' expr "RETURN" . expr '}'  (17)
+	size : '[' expr_num . ']' size  (14)
+	expr_num : expr_num . '*' expr_num  (44)
+	expr_num : expr_num . '/' expr_num  (45)
+	expr_num : expr_num . '-' expr_num  (46)
+	expr_num : expr_num . '+' expr_num  (47)
+	expr_num : expr_num . '>' expr_num  (48)
+	expr_num : expr_num . "MAYOR_IGUAL" expr_num  (49)
+	expr_num : expr_num . '<' expr_num  (50)
+	expr_num : expr_num . "MENOR_IGUAL" expr_num  (51)
+	expr_num : expr_num . "IGUAL" expr_num  (52)
+	expr_num : expr_num . "DISTINTO" expr_num  (53)
+	expr_num : expr_num . "AND" expr_num  (54)
+	expr_num : expr_num . "OR" expr_num  (55)
+	expr_num : expr_num . "NOT" expr_num  (56)
 
-	"IDENT"  shift 41
-	"LITCHAR"  shift 42
-	"READ"  shift 43
-	"PRINT"  shift 44
-	"CAST"  shift 45
-	"LITENT"  shift 37
-	"LITREAL"  shift 38
-	"IF"  shift 46
-	"WHILE"  shift 47
+	'+'  shift 47
+	'-'  shift 48
+	'*'  shift 49
+	'/'  shift 50
+	'<'  shift 51
+	'>'  shift 52
+	"MAYOR_IGUAL"  shift 53
+	"MENOR_IGUAL"  shift 54
+	"IGUAL"  shift 55
+	"DISTINTO"  shift 56
+	"AND"  shift 57
+	"OR"  shift 58
+	"NOT"  shift 59
+	']'  shift 116
 	.  error
-
-	expr_num  goto 48
-	expr  goto 108
-	punto  goto 50
-	if  goto 51
-	while  goto 52
 
 
 state 105
-	expr : "CAST" '<' tipo '>' '(' . expr ')'  (32)
+	tipo : "IDENT" .  (16)
 
-	"IDENT"  shift 41
-	"LITCHAR"  shift 42
-	"READ"  shift 43
-	"PRINT"  shift 44
-	"CAST"  shift 45
-	"LITENT"  shift 37
-	"LITREAL"  shift 38
-	"IF"  shift 46
-	"WHILE"  shift 47
-	.  error
-
-	expr_num  goto 48
-	expr  goto 109
-	punto  goto 50
-	if  goto 51
-	while  goto 52
+	.  reduce 16
 
 
 state 106
-	if : "IF" '(' expr_num ')' '{' . sentencias '}'  (50)
-	if : "IF" '(' expr_num ')' '{' . sentencias '}' "ELSE" '{' sentencias '}'  (51)
+	definicion : "VAR" "IDENT" ':' size tipo . ';'  (12)
 
-	"STRUCT"  shift 1
-	"IDENT"  shift 2
-	"VAR"  shift 3
+	';'  shift 117
 	.  error
-
-	sentencias  goto 110
-	definiciones  goto 6
-	struct  goto 7
-	funciones  goto 8
-	definicion  goto 9
-	funcion  goto 10
 
 
 state 107
-	while : "WHILE" '(' expr ')' '{' . sentencias '}'  (52)
+	tipo : tipo_basico .  (15)
 
-	"STRUCT"  shift 1
-	"IDENT"  shift 2
-	"VAR"  shift 3
-	.  error
-
-	sentencias  goto 111
-	definiciones  goto 6
-	struct  goto 7
-	funciones  goto 8
-	definicion  goto 9
-	funcion  goto 10
+	.  reduce 15
 
 
 state 108
-	funcion : "IDENT" '(' parametrosP ')' ':' tipo '{' expr "RETURN" expr . '}'  (17)
-	expr : expr . '=' expr ';'  (27)
+	expr : "CAST" '<' tipo_basico '>' . '(' expr ')'  (40)
 
-	'}'  shift 112
-	'='  shift 76
+	'('  shift 118
 	.  error
 
 
 state 109
-	expr : expr . '=' expr ';'  (27)
-	expr : "CAST" '<' tipo '>' '(' expr . ')'  (32)
+	expr : expr '[' expr_num ']' .  (37)
 
-	')'  shift 113
-	'='  shift 76
-	.  error
+	.  reduce 37
 
 
 state 110
-	if : "IF" '(' expr_num ')' '{' sentencias . '}'  (50)
-	if : "IF" '(' expr_num ')' '{' sentencias . '}' "ELSE" '{' sentencias '}'  (51)
-
-	'}'  shift 114
-	.  error
-
-
-state 111
-	while : "WHILE" '(' expr ')' '{' sentencias . '}'  (52)
-
-	'}'  shift 115
-	.  error
-
-
-state 112
-	funcion : "IDENT" '(' parametrosP ')' ':' tipo '{' expr "RETURN" expr '}' .  (17)
-
-	.  reduce 17
-
-
-state 113
-	expr : "CAST" '<' tipo '>' '(' expr ')' .  (32)
-
-	.  reduce 32
-
-
-state 114
-	if : "IF" '(' expr_num ')' '{' sentencias '}' .  (50)
-	if : "IF" '(' expr_num ')' '{' sentencias '}' . "ELSE" '{' sentencias '}'  (51)
-
-	"ELSE"  shift 116
-	'}'  reduce 50
-	';'  reduce 50
-	')'  reduce 50
-	"RETURN"  reduce 50
-	'='  reduce 50
-
-
-state 115
-	while : "WHILE" '(' expr ')' '{' sentencias '}' .  (52)
-
-	.  reduce 52
-
-
-state 116
-	if : "IF" '(' expr_num ')' '{' sentencias '}' "ELSE" . '{' sentencias '}'  (51)
-
-	'{'  shift 117
-	.  error
-
-
-state 117
-	if : "IF" '(' expr_num ')' '{' sentencias '}' "ELSE" '{' . sentencias '}'  (51)
+	if : "IF" '(' expr_num ')' '{' . sentencias '}'  (58)
+	if : "IF" '(' expr_num ')' '{' . sentencias '}' "ELSE" '{' sentencias '}'  (59)
+	definiciones : .  (10)
 
 	"STRUCT"  shift 1
 	"IDENT"  shift 2
 	"VAR"  shift 3
+	"PRINT"  shift 4
+	"READ"  shift 5
+	"IF"  shift 6
+	"WHILE"  shift 7
+	'}'  reduce 10
+
+	sentencias  goto 119
+	definiciones  goto 10
+	struct  goto 11
+	funciones  goto 12
+	definicion  goto 13
+	funcion  goto 14
+	sentencia  goto 15
+	while  goto 16
+	if  goto 17
+
+
+state 111
+	while : "WHILE" '(' expr ')' '{' . sentencias '}'  (60)
+	definiciones : .  (10)
+
+	"STRUCT"  shift 1
+	"IDENT"  shift 2
+	"VAR"  shift 3
+	"PRINT"  shift 4
+	"READ"  shift 5
+	"IF"  shift 6
+	"WHILE"  shift 7
+	'}'  reduce 10
+
+	sentencias  goto 120
+	definiciones  goto 10
+	struct  goto 11
+	funciones  goto 12
+	definicion  goto 13
+	funcion  goto 14
+	sentencia  goto 15
+	while  goto 16
+	if  goto 17
+
+
+state 112
+	definicion_struct : "IDENT" ':' size . tipo ';'  (9)
+
+	"IDENT"  shift 105
+	"INT"  shift 76
+	"FLOAT"  shift 77
+	"CHAR"  shift 78
 	.  error
 
-	sentencias  goto 118
-	definiciones  goto 6
-	struct  goto 7
-	funciones  goto 8
-	definicion  goto 9
-	funcion  goto 10
+	tipo  goto 121
+	tipo_basico  goto 107
+
+
+state 113
+	struct : "STRUCT" "IDENT" '{' definiciones_struct '}' ';' .  (6)
+
+	.  reduce 6
+
+
+state 114
+	funcion : "IDENT" '(' parametrosP ')' '{' definiciones . sentencias '}'  (23)
+	definiciones : .  (10)
+
+	"STRUCT"  shift 1
+	"IDENT"  shift 2
+	"VAR"  shift 3
+	"PRINT"  shift 4
+	"READ"  shift 5
+	"IF"  shift 6
+	"WHILE"  shift 7
+	'}'  reduce 10
+
+	sentencias  goto 122
+	definiciones  goto 10
+	struct  goto 11
+	funciones  goto 12
+	definicion  goto 13
+	funcion  goto 14
+	sentencia  goto 15
+	while  goto 16
+	if  goto 17
+
+
+state 115
+	funcion : "IDENT" '(' parametrosP ')' ':' tipo_basico . '{' definiciones sentencias "RETURN" expr ';' '}'  (22)
+
+	'{'  shift 123
+	.  error
+
+
+state 116
+	size : '[' expr_num ']' . size  (14)
+	size : .  (13)
+
+	'['  shift 73
+	"IDENT"  reduce 13
+	"INT"  reduce 13
+	"FLOAT"  reduce 13
+	"CHAR"  reduce 13
+
+	size  goto 124
+
+
+state 117
+	definicion : "VAR" "IDENT" ':' size tipo ';' .  (12)
+
+	.  reduce 12
 
 
 state 118
-	if : "IF" '(' expr_num ')' '{' sentencias '}' "ELSE" '{' sentencias . '}'  (51)
+	expr : "CAST" '<' tipo_basico '>' '(' . expr ')'  (40)
 
-	'}'  shift 119
+	"IDENT"  shift 22
+	'('  shift 23
+	"LITCHAR"  shift 24
+	"CAST"  shift 25
+	"LITENT"  shift 26
+	"LITREAL"  shift 27
 	.  error
+
+	expr_num  goto 28
+	expr  goto 125
 
 
 state 119
-	if : "IF" '(' expr_num ')' '{' sentencias '}' "ELSE" '{' sentencias '}' .  (51)
+	if : "IF" '(' expr_num ')' '{' sentencias . '}'  (58)
+	if : "IF" '(' expr_num ')' '{' sentencias . '}' "ELSE" '{' sentencias '}'  (59)
 
-	.  reduce 51
-
-
-State 9 contains 1 shift/reduce conflict.
-State 10 contains 1 shift/reduce conflict.
+	'}'  shift 126
+	.  error
 
 
-42 terminals, 18 nonterminals
-53 grammar rules, 120 states
+state 120
+	while : "WHILE" '(' expr ')' '{' sentencias . '}'  (60)
+
+	'}'  shift 127
+	.  error
+
+
+state 121
+	definicion_struct : "IDENT" ':' size tipo . ';'  (9)
+
+	';'  shift 128
+	.  error
+
+
+state 122
+	funcion : "IDENT" '(' parametrosP ')' '{' definiciones sentencias . '}'  (23)
+
+	'}'  shift 129
+	.  error
+
+
+123: shift/reduce conflict (shift 3, reduce 10) on "VAR"
+state 123
+	funcion : "IDENT" '(' parametrosP ')' ':' tipo_basico '{' . definiciones sentencias "RETURN" expr ';' '}'  (22)
+	definiciones : .  (10)
+
+	"VAR"  shift 3
+	"STRUCT"  reduce 10
+	"IDENT"  reduce 10
+	"RETURN"  reduce 10
+	"PRINT"  reduce 10
+	"READ"  reduce 10
+	"IF"  reduce 10
+	"WHILE"  reduce 10
+
+	definiciones  goto 130
+	definicion  goto 13
+
+
+state 124
+	size : '[' expr_num ']' size .  (14)
+
+	.  reduce 14
+
+
+state 125
+	expr : expr . '[' expr_num ']'  (37)
+	expr : expr . "PUNTO" expr  (38)
+	expr : "CAST" '<' tipo_basico '>' '(' expr . ')'  (40)
+
+	'['  shift 61
+	')'  shift 131
+	"PUNTO"  shift 62
+	.  error
+
+
+state 126
+	if : "IF" '(' expr_num ')' '{' sentencias '}' .  (58)
+	if : "IF" '(' expr_num ')' '{' sentencias '}' . "ELSE" '{' sentencias '}'  (59)
+
+	"ELSE"  shift 132
+	$end  reduce 58
+	"STRUCT"  reduce 58
+	"IDENT"  reduce 58
+	'}'  reduce 58
+	"VAR"  reduce 58
+	"RETURN"  reduce 58
+	"PRINT"  reduce 58
+	"READ"  reduce 58
+	"IF"  reduce 58
+	"WHILE"  reduce 58
+
+
+state 127
+	while : "WHILE" '(' expr ')' '{' sentencias '}' .  (60)
+
+	.  reduce 60
+
+
+state 128
+	definicion_struct : "IDENT" ':' size tipo ';' .  (9)
+
+	.  reduce 9
+
+
+state 129
+	funcion : "IDENT" '(' parametrosP ')' '{' definiciones sentencias '}' .  (23)
+
+	.  reduce 23
+
+
+state 130
+	funcion : "IDENT" '(' parametrosP ')' ':' tipo_basico '{' definiciones . sentencias "RETURN" expr ';' '}'  (22)
+	definiciones : .  (10)
+
+	"STRUCT"  shift 1
+	"IDENT"  shift 2
+	"VAR"  shift 3
+	"PRINT"  shift 4
+	"READ"  shift 5
+	"IF"  shift 6
+	"WHILE"  shift 7
+	"RETURN"  reduce 10
+
+	sentencias  goto 133
+	definiciones  goto 10
+	struct  goto 11
+	funciones  goto 12
+	definicion  goto 13
+	funcion  goto 14
+	sentencia  goto 15
+	while  goto 16
+	if  goto 17
+
+
+state 131
+	expr : "CAST" '<' tipo_basico '>' '(' expr ')' .  (40)
+
+	.  reduce 40
+
+
+state 132
+	if : "IF" '(' expr_num ')' '{' sentencias '}' "ELSE" . '{' sentencias '}'  (59)
+
+	'{'  shift 134
+	.  error
+
+
+state 133
+	funcion : "IDENT" '(' parametrosP ')' ':' tipo_basico '{' definiciones sentencias . "RETURN" expr ';' '}'  (22)
+
+	"RETURN"  shift 135
+	.  error
+
+
+state 134
+	if : "IF" '(' expr_num ')' '{' sentencias '}' "ELSE" '{' . sentencias '}'  (59)
+	definiciones : .  (10)
+
+	"STRUCT"  shift 1
+	"IDENT"  shift 2
+	"VAR"  shift 3
+	"PRINT"  shift 4
+	"READ"  shift 5
+	"IF"  shift 6
+	"WHILE"  shift 7
+	'}'  reduce 10
+
+	sentencias  goto 136
+	definiciones  goto 10
+	struct  goto 11
+	funciones  goto 12
+	definicion  goto 13
+	funcion  goto 14
+	sentencia  goto 15
+	while  goto 16
+	if  goto 17
+
+
+state 135
+	funcion : "IDENT" '(' parametrosP ')' ':' tipo_basico '{' definiciones sentencias "RETURN" . expr ';' '}'  (22)
+
+	"IDENT"  shift 22
+	'('  shift 23
+	"LITCHAR"  shift 24
+	"CAST"  shift 25
+	"LITENT"  shift 26
+	"LITREAL"  shift 27
+	.  error
+
+	expr_num  goto 28
+	expr  goto 137
+
+
+state 136
+	if : "IF" '(' expr_num ')' '{' sentencias '}' "ELSE" '{' sentencias . '}'  (59)
+
+	'}'  shift 138
+	.  error
+
+
+state 137
+	funcion : "IDENT" '(' parametrosP ')' ':' tipo_basico '{' definiciones sentencias "RETURN" expr . ';' '}'  (22)
+	expr : expr . '[' expr_num ']'  (37)
+	expr : expr . "PUNTO" expr  (38)
+
+	';'  shift 139
+	'['  shift 61
+	"PUNTO"  shift 62
+	.  error
+
+
+state 138
+	if : "IF" '(' expr_num ')' '{' sentencias '}' "ELSE" '{' sentencias '}' .  (59)
+
+	.  reduce 59
+
+
+state 139
+	funcion : "IDENT" '(' parametrosP ')' ':' tipo_basico '{' definiciones sentencias "RETURN" expr ';' . '}'  (22)
+
+	'}'  shift 140
+	.  error
+
+
+state 140
+	funcion : "IDENT" '(' parametrosP ')' ':' tipo_basico '{' definiciones sentencias "RETURN" expr ';' '}' .  (22)
+
+	.  reduce 22
+
+
+Rules never reduced:
+	sentencias : sentencia  (29)
+
+
+State 0 contains 7 shift/reduce conflicts.
+State 9 contains 7 shift/reduce conflicts, 1 reduce/reduce conflict.
+State 13 contains 1 shift/reduce conflict.
+State 14 contains 1 shift/reduce conflict.
+State 15 contains 14 shift/reduce conflicts, 3 reduce/reduce conflicts.
+State 94 contains 2 shift/reduce conflicts.
+State 101 contains 1 shift/reduce conflict.
+State 123 contains 1 shift/reduce conflict.
+
+
+42 terminals, 21 nonterminals
+61 grammar rules, 141 states

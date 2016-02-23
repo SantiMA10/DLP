@@ -32,10 +32,18 @@ sentencias: definiciones
 		  | funciones
 		  ;
 
-struct: 'STRUCT' 'IDENT' '{' definiciones '}'
+struct: 'STRUCT' 'IDENT' '{' definiciones_struct '}' ';'
 	  ;
 
-definiciones:  definicion
+definiciones_struct:  definicion_struct
+			 	   | definicion_struct definiciones_struct
+			 	   ;
+
+definicion_struct: 'IDENT' ':' size tipo
+ ';'
+			;
+
+definiciones:  
 			 | definicion definiciones
 			 ;
 
@@ -46,7 +54,11 @@ size:
 	| '[' expr_num ']' size
 	;
 
-tipo: 'INT'
+tipo : tipo_basico
+	 | 'IDENT'
+	 ;
+
+tipo_basico: 'INT'
 	| 'FLOAT'
 	| 'CHAR'
 	;			
@@ -55,8 +67,8 @@ funciones: funcion
 		 | funcion funciones
 		 ;
 
-funcion: 'IDENT' '(' parametrosP ')' ':' tipo '{' expr 'RETURN' expr '}'
-	   | 'IDENT' '(' parametrosP ')' '{' expr '}'
+funcion: 'IDENT' '(' parametrosP ')' ':' tipo_basico '{' definiciones sentencias 'RETURN' expr ';' '}'
+	   | 'IDENT' '(' parametrosP ')' '{' definiciones sentencias '}'
 	   ;
 
 parametrosP: parametros
@@ -67,21 +79,30 @@ parametros: parametro
 		  | parametro ',' parametros
 		  ;
 
-parametro: 'IDENT' ':' tipo
+parametro: 'IDENT' ':' tipo_basico
+		 ;
+
+sentencias: sentencia
+		  | sentencia sentencias
+		  ;
+
+sentencia: 'PRINT' expr ';'
+		 | 'READ'  expr ';'
+		 | 'IDENT' '=' expr ';'
+		 | while
+		 | if
+		 ;   
 
 expr: 'LITCHAR'
-	| 'READ' expr ';'
-	| 'PRINT' expr ';'
-	| expr '=' expr ';'
-	| punto
-	| if
-	| while
-	| expr_num
-	| 'CAST' '<' tipo '>' '(' expr ')'
+	|  expr '[' expr_num ']'
+	|  expr 'PUNTO' expr
+	|  expr_num
+	|  'CAST' '<' tipo_basico '>' '(' expr ')'
 	;
 
 expr_num: 'LITENT'
 		| 'LITREAL'
+		| 'IDENT'
 	 	| expr_num '*' expr_num
 		| expr_num '/' expr_num
 		| expr_num '-' expr_num
@@ -95,11 +116,9 @@ expr_num: 'LITENT'
 		| expr_num 'AND' expr_num
 		| expr_num 'OR' expr_num
 		| expr_num 'NOT' expr_num
+		| '(' expr_num  ')'
 		;
 
-punto: 'IDENT'
-	 | 'IDENT' '.' punto
-	 ;
 
 if: 'IF' '(' expr_num ')' '{' sentencias '}'
   | 'IF' '(' expr_num ')' '{' sentencias '}' 'ELSE' '{' sentencias '}'
