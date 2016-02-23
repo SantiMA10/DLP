@@ -14,22 +14,23 @@ import main.*;
 /* Precedencias aquí --------------------------------------- */
 %left '+' '-'
 %left '*' '/'
+%left '<' '>'
+%left 'MAYOR_IGUAL' 'MENOR_IGUAL'
+%left 'IGUAL' 'DISTINTO'
+%left 'AND' 'OR' 'NOT'
 
 %%
 
 /* Añadir las reglas en esta sección ----------------------- */
 
-programa: 
+programa: sentencias
 		| sentencias programa 
 		;
 
-sentencias: declaraciones
+sentencias: definiciones
+		  | struct
 		  | funciones
 		  ;
-
-declaraciones: definicion
-			 | struct
-			 ;
 
 struct: 'STRUCT' 'IDENT' '{' definiciones '}'
 	  ;
@@ -54,9 +55,58 @@ funciones: funcion
 		 | funcion funciones
 		 ;
 
-funcion: 'IDENT' '(' ')' '{' '}'
+funcion: 'IDENT' '(' parametrosP ')' ':' tipo '{' expr 'RETURN' expr '}'
+	   | 'IDENT' '(' parametrosP ')' '{' expr '}'
+	   ;
+
+parametrosP: parametros
+		  | 
+		  ;
+
+parametros: parametro
+		  | parametro ',' parametros
+		  ;
+
+parametro: 'IDENT' ':' tipo
+
+expr: 'LITCHAR'
+	| 'READ' expr ';'
+	| 'PRINT' expr ';'
+	| expr '=' expr ';'
+	| punto
+	| if
+	| while
+	| expr_num
+	| 'CAST' '<' tipo '>' '(' expr ')'
+	;
+
+expr_num: 'LITENT'
+		| 'LITREAL'
+	 	| expr_num '*' expr_num
+		| expr_num '/' expr_num
+		| expr_num '-' expr_num
+		| expr_num '+' expr_num
+		| expr_num '>' expr_num
+		| expr_num 'MAYOR_IGUAL' expr_num
+		| expr_num '<' expr_num
+		| expr_num 'MENOR_IGUAL' expr_num
+		| expr_num 'IGUAL' expr_num
+		| expr_num 'DISTINTO' expr_num
+		| expr_num 'AND' expr_num
+		| expr_num 'OR' expr_num
+		| expr_num 'NOT' expr_num
 		;
 
+punto: 'IDENT'
+	 | 'IDENT' '.' punto
+	 ;
+
+if: 'IF' '(' expr_num ')' '{' sentencias '}'
+  | 'IF' '(' expr_num ')' '{' sentencias '}' 'ELSE' '{' sentencias '}'
+  ;
+
+while: 'WHILE' '(' expr ')' '{' sentencias '}'
+	 ;
 
 %%
 /* No es necesario modificar esta sección ------------------ */
