@@ -39,10 +39,9 @@ definiciones: definicion
 			;
 
 definicion: 'IDENT' ':' tipo ';'
-		  | 'IDENT' ':' tam_array tipo ';'
 		  ;
 
-funcion: 'IDENT' '(' parametros_ ')' ':' tipo_basico '{' definiciones_funcion sentencias_locales '}'
+funcion: 'IDENT' '(' parametros_ ')' ':' tipo '{' definiciones_funcion sentencias_locales '}'
 		| 'IDENT' '(' parametros_ ')' '{' definiciones_funcion sentencias_locales '}'
 		;
 
@@ -58,17 +57,15 @@ parametros: parametro
 		  | parametro ',' parametros
 		  ;
 
-parametro: 'IDENT' ':' tipo_basico
+parametro: 'IDENT' ':' tipo
 		  ;
 
 tipo: 'IDENT'
-	| tipo_basico
+	| 'INT'
+	| 'FLOAT'
+	| 'CHAR'
+	| '[' 'LITENT' ']' tipo
 	;
-
-tipo_basico: 'INT'
-			| 'FLOAT'
-			| 'CHAR'
-			;
 
 tam_array: '[' LITENT ']'
 		 | '[' LITENT ']' tam_array
