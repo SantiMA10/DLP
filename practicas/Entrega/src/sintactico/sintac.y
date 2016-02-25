@@ -67,10 +67,6 @@ tipo: 'IDENT'
 	| '[' 'LITENT' ']' tipo
 	;
 
-tam_array: '[' LITENT ']'
-		 | '[' LITENT ']' tam_array
-		 ;
-
 sentencias_locales : sentencia_local
 				   | sentencia_local sentencias_locales;
 
