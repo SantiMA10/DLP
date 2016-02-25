@@ -14,7 +14,13 @@ import main.*;
 /* Precedencias aquí --------------------------------------- */
 %left '+' '-'
 %left '*' '/'
-%left '<' '>' 'MAYOR_IGUAL' 'MENOR_IGUAL' 'IGUAL' 'DISTINTO' 'AND' 'OR' 'NOT'
+%left '<' '>'
+%left 'MAYOR_IGUAL' 'MENOR_IGUAL'
+%left 'IGUAL' 'DISTINTO'
+%left 'AND' 'OR' 'NOT'
+%left '.'
+%left '[' ']'
+%left '(' ')'
 
 %%
 
@@ -53,11 +59,8 @@ parametros_: parametros
 			|
 			;
 
-parametros: parametro
-		  | parametro ',' parametros
-		  ;
-
-parametro: 'IDENT' ':' tipo
+parametros: 'IDENT' ':' tipo
+		  | 'IDENT' ':' tipo ',' parametros
 		  ;
 
 tipo: 'IDENT'
@@ -115,23 +118,19 @@ paso_parametros: expr
 
 %%
 /* No es necesario modificar esta sección ------------------ */
-
 public Parser(Yylex lex, GestorErrores gestor, boolean debug) {
 	this(debug);
 	this.lex = lex;
 	this.gestor = gestor;
 }
-
 // Métodos de acceso para el main -------------
 public int parse() { return yyparse(); }
 public AST getAST() { return raiz; }
-
 // Funciones requeridas por Yacc --------------
 void yyerror(String msg) {
 	Token lastToken = (Token) yylval;
 	gestor.error("Sintáctico", "Token = " + lastToken.getToken() + ", lexema = \"" + lastToken.getLexeme() + "\". " + msg, lastToken.getStart());
 }
-
 int yylex() {
 	try {
 		int token = lex.yylex();
@@ -141,7 +140,6 @@ int yylex() {
 		return -1;
 	}
 }
-
 private Yylex lex;
 private GestorErrores gestor;
 private AST raiz;
