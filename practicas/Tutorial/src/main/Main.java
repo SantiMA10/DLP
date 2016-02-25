@@ -19,7 +19,7 @@ import ast.*;
  * - Para Generación de Código: 'generacionDeCodigo/GestionDeMemoria.java' y 'generacionDeCodigo/SeleccionDeInstrucciones.java'
  *
  * @author Raúl Izquierdo
- * @version 1.1
+ * 
  */
 public class Main {
 	public static final String programa = "src/entrada.txt";	// Entrada a usar durante el desarrollo

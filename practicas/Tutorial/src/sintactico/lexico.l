@@ -1,3 +1,5 @@
+// @author Raúl Izquierdo
+
 /* -- No es necesario modificar esta parte ----------------------------------------------- */
 package sintactico;
 
@@ -22,7 +24,7 @@ import ast.Position;
 	public int column() { return yycolumn + 1; }
 	public String lexeme() { return yytext(); }
 
-	// Traza para probar el lÃ©xico de manera independiente al sintÃ¡ctico
+	// Traza para probar el léxico de manera independiente al sintáctico
 	public static void main(String[] args) throws Exception {
 		Yylex lex = new Yylex(new FileReader(Main.programa), new GestorErrores());
 		int token;
@@ -35,19 +37,19 @@ import ast.Position;
 
 %%
 
-/* -- Modificar aquÃ­. AÃ±adir reglas en esta secciÃ³n ----------------------------------------- */
+/* -- Modificar aquí. Añadir reglas en esta sección ----------------------------------------- */
 
-[+\-*/;\()=] 						{ return yytext().charAt(0); }
+[+\-*/;\()=]	{ return yytext().charAt(0); }
 
-DATA 								{ return Tokens.DATA; } 
-CODE 								{ return Tokens.CODE; } 
-print 								{ return Tokens.PRINT; } 
-int 								{ return Tokens.INT; }
-float 								{ return Tokens.REAL; }
+DATA	{ return Parser.DATA; }
+CODE	{ return Parser.CODE; }
+print	{ return Parser.PRINT; }
+int		{ return Parser.INT; }
+float	{ return Parser.REAL; }
 
-[a-zA-ZnÌƒNÌƒ][a-zA-Z0-9_nÌƒNÌƒ]*		{ return Tokens.IDENT; }
-[0-9]+								{ return Tokens.LITERALINT; }
-[0-9]+"."[0-9]*						{ return Tokens.LITERALREAL; }
+[a-zA-ZñÑ][a-zA-Z0-9_ñÑ]*	{ return Parser.IDENT; }
+[0-9]+				{ return Parser.LITERALINT; }
+[0-9]+"."[0-9]*		{ return Parser.LITERALREAL; }
 
 /* -- Se aconseja dejar estas reglas al final ----------------------------------------------- */
 
@@ -55,6 +57,6 @@ float 								{ return Tokens.REAL; }
 "//".*							{ }		// Comentario de una linea como este
 
 [ \n\r]		{ }
-"\t"		{ yycolumn += 3; } // Para que coincida con la info del editor de Eclipse (opcional). En eclipse: \t == 4 caracteres. En Jflex: \t == 1 carÃ¡cter.
+"\t"		{ yycolumn += 3; } // Para que coincida con la info del editor de Eclipse (opcional). En eclipse: \t == 4 caracteres. En Jflex: \t == 1 carácter.
 
-.			{ gestor.error("LÃ©xico", "Cadena \"" + yytext() +"\" no reconocida.", new Position(line(), column())); }
+.			{ gestor.error("Léxico", "Cadena \"" + yytext() +"\" no reconocida.", new Position(line(), column())); }

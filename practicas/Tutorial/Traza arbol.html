@@ -1,0 +1,56 @@
+<html>
+<head>
+<style type="text/css">
+.value { font-weight: bold; }
+.dots { color: #888888; }
+.type { color: #BBBBBB; }
+.pos { color: #CCCCCC; }
+.sourceText { color: #BBBBBB; }
+.posText {
+	color: #BBBBBB;
+	text-decoration: underline; font-weight: bold;
+}
+.null {
+	color: #FF0000;
+	font-weight: bold;
+	font-style: italic;
+}
+</style>
+</head>
+
+<body><pre>
+[ASTPrinter] -------------------------------- line:col  line:col
+
+<span class="dots"></span>Programa &rarr;                                                   <span class="pos">2:11  9:22   </span><span class="sourceText">float </span><span class="posText">precio;</span><span class="sourceText"> ... </span><span class="posText">print precio / 2.0</span><span class="sourceText">;</span>
+<span class="dots">·  </span>definiciones  <span class="type">List&lt;DefVariable&gt;</span> = 
+<span class="dots">·  ·  </span>DefVariable &rarr;                                          <span class="pos">2:11  2:16   </span><span class="sourceText">float </span><span class="posText">precio</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  </span><span class="value">RealType</span> &rarr;                                          <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  </span>"<span class="value">precio</span>"  
+<span class="dots">·  ·  </span>DefVariable &rarr;                                          <span class="pos">3:9  3:13    </span><span class="sourceText">int </span><span class="posText">ancho</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  </span><span class="value">IntType</span> &rarr;                                           <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  </span>"<span class="value">ancho</span>"  
+<span class="dots">·  </span>sentencias  <span class="type">List&lt;Sentencia&gt;</span> = 
+<span class="dots">·  ·  </span>Asigna &rarr;                                               <span class="pos">5:5  5:23    </span><span class="sourceText"></span><span class="posText">ancho = 25 * (2 + 1</span><span class="sourceText">);</span>
+<span class="dots">·  ·  |  </span>"ancho"  <span class="type">Variable.nombre</span>                            <span class="pos">5:5  5:9     </span><span class="sourceText"></span><span class="posText">ancho</span><span class="sourceText"> = 25 * (2 + 1);</span>
+<span class="dots">·  ·  |  </span>ExprAritmetica &rarr;                                    <span class="pos">5:13  5:23   </span><span class="sourceText">ancho = </span><span class="posText">25 * (2 + 1</span><span class="sourceText">);</span>
+<span class="dots">·  ·  |  ·  </span>"25"  <span class="type">LiteralInt.valor</span>                           <span class="pos">5:13  5:14   </span><span class="sourceText">ancho = </span><span class="posText">25</span><span class="sourceText"> * (2 + 1);</span>
+<span class="dots">·  ·  |  ·  </span>"<span class="value">*</span>"  
+<span class="dots">·  ·  |  ·  </span>ExprAritmetica &rarr;                                 <span class="pos">5:19  5:23   </span><span class="sourceText">ancho = 25 * (</span><span class="posText">2 + 1</span><span class="sourceText">);</span>
+<span class="dots">·  ·  |  ·  |  </span>"2"  <span class="type">LiteralInt.valor</span>                         <span class="pos">5:19  5:19   </span><span class="sourceText">ancho = 25 * (</span><span class="posText">2</span><span class="sourceText"> + 1);</span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">+</span>"  
+<span class="dots">·  ·  |  ·  |  </span>"1"  <span class="type">LiteralInt.valor</span>                         <span class="pos">5:23  5:23   </span><span class="sourceText">ancho = 25 * (2 + </span><span class="posText">1</span><span class="sourceText">);</span>
+<span class="dots">·  ·  </span>Print &rarr;                                                <span class="pos">6:11  6:15   </span><span class="sourceText">print </span><span class="posText">ancho</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  </span>"ancho"  <span class="type">Variable.nombre</span>                            <span class="pos">6:11  6:15   </span><span class="sourceText">print </span><span class="posText">ancho</span><span class="sourceText">;</span>
+<span class="dots">·  ·  </span>Asigna &rarr;                                               <span class="pos">8:5  8:16    </span><span class="sourceText"></span><span class="posText">precio = 5.0</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  </span>"precio"  <span class="type">Variable.nombre</span>                           <span class="pos">8:5  8:10    </span><span class="sourceText"></span><span class="posText">precio</span><span class="sourceText"> = 5.0;</span>
+<span class="dots">·  ·  |  </span>"5.0"  <span class="type">LiteralReal.valor</span>                            <span class="pos">8:14  8:16   </span><span class="sourceText">precio = </span><span class="posText">5.0</span><span class="sourceText">;</span>
+<span class="dots">·  ·  </span>Print &rarr;                                                <span class="pos">9:11  9:22   </span><span class="sourceText">print </span><span class="posText">precio / 2.0</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  </span>ExprAritmetica &rarr;                                    <span class="pos">9:11  9:22   </span><span class="sourceText">print </span><span class="posText">precio / 2.0</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  </span>"precio"  <span class="type">Variable.nombre</span>                        <span class="pos">9:11  9:16   </span><span class="sourceText">print </span><span class="posText">precio</span><span class="sourceText"> / 2.0;</span>
+<span class="dots">·  ·  |  ·  </span>"<span class="value">/</span>"  
+<span class="dots">·  ·  |  ·  </span>"2.0"  <span class="type">LiteralReal.valor</span>                         <span class="pos">9:20  9:22   </span><span class="sourceText">print precio / </span><span class="posText">2.0</span><span class="sourceText">;</span>
+
+[ASTPrinter] --------------------------------
+</pre>
+</body>
+</html>

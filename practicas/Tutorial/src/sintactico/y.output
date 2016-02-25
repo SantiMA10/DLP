@@ -1,27 +1,366 @@
-   0  $accept : program $end
+   0  $accept : programa $end
 
-   1  program : ';'
+   1  programa : "DATA" variables "CODE" sentencias
+
+   2  variables :
+   3            | variables variable
+
+   4  variable : tipo "IDENT" ';'
+
+   5  tipo : "INT"
+   6       | "REAL"
+
+   7  sentencias :
+   8             | sentencias sentencia
+
+   9  sentencia : "PRINT" expr ';'
+  10            | expr '=' expr ';'
+
+  11  expr : expr '+' expr
+  12       | expr '-' expr
+  13       | expr '*' expr
+  14       | expr '/' expr
+  15       | '(' expr ')'
+  16       | "IDENT"
+  17       | "LITERALINT"
+  18       | "LITERALREAL"
 
 state 0
-	$accept : . program $end  (0)
+	$accept : . programa $end  (0)
 
-	';'  shift 1
+	"DATA"  shift 1
 	.  error
 
-	program  goto 2
+	programa  goto 2
 
 
 state 1
-	program : ';' .  (1)
+	programa : "DATA" . variables "CODE" sentencias  (1)
+	variables : .  (2)
 
-	.  reduce 1
+	.  reduce 2
+
+	variables  goto 3
 
 
 state 2
-	$accept : program . $end  (0)
+	$accept : programa . $end  (0)
 
 	$end  accept
 
 
-7 terminals, 2 nonterminals
-2 grammar rules, 3 states
+state 3
+	programa : "DATA" variables . "CODE" sentencias  (1)
+	variables : variables . variable  (3)
+
+	"CODE"  shift 4
+	"INT"  shift 5
+	"REAL"  shift 6
+	.  error
+
+	variable  goto 7
+	tipo  goto 8
+
+
+state 4
+	programa : "DATA" variables "CODE" . sentencias  (1)
+	sentencias : .  (7)
+
+	.  reduce 7
+
+	sentencias  goto 9
+
+
+state 5
+	tipo : "INT" .  (5)
+
+	.  reduce 5
+
+
+state 6
+	tipo : "REAL" .  (6)
+
+	.  reduce 6
+
+
+state 7
+	variables : variables variable .  (3)
+
+	.  reduce 3
+
+
+state 8
+	variable : tipo . "IDENT" ';'  (4)
+
+	"IDENT"  shift 10
+	.  error
+
+
+state 9
+	programa : "DATA" variables "CODE" sentencias .  (1)
+	sentencias : sentencias . sentencia  (8)
+
+	"IDENT"  shift 11
+	"PRINT"  shift 12
+	'('  shift 13
+	"LITERALINT"  shift 14
+	"LITERALREAL"  shift 15
+	$end  reduce 1
+
+	sentencia  goto 16
+	expr  goto 17
+
+
+state 10
+	variable : tipo "IDENT" . ';'  (4)
+
+	';'  shift 18
+	.  error
+
+
+state 11
+	expr : "IDENT" .  (16)
+
+	.  reduce 16
+
+
+state 12
+	sentencia : "PRINT" . expr ';'  (9)
+
+	"IDENT"  shift 11
+	'('  shift 13
+	"LITERALINT"  shift 14
+	"LITERALREAL"  shift 15
+	.  error
+
+	expr  goto 19
+
+
+state 13
+	expr : '(' . expr ')'  (15)
+
+	"IDENT"  shift 11
+	'('  shift 13
+	"LITERALINT"  shift 14
+	"LITERALREAL"  shift 15
+	.  error
+
+	expr  goto 20
+
+
+state 14
+	expr : "LITERALINT" .  (17)
+
+	.  reduce 17
+
+
+state 15
+	expr : "LITERALREAL" .  (18)
+
+	.  reduce 18
+
+
+state 16
+	sentencias : sentencias sentencia .  (8)
+
+	.  reduce 8
+
+
+state 17
+	sentencia : expr . '=' expr ';'  (10)
+	expr : expr . '+' expr  (11)
+	expr : expr . '-' expr  (12)
+	expr : expr . '*' expr  (13)
+	expr : expr . '/' expr  (14)
+
+	'+'  shift 21
+	'-'  shift 22
+	'*'  shift 23
+	'/'  shift 24
+	'='  shift 25
+	.  error
+
+
+state 18
+	variable : tipo "IDENT" ';' .  (4)
+
+	.  reduce 4
+
+
+state 19
+	sentencia : "PRINT" expr . ';'  (9)
+	expr : expr . '+' expr  (11)
+	expr : expr . '-' expr  (12)
+	expr : expr . '*' expr  (13)
+	expr : expr . '/' expr  (14)
+
+	'+'  shift 21
+	'-'  shift 22
+	'*'  shift 23
+	'/'  shift 24
+	';'  shift 26
+	.  error
+
+
+state 20
+	expr : expr . '+' expr  (11)
+	expr : expr . '-' expr  (12)
+	expr : expr . '*' expr  (13)
+	expr : expr . '/' expr  (14)
+	expr : '(' expr . ')'  (15)
+
+	'+'  shift 21
+	'-'  shift 22
+	'*'  shift 23
+	'/'  shift 24
+	')'  shift 27
+	.  error
+
+
+state 21
+	expr : expr '+' . expr  (11)
+
+	"IDENT"  shift 11
+	'('  shift 13
+	"LITERALINT"  shift 14
+	"LITERALREAL"  shift 15
+	.  error
+
+	expr  goto 28
+
+
+state 22
+	expr : expr '-' . expr  (12)
+
+	"IDENT"  shift 11
+	'('  shift 13
+	"LITERALINT"  shift 14
+	"LITERALREAL"  shift 15
+	.  error
+
+	expr  goto 29
+
+
+state 23
+	expr : expr '*' . expr  (13)
+
+	"IDENT"  shift 11
+	'('  shift 13
+	"LITERALINT"  shift 14
+	"LITERALREAL"  shift 15
+	.  error
+
+	expr  goto 30
+
+
+state 24
+	expr : expr '/' . expr  (14)
+
+	"IDENT"  shift 11
+	'('  shift 13
+	"LITERALINT"  shift 14
+	"LITERALREAL"  shift 15
+	.  error
+
+	expr  goto 31
+
+
+state 25
+	sentencia : expr '=' . expr ';'  (10)
+
+	"IDENT"  shift 11
+	'('  shift 13
+	"LITERALINT"  shift 14
+	"LITERALREAL"  shift 15
+	.  error
+
+	expr  goto 32
+
+
+state 26
+	sentencia : "PRINT" expr ';' .  (9)
+
+	.  reduce 9
+
+
+state 27
+	expr : '(' expr ')' .  (15)
+
+	.  reduce 15
+
+
+state 28
+	expr : expr . '+' expr  (11)
+	expr : expr '+' expr .  (11)
+	expr : expr . '-' expr  (12)
+	expr : expr . '*' expr  (13)
+	expr : expr . '/' expr  (14)
+
+	'*'  shift 23
+	'/'  shift 24
+	'+'  reduce 11
+	'-'  reduce 11
+	';'  reduce 11
+	'='  reduce 11
+	')'  reduce 11
+
+
+state 29
+	expr : expr . '+' expr  (11)
+	expr : expr . '-' expr  (12)
+	expr : expr '-' expr .  (12)
+	expr : expr . '*' expr  (13)
+	expr : expr . '/' expr  (14)
+
+	'*'  shift 23
+	'/'  shift 24
+	'+'  reduce 12
+	'-'  reduce 12
+	';'  reduce 12
+	'='  reduce 12
+	')'  reduce 12
+
+
+state 30
+	expr : expr . '+' expr  (11)
+	expr : expr . '-' expr  (12)
+	expr : expr . '*' expr  (13)
+	expr : expr '*' expr .  (13)
+	expr : expr . '/' expr  (14)
+
+	.  reduce 13
+
+
+state 31
+	expr : expr . '+' expr  (11)
+	expr : expr . '-' expr  (12)
+	expr : expr . '*' expr  (13)
+	expr : expr . '/' expr  (14)
+	expr : expr '/' expr .  (14)
+
+	.  reduce 14
+
+
+state 32
+	sentencia : expr '=' expr . ';'  (10)
+	expr : expr . '+' expr  (11)
+	expr : expr . '-' expr  (12)
+	expr : expr . '*' expr  (13)
+	expr : expr . '/' expr  (14)
+
+	'+'  shift 21
+	'-'  shift 22
+	'*'  shift 23
+	'/'  shift 24
+	';'  shift 33
+	.  error
+
+
+state 33
+	sentencia : expr '=' expr ';' .  (10)
+
+	.  reduce 10
+
+
+18 terminals, 8 nonterminals
+19 grammar rules, 34 states
