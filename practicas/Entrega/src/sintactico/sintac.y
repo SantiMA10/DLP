@@ -14,13 +14,7 @@ import main.*;
 /* Precedencias aquí --------------------------------------- */
 %left '+' '-'
 %left '*' '/'
-%left '<' '>'
-%left 'MAYOR_IGUAL' 'MENOR_IGUAL'
-%left 'IGUAL' 'DISTINTO'
-%left 'AND' 'OR' 'NOT'
-%left '.'
-%left '[' ']'
-%left '(' ')'
+%left '<' '>' 'MAYOR_IGUAL' 'MENOR_IGUAL' 'IGUAL' 'DISTINTO' 'AND' 'OR' 'NOT'
 
 %%
 
@@ -76,8 +70,8 @@ tipo_basico: 'INT'
 			| 'CHAR'
 			;
 
-tam_array: '[' expr ']'
-		 | '[' expr ']' tam_array
+tam_array: '[' LITENT ']'
+		 | '[' LITENT ']' tam_array
 		 ;
 
 sentencias_locales : sentencia_local
