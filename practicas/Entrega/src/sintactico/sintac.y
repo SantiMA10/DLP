@@ -85,7 +85,7 @@ expr: 'LITENT'
 	| 'LITREAL'
 	| 'LITCHAR'
 	| 'IDENT'
-	| 'CAST' '<' tipo_basico '>' '(' expr ')'
+	| 'CAST' '<' tipo '>' '(' expr ')'
 	| expr '*' expr
 	| expr '/' expr
 	| expr '+' expr
