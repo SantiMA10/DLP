@@ -17,7 +17,7 @@ import main.*;
 %left '<' '>'
 %left 'MAYOR_IGUAL' 'MENOR_IGUAL'
 %left 'IGUAL' 'DISTINTO'
-%left 'AND' 'OR' 'NOT'
+%left 'AND' 'OR' '!'
 %left '.'
 %left '[' ']'
 %left '(' ')'
@@ -101,7 +101,7 @@ expr: 'LITENT'
 	| expr 'DISTINTO' expr
 	| expr 'AND' expr
 	| expr 'OR' expr
-	| expr 'NOT' expr
+	| '!' expr
 	| '(' expr ')'
 	| expr '.' expr
 	| expr '[' expr ']'
