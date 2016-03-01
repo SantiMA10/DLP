@@ -9,6 +9,8 @@ real:tipo ->
 char:tipo -> 
 array:tipo -> tipo int
 
+parametro -> string tipo
+
 if:sent_func -> expr sent_func* sent_func*
 while:sent_func -> expr sent_func*
 print:sent_func -> expr
