@@ -7,7 +7,7 @@ funcion:sentencia -> string parametro defVar* sent_func* tipo
 int:tipo ->
 real:tipo ->
 char:tipo -> 
-array:tipo -> tipo
+array:tipo -> tipo int
 
 if:sent_func -> expr sent_func* sent_func*
 while:sent_func -> expr sent_func*
