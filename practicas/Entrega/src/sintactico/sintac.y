@@ -29,27 +29,27 @@ import main.*;
 programa: sentencias 				{ raiz = new Programa($1); }
 		;
 
-sentencias: 
-		  | sentencia sentencias 	{ }
+sentencias: 						{ $$ = new ArrayList<Sentencia>(); }
+		  | sentencias sentencia  	{ ((ArrayList<Sentencia>) $1).add($2);}
 		  ;
 
-sentencia: 'VAR' definicion
-		 | struct
-		 | funcion
+sentencia: 'VAR' definicion 		{ $$ = $1; }
+		 | struct 					{ $$ = $1; }
+		 | funcion 					{ $$ = $1; }
 		 ;
 
-struct: 'STRUCT' 'IDENT' '{' definiciones '}' ';' {  }
+struct: 'STRUCT' 'IDENT' '{' definiciones '}' ';' { $$ = new Struct($2, $3); }
 	  ;
 
-definiciones: definicion
-			| definicion definiciones
+definiciones: definicion 				{ $$ = new ArrayList<DefVar>(); }
+			| definiciones definicion 	{ ((ArrayList<DefVar>) $1).add($2); }
 			;
 
-definicion: 'IDENT' ':' tipo ';'
+definicion: 'IDENT' ':' tipo ';' 		{ $$ = new DefVar($1, $3); }
 		  ;
 
-funcion: 'IDENT' '(' parametros_ ')' ':' tipo '{' definiciones_funcion sentencias_locales '}'
-		| 'IDENT' '(' parametros_ ')' '{' definiciones_funcion sentencias_locales '}'
+funcion: 'IDENT' '(' parametros_ ')' ':' tipo '{' definiciones_funcion sentencias_locales '}'	{ $$ = new Funcion($1, $3, $6, $8, $9); }
+		| 'IDENT' '(' parametros_ ')' '{' definiciones_funcion sentencias_locales '}'			{ $$ = new Funcion($1, $3, $6, $7); }
 		;
 
 definiciones_funcion: 
@@ -60,8 +60,8 @@ parametros_: parametros
 			|
 			;
 
-parametros: 'IDENT' ':' tipo
-		  | 'IDENT' ':' tipo ',' parametros
+parametros: 'IDENT' ':' tipo 				{ }
+		  | parametros ',' IDENT' ':' tipo 	{ }
 		  ;
 
 tipo: 'IDENT'				 {}
