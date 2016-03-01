@@ -102,8 +102,8 @@ expr: 'LITENT'							{ $$ = new Lintent($1); }
 	| expr 'DISTINTO' expr				{ $$ = new Op_bin( $1, "!=", $3 ); }
 	| expr 'AND' expr					{ $$ = new Op_bin( $1, "&&", $3 ); }
 	| expr 'OR' expr					{ $$ = new Op_bin( $1, "||", $3 ); }
-	| '!' expr							{ $$ = new Op_un($2); }
-	| '(' expr ')'
+	| '!' expr							{ $$ = new Op_un("!", $2); }
+	| '(' expr ')'						{ $$ = new Op_un("()", $2); }
 	| expr '.' expr						{ $$ = new Op_bin( $1, ".", $3 );}
 	| expr '[' expr ']'					{ $$ = new Op_bin( $1, "[]", $3 ); }
 	| 'IDENT' '(' paso_parametros_ ')' 	{ $$ = new Invocacion( $3 ); }
