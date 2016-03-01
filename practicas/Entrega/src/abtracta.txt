@@ -1,0 +1,24 @@
+programa -> sentencia*
+
+defVar:sentencia -> string tipo
+strut:sentencia -> string defVar*
+funcion:sentencia -> string parametro defVar* sent_func* tipo
+
+int:tipo ->
+real:tipo ->
+char:tipo -> 
+array:tipo -> tipo
+
+if:sent_func -> expr sent_func* sent_func*
+while:sent_func -> expr sent_func*
+print:sent_func -> expr
+read:sent_func -> expr
+asignacion:sent_func -> expr expr
+invocacion:sent_func:expr -> string expr*
+
+op_bin:expr -> expr string expr
+lintent:expr -> string
+lintreal:expr -> string
+lintchar:expr -> string
+cast:expr -> tipo expr
+var:expr -> string
