@@ -26,18 +26,19 @@ import main.*;
 
 /* Añadir las reglas en esta sección ----------------------- */
 
-programa: sentencias
+programa: sentencias 				{ raiz = new Programa($1); }
 		;
 
 sentencias: 
-		  | sentencia sentencias;
+		  | sentencia sentencias 	{ }
+		  ;
 
 sentencia: 'VAR' definicion
 		 | struct
 		 | funcion
 		 ;
 
-struct: 'STRUCT' 'IDENT' '{' definiciones '}' ';'
+struct: 'STRUCT' 'IDENT' '{' definiciones '}' ';' {  }
 	  ;
 
 definiciones: definicion
@@ -63,49 +64,49 @@ parametros: 'IDENT' ':' tipo
 		  | 'IDENT' ':' tipo ',' parametros
 		  ;
 
-tipo: 'IDENT'
-	| 'INT'
-	| 'FLOAT'
-	| 'CHAR'
-	| '[' 'LITENT' ']' tipo
+tipo: 'IDENT'				 {}
+	| 'INT'					 { $$ = new Int($1); }
+	| 'FLOAT'				 { $$ = new Float($1); }
+	| 'CHAR'				 { $$ = new Char($1); }
+	| '[' 'LITENT' ']' tipo  { $$ = new Array($2, $4); }
 	;
 
 sentencias_locales : sentencia_local
 				   | sentencia_local sentencias_locales;
 
-sentencia_local: expr '=' expr ';'
-			   | 'PRINT' expr ';'
-			   | 'READ' expr ';'
-			   | 'IF' '(' expr ')' '{' sentencias_locales '}'
-			   | 'IF' '(' expr ')' '{' sentencias_locales '}' 'ELSE' '{' sentencias_locales '}'
-			   | 'WHILE' '(' expr ')' '{' sentencias_locales '}'
-			   | 'IDENT' '(' paso_parametros_ ')' ';'
-			   | 'RETURN' expr ';'
-			   | 'RETURN' ';'
+sentencia_local: expr '=' expr ';'																	{ $$ = new Asignacion($1, $3); }
+			   | 'PRINT' expr ';'																	{ $$ = new Print($2); }
+			   | 'READ' expr ';'																	{ $$ = new Read($2); }
+			   | 'IF' '(' expr ')' '{' sentencias_locales '}'										{ $$ = new If($3, $&, null ); }
+			   | 'IF' '(' expr ')' '{' sentencias_locales '}' 'ELSE' '{' sentencias_locales '}'		{ $$ = new If($3, $&, $10 ); }
+			   | 'WHILE' '(' expr ')' '{' sentencias_locales '}'									{ $$ = new While($3, $6); }
+			   | 'IDENT' '(' paso_parametros_ ')' ';'												{ $$ = new Invocacion($3); }
+			   | 'RETURN' expr ';'																	{ $$ = new Return($2); }
+			   | 'RETURN' ';'																		{ $$ = new Return(null); }
 			   ;
 
-expr: 'LITENT'
-	| 'LITREAL'
-	| 'LITCHAR'
-	| 'IDENT'
-	| 'CAST' '<' tipo '>' '(' expr ')'
-	| expr '*' expr
-	| expr '/' expr
-	| expr '+' expr
-	| expr '-' expr
-	| expr '<' expr
-	| expr '>' expr
-	| expr 'MAYOR_IGUAL' expr
-	| expr 'MENOR_IGUAL' expr
-	| expr 'IGUAL' expr
-	| expr 'DISTINTO' expr
-	| expr 'AND' expr
-	| expr 'OR' expr
-	| '!' expr
+expr: 'LITENT'							{ $$ = new Lintent($1); }
+	| 'LITREAL'							{ $$ = new Lintreal($1); }
+	| 'LITCHAR'							{ $$ = new Lintchar($1); }
+	| 'IDENT'							{ $$ = new Var($1); }
+	| 'CAST' '<' tipo '>' '(' expr ')'	{ $$ = new Cast( $3, $6); }
+	| expr '*' expr						{ $$ = new Op_bin( $1, "*", $3 ); }
+	| expr '/' expr						{ $$ = new Op_bin( $1, "/", $3 ); }
+	| expr '+' expr						{ $$ = new Op_bin( $1, "+", $3 ); }
+	| expr '-' expr						{ $$ = new Op_bin( $1, "-", $3 ); }
+	| expr '<' expr						{ $$ = new Op_bin( $1, "<", $3 ); }
+	| expr '>' expr						{ $$ = new Op_bin( $1, ">", $3 ); }
+	| expr 'MAYOR_IGUAL' expr			{ $$ = new Op_bin( $1, ">=", $3 ); }
+	| expr 'MENOR_IGUAL' expr			{ $$ = new Op_bin( $1, "<=", $3 ); }
+	| expr 'IGUAL' expr					{ $$ = new Op_bin( $1, "==", $3 ); }
+	| expr 'DISTINTO' expr				{ $$ = new Op_bin( $1, "!=", $3 ); }
+	| expr 'AND' expr					{ $$ = new Op_bin( $1, "&&", $3 ); }
+	| expr 'OR' expr					{ $$ = new Op_bin( $1, "||", $3 ); }
+	| '!' expr							{ $$ = new Op_un($2); }
 	| '(' expr ')'
-	| expr '.' expr
-	| expr '[' expr ']'
-	| 'IDENT' '(' paso_parametros_ ')'
+	| expr '.' expr						{ $$ = new Op_bin( $1, ".", $3 );}
+	| expr '[' expr ']'					{ $$ = new Op_bin( $1, "[]", $3 ); }
+	| 'IDENT' '(' paso_parametros_ ')' 	{ $$ = new Invocacion( $3 ); }
 	;
 
 paso_parametros_: paso_parametros
