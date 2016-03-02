@@ -11,6 +11,7 @@ funcion:sentencia -> string parametro* defVar* sent_func* tipo;
 intType:tipo -> ;
 realType:tipo -> ;
 charType:tipo -> ;
+structType:tipo -> string;
 arrayType:tipo -> tipo size:int;
 
 parametro -> string tipo;

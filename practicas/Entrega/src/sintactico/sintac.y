@@ -33,12 +33,12 @@ sentencias: 						{ $$ = new ArrayList<Sentencia>(); }
 		  | sentencias sentencia  	{ ((ArrayList<Sentencia>) $1).add((Sentencia)$2); $$ = $1; }
 		  ;
 
-sentencia: 'VAR' definicion 		{ $$ = $1; }
+sentencia: 'VAR' definicion 		{ $$ = $2; }
 		 | struct 					{ $$ = $1; }
 		 | funcion 					{ $$ = $1; }
 		 ;
 
-struct: 'STRUCT' 'IDENT' '{' definiciones '}' ';' { $$ = new Struct($2, $3); }
+struct: 'STRUCT' 'IDENT' '{' definiciones '}' ';' { $$ = new Struct($2, $4); }
 	  ;
 
 definiciones: definicion 				{ $$ = new ArrayList<DefVar>(); }
@@ -67,11 +67,11 @@ parametros: parametro					{ $$ = $1; }
 parametro: 'IDENT' ':' tipo { $$ = new Parametro($1, $3); }
 		 ;
 
-tipo: 'IDENT'				 {}
+tipo: 'IDENT'				 { $$ = new StructType($1); }
 	| 'INT'					 { $$ = new IntType(); }
 	| 'FLOAT'				 { $$ = new RealType(); }
 	| 'CHAR'				 { $$ = new CharType(); }
-	| '[' 'LITENT' ']' tipo  { $$ = new ArrayType($2, $4); }
+	| '[' 'LITENT' ']' tipo  { $$ = new ArrayType($4, $2); }
 	;
 
 sentencias_locales : sentencia_local  					{ $$ = $1; }

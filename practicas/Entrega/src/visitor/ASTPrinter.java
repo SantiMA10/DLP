@@ -171,6 +171,14 @@ public class ASTPrinter extends DefaultVisitor {
 		return null;
 	}
 
+	//	class StructType { String string; }
+	public Object visit(StructType node, Object param) {
+		int indent = ((Integer)param).intValue();
+
+		printCompact(indent, "StructType", node, "string", node.getString());
+		return null;
+	}
+
 	//	class ArrayType { Tipo tipo;  int size; }
 	public Object visit(ArrayType node, Object param) {
 		int indent = ((Integer)param).intValue();

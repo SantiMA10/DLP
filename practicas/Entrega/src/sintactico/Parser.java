@@ -759,7 +759,7 @@ case 3:
 break;
 case 4:
 //#line 36 "sintac.y"
-{ yyval = val_peek(1); }
+{ yyval = val_peek(0); }
 break;
 case 5:
 //#line 37 "sintac.y"
@@ -771,7 +771,7 @@ case 6:
 break;
 case 7:
 //#line 41 "sintac.y"
-{ yyval = new Struct(val_peek(4), val_peek(3)); }
+{ yyval = new Struct(val_peek(4), val_peek(2)); }
 break;
 case 8:
 //#line 44 "sintac.y"
@@ -819,7 +819,7 @@ case 19:
 break;
 case 20:
 //#line 70 "sintac.y"
-{}
+{ yyval = new StructType(val_peek(0)); }
 break;
 case 21:
 //#line 71 "sintac.y"
@@ -835,7 +835,7 @@ case 23:
 break;
 case 24:
 //#line 74 "sintac.y"
-{ yyval = new ArrayType(val_peek(2), val_peek(0)); }
+{ yyval = new ArrayType(val_peek(0), val_peek(2)); }
 break;
 case 25:
 //#line 77 "sintac.y"

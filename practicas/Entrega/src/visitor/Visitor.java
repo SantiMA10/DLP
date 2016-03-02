@@ -14,6 +14,7 @@ public interface Visitor {
 	public Object visit(IntType node, Object param);
 	public Object visit(RealType node, Object param);
 	public Object visit(CharType node, Object param);
+	public Object visit(StructType node, Object param);
 	public Object visit(ArrayType node, Object param);
 	public Object visit(Parametro node, Object param);
 	public Object visit(If node, Object param);

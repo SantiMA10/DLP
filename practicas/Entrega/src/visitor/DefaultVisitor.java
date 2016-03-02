@@ -58,6 +58,11 @@ public class DefaultVisitor implements Visitor {
 		return null;
 	}
 
+	//	class StructType { String string; }
+	public Object visit(StructType node, Object param) {
+		return null;
+	}
+
 	//	class ArrayType { Tipo tipo;  int size; }
 	public Object visit(ArrayType node, Object param) {
 		if (node.getTipo() != null)

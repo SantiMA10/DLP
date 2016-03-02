@@ -32,6 +32,7 @@ public class Main {
 			System.out.println("El programa se ha compilado correctamente.");
 
 		ASTPrinter.toHtml(programa, raiz, "Traza arbol"); // Utilidad generada por VGen (opcional)
+		
 	}
 
 	/**
@@ -41,13 +42,13 @@ public class Main {
 
 		// 1. Fases de Análisis Léxico y Sintáctico
 		Yylex lexico = new Yylex(new FileReader(sourceName), gestor);
-		Parser sintáctico = new Parser(lexico, gestor, false);
+		Parser sintáctico = new Parser(lexico, gestor, true);
 		sintáctico.parse();
 
 		AST raiz = sintáctico.getAST();
 		if (raiz == null) // Hay errores o el AST no se ha implementado aún
 			return null;
-
+		
 		// 2. Fase de Análisis Semántico
 		AnalisisSemantico semántico = new AnalisisSemantico(gestor);
 		semántico.analiza(raiz);
