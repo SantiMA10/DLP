@@ -41,26 +41,26 @@ sentencia: 'VAR' definicion 		{ $$ = $2; }
 struct: 'STRUCT' 'IDENT' '{' definiciones '}' ';' { $$ = new Struct($2, $4); }
 	  ;
 
-definiciones: definicion 				{ $$ = new ArrayList<DefVar>(); }
+definiciones: definicion 				{ $$ = new ArrayList<DefVar>(); ((ArrayList<DefVar>) $$).add((DefVar)$1); }
 			| definiciones definicion 	{ ((ArrayList<DefVar>) $1).add((DefVar)$2); $$ = $1; }
 			;
 
 definicion: 'IDENT' ':' tipo ';' 		{ $$ = new DefVar($1, $3); }
 		  ;
 
-funcion: 'IDENT' '(' parametros_ ')' ':' tipo '{' definiciones_funcion sentencias_locales '}'	{ $$ = new Funcion($1, $3, $6, $8, $9); }
-		| 'IDENT' '(' parametros_ ')' '{' definiciones_funcion sentencias_locales '}'			{ $$ = new Funcion($1, $3, null, $6, $7); }
+funcion: 'IDENT' '(' parametros_ ')' ':' tipo '{' definiciones_funcion sentencias_locales '}'	{ $$ = new Funcion($1, $3, $8, $9, $6); }
+		| 'IDENT' '(' parametros_ ')' '{' definiciones_funcion sentencias_locales '}'			{ $$ = new Funcion($1, $3, $6, $7, null); }
 		;
 
 definiciones_funcion: 										{ $$ = new ArrayList<DefVar>(); }
-					| definiciones_funcion 'VAR' definicion { ((ArrayList<DefVar>) $1).add((DefVar)$2); $$ = $1; }
+					| definiciones_funcion 'VAR' definicion { ((ArrayList<DefVar>) $1).add((DefVar)$3); $$ = $1; }
 					;
 
-parametros_: parametros { $$ = new ArrayList<Parametro>(); }
-			|
+parametros_: parametros { $$ = $1; }
+			|			{ $$ = new ArrayList<Parametro>();}
 			;
 
-parametros: parametro					{ $$ = $1; }
+parametros: parametro					{ $$ = new ArrayList<Parametro>(); ((ArrayList<Parametro>) $$).add((Parametro)$1); }
 		  | parametros ',' parametro 	{ ((ArrayList<Parametro>) $1).add((Parametro)$3); $$ = $1; }
 		  ;
 
@@ -74,7 +74,7 @@ tipo: 'IDENT'				 { $$ = new StructType($1); }
 	| '[' 'LITENT' ']' tipo  { $$ = new ArrayType($4, $2); }
 	;
 
-sentencias_locales : sentencia_local  					{ $$ = $1; }
+sentencias_locales : sentencia_local  					{  $$ = new ArrayList<Sent_func>(); ((ArrayList<Sent_func>) $$).add((Sent_func)$1); }
 				   | sentencias_locales sentencia_local { ((ArrayList<Sent_func>) $1).add((Sent_func)$2); $$ = $1; }
 				   ;
 
@@ -113,12 +113,12 @@ expr: 'LITENT'							{ $$ = new Lintent($1); }
 	| 'IDENT' '(' paso_parametros_ ')' 	{ $$ = new Invocacion( $1, $3 ); }
 	;
 
-paso_parametros_: paso_parametros { $$ = new ArrayList<Expr>(); }
-				|
+paso_parametros_: paso_parametros { $$ = $1; }
+				|				  { $$ = new ArrayList<Expr>(); }
 				;	
 
-paso_parametros: expr 						{ $$ = $1; }
-			   | paso_parametros ',' expr 	{ ((ArrayList<Expr>) $1).add((Expr)$2); $$ = $1; }
+paso_parametros: expr 						{ $$ = new ArrayList<Expr>(); ((ArrayList<Expr>) $$).add((Expr)$1); }
+			   | paso_parametros ',' expr 	{ ((ArrayList<Expr>) $1).add((Expr)$3); $$ = $1; }
 			   ;
 
 %%

@@ -775,7 +775,7 @@ case 7:
 break;
 case 8:
 //#line 44 "sintac.y"
-{ yyval = new ArrayList<DefVar>(); }
+{ yyval = new ArrayList<DefVar>(); ((ArrayList<DefVar>) yyval).add((DefVar)val_peek(0)); }
 break;
 case 9:
 //#line 45 "sintac.y"
@@ -787,11 +787,11 @@ case 10:
 break;
 case 11:
 //#line 51 "sintac.y"
-{ yyval = new Funcion(val_peek(9), val_peek(7), val_peek(4), val_peek(2), val_peek(1)); }
+{ yyval = new Funcion(val_peek(9), val_peek(7), val_peek(2), val_peek(1), val_peek(4)); }
 break;
 case 12:
 //#line 52 "sintac.y"
-{ yyval = new Funcion(val_peek(7), val_peek(5), null, val_peek(2), val_peek(1)); }
+{ yyval = new Funcion(val_peek(7), val_peek(5), val_peek(2), val_peek(1), null); }
 break;
 case 13:
 //#line 55 "sintac.y"
@@ -799,15 +799,19 @@ case 13:
 break;
 case 14:
 //#line 56 "sintac.y"
-{ ((ArrayList<DefVar>) val_peek(2)).add((DefVar)val_peek(1)); yyval = val_peek(2); }
+{ ((ArrayList<DefVar>) val_peek(2)).add((DefVar)val_peek(0)); yyval = val_peek(2); }
 break;
 case 15:
 //#line 59 "sintac.y"
-{ yyval = new ArrayList<Parametro>(); }
+{ yyval = val_peek(0); }
+break;
+case 16:
+//#line 60 "sintac.y"
+{ yyval = new ArrayList<Parametro>();}
 break;
 case 17:
 //#line 63 "sintac.y"
-{ yyval = val_peek(0); }
+{ yyval = new ArrayList<Parametro>(); ((ArrayList<Parametro>) yyval).add((Parametro)val_peek(0)); }
 break;
 case 18:
 //#line 64 "sintac.y"
@@ -839,7 +843,7 @@ case 24:
 break;
 case 25:
 //#line 77 "sintac.y"
-{ yyval = val_peek(0); }
+{  yyval = new ArrayList<Sent_func>(); ((ArrayList<Sent_func>) yyval).add((Sent_func)val_peek(0)); }
 break;
 case 26:
 //#line 78 "sintac.y"
@@ -971,17 +975,21 @@ case 57:
 break;
 case 58:
 //#line 116 "sintac.y"
+{ yyval = val_peek(0); }
+break;
+case 59:
+//#line 117 "sintac.y"
 { yyval = new ArrayList<Expr>(); }
 break;
 case 60:
 //#line 120 "sintac.y"
-{ yyval = val_peek(0); }
+{ yyval = new ArrayList<Expr>(); ((ArrayList<Expr>) yyval).add((Expr)val_peek(0)); }
 break;
 case 61:
 //#line 121 "sintac.y"
-{ ((ArrayList<Expr>) val_peek(2)).add((Expr)val_peek(1)); yyval = val_peek(2); }
+{ ((ArrayList<Expr>) val_peek(2)).add((Expr)val_peek(0)); yyval = val_peek(2); }
 break;
-//#line 921 "Parser.java"
+//#line 929 "Parser.java"
 //########## END OF USER-SUPPLIED ACTIONS ##########
     }//switch
     //#### Now let's reduce... ####
