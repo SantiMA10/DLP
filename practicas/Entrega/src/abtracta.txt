@@ -1,26 +1,30 @@
-programa -> sentencia*
+CATEGORIES
+expr, sentencia, tipo, sent_func
 
-defVar:sentencia -> string tipo
-strut:sentencia -> string defVar*
-funcion:sentencia -> string parametro defVar* sent_func* tipo
+NODES
+programa -> sentencia*;
 
-int:tipo ->
-real:tipo ->
-char:tipo -> 
-array:tipo -> tipo int
+defVar:sentencia -> string tipo;
+strut:sentencia -> string defVar*;
+funcion:sentencia -> string parametro* defVar* sent_func* tipo;
 
-parametro -> string tipo
+intType:tipo -> ;
+realType:tipo -> ;
+charType:tipo -> ;
+arrayType:tipo -> tipo size:int;
 
-if:sent_func -> expr verdadero:sent_func* falso:sent_func*
-while:sent_func -> expr sent_func*
-print:sent_func -> expr
-read:sent_func -> expr
-asignacion:sent_func -> expr expr
-invocacion:sent_func:expr -> string expr*
+parametro -> string tipo;
 
-op_bin:expr -> izq:expr string der:expr
-lintent:expr -> string
-lintreal:expr -> string
-lintchar:expr -> string
-cast:expr -> tipo expr
-var:expr -> string
+if:sent_func -> expr verdadero:sent_func* falso:sent_func*;
+while:sent_func -> expr sent_func*;
+print:sent_func -> expr;
+read:sent_func -> expr;
+asignacion:sent_func -> izq:expr der:expr;
+invocacion:sent_func,expr -> string expr*;
+
+op_bin:expr -> izq:expr string der:expr;
+lintent:expr -> string;
+lintreal:expr -> string;
+lintchar:expr -> string;
+cast:expr -> tipo expr;
+var:expr -> string;

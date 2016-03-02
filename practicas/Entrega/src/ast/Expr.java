@@ -4,7 +4,7 @@
 
 package ast;
 
-public interface Expresion extends AST {
+public interface Expr extends AST {
 
 }
 

@@ -4,7 +4,7 @@
 
 package ast;
 
-public interface Tipo extends AST {
+public interface Sent_func extends AST {
 
 }
 
