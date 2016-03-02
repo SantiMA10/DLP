@@ -9,7 +9,7 @@ import ast.*;
 public interface Visitor {
 	public Object visit(Programa node, Object param);
 	public Object visit(DefVar node, Object param);
-	public Object visit(Strut node, Object param);
+	public Object visit(Struct node, Object param);
 	public Object visit(Funcion node, Object param);
 	public Object visit(IntType node, Object param);
 	public Object visit(RealType node, Object param);
@@ -22,7 +22,9 @@ public interface Visitor {
 	public Object visit(Read node, Object param);
 	public Object visit(Asignacion node, Object param);
 	public Object visit(Invocacion node, Object param);
+	public Object visit(Return node, Object param);
 	public Object visit(Op_bin node, Object param);
+	public Object visit(Op_un node, Object param);
 	public Object visit(Lintent node, Object param);
 	public Object visit(Lintreal node, Object param);
 	public Object visit(Lintchar node, Object param);

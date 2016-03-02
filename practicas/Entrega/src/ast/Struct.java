@@ -7,11 +7,11 @@ package ast;
 import java.util.*;
 import visitor.*;
 
-//	strut:sentencia -> string:String  defvar:defVar*
+//	struct:sentencia -> string:String  defvar:defVar*
 
-public class Strut extends AbstractSentencia {
+public class Struct extends AbstractSentencia {
 
-	public Strut(String string, List<DefVar> defvar) {
+	public Struct(String string, List<DefVar> defvar) {
 		this.string = string;
 		this.defvar = defvar;
 
@@ -19,7 +19,7 @@ public class Strut extends AbstractSentencia {
 	}
 
 	@SuppressWarnings("unchecked")
-	public Strut(Object string, Object defvar) {
+	public Struct(Object string, Object defvar) {
 		this.string = (string instanceof Token) ? ((Token)string).getLexeme() : (String) string;
 		this.defvar = (List<DefVar>) defvar;
 

@@ -5,7 +5,7 @@ NODES
 programa -> sentencia*;
 
 defVar:sentencia -> string tipo;
-strut:sentencia -> string defVar*;
+struct:sentencia -> string defVar*;
 funcion:sentencia -> string parametro* defVar* sent_func* tipo;
 
 intType:tipo -> ;
@@ -21,8 +21,10 @@ print:sent_func -> expr;
 read:sent_func -> expr;
 asignacion:sent_func -> izq:expr der:expr;
 invocacion:sent_func,expr -> string expr*;
+return:sent_func -> expr;
 
 op_bin:expr -> izq:expr string der:expr;
+op_un:expr -> string der:expr;
 lintent:expr -> string;
 lintreal:expr -> string;
 lintchar:expr -> string;

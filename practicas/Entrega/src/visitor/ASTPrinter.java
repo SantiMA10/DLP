@@ -119,11 +119,11 @@ public class ASTPrinter extends DefaultVisitor {
 		return null;
 	}
 
-	//	class Strut { String string;  List<DefVar> defvar; }
-	public Object visit(Strut node, Object param) {
+	//	class Struct { String string;  List<DefVar> defvar; }
+	public Object visit(Struct node, Object param) {
 		int indent = ((Integer)param).intValue();
 
-		printName(indent, "Strut", node, false);
+		printName(indent, "Struct", node, false);
 
 		print(indent + 1, "string", "String", node.getString());
 		visit(indent + 1, "defvar", "List<DefVar>",node.getDefvar());
@@ -258,6 +258,16 @@ public class ASTPrinter extends DefaultVisitor {
 		return null;
 	}
 
+	//	class Return { Expr expr; }
+	public Object visit(Return node, Object param) {
+		int indent = ((Integer)param).intValue();
+
+		printName(indent, "Return", node, false);
+
+		visit(indent + 1, "expr", "Expr",node.getExpr());
+		return null;
+	}
+
 	//	class Op_bin { Expr izq;  String string;  Expr der; }
 	public Object visit(Op_bin node, Object param) {
 		int indent = ((Integer)param).intValue();
@@ -265,6 +275,17 @@ public class ASTPrinter extends DefaultVisitor {
 		printName(indent, "Op_bin", node, false);
 
 		visit(indent + 1, "izq", "Expr",node.getIzq());
+		print(indent + 1, "string", "String", node.getString());
+		visit(indent + 1, "der", "Expr",node.getDer());
+		return null;
+	}
+
+	//	class Op_un { String string;  Expr der; }
+	public Object visit(Op_un node, Object param) {
+		int indent = ((Integer)param).intValue();
+
+		printName(indent, "Op_un", node, false);
+
 		print(indent + 1, "string", "String", node.getString());
 		visit(indent + 1, "der", "Expr",node.getDer());
 		return null;

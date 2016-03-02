@@ -27,8 +27,8 @@ public class DefaultVisitor implements Visitor {
 		return null;
 	}
 
-	//	class Strut { String string;  List<DefVar> defvar; }
-	public Object visit(Strut node, Object param) {
+	//	class Struct { String string;  List<DefVar> defvar; }
+	public Object visit(Struct node, Object param) {
 		visitChildren(node.getDefvar(), param);
 		return null;
 	}
@@ -118,10 +118,24 @@ public class DefaultVisitor implements Visitor {
 		return null;
 	}
 
+	//	class Return { Expr expr; }
+	public Object visit(Return node, Object param) {
+		if (node.getExpr() != null)
+			node.getExpr().accept(this, param);
+		return null;
+	}
+
 	//	class Op_bin { Expr izq;  String string;  Expr der; }
 	public Object visit(Op_bin node, Object param) {
 		if (node.getIzq() != null)
 			node.getIzq().accept(this, param);
+		if (node.getDer() != null)
+			node.getDer().accept(this, param);
+		return null;
+	}
+
+	//	class Op_un { String string;  Expr der; }
+	public Object visit(Op_un node, Object param) {
 		if (node.getDer() != null)
 			node.getDer().accept(this, param);
 		return null;
