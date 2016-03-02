@@ -11,14 +11,14 @@ array:tipo -> tipo int
 
 parametro -> string tipo
 
-if:sent_func -> expr sent_func* sent_func*
+if:sent_func -> expr verdadero:sent_func* falso:sent_func*
 while:sent_func -> expr sent_func*
 print:sent_func -> expr
 read:sent_func -> expr
 asignacion:sent_func -> expr expr
 invocacion:sent_func:expr -> string expr*
 
-op_bin:expr -> expr string expr
+op_bin:expr -> izq:expr string der:expr
 lintent:expr -> string
 lintreal:expr -> string
 lintchar:expr -> string

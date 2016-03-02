@@ -30,7 +30,7 @@ programa: sentencias 				{ raiz = new Programa($1); }
 		;
 
 sentencias: 						{ $$ = new ArrayList<Sentencia>(); }
-		  | sentencias sentencia  	{ ((ArrayList<Sentencia>) $1).add($2);}
+		  | sentencias sentencia  	{ ((ArrayList<Sentencia>) $1).add($2); $$ = $1; }
 		  ;
 
 sentencia: 'VAR' definicion 		{ $$ = $1; }
@@ -42,7 +42,7 @@ struct: 'STRUCT' 'IDENT' '{' definiciones '}' ';' { $$ = new Struct($2, $3); }
 	  ;
 
 definiciones: definicion 				{ $$ = new ArrayList<DefVar>(); }
-			| definiciones definicion 	{ ((ArrayList<DefVar>) $1).add($2); }
+			| definiciones definicion 	{ ((ArrayList<DefVar>) $1).add($2); $$ = $1; }
 			;
 
 definicion: 'IDENT' ':' tipo ';' 		{ $$ = new DefVar($1, $3); }
@@ -52,16 +52,16 @@ funcion: 'IDENT' '(' parametros_ ')' ':' tipo '{' definiciones_funcion sentencia
 		| 'IDENT' '(' parametros_ ')' '{' definiciones_funcion sentencias_locales '}'			{ $$ = new Funcion($1, $3, $6, $7); }
 		;
 
-definiciones_funcion: 
-			| 'VAR' definicion definiciones_funcion
-			;
+definiciones_funcion: 										{ $$ = new ArrayList<DefVar>(); }
+					| definiciones_funcion 'VAR' definicion { ((ArrayList<DefVar>) $1).add($2); $$ = $1; }
+					;
 
-parametros_: parametros
+parametros_: parametros { $$ = new ArrayList<Parametro>(); }
 			|
 			;
 
-parametros: 'IDENT' ':' tipo 				{ }
-		  | parametros ',' IDENT' ':' tipo 	{ }
+parametros: 'IDENT' ':' tipo 				{ $$ = new Parametro($1, $3); }
+		  | parametros ',' IDENT' ':' tipo 	{ ((ArrayList<Parametro>) $1).add(new Parametro($3, $5)); $$ = $1; }
 		  ;
 
 tipo: 'IDENT'				 {}
@@ -71,8 +71,9 @@ tipo: 'IDENT'				 {}
 	| '[' 'LITENT' ']' tipo  { $$ = new Array($2, $4); }
 	;
 
-sentencias_locales : sentencia_local
-				   | sentencia_local sentencias_locales;
+sentencias_locales : sentencia_local  					{ $$ = $1; }
+				   | sentencias_locales sentencia_local { ((ArrayList<Parametro>) $1).add($2); $$ = $1; }
+				   ;
 
 sentencia_local: expr '=' expr ';'																	{ $$ = new Asignacion($1, $3); }
 			   | 'PRINT' expr ';'																	{ $$ = new Print($2); }
@@ -109,13 +110,13 @@ expr: 'LITENT'							{ $$ = new Lintent($1); }
 	| 'IDENT' '(' paso_parametros_ ')' 	{ $$ = new Invocacion( $3 ); }
 	;
 
-paso_parametros_: paso_parametros
-			|
-			;
+paso_parametros_: paso_parametros { $$ = new ArrayList<Expr>(); }
+				|
+				;	
 
-paso_parametros: expr
-		  | expr ',' paso_parametros
-		  ;
+paso_parametros: expr 						{ $$ = $1; }
+			   | paso_parametros ',' expr 	{ ((ArrayList<Expr>) $1).add($2); $$ = $1; }
+			   ;
 
 %%
 /* No es necesario modificar esta sección ------------------ */
