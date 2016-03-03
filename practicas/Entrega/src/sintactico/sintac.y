@@ -15,12 +15,8 @@ import main.*;
 %left '+' '-'
 %left '*' '/'
 %left '<' '>'
-%left 'MAYOR_IGUAL' 'MENOR_IGUAL'
-%left 'IGUAL' 'DISTINTO'
-%left 'AND' 'OR' '!'
-%left '.'
-%left '[' ']'
-%left '(' ')'
+%left '.' '[' '('
+%left 'MAYOR_IGUAL' 'MENOR_IGUAL' 'IGUAL' 'DISTINTO' 'AND' 'OR' '!'
 
 %%
 

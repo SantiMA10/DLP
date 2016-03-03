@@ -42,12 +42,15 @@ public class Main {
 
 		// 1. Fases de Análisis Léxico y Sintáctico
 		Yylex lexico = new Yylex(new FileReader(sourceName), gestor);
-		Parser sintáctico = new Parser(lexico, gestor, true);
+		Parser sintáctico = new Parser(lexico, gestor, false);
 		sintáctico.parse();
 
 		AST raiz = sintáctico.getAST();
 		if (raiz == null) // Hay errores o el AST no se ha implementado aún
 			return null;
+		
+		new PrintVisitor().visit((Programa)raiz, null);
+		System.out.println();
 		
 		// 2. Fase de Análisis Semántico
 		AnalisisSemantico semántico = new AnalisisSemantico(gestor);
