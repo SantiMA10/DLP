@@ -4,7 +4,7 @@ expr, sentencia, tipo, sent_func
 NODES
 programa -> sentencia*;
 
-defVar:sentencia -> string tipo;
+defVar:sentencia -> nombre:string tipo ambito:string;
 struct:sentencia -> string defVar*;
 funcion:sentencia -> string parametro* defVar* sent_func* tipo;
 

@@ -1,7 +1,6 @@
 package visitor;
 
 import java.util.List;
-
 import ast.ArrayType;
 import ast.Asignacion;
 import ast.Cast;
