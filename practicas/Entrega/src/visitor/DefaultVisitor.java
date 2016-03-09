@@ -20,7 +20,7 @@ public class DefaultVisitor implements Visitor {
 		return null;
 	}
 
-	//	class DefVar { String string;  Tipo tipo; }
+	//	class DefVar { String nombre;  Tipo tipo;  String ambito; }
 	public Object visit(DefVar node, Object param) {
 		if (node.getTipo() != null)
 			node.getTipo().accept(this, param);
@@ -117,7 +117,7 @@ public class DefaultVisitor implements Visitor {
 		return null;
 	}
 
-	//	class Invocacion { String string;  List<Expr> expr; }
+	//	class Invocacion { String nombre;  List<Expr> expr;  String ambito; }
 	public Object visit(Invocacion node, Object param) {
 		visitChildren(node.getExpr(), param);
 		return null;

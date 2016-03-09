@@ -21,7 +21,7 @@ while:sent_func -> expr sent_func*;
 print:sent_func -> expr;
 read:sent_func -> expr;
 asignacion:sent_func -> izq:expr der:expr;
-invocacion:sent_func,expr -> string expr*;
+invocacion:sent_func,expr -> nombre:string expr* ambito:string;
 return:sent_func -> expr;
 
 op_bin:expr -> izq:expr string der:expr;

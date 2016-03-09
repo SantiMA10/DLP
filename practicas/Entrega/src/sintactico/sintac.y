@@ -29,7 +29,7 @@ sentencias: 						{ $$ = new ArrayList<Sentencia>(); }
 		  | sentencias sentencia  	{ ((ArrayList<Sentencia>) $1).add((Sentencia)$2); $$ = $1; }
 		  ;
 
-sentencia: 'VAR' definicion 		{ $$ = $2; }
+sentencia: 'VAR' definicion 		{ ((DefVar)$2).setAmbito("var"); $$ = $2; }
 		 | struct 					{ $$ = $1; }
 		 | funcion 					{ $$ = $1; }
 		 ;
@@ -41,7 +41,7 @@ definiciones: definicion 				{ $$ = new ArrayList<DefVar>(); ((ArrayList<DefVar>
 			| definiciones definicion 	{ ((ArrayList<DefVar>) $1).add((DefVar)$2); $$ = $1; }
 			;
 
-definicion: 'IDENT' ':' tipo ';' 		{ $$ = new DefVar($1, $3); }
+definicion: 'IDENT' ':' tipo ';' 		{ $$ = new DefVar($1, $3, ""); }
 		  ;
 
 funcion: 'IDENT' '(' parametros_ ')' ':' tipo '{' definiciones_funcion sentencias_locales '}'	{ $$ = new Funcion($1, $3, $8, $9, $6); }
@@ -49,7 +49,7 @@ funcion: 'IDENT' '(' parametros_ ')' ':' tipo '{' definiciones_funcion sentencia
 		;
 
 definiciones_funcion: 										{ $$ = new ArrayList<DefVar>(); }
-					| definiciones_funcion 'VAR' definicion { ((ArrayList<DefVar>) $1).add((DefVar)$3); $$ = $1; }
+					| definiciones_funcion 'VAR' definicion { ((DefVar)$3).setAmbito("var"); ((ArrayList<DefVar>) $1).add((DefVar)$3); $$ = $1; }
 					;
 
 parametros_: parametros { $$ = $1; }
@@ -80,7 +80,7 @@ sentencia_local: expr '=' expr ';'																	{ $$ = new Asignacion($1, $3)
 			   | 'IF' '(' expr ')' '{' sentencias_locales '}'										{ $$ = new If($3, $6, null ); }
 			   | 'IF' '(' expr ')' '{' sentencias_locales '}' 'ELSE' '{' sentencias_locales '}'		{ $$ = new If($3, $6, $10 ); }
 			   | 'WHILE' '(' expr ')' '{' sentencias_locales '}'									{ $$ = new While($3, $6); }
-			   | 'IDENT' '(' paso_parametros_ ')' ';'												{ $$ = new Invocacion($1, $3); }
+			   | 'IDENT' '(' paso_parametros_ ')' ';'												{ $$ = new Invocacion($1, $3, "llamada"); }
 			   | 'RETURN' expr ';'																	{ $$ = new Return($2); }
 			   | 'RETURN' ';'																		{ $$ = new Return(null); }
 			   ;
@@ -106,7 +106,7 @@ expr: 'LITENT'							{ $$ = new Lintent($1); }
 	| '(' expr ')'						{ $$ = new Op_un("()", $2); }
 	| expr '.' expr						{ $$ = new Op_bin( $1, ".", $3 );}
 	| expr '[' expr ']'					{ $$ = new Op_bin( $1, "[]", $3 ); }
-	| 'IDENT' '(' paso_parametros_ ')' 	{ $$ = new Invocacion( $1, $3 ); }
+	| 'IDENT' '(' paso_parametros_ ')' 	{ $$ = new Invocacion( $1, $3, "parametro" ); }
 	;
 
 paso_parametros_: paso_parametros { $$ = $1; }

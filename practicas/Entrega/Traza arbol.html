@@ -26,14 +26,17 @@
 <span class="dots">·  ·  </span>DefVar &rarr;                                               <span class="pos">1:5  1:5     </span><span class="sourceText">var </span><span class="posText">a</span><span class="sourceText">:int;</span>
 <span class="dots">·  ·  |  </span>"<span class="value">a</span>"  
 <span class="dots">·  ·  |  </span><span class="value">IntType</span> &rarr;                                           <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  </span>"<span class="value">var</span>"  
 <span class="dots">·  ·  </span>DefVar &rarr;                                               <span class="pos">2:5  2:5     </span><span class="sourceText">var </span><span class="posText">b</span><span class="sourceText">:char;</span>
 <span class="dots">·  ·  |  </span>"<span class="value">b</span>"  
 <span class="dots">·  ·  |  </span><span class="value">CharType</span> &rarr;                                          <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  </span>"<span class="value">var</span>"  
 <span class="dots">·  ·  </span>DefVar &rarr;                                               <span class="pos">4:5  4:9     </span><span class="sourceText">var </span><span class="posText">c:[20</span><span class="sourceText">] int;</span>
 <span class="dots">·  ·  |  </span>"<span class="value">c</span>"  
 <span class="dots">·  ·  |  </span>ArrayType &rarr;                                         <span class="pos">4:8  4:9     </span><span class="sourceText">var c:[</span><span class="posText">20</span><span class="sourceText">] int;</span>
 <span class="dots">·  ·  |  ·  </span><span class="value">IntType</span> &rarr;                                        <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
 <span class="dots">·  ·  |  ·  </span><span class="value">20</span>  <span class="type">int</span>
+<span class="dots">·  ·  |  </span>"<span class="value">var</span>"  
 <span class="dots">·  ·  </span>DefVar &rarr;                                               <span class="pos">5:5  5:13    </span><span class="sourceText">var </span><span class="posText">h:[30][20</span><span class="sourceText">] float;</span>
 <span class="dots">·  ·  |  </span>"<span class="value">h</span>"  
 <span class="dots">·  ·  |  </span>ArrayType &rarr;                                         <span class="pos">5:8  5:13    </span><span class="sourceText">var h:[</span><span class="posText">30][20</span><span class="sourceText">] float;</span>
@@ -41,28 +44,34 @@
 <span class="dots">·  ·  |  ·  |  </span><span class="value">RealType</span> &rarr;                                    <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
 <span class="dots">·  ·  |  ·  |  </span><span class="value">20</span>  <span class="type">int</span>
 <span class="dots">·  ·  |  ·  </span><span class="value">30</span>  <span class="type">int</span>
+<span class="dots">·  ·  |  </span>"<span class="value">var</span>"  
 <span class="dots">·  ·  </span>Struct &rarr;                                               <span class="pos">8:8  10:13   </span><span class="sourceText">struct </span><span class="posText">Persona {</span><span class="sourceText"> ... </span><span class="posText">meses:[12</span><span class="sourceText">] int;</span>
 <span class="dots">·  ·  |  </span>"<span class="value">Persona</span>"  
 <span class="dots">·  ·  |  </span>defvar  <span class="type">List&lt;DefVar&gt;</span> = 
 <span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">9:5  9:8     </span><span class="sourceText"></span><span class="posText">edad</span><span class="sourceText">:int;</span>
 <span class="dots">·  ·  |  ·  |  </span>"<span class="value">edad</span>"  
 <span class="dots">·  ·  |  ·  |  </span><span class="value">IntType</span> &rarr;                                     <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value"></span>"  
 <span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">10:5  10:13  </span><span class="sourceText"></span><span class="posText">meses:[12</span><span class="sourceText">] int;</span>
 <span class="dots">·  ·  |  ·  |  </span>"<span class="value">meses</span>"  
 <span class="dots">·  ·  |  ·  |  </span>ArrayType &rarr;                                   <span class="pos">10:12  10:13 </span><span class="sourceText">meses:[</span><span class="posText">12</span><span class="sourceText">] int;</span>
 <span class="dots">·  ·  |  ·  |  ·  </span><span class="value">IntType</span> &rarr;                                  <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
 <span class="dots">·  ·  |  ·  |  ·  </span><span class="value">12</span>  <span class="type">int</span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value"></span>"  
 <span class="dots">·  ·  </span>DefVar &rarr;                                               <span class="pos">13:5  13:14  </span><span class="sourceText">var </span><span class="posText">e1:Persona</span><span class="sourceText">;</span>
 <span class="dots">·  ·  |  </span>"<span class="value">e1</span>"  
 <span class="dots">·  ·  |  </span>"Persona"  <span class="type">StructType.string</span>                        <span class="pos">13:8  13:14  </span><span class="sourceText">var e1:</span><span class="posText">Persona</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  </span>"<span class="value">var</span>"  
 <span class="dots">·  ·  </span>DefVar &rarr;                                               <span class="pos">14:5  14:14  </span><span class="sourceText">var </span><span class="posText">e2:Persona</span><span class="sourceText">;</span>
 <span class="dots">·  ·  |  </span>"<span class="value">e2</span>"  
 <span class="dots">·  ·  |  </span>"Persona"  <span class="type">StructType.string</span>                        <span class="pos">14:8  14:14  </span><span class="sourceText">var e2:</span><span class="posText">Persona</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  </span>"<span class="value">var</span>"  
 <span class="dots">·  ·  </span>DefVar &rarr;                                               <span class="pos">16:5  16:18  </span><span class="sourceText">var </span><span class="posText">f:[10] Persona</span><span class="sourceText">;</span>
 <span class="dots">·  ·  |  </span>"<span class="value">f</span>"  
 <span class="dots">·  ·  |  </span>ArrayType &rarr;                                         <span class="pos">16:8  16:18  </span><span class="sourceText">var f:[</span><span class="posText">10] Persona</span><span class="sourceText">;</span>
 <span class="dots">·  ·  |  ·  </span>"Persona"  <span class="type">StructType.string</span>                     <span class="pos">16:12  16:18 </span><span class="sourceText">var f:[10] </span><span class="posText">Persona</span><span class="sourceText">;</span>
 <span class="dots">·  ·  |  ·  </span><span class="value">10</span>  <span class="type">int</span>
+<span class="dots">·  ·  |  </span>"<span class="value">var</span>"  
 <span class="dots">·  ·  </span>Struct &rarr;                                               <span class="pos">18:8  20:26  </span><span class="sourceText">struct </span><span class="posText">Empresa {</span><span class="sourceText"> ... </span><span class="posText">empleados:[25] Persona</span><span class="sourceText">;</span>
 <span class="dots">·  ·  |  </span>"<span class="value">Empresa</span>"  
 <span class="dots">·  ·  |  </span>defvar  <span class="type">List&lt;DefVar&gt;</span> = 
@@ -71,14 +80,17 @@
 <span class="dots">·  ·  |  ·  |  </span>ArrayType &rarr;                                   <span class="pos">19:10  19:11 </span><span class="sourceText">cif:[</span><span class="posText">20</span><span class="sourceText">] char;</span>
 <span class="dots">·  ·  |  ·  |  ·  </span><span class="value">CharType</span> &rarr;                                 <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
 <span class="dots">·  ·  |  ·  |  ·  </span><span class="value">20</span>  <span class="type">int</span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value"></span>"  
 <span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">20:5  20:26  </span><span class="sourceText"></span><span class="posText">empleados:[25] Persona</span><span class="sourceText">;</span>
 <span class="dots">·  ·  |  ·  |  </span>"<span class="value">empleados</span>"  
 <span class="dots">·  ·  |  ·  |  </span>ArrayType &rarr;                                   <span class="pos">20:16  20:26 </span><span class="sourceText">empleados:[</span><span class="posText">25] Persona</span><span class="sourceText">;</span>
 <span class="dots">·  ·  |  ·  |  ·  </span>"Persona"  <span class="type">StructType.string</span>               <span class="pos">20:20  20:26 </span><span class="sourceText">empleados:[25] </span><span class="posText">Persona</span><span class="sourceText">;</span>
 <span class="dots">·  ·  |  ·  |  ·  </span><span class="value">25</span>  <span class="type">int</span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value"></span>"  
 <span class="dots">·  ·  </span>DefVar &rarr;                                               <span class="pos">23:5  23:22  </span><span class="sourceText">var </span><span class="posText">microsoft: Empresa</span><span class="sourceText">;</span>
 <span class="dots">·  ·  |  </span>"<span class="value">microsoft</span>"  
 <span class="dots">·  ·  |  </span>"Empresa"  <span class="type">StructType.string</span>                        <span class="pos">23:16  23:22 </span><span class="sourceText">var microsoft: </span><span class="posText">Empresa</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  </span>"<span class="value">var</span>"  
 <span class="dots">·  ·  </span>Funcion &rarr;                                              <span class="pos">27:1  31:20  </span><span class="sourceText"></span><span class="posText">dobleSuma(a:int, b:int): int {</span><span class="sourceText"> ... </span><span class="posText">return local * 2</span><span class="sourceText">;</span>
 <span class="dots">·  ·  |  </span>"<span class="value">dobleSuma</span>"  
 <span class="dots">·  ·  |  </span>parametro  <span class="type">List&lt;Parametro&gt;</span> = 
@@ -92,6 +104,7 @@
 <span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">28:9  28:13  </span><span class="sourceText">var </span><span class="posText">local</span><span class="sourceText">:int;</span>
 <span class="dots">·  ·  |  ·  |  </span>"<span class="value">local</span>"  
 <span class="dots">·  ·  |  ·  |  </span><span class="value">IntType</span> &rarr;                                     <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">var</span>"  
 <span class="dots">·  ·  |  </span>sent_func  <span class="type">List&lt;Sent_func&gt;</span> = 
 <span class="dots">·  ·  |  ·  </span>Asignacion &rarr;                                     <span class="pos">30:5  30:23  </span><span class="sourceText"></span><span class="posText">local = (a + b) * 2</span><span class="sourceText">;</span>
 <span class="dots">·  ·  |  ·  |  </span>"local"  <span class="type">Var.string</span>                           <span class="pos">30:5  30:9   </span><span class="sourceText"></span><span class="posText">local</span><span class="sourceText"> = (a + b) * 2;</span>
@@ -133,6 +146,7 @@
 <span class="dots">·  ·  </span>DefVar &rarr;                                               <span class="pos">38:5  38:5   </span><span class="sourceText">var </span><span class="posText">z</span><span class="sourceText">:int;</span>
 <span class="dots">·  ·  |  </span>"<span class="value">z</span>"  
 <span class="dots">·  ·  |  </span><span class="value">IntType</span> &rarr;                                           <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  </span>"<span class="value">var</span>"  
 <span class="dots">·  ·  </span>Funcion &rarr;                                              <span class="pos">40:1  62:24  </span><span class="sourceText"></span><span class="posText">main() {</span><span class="sourceText"> ... </span><span class="posText">escribe(pepe.meses[2</span><span class="sourceText">]);</span>
 <span class="dots">·  ·  |  </span>"<span class="value">main</span>"  
 <span class="dots">·  ·  |  </span>parametro  <span class="type">List&lt;Parametro&gt;</span> = 
@@ -140,14 +154,17 @@
 <span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">41:7  41:11  </span><span class="sourceText">var </span><span class="posText">local</span><span class="sourceText">: int;</span>
 <span class="dots">·  ·  |  ·  |  </span>"<span class="value">local</span>"  
 <span class="dots">·  ·  |  ·  |  </span><span class="value">IntType</span> &rarr;                                     <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">var</span>"  
 <span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">42:7  42:19  </span><span class="sourceText">var </span><span class="posText">pepe: Persona</span><span class="sourceText">;</span>
 <span class="dots">·  ·  |  ·  |  </span>"<span class="value">pepe</span>"  
 <span class="dots">·  ·  |  ·  |  </span>"Persona"  <span class="type">StructType.string</span>                  <span class="pos">42:13  42:19 </span><span class="sourceText">var pepe: </span><span class="posText">Persona</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">var</span>"  
 <span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">43:7  43:11  </span><span class="sourceText">var </span><span class="posText">v:[20</span><span class="sourceText">] int;</span>
 <span class="dots">·  ·  |  ·  |  </span>"<span class="value">v</span>"  
 <span class="dots">·  ·  |  ·  |  </span>ArrayType &rarr;                                   <span class="pos">43:10  43:11 </span><span class="sourceText">var v:[</span><span class="posText">20</span><span class="sourceText">] int;</span>
 <span class="dots">·  ·  |  ·  |  ·  </span><span class="value">IntType</span> &rarr;                                  <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
 <span class="dots">·  ·  |  ·  |  ·  </span><span class="value">20</span>  <span class="type">int</span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">var</span>"  
 <span class="dots">·  ·  |  </span>sent_func  <span class="type">List&lt;Sent_func&gt;</span> = 
 <span class="dots">·  ·  |  ·  </span>Asignacion &rarr;                                     <span class="pos">45:3  45:16  </span><span class="sourceText"></span><span class="posText">pepe.edad = 20</span><span class="sourceText">;</span>
 <span class="dots">·  ·  |  ·  |  </span>Op_bin &rarr;                                      <span class="pos">45:3  45:11  </span><span class="sourceText"></span><span class="posText">pepe.edad</span><span class="sourceText"> = 20;</span>
@@ -193,6 +210,7 @@
 <span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  ·  </span>"<span class="value">[]</span>"  
 <span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  ·  </span>"3"  <span class="type">Lintent.string</span>      <span class="pos">50:47  50:47 </span><span class="sourceText">v[local] = dobleSuma(cast<int>(2.0 + h[0][</span><span class="posText">3</span><span class="sourceText">]), local);</span>
 <span class="dots">·  ·  |  ·  |  ·  |  ·  |  </span>"local"  <span class="type">Var.string</span>               <span class="pos">50:52  50:56 </span><span class="sourceText">v[local] = dobleSuma(cast<int>(2.0 + h[0][3]), </span><span class="posText">local</span><span class="sourceText">);</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>"<span class="value">parametro</span>"  
 <span class="dots">·  ·  |  ·  |  ·  </span>Asignacion &rarr;                               <span class="pos">51:5  51:21  </span><span class="sourceText"></span><span class="posText">local = local + 1</span><span class="sourceText">;</span>
 <span class="dots">·  ·  |  ·  |  ·  |  </span>"local"  <span class="type">Var.string</span>                     <span class="pos">51:5  51:9   </span><span class="sourceText"></span><span class="posText">local</span><span class="sourceText"> = local + 1;</span>
 <span class="dots">·  ·  |  ·  |  ·  |  </span>Op_bin &rarr;                                <span class="pos">51:13  51:21 </span><span class="sourceText">local = </span><span class="posText">local + 1</span><span class="sourceText">;</span>
@@ -218,6 +236,7 @@
 <span class="dots">·  ·  |  ·  |  ·  |  ·  |  </span>"a"  <span class="type">Var.string</span>                   <span class="pos">55:17  55:17 </span><span class="sourceText">escribeEdad(</span><span class="posText">a</span><span class="sourceText">+local); </span>
 <span class="dots">·  ·  |  ·  |  ·  |  ·  |  </span>"<span class="value">+</span>"  
 <span class="dots">·  ·  |  ·  |  ·  |  ·  |  </span>"local"  <span class="type">Var.string</span>               <span class="pos">55:19  55:23 </span><span class="sourceText">escribeEdad(a+</span><span class="posText">local</span><span class="sourceText">); </span>
+<span class="dots">·  ·  |  ·  |  ·  |  </span>"<span class="value">llamada</span>"  
 <span class="dots">·  ·  |  ·  |  ·  </span>Return &rarr;                                   <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
 <span class="dots">·  ·  |  ·  |  ·  |  </span><span class="null">null</span>  expr:<span class="type">Expr</span>
 <span class="dots">·  ·  |  ·  |  </span>falso  <span class="type">List&lt;Sent_func&gt;</span> = 
@@ -240,6 +259,7 @@
 <span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  </span>"meses"  <span class="type">Var.string</span>            <span class="pos">62:18  62:22 </span><span class="sourceText">escribe(pepe.</span><span class="posText">meses</span><span class="sourceText">[2]);</span>
 <span class="dots">·  ·  |  ·  |  ·  |  ·  |  </span>"<span class="value">[]</span>"  
 <span class="dots">·  ·  |  ·  |  ·  |  ·  |  </span>"2"  <span class="type">Lintent.string</span>               <span class="pos">62:24  62:24 </span><span class="sourceText">escribe(pepe.meses[</span><span class="posText">2</span><span class="sourceText">]);</span>
+<span class="dots">·  ·  |  ·  |  ·  |  </span>"<span class="value">llamada</span>"  
 <span class="dots">·  ·  |  ·  |  </span>falso  <span class="type">List&lt;Sent_func&gt;</span> =  <span class="null">null</span>
 <span class="dots">·  ·  |  </span><span class="null">null</span>  tipo:<span class="type">Tipo</span>
 

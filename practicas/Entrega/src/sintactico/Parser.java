@@ -709,7 +709,7 @@ case 3:
 break;
 case 4:
 //#line 32 "sintac.y"
-{ yyval = val_peek(0); }
+{ ((DefVar)val_peek(0)).setAmbito("var"); yyval = val_peek(0); }
 break;
 case 5:
 //#line 33 "sintac.y"
@@ -733,7 +733,7 @@ case 9:
 break;
 case 10:
 //#line 44 "sintac.y"
-{ yyval = new DefVar(val_peek(3), val_peek(1)); }
+{ yyval = new DefVar(val_peek(3), val_peek(1), ""); }
 break;
 case 11:
 //#line 47 "sintac.y"
@@ -749,7 +749,7 @@ case 13:
 break;
 case 14:
 //#line 52 "sintac.y"
-{ ((ArrayList<DefVar>) val_peek(2)).add((DefVar)val_peek(0)); yyval = val_peek(2); }
+{ ((DefVar)val_peek(0)).setAmbito("var"); ((ArrayList<DefVar>) val_peek(2)).add((DefVar)val_peek(0)); yyval = val_peek(2); }
 break;
 case 15:
 //#line 55 "sintac.y"
@@ -825,7 +825,7 @@ case 32:
 break;
 case 33:
 //#line 83 "sintac.y"
-{ yyval = new Invocacion(val_peek(4), val_peek(2)); }
+{ yyval = new Invocacion(val_peek(4), val_peek(2), "llamada"); }
 break;
 case 34:
 //#line 84 "sintac.y"
@@ -921,7 +921,7 @@ case 56:
 break;
 case 57:
 //#line 109 "sintac.y"
-{ yyval = new Invocacion( val_peek(3), val_peek(1) ); }
+{ yyval = new Invocacion( val_peek(3), val_peek(1), "parametro" ); }
 break;
 case 58:
 //#line 112 "sintac.y"

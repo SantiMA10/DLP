@@ -69,7 +69,7 @@ public class PrintVisitor extends DefaultVisitor {
 		public Object visit(DefVar node, Object param) {
 
 			// super.visit(node, param);
-			System.out.print("var " + node.getString() + ":");
+			System.out.print(node.getAmbito() + " " + node.getNombre() + ":");
 			if (node.getTipo() != null)
 				node.getTipo().accept(this, param);
 			
@@ -264,7 +264,7 @@ public class PrintVisitor extends DefaultVisitor {
 
 			// super.visit(node, param);
 
-			System.out.print(node.getString() +"(");
+			System.out.print(node.getNombre() +"(");
 			if (node.getExpr() != null){
 				List<Expr> params =  node.getExpr();
 				
@@ -274,6 +274,8 @@ public class PrintVisitor extends DefaultVisitor {
 				}
 			}
 			System.out.print(")");
+			if(node.getAmbito().equals("llamada"))
+				System.out.print(";");
 			
 
 			return null;

@@ -108,14 +108,15 @@ public class ASTPrinter extends DefaultVisitor {
 		return null;
 	}
 
-	//	class DefVar { String string;  Tipo tipo; }
+	//	class DefVar { String nombre;  Tipo tipo;  String ambito; }
 	public Object visit(DefVar node, Object param) {
 		int indent = ((Integer)param).intValue();
 
 		printName(indent, "DefVar", node, false);
 
-		print(indent + 1, "string", "String", node.getString());
+		print(indent + 1, "nombre", "String", node.getNombre());
 		visit(indent + 1, "tipo", "Tipo",node.getTipo());
+		print(indent + 1, "ambito", "String", node.getAmbito());
 		return null;
 	}
 
@@ -255,14 +256,15 @@ public class ASTPrinter extends DefaultVisitor {
 		return null;
 	}
 
-	//	class Invocacion { String string;  List<Expr> expr; }
+	//	class Invocacion { String nombre;  List<Expr> expr;  String ambito; }
 	public Object visit(Invocacion node, Object param) {
 		int indent = ((Integer)param).intValue();
 
 		printName(indent, "Invocacion", node, false);
 
-		print(indent + 1, "string", "String", node.getString());
+		print(indent + 1, "nombre", "String", node.getNombre());
 		visit(indent + 1, "expr", "List<Expr>",node.getExpr());
+		print(indent + 1, "ambito", "String", node.getAmbito());
 		return null;
 	}
 
