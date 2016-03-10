@@ -22,10 +22,12 @@ public class ContextMap<S, D> {
 		contextos.peek().put(nombre, def);
 	}
 
+	//Siempre para definir nuevas
 	public D getFromTop(S nombre) {
 		return contextos.peek().get(nombre);
 	}
-
+	
+	//Siempre que se usa para buscarlos
 	public D getFromAny(S nombre) {
 		for (int i = contextos.size() - 1; i >= 0; i--) {
 			Map<S, D> contexto = contextos.get(i);

@@ -13,20 +13,76 @@ public class Identificacion extends DefaultVisitor {
 		this.gestorErrores = gestor;
 	}
 
-	
-	
-	/*
-	 * Poner aquí los visit necesarios.
-	 * Si se ha usado VGen solo hay que copiarlos de la clase 'visitor/_PlantillaParaVisitors.txt'.
-	 */
+	//Para estructuras y funciones tabla hash
+	//Para variables contextMap
 
-	// public Object visit(Programa prog, Object param) {
-	// ...
-	// }
+	//	class DefVar { String string;  Tipo tipo; }
+	public Object visit(DefVar node, Object param) {
 
-	
-	
-	
+		// super.visit(node, param);
+
+		if (node.getTipo() != null)
+			node.getTipo().accept(this, param);
+
+		return null;
+	}
+
+	//	class Struct { String string;  List<DefVar> defvar; }
+	public Object visit(Struct node, Object param) {
+
+		// super.visit(node, param);
+
+		if (node.getDefvar() != null)
+			for (DefVar child : node.getDefvar())
+				child.accept(this, param);
+
+		return null;
+	}
+
+	//	class Funcion { String string;  List<Parametro> parametro;  List<DefVar> defvar;  List<Sent_func> sent_func;  Tipo tipo; }
+	public Object visit(Funcion node, Object param) {
+
+		// super.visit(node, param);
+
+		if (node.getParametro() != null)
+			for (Parametro child : node.getParametro())
+				child.accept(this, param);
+
+		if (node.getDefvar() != null)
+			for (DefVar child : node.getDefvar())
+				child.accept(this, param);
+
+		if (node.getSent_func() != null)
+			for (Sent_func child : node.getSent_func())
+				child.accept(this, param);
+
+		if (node.getTipo() != null)
+			node.getTipo().accept(this, param);
+
+		return null;
+	}
+
+	//	class StructType { String string; }
+	public Object visit(StructType node, Object param) {
+		return null;
+	}
+
+	//	class Invocacion { String string;  List<Expr> expr; }
+	public Object visit(Invocacion node, Object param) {
+
+		// super.visit(node, param);
+
+		if (node.getExpr() != null)
+			for (Expr child : node.getExpr())
+				child.accept(this, param);
+
+		return null;
+	}
+
+	//	class Var { String string; }
+	public Object visit(Var node, Object param) {
+		return null;
+	}
 	
 	/**
 	 * Método auxiliar opcional para ayudar a implementar los predicados de la Gramática Atribuida.
@@ -49,4 +105,8 @@ public class Identificacion extends DefaultVisitor {
 
 
 	private GestorErrores gestorErrores;
+	private ContextMap<String, DefVar> variables = new ContextMap<>();
+	private Map<String, Funcion> funciones = new HashMap<>();
+	private Map<String, Struct> estructuras = new HashMap<>();
+	
 }
