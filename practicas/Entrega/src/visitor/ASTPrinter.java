@@ -301,6 +301,17 @@ public class ASTPrinter extends DefaultVisitor {
 		return null;
 	}
 
+	//	class Acceso_struct { Expr struct;  String string; }
+	public Object visit(Acceso_struct node, Object param) {
+		int indent = ((Integer)param).intValue();
+
+		printName(indent, "Acceso_struct", node, false);
+
+		visit(indent + 1, "struct", "Expr",node.getStruct());
+		print(indent + 1, "string", "String", node.getString());
+		return null;
+	}
+
 	//	class Lintent { String string; }
 	public Object visit(Lintent node, Object param) {
 		int indent = ((Integer)param).intValue();

@@ -26,6 +26,7 @@ return:sent_func -> expr;
 
 op_bin:expr -> izq:expr string der:expr;
 op_un:expr -> string der:expr;
+acceso_struct:expr -> struct:expr string;
 lintent:expr -> string;
 lintreal:expr -> string;
 lintchar:expr -> string;

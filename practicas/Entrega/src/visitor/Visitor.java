@@ -26,6 +26,7 @@ public interface Visitor {
 	public Object visit(Return node, Object param);
 	public Object visit(Op_bin node, Object param);
 	public Object visit(Op_un node, Object param);
+	public Object visit(Acceso_struct node, Object param);
 	public Object visit(Lintent node, Object param);
 	public Object visit(Lintreal node, Object param);
 	public Object visit(Lintchar node, Object param);

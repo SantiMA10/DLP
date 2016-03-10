@@ -33,6 +33,7 @@ public class StructType extends AbstractTipo {
 	}
 
 	private String string;
+	
 	public Struct getDefinicion() {
 		return definicion;
 	}

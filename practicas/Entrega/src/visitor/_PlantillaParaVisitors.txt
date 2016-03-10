@@ -49,7 +49,7 @@ public class <nombre clase> extends DefaultVisitor {
 		return null;
 	}
 
-	//	class DefVar { String string;  Tipo tipo; }
+	//	class DefVar { String nombre;  Tipo tipo;  String ambito; }
 	public Object visit(DefVar node, Object param) {
 
 		// super.visit(node, param);
@@ -207,7 +207,7 @@ public class <nombre clase> extends DefaultVisitor {
 		return null;
 	}
 
-	//	class Invocacion { String string;  List<Expr> expr; }
+	//	class Invocacion { String nombre;  List<Expr> expr;  String ambito; }
 	public Object visit(Invocacion node, Object param) {
 
 		// super.visit(node, param);
@@ -251,6 +251,17 @@ public class <nombre clase> extends DefaultVisitor {
 
 		if (node.getDer() != null)
 			node.getDer().accept(this, param);
+
+		return null;
+	}
+
+	//	class Acceso_struct { Expr struct;  String string; }
+	public Object visit(Acceso_struct node, Object param) {
+
+		// super.visit(node, param);
+
+		if (node.getStruct() != null)
+			node.getStruct().accept(this, param);
 
 		return null;
 	}

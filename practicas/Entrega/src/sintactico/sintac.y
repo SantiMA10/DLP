@@ -104,7 +104,7 @@ expr: 'LITENT'							{ $$ = new Lintent($1); }
 	| expr 'OR' expr					{ $$ = new Op_bin( $1, "||", $3 ); }
 	| '!' expr							{ $$ = new Op_un("!", $2); }
 	| '(' expr ')'						{ $$ = new Op_un("()", $2); }
-	| expr '.' expr						{ $$ = new Op_bin( $1, ".", $3 );}
+	| expr '.' 'IDENT'					{ $$ = new Acceso_struct( $1, $3 );}
 	| expr '[' expr ']'					{ $$ = new Op_bin( $1, "[]", $3 ); }
 	| 'IDENT' '(' paso_parametros_ ')' 	{ $$ = new Invocacion( $1, $3, "parametro" ); }
 	;

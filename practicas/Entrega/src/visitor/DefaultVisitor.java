@@ -146,6 +146,13 @@ public class DefaultVisitor implements Visitor {
 		return null;
 	}
 
+	//	class Acceso_struct { Expr struct;  String string; }
+	public Object visit(Acceso_struct node, Object param) {
+		if (node.getStruct() != null)
+			node.getStruct().accept(this, param);
+		return null;
+	}
+
 	//	class Lintent { String string; }
 	public Object visit(Lintent node, Object param) {
 		return null;

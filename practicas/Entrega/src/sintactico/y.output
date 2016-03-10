@@ -68,7 +68,7 @@
   52       | expr "OR" expr
   53       | '!' expr
   54       | '(' expr ')'
-  55       | expr '.' expr
+  55       | expr '.' "IDENT"
   56       | expr '[' expr ']'
   57       | "IDENT" '(' paso_parametros_ ')'
 
@@ -649,7 +649,7 @@ state 61
 	expr : expr . "DISTINTO" expr  (50)
 	expr : expr . "AND" expr  (51)
 	expr : expr . "OR" expr  (52)
-	expr : expr . '.' expr  (55)
+	expr : expr . '.' "IDENT"  (55)
 	expr : expr . '[' expr ']'  (56)
 
 	'+'  shift 74
@@ -733,7 +733,7 @@ state 64
 	expr : expr . "AND" expr  (51)
 	expr : expr . "OR" expr  (52)
 	expr : '(' expr . ')'  (54)
-	expr : expr . '.' expr  (55)
+	expr : expr . '.' "IDENT"  (55)
 	expr : expr . '[' expr ']'  (56)
 
 	'+'  shift 74
@@ -768,7 +768,7 @@ state 65
 	expr : expr . "AND" expr  (51)
 	expr : expr . "OR" expr  (52)
 	expr : '!' expr .  (53)
-	expr : expr . '.' expr  (55)
+	expr : expr . '.' "IDENT"  (55)
 	expr : expr . '[' expr ']'  (56)
 
 	.  reduce 53
@@ -807,7 +807,7 @@ state 67
 	expr : expr . "DISTINTO" expr  (50)
 	expr : expr . "AND" expr  (51)
 	expr : expr . "OR" expr  (52)
-	expr : expr . '.' expr  (55)
+	expr : expr . '.' "IDENT"  (55)
 	expr : expr . '[' expr ']'  (56)
 
 	'+'  shift 74
@@ -842,7 +842,7 @@ state 68
 	expr : expr . "DISTINTO" expr  (50)
 	expr : expr . "AND" expr  (51)
 	expr : expr . "OR" expr  (52)
-	expr : expr . '.' expr  (55)
+	expr : expr . '.' "IDENT"  (55)
 	expr : expr . '[' expr ']'  (56)
 
 	'+'  shift 74
@@ -914,7 +914,7 @@ state 72
 	expr : expr . "DISTINTO" expr  (50)
 	expr : expr . "AND" expr  (51)
 	expr : expr . "OR" expr  (52)
-	expr : expr . '.' expr  (55)
+	expr : expr . '.' "IDENT"  (55)
 	expr : expr . '[' expr ']'  (56)
 
 	'+'  shift 74
@@ -1039,18 +1039,10 @@ state 79
 
 
 state 80
-	expr : expr '.' . expr  (55)
+	expr : expr '.' . "IDENT"  (55)
 
-	'('  shift 47
-	'!'  shift 48
-	"IDENT"  shift 63
-	"LITENT"  shift 51
-	"LITREAL"  shift 57
-	"LITCHAR"  shift 58
-	"CAST"  shift 59
+	"IDENT"  shift 107
 	.  error
-
-	expr  goto 107
 
 
 state 81
@@ -1233,7 +1225,7 @@ state 92
 	expr : expr . "DISTINTO" expr  (50)
 	expr : expr . "AND" expr  (51)
 	expr : expr . "OR" expr  (52)
-	expr : expr . '.' expr  (55)
+	expr : expr . '.' "IDENT"  (55)
 	expr : expr . '[' expr ']'  (56)
 	paso_parametros : expr .  (60)
 
@@ -1298,7 +1290,7 @@ state 97
 	expr : expr . "DISTINTO" expr  (50)
 	expr : expr . "AND" expr  (51)
 	expr : expr . "OR" expr  (52)
-	expr : expr . '.' expr  (55)
+	expr : expr . '.' "IDENT"  (55)
 	expr : expr . '[' expr ']'  (56)
 
 	'+'  shift 74
@@ -1333,7 +1325,7 @@ state 98
 	expr : expr . "DISTINTO" expr  (50)
 	expr : expr . "AND" expr  (51)
 	expr : expr . "OR" expr  (52)
-	expr : expr . '.' expr  (55)
+	expr : expr . '.' "IDENT"  (55)
 	expr : expr . '[' expr ']'  (56)
 
 	'+'  shift 74
@@ -1381,7 +1373,7 @@ state 101
 	expr : expr . "DISTINTO" expr  (50)
 	expr : expr . "AND" expr  (51)
 	expr : expr . "OR" expr  (52)
-	expr : expr . '.' expr  (55)
+	expr : expr . '.' "IDENT"  (55)
 	expr : expr . '[' expr ']'  (56)
 
 	'*'  shift 76
@@ -1419,7 +1411,7 @@ state 102
 	expr : expr . "DISTINTO" expr  (50)
 	expr : expr . "AND" expr  (51)
 	expr : expr . "OR" expr  (52)
-	expr : expr . '.' expr  (55)
+	expr : expr . '.' "IDENT"  (55)
 	expr : expr . '[' expr ']'  (56)
 
 	'*'  shift 76
@@ -1457,7 +1449,7 @@ state 103
 	expr : expr . "DISTINTO" expr  (50)
 	expr : expr . "AND" expr  (51)
 	expr : expr . "OR" expr  (52)
-	expr : expr . '.' expr  (55)
+	expr : expr . '.' "IDENT"  (55)
 	expr : expr . '[' expr ']'  (56)
 
 	'<'  shift 78
@@ -1495,7 +1487,7 @@ state 104
 	expr : expr . "DISTINTO" expr  (50)
 	expr : expr . "AND" expr  (51)
 	expr : expr . "OR" expr  (52)
-	expr : expr . '.' expr  (55)
+	expr : expr . '.' "IDENT"  (55)
 	expr : expr . '[' expr ']'  (56)
 
 	'<'  shift 78
@@ -1533,7 +1525,7 @@ state 105
 	expr : expr . "DISTINTO" expr  (50)
 	expr : expr . "AND" expr  (51)
 	expr : expr . "OR" expr  (52)
-	expr : expr . '.' expr  (55)
+	expr : expr . '.' "IDENT"  (55)
 	expr : expr . '[' expr ']'  (56)
 
 	'.'  shift 80
@@ -1571,7 +1563,7 @@ state 106
 	expr : expr . "DISTINTO" expr  (50)
 	expr : expr . "AND" expr  (51)
 	expr : expr . "OR" expr  (52)
-	expr : expr . '.' expr  (55)
+	expr : expr . '.' "IDENT"  (55)
 	expr : expr . '[' expr ']'  (56)
 
 	'.'  shift 80
@@ -1596,41 +1588,9 @@ state 106
 
 
 state 107
-	expr : expr . '*' expr  (41)
-	expr : expr . '/' expr  (42)
-	expr : expr . '+' expr  (43)
-	expr : expr . '-' expr  (44)
-	expr : expr . '<' expr  (45)
-	expr : expr . '>' expr  (46)
-	expr : expr . "MAYOR_IGUAL" expr  (47)
-	expr : expr . "MENOR_IGUAL" expr  (48)
-	expr : expr . "IGUAL" expr  (49)
-	expr : expr . "DISTINTO" expr  (50)
-	expr : expr . "AND" expr  (51)
-	expr : expr . "OR" expr  (52)
-	expr : expr . '.' expr  (55)
-	expr : expr '.' expr .  (55)
-	expr : expr . '[' expr ']'  (56)
+	expr : expr '.' "IDENT" .  (55)
 
-	"MAYOR_IGUAL"  shift 82
-	"MENOR_IGUAL"  shift 83
-	"IGUAL"  shift 84
-	"DISTINTO"  shift 85
-	"AND"  shift 86
-	"OR"  shift 87
-	'+'  reduce 55
-	'-'  reduce 55
-	'*'  reduce 55
-	'/'  reduce 55
-	'<'  reduce 55
-	'>'  reduce 55
-	'.'  reduce 55
-	'['  reduce 55
-	';'  reduce 55
-	')'  reduce 55
-	','  reduce 55
-	']'  reduce 55
-	'='  reduce 55
+	.  reduce 55
 
 
 state 108
@@ -1646,7 +1606,7 @@ state 108
 	expr : expr . "DISTINTO" expr  (50)
 	expr : expr . "AND" expr  (51)
 	expr : expr . "OR" expr  (52)
-	expr : expr . '.' expr  (55)
+	expr : expr . '.' "IDENT"  (55)
 	expr : expr . '[' expr ']'  (56)
 	expr : expr '[' expr . ']'  (56)
 
@@ -1682,7 +1642,7 @@ state 109
 	expr : expr . "DISTINTO" expr  (50)
 	expr : expr . "AND" expr  (51)
 	expr : expr . "OR" expr  (52)
-	expr : expr . '.' expr  (55)
+	expr : expr . '.' "IDENT"  (55)
 	expr : expr . '[' expr ']'  (56)
 
 	.  reduce 47
@@ -1702,7 +1662,7 @@ state 110
 	expr : expr . "DISTINTO" expr  (50)
 	expr : expr . "AND" expr  (51)
 	expr : expr . "OR" expr  (52)
-	expr : expr . '.' expr  (55)
+	expr : expr . '.' "IDENT"  (55)
 	expr : expr . '[' expr ']'  (56)
 
 	.  reduce 48
@@ -1722,7 +1682,7 @@ state 111
 	expr : expr . "DISTINTO" expr  (50)
 	expr : expr . "AND" expr  (51)
 	expr : expr . "OR" expr  (52)
-	expr : expr . '.' expr  (55)
+	expr : expr . '.' "IDENT"  (55)
 	expr : expr . '[' expr ']'  (56)
 
 	.  reduce 49
@@ -1742,7 +1702,7 @@ state 112
 	expr : expr "DISTINTO" expr .  (50)
 	expr : expr . "AND" expr  (51)
 	expr : expr . "OR" expr  (52)
-	expr : expr . '.' expr  (55)
+	expr : expr . '.' "IDENT"  (55)
 	expr : expr . '[' expr ']'  (56)
 
 	.  reduce 50
@@ -1762,7 +1722,7 @@ state 113
 	expr : expr . "AND" expr  (51)
 	expr : expr "AND" expr .  (51)
 	expr : expr . "OR" expr  (52)
-	expr : expr . '.' expr  (55)
+	expr : expr . '.' "IDENT"  (55)
 	expr : expr . '[' expr ']'  (56)
 
 	.  reduce 51
@@ -1782,7 +1742,7 @@ state 114
 	expr : expr . "AND" expr  (51)
 	expr : expr . "OR" expr  (52)
 	expr : expr "OR" expr .  (52)
-	expr : expr . '.' expr  (55)
+	expr : expr . '.' "IDENT"  (55)
 	expr : expr . '[' expr ']'  (56)
 
 	.  reduce 52
@@ -1802,7 +1762,7 @@ state 115
 	expr : expr . "DISTINTO" expr  (50)
 	expr : expr . "AND" expr  (51)
 	expr : expr . "OR" expr  (52)
-	expr : expr . '.' expr  (55)
+	expr : expr . '.' "IDENT"  (55)
 	expr : expr . '[' expr ']'  (56)
 
 	'+'  shift 74
@@ -1932,7 +1892,7 @@ state 127
 	expr : expr . "DISTINTO" expr  (50)
 	expr : expr . "AND" expr  (51)
 	expr : expr . "OR" expr  (52)
-	expr : expr . '.' expr  (55)
+	expr : expr . '.' "IDENT"  (55)
 	expr : expr . '[' expr ']'  (56)
 	paso_parametros : paso_parametros ',' expr .  (61)
 
@@ -2049,7 +2009,7 @@ state 133
 	expr : expr . "DISTINTO" expr  (50)
 	expr : expr . "AND" expr  (51)
 	expr : expr . "OR" expr  (52)
-	expr : expr . '.' expr  (55)
+	expr : expr . '.' "IDENT"  (55)
 	expr : expr . '[' expr ']'  (56)
 
 	'+'  shift 74

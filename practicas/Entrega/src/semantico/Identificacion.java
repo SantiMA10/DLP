@@ -19,6 +19,20 @@ public class Identificacion extends DefaultVisitor {
 	//	class DefVar { String string;  Tipo tipo; }
 	public Object visit(DefVar node, Object param) {
 
+		predicado(variables.getFromTop(node.getNombre()) == null, "Variable ya definida " + node.getNombre(), node.getStart());
+		variables.put(node.getNombre(), node);
+		super.visit(node, param);
+
+		return null;
+	}
+	
+	//	class Parametro { String string;  Tipo tipo; }
+	public Object visit(Parametro node, Object param) {
+
+		DefVar defVar = new DefVar(node.getString(), node.getTipo(), "var");
+		predicado(variables.getFromTop(defVar.getNombre()) == null, "Variable ya definida " + defVar.getNombre(), node.getStart());
+		variables.put(defVar.getNombre(), defVar);
+		
 		super.visit(node, param);
 
 		return null;
@@ -39,7 +53,10 @@ public class Identificacion extends DefaultVisitor {
 
 		predicado(funciones.get(node.getString()) == null, "Funcion ya definida " + node.getString(), node.getStart());
 		funciones.put(node.getString(), node);
+		
+		variables.set();
 		super.visit(node, param);
+		variables.reset();
 
 		return null;
 	}
@@ -73,6 +90,8 @@ public class Identificacion extends DefaultVisitor {
 
 	//	class Var { String string; }
 	public Object visit(Var node, Object param) {
+		
+		predicado(variables.getFromAny(node.getString()) != null, "Variable " + node.getString() + " no definida", node.getStart());
 		return null;
 	}
 	
