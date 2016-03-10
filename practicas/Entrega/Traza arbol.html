@@ -21,246 +21,147 @@
 <body><pre>
 [ASTPrinter] -------------------------------- line:col  line:col
 
-<span class="dots"></span>Programa &rarr;                                                   <span class="pos">1:5  62:24   </span><span class="sourceText">var </span><span class="posText">a:int;</span><span class="sourceText"> ... </span><span class="posText">escribe(pepe.meses[2</span><span class="sourceText">]);</span>
+<span class="dots"></span>Programa &rarr;                                                   <span class="pos">9:5  58:9    </span><span class="sourceText">var </span><span class="posText">a:int;</span><span class="sourceText"> ... </span><span class="posText">dobleSuma</span><span class="sourceText">() {    // Función repetida </span>
 <span class="dots">·  </span>sentencia  <span class="type">List&lt;Sentencia&gt;</span> = 
-<span class="dots">·  ·  </span>DefVar &rarr;                                               <span class="pos">1:5  1:5     </span><span class="sourceText">var </span><span class="posText">a</span><span class="sourceText">:int;</span>
+<span class="dots">·  ·  </span>DefVar &rarr;                                               <span class="pos">9:5  9:5     </span><span class="sourceText">var </span><span class="posText">a</span><span class="sourceText">:int;</span>
 <span class="dots">·  ·  |  </span>"<span class="value">a</span>"  
 <span class="dots">·  ·  |  </span><span class="value">IntType</span> &rarr;                                           <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
 <span class="dots">·  ·  |  </span>"<span class="value">var</span>"  
-<span class="dots">·  ·  </span>DefVar &rarr;                                               <span class="pos">2:5  2:5     </span><span class="sourceText">var </span><span class="posText">b</span><span class="sourceText">:char;</span>
+<span class="dots">·  ·  </span>DefVar &rarr;                                               <span class="pos">10:5  10:5   </span><span class="sourceText">var </span><span class="posText">b</span><span class="sourceText">:char;</span>
 <span class="dots">·  ·  |  </span>"<span class="value">b</span>"  
 <span class="dots">·  ·  |  </span><span class="value">CharType</span> &rarr;                                          <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
 <span class="dots">·  ·  |  </span>"<span class="value">var</span>"  
-<span class="dots">·  ·  </span>DefVar &rarr;                                               <span class="pos">4:5  4:9     </span><span class="sourceText">var </span><span class="posText">c:[20</span><span class="sourceText">] int;</span>
-<span class="dots">·  ·  |  </span>"<span class="value">c</span>"  
-<span class="dots">·  ·  |  </span>ArrayType &rarr;                                         <span class="pos">4:8  4:9     </span><span class="sourceText">var c:[</span><span class="posText">20</span><span class="sourceText">] int;</span>
+<span class="dots">·  ·  </span>DefVar &rarr;                                               <span class="pos">11:5  11:5   </span><span class="sourceText">var </span><span class="posText">d</span><span class="sourceText">:float;</span>
+<span class="dots">·  ·  |  </span>"<span class="value">d</span>"  
+<span class="dots">·  ·  |  </span><span class="value">RealType</span> &rarr;                                          <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  </span>"<span class="value">var</span>"  
+<span class="dots">·  ·  </span>DefVar &rarr;                                               <span class="pos">12:5  12:5   </span><span class="sourceText">var </span><span class="posText">e</span><span class="sourceText">:float;</span>
+<span class="dots">·  ·  |  </span>"<span class="value">e</span>"  
+<span class="dots">·  ·  |  </span><span class="value">RealType</span> &rarr;                                          <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  </span>"<span class="value">var</span>"  
+<span class="dots">·  ·  </span>DefVar &rarr;                                               <span class="pos">14:5  14:9   </span><span class="sourceText">var </span><span class="posText">a:[20</span><span class="sourceText">] int;    // Variable global repetida </span>
+<span class="dots">·  ·  |  </span>"<span class="value">a</span>"  
+<span class="dots">·  ·  |  </span>ArrayType &rarr;                                         <span class="pos">14:8  14:9   </span><span class="sourceText">var a:[</span><span class="posText">20</span><span class="sourceText">] int;    // Variable global repetida </span>
 <span class="dots">·  ·  |  ·  </span><span class="value">IntType</span> &rarr;                                        <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
 <span class="dots">·  ·  |  ·  </span><span class="value">20</span>  <span class="type">int</span>
 <span class="dots">·  ·  |  </span>"<span class="value">var</span>"  
-<span class="dots">·  ·  </span>DefVar &rarr;                                               <span class="pos">5:5  5:13    </span><span class="sourceText">var </span><span class="posText">h:[30][20</span><span class="sourceText">] float;</span>
-<span class="dots">·  ·  |  </span>"<span class="value">h</span>"  
-<span class="dots">·  ·  |  </span>ArrayType &rarr;                                         <span class="pos">5:8  5:13    </span><span class="sourceText">var h:[</span><span class="posText">30][20</span><span class="sourceText">] float;</span>
-<span class="dots">·  ·  |  ·  </span>ArrayType &rarr;                                      <span class="pos">5:12  5:13   </span><span class="sourceText">var h:[30][</span><span class="posText">20</span><span class="sourceText">] float;</span>
-<span class="dots">·  ·  |  ·  |  </span><span class="value">RealType</span> &rarr;                                    <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
-<span class="dots">·  ·  |  ·  |  </span><span class="value">20</span>  <span class="type">int</span>
-<span class="dots">·  ·  |  ·  </span><span class="value">30</span>  <span class="type">int</span>
-<span class="dots">·  ·  |  </span>"<span class="value">var</span>"  
-<span class="dots">·  ·  </span>Struct &rarr;                                               <span class="pos">8:8  10:13   </span><span class="sourceText">struct </span><span class="posText">Persona {</span><span class="sourceText"> ... </span><span class="posText">meses:[12</span><span class="sourceText">] int;</span>
+<span class="dots">·  ·  </span>Struct &rarr;                                               <span class="pos">17:8  20:8   </span><span class="sourceText">struct </span><span class="posText">Persona {</span><span class="sourceText"> ... </span><span class="posText">edad</span><span class="sourceText">:float;  // Campo repetido </span>
 <span class="dots">·  ·  |  </span>"<span class="value">Persona</span>"  
 <span class="dots">·  ·  |  </span>defvar  <span class="type">List&lt;DefVar&gt;</span> = 
-<span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">9:5  9:8     </span><span class="sourceText"></span><span class="posText">edad</span><span class="sourceText">:int;</span>
+<span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">18:5  18:8   </span><span class="sourceText"></span><span class="posText">edad</span><span class="sourceText">:int;</span>
 <span class="dots">·  ·  |  ·  |  </span>"<span class="value">edad</span>"  
 <span class="dots">·  ·  |  ·  |  </span><span class="value">IntType</span> &rarr;                                     <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
 <span class="dots">·  ·  |  ·  |  </span>"<span class="value"></span>"  
-<span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">10:5  10:13  </span><span class="sourceText"></span><span class="posText">meses:[12</span><span class="sourceText">] int;</span>
+<span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">19:5  19:13  </span><span class="sourceText"></span><span class="posText">meses:[12</span><span class="sourceText">] int;</span>
 <span class="dots">·  ·  |  ·  |  </span>"<span class="value">meses</span>"  
-<span class="dots">·  ·  |  ·  |  </span>ArrayType &rarr;                                   <span class="pos">10:12  10:13 </span><span class="sourceText">meses:[</span><span class="posText">12</span><span class="sourceText">] int;</span>
+<span class="dots">·  ·  |  ·  |  </span>ArrayType &rarr;                                   <span class="pos">19:12  19:13 </span><span class="sourceText">meses:[</span><span class="posText">12</span><span class="sourceText">] int;</span>
 <span class="dots">·  ·  |  ·  |  ·  </span><span class="value">IntType</span> &rarr;                                  <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
 <span class="dots">·  ·  |  ·  |  ·  </span><span class="value">12</span>  <span class="type">int</span>
 <span class="dots">·  ·  |  ·  |  </span>"<span class="value"></span>"  
-<span class="dots">·  ·  </span>DefVar &rarr;                                               <span class="pos">13:5  13:14  </span><span class="sourceText">var </span><span class="posText">e1:Persona</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  </span>"<span class="value">e1</span>"  
-<span class="dots">·  ·  |  </span>"Persona"  <span class="type">StructType.string</span>                        <span class="pos">13:8  13:14  </span><span class="sourceText">var e1:</span><span class="posText">Persona</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  </span>"<span class="value">var</span>"  
-<span class="dots">·  ·  </span>DefVar &rarr;                                               <span class="pos">14:5  14:14  </span><span class="sourceText">var </span><span class="posText">e2:Persona</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  </span>"<span class="value">e2</span>"  
-<span class="dots">·  ·  |  </span>"Persona"  <span class="type">StructType.string</span>                        <span class="pos">14:8  14:14  </span><span class="sourceText">var e2:</span><span class="posText">Persona</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  </span>"<span class="value">var</span>"  
-<span class="dots">·  ·  </span>DefVar &rarr;                                               <span class="pos">16:5  16:18  </span><span class="sourceText">var </span><span class="posText">f:[10] Persona</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  </span>"<span class="value">f</span>"  
-<span class="dots">·  ·  |  </span>ArrayType &rarr;                                         <span class="pos">16:8  16:18  </span><span class="sourceText">var f:[</span><span class="posText">10] Persona</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  </span>"Persona"  <span class="type">StructType.string</span>                     <span class="pos">16:12  16:18 </span><span class="sourceText">var f:[10] </span><span class="posText">Persona</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">20:5  20:8   </span><span class="sourceText"></span><span class="posText">edad</span><span class="sourceText">:float;  // Campo repetido </span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">edad</span>"  
+<span class="dots">·  ·  |  ·  |  </span><span class="value">RealType</span> &rarr;                                    <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value"></span>"  
+<span class="dots">·  ·  </span>DefVar &rarr;                                               <span class="pos">23:5  23:17  </span><span class="sourceText">var </span><span class="posText">k:[10] Window</span><span class="sourceText">;    // Estructura no definida </span>
+<span class="dots">·  ·  |  </span>"<span class="value">k</span>"  
+<span class="dots">·  ·  |  </span>ArrayType &rarr;                                         <span class="pos">23:8  23:17  </span><span class="sourceText">var k:[</span><span class="posText">10] Window</span><span class="sourceText">;    // Estructura no definida </span>
+<span class="dots">·  ·  |  ·  </span>"Window"  <span class="type">StructType.string</span>                      <span class="pos">23:12  23:17 </span><span class="sourceText">var k:[10] </span><span class="posText">Window</span><span class="sourceText">;    // Estructura no definida </span>
 <span class="dots">·  ·  |  ·  </span><span class="value">10</span>  <span class="type">int</span>
 <span class="dots">·  ·  |  </span>"<span class="value">var</span>"  
-<span class="dots">·  ·  </span>Struct &rarr;                                               <span class="pos">18:8  20:26  </span><span class="sourceText">struct </span><span class="posText">Empresa {</span><span class="sourceText"> ... </span><span class="posText">empleados:[25] Persona</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  </span>"<span class="value">Empresa</span>"  
+<span class="dots">·  ·  </span>Struct &rarr;                                               <span class="pos">25:8  26:5   </span><span class="sourceText">struct </span><span class="posText">Persona {    // Estructura repetida </span><span class="sourceText"> ... </span><span class="posText">j</span><span class="sourceText">:int;</span>
+<span class="dots">·  ·  |  </span>"<span class="value">Persona</span>"  
 <span class="dots">·  ·  |  </span>defvar  <span class="type">List&lt;DefVar&gt;</span> = 
-<span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">19:5  19:11  </span><span class="sourceText"></span><span class="posText">cif:[20</span><span class="sourceText">] char;</span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value">cif</span>"  
-<span class="dots">·  ·  |  ·  |  </span>ArrayType &rarr;                                   <span class="pos">19:10  19:11 </span><span class="sourceText">cif:[</span><span class="posText">20</span><span class="sourceText">] char;</span>
-<span class="dots">·  ·  |  ·  |  ·  </span><span class="value">CharType</span> &rarr;                                 <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
-<span class="dots">·  ·  |  ·  |  ·  </span><span class="value">20</span>  <span class="type">int</span>
+<span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">26:5  26:5   </span><span class="sourceText"></span><span class="posText">j</span><span class="sourceText">:int;</span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">j</span>"  
+<span class="dots">·  ·  |  ·  |  </span><span class="value">IntType</span> &rarr;                                     <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
 <span class="dots">·  ·  |  ·  |  </span>"<span class="value"></span>"  
-<span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">20:5  20:26  </span><span class="sourceText"></span><span class="posText">empleados:[25] Persona</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value">empleados</span>"  
-<span class="dots">·  ·  |  ·  |  </span>ArrayType &rarr;                                   <span class="pos">20:16  20:26 </span><span class="sourceText">empleados:[</span><span class="posText">25] Persona</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  |  ·  </span>"Persona"  <span class="type">StructType.string</span>               <span class="pos">20:20  20:26 </span><span class="sourceText">empleados:[25] </span><span class="posText">Persona</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  |  ·  </span><span class="value">25</span>  <span class="type">int</span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value"></span>"  
-<span class="dots">·  ·  </span>DefVar &rarr;                                               <span class="pos">23:5  23:22  </span><span class="sourceText">var </span><span class="posText">microsoft: Empresa</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  </span>"<span class="value">microsoft</span>"  
-<span class="dots">·  ·  |  </span>"Empresa"  <span class="type">StructType.string</span>                        <span class="pos">23:16  23:22 </span><span class="sourceText">var microsoft: </span><span class="posText">Empresa</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  </span>"<span class="value">var</span>"  
-<span class="dots">·  ·  </span>Funcion &rarr;                                              <span class="pos">27:1  31:20  </span><span class="sourceText"></span><span class="posText">dobleSuma(a:int, b:int): int {</span><span class="sourceText"> ... </span><span class="posText">return local * 2</span><span class="sourceText">;</span>
+<span class="dots">·  ·  </span>Funcion &rarr;                                              <span class="pos">30:1  41:16  </span><span class="sourceText"></span><span class="posText">dobleSuma(z:int, b:int, z:float): int { // Parámetro 'z' repetido ('b' no colisiona con global)</span><span class="sourceText"> ... </span><span class="posText">print local2</span><span class="sourceText">;    </span>
 <span class="dots">·  ·  |  </span>"<span class="value">dobleSuma</span>"  
 <span class="dots">·  ·  |  </span>parametro  <span class="type">List&lt;Parametro&gt;</span> = 
-<span class="dots">·  ·  |  ·  </span>Parametro &rarr;                                      <span class="pos">27:11  27:11 </span><span class="sourceText">dobleSuma(</span><span class="posText">a</span><span class="sourceText">:int, b:int): int {</span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value">a</span>"  
+<span class="dots">·  ·  |  ·  </span>Parametro &rarr;                                      <span class="pos">30:11  30:11 </span><span class="sourceText">dobleSuma(</span><span class="posText">z</span><span class="sourceText">:int, b:int, z:float): int { // Parámetro 'z' repetido ('b' no colisiona con global)</span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">z</span>"  
 <span class="dots">·  ·  |  ·  |  </span><span class="value">IntType</span> &rarr;                                     <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
-<span class="dots">·  ·  |  ·  </span>Parametro &rarr;                                      <span class="pos">27:18  27:18 </span><span class="sourceText">dobleSuma(a:int, </span><span class="posText">b</span><span class="sourceText">:int): int {</span>
+<span class="dots">·  ·  |  ·  </span>Parametro &rarr;                                      <span class="pos">30:18  30:18 </span><span class="sourceText">dobleSuma(z:int, </span><span class="posText">b</span><span class="sourceText">:int, z:float): int { // Parámetro 'z' repetido ('b' no colisiona con global)</span>
 <span class="dots">·  ·  |  ·  |  </span>"<span class="value">b</span>"  
 <span class="dots">·  ·  |  ·  |  </span><span class="value">IntType</span> &rarr;                                     <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  ·  </span>Parametro &rarr;                                      <span class="pos">30:25  30:25 </span><span class="sourceText">dobleSuma(z:int, b:int, </span><span class="posText">z</span><span class="sourceText">:float): int { // Parámetro 'z' repetido ('b' no colisiona con global)</span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">z</span>"  
+<span class="dots">·  ·  |  ·  |  </span><span class="value">RealType</span> &rarr;                                    <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
 <span class="dots">·  ·  |  </span>defvar  <span class="type">List&lt;DefVar&gt;</span> = 
-<span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">28:9  28:13  </span><span class="sourceText">var </span><span class="posText">local</span><span class="sourceText">:int;</span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value">local</span>"  
+<span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">31:9  31:14  </span><span class="sourceText">var </span><span class="posText">local1</span><span class="sourceText">:int;</span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">local1</span>"  
+<span class="dots">·  ·  |  ·  |  </span><span class="value">IntType</span> &rarr;                                     <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">var</span>"  
+<span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">32:9  32:14  </span><span class="sourceText">var </span><span class="posText">local2</span><span class="sourceText">:int;        </span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">local2</span>"  
+<span class="dots">·  ·  |  ·  |  </span><span class="value">IntType</span> &rarr;                                     <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">var</span>"  
+<span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">33:9  33:14  </span><span class="sourceText">var </span><span class="posText">local1</span><span class="sourceText">:int;        // Local repetida (con otra local) </span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">local1</span>"  
+<span class="dots">·  ·  |  ·  |  </span><span class="value">IntType</span> &rarr;                                     <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">var</span>"  
+<span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">34:9  34:9   </span><span class="sourceText">var </span><span class="posText">b</span><span class="sourceText">:float;        // Local repetida (con un parámetro) </span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">b</span>"  
+<span class="dots">·  ·  |  ·  |  </span><span class="value">RealType</span> &rarr;                                    <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">var</span>"  
+<span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">35:9  35:9   </span><span class="sourceText">var </span><span class="posText">d</span><span class="sourceText">:int;        // Esta no debía dar error, ya que la otra 'd' es global </span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">d</span>"  
 <span class="dots">·  ·  |  ·  |  </span><span class="value">IntType</span> &rarr;                                     <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
 <span class="dots">·  ·  |  ·  |  </span>"<span class="value">var</span>"  
 <span class="dots">·  ·  |  </span>sent_func  <span class="type">List&lt;Sent_func&gt;</span> = 
-<span class="dots">·  ·  |  ·  </span>Asignacion &rarr;                                     <span class="pos">30:5  30:23  </span><span class="sourceText"></span><span class="posText">local = (a + b) * 2</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  |  </span>"local"  <span class="type">Var.string</span>                           <span class="pos">30:5  30:9   </span><span class="sourceText"></span><span class="posText">local</span><span class="sourceText"> = (a + b) * 2;</span>
-<span class="dots">·  ·  |  ·  |  </span>Op_bin &rarr;                                      <span class="pos">30:14  30:23 </span><span class="sourceText">local = (</span><span class="posText">a + b) * 2</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  |  ·  </span>Op_un &rarr;                                    <span class="pos">30:14  30:18 </span><span class="sourceText">local = (</span><span class="posText">a + b</span><span class="sourceText">) * 2;</span>
-<span class="dots">·  ·  |  ·  |  ·  |  </span>"<span class="value">()</span>"  
-<span class="dots">·  ·  |  ·  |  ·  |  </span>Op_bin &rarr;                                <span class="pos">30:14  30:18 </span><span class="sourceText">local = (</span><span class="posText">a + b</span><span class="sourceText">) * 2;</span>
-<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>"a"  <span class="type">Var.string</span>                      <span class="pos">30:14  30:14 </span><span class="sourceText">local = (</span><span class="posText">a</span><span class="sourceText"> + b) * 2;</span>
-<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>"<span class="value">+</span>"  
-<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>"b"  <span class="type">Var.string</span>                      <span class="pos">30:18  30:18 </span><span class="sourceText">local = (a + </span><span class="posText">b</span><span class="sourceText">) * 2;</span>
-<span class="dots">·  ·  |  ·  |  ·  </span>"<span class="value">*</span>"  
-<span class="dots">·  ·  |  ·  |  ·  </span>"2"  <span class="type">Lintent.string</span>                        <span class="pos">30:23  30:23 </span><span class="sourceText">local = (a + b) * </span><span class="posText">2</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  </span>Return &rarr;                                         <span class="pos">31:12  31:20 </span><span class="sourceText">return </span><span class="posText">local * 2</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  |  </span>Op_bin &rarr;                                      <span class="pos">31:12  31:20 </span><span class="sourceText">return </span><span class="posText">local * 2</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  |  ·  </span>"local"  <span class="type">Var.string</span>                        <span class="pos">31:12  31:16 </span><span class="sourceText">return </span><span class="posText">local</span><span class="sourceText"> * 2;</span>
-<span class="dots">·  ·  |  ·  |  ·  </span>"<span class="value">*</span>"  
-<span class="dots">·  ·  |  ·  |  ·  </span>"2"  <span class="type">Lintent.string</span>                        <span class="pos">31:20  31:20 </span><span class="sourceText">return local * </span><span class="posText">2</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  </span>Print &rarr;                                          <span class="pos">37:11  37:11 </span><span class="sourceText">print </span><span class="posText">a</span><span class="sourceText">;    </span>
+<span class="dots">·  ·  |  ·  |  </span>"a"  <span class="type">Var.string</span>                               <span class="pos">37:11  37:11 </span><span class="sourceText">print </span><span class="posText">a</span><span class="sourceText">;    </span>
+<span class="dots">·  ·  |  ·  </span>Print &rarr;                                          <span class="pos">38:11  38:11 </span><span class="sourceText">print </span><span class="posText">d</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  |  </span>"d"  <span class="type">Var.string</span>                               <span class="pos">38:11  38:11 </span><span class="sourceText">print </span><span class="posText">d</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  </span>Print &rarr;                                          <span class="pos">39:11  39:11 </span><span class="sourceText">print </span><span class="posText">b</span><span class="sourceText">;    </span>
+<span class="dots">·  ·  |  ·  |  </span>"b"  <span class="type">Var.string</span>                               <span class="pos">39:11  39:11 </span><span class="sourceText">print </span><span class="posText">b</span><span class="sourceText">;    </span>
+<span class="dots">·  ·  |  ·  </span>Print &rarr;                                          <span class="pos">40:11  40:11 </span><span class="sourceText">print </span><span class="posText">c</span><span class="sourceText">;        // variable no definida </span>
+<span class="dots">·  ·  |  ·  |  </span>"c"  <span class="type">Var.string</span>                               <span class="pos">40:11  40:11 </span><span class="sourceText">print </span><span class="posText">c</span><span class="sourceText">;        // variable no definida </span>
+<span class="dots">·  ·  |  ·  </span>Print &rarr;                                          <span class="pos">41:11  41:16 </span><span class="sourceText">print </span><span class="posText">local2</span><span class="sourceText">;    </span>
+<span class="dots">·  ·  |  ·  |  </span>"local2"  <span class="type">Var.string</span>                          <span class="pos">41:11  41:16 </span><span class="sourceText">print </span><span class="posText">local2</span><span class="sourceText">;    </span>
 <span class="dots">·  ·  |  </span><span class="value">IntType</span> &rarr;                                           <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
-<span class="dots">·  ·  </span>Funcion &rarr;                                              <span class="pos">34:1  35:39  </span><span class="sourceText"></span><span class="posText">escribeEdad(num:int) {</span><span class="sourceText"> ... </span><span class="posText">print microsoft.empleados[num].edad</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  </span>"<span class="value">escribeEdad</span>"  
-<span class="dots">·  ·  |  </span>parametro  <span class="type">List&lt;Parametro&gt;</span> = 
-<span class="dots">·  ·  |  ·  </span>Parametro &rarr;                                      <span class="pos">34:13  34:15 </span><span class="sourceText">escribeEdad(</span><span class="posText">num</span><span class="sourceText">:int) {</span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value">num</span>"  
-<span class="dots">·  ·  |  ·  |  </span><span class="value">IntType</span> &rarr;                                     <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  </span>Struct &rarr;                                               <span class="pos">44:8  45:5   </span><span class="sourceText">struct </span><span class="posText">Punto {</span><span class="sourceText"> ... </span><span class="posText">x</span><span class="sourceText">:int;</span>
+<span class="dots">·  ·  |  </span>"<span class="value">Punto</span>"  
 <span class="dots">·  ·  |  </span>defvar  <span class="type">List&lt;DefVar&gt;</span> = 
-<span class="dots">·  ·  |  </span>sent_func  <span class="type">List&lt;Sent_func&gt;</span> = 
-<span class="dots">·  ·  |  ·  </span>Print &rarr;                                          <span class="pos">35:11  35:39 </span><span class="sourceText">print </span><span class="posText">microsoft.empleados[num].edad</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  |  </span>Op_bin &rarr;                                      <span class="pos">35:11  35:39 </span><span class="sourceText">print </span><span class="posText">microsoft.empleados[num].edad</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  |  ·  </span>Op_bin &rarr;                                   <span class="pos">35:11  35:33 </span><span class="sourceText">print </span><span class="posText">microsoft.empleados[num</span><span class="sourceText">].edad;</span>
-<span class="dots">·  ·  |  ·  |  ·  |  </span>Op_bin &rarr;                                <span class="pos">35:11  35:29 </span><span class="sourceText">print </span><span class="posText">microsoft.empleados</span><span class="sourceText">[num].edad;</span>
-<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>"microsoft"  <span class="type">Var.string</span>              <span class="pos">35:11  35:19 </span><span class="sourceText">print </span><span class="posText">microsoft</span><span class="sourceText">.empleados[num].edad;</span>
-<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>"<span class="value">.</span>"  
-<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>"empleados"  <span class="type">Var.string</span>              <span class="pos">35:21  35:29 </span><span class="sourceText">print microsoft.</span><span class="posText">empleados</span><span class="sourceText">[num].edad;</span>
-<span class="dots">·  ·  |  ·  |  ·  |  </span>"<span class="value">[]</span>"  
-<span class="dots">·  ·  |  ·  |  ·  |  </span>"num"  <span class="type">Var.string</span>                       <span class="pos">35:31  35:33 </span><span class="sourceText">print microsoft.empleados[</span><span class="posText">num</span><span class="sourceText">].edad;</span>
-<span class="dots">·  ·  |  ·  |  ·  </span>"<span class="value">.</span>"  
-<span class="dots">·  ·  |  ·  |  ·  </span>"edad"  <span class="type">Var.string</span>                         <span class="pos">35:36  35:39 </span><span class="sourceText">print microsoft.empleados[num].</span><span class="posText">edad</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  </span><span class="null">null</span>  tipo:<span class="type">Tipo</span>
-<span class="dots">·  ·  </span>DefVar &rarr;                                               <span class="pos">38:5  38:5   </span><span class="sourceText">var </span><span class="posText">z</span><span class="sourceText">:int;</span>
-<span class="dots">·  ·  |  </span>"<span class="value">z</span>"  
-<span class="dots">·  ·  |  </span><span class="value">IntType</span> &rarr;                                           <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">45:5  45:5   </span><span class="sourceText"></span><span class="posText">x</span><span class="sourceText">:int;</span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">x</span>"  
+<span class="dots">·  ·  |  ·  |  </span><span class="value">IntType</span> &rarr;                                     <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value"></span>"  
+<span class="dots">·  ·  </span>DefVar &rarr;                                               <span class="pos">48:5  48:16  </span><span class="sourceText">var </span><span class="posText">centro:Punto</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  </span>"<span class="value">centro</span>"  
+<span class="dots">·  ·  |  </span>"Punto"  <span class="type">StructType.string</span>                          <span class="pos">48:12  48:16 </span><span class="sourceText">var centro:</span><span class="posText">Punto</span><span class="sourceText">;</span>
 <span class="dots">·  ·  |  </span>"<span class="value">var</span>"  
-<span class="dots">·  ·  </span>Funcion &rarr;                                              <span class="pos">40:1  62:24  </span><span class="sourceText"></span><span class="posText">main() {</span><span class="sourceText"> ... </span><span class="posText">escribe(pepe.meses[2</span><span class="sourceText">]);</span>
+<span class="dots">·  ·  </span>Funcion &rarr;                                              <span class="pos">50:1  55:18  </span><span class="sourceText"></span><span class="posText">main() {</span><span class="sourceText"> ... </span><span class="posText">print centro.y</span><span class="sourceText">; // No error en esta fase aunque aunque el campo no está en la struct </span>
 <span class="dots">·  ·  |  </span>"<span class="value">main</span>"  
 <span class="dots">·  ·  |  </span>parametro  <span class="type">List&lt;Parametro&gt;</span> = 
 <span class="dots">·  ·  |  </span>defvar  <span class="type">List&lt;DefVar&gt;</span> = 
-<span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">41:7  41:11  </span><span class="sourceText">var </span><span class="posText">local</span><span class="sourceText">: int;</span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value">local</span>"  
-<span class="dots">·  ·  |  ·  |  </span><span class="value">IntType</span> &rarr;                                     <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value">var</span>"  
-<span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">42:7  42:19  </span><span class="sourceText">var </span><span class="posText">pepe: Persona</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value">pepe</span>"  
-<span class="dots">·  ·  |  ·  |  </span>"Persona"  <span class="type">StructType.string</span>                  <span class="pos">42:13  42:19 </span><span class="sourceText">var pepe: </span><span class="posText">Persona</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value">var</span>"  
-<span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">43:7  43:11  </span><span class="sourceText">var </span><span class="posText">v:[20</span><span class="sourceText">] int;</span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value">v</span>"  
-<span class="dots">·  ·  |  ·  |  </span>ArrayType &rarr;                                   <span class="pos">43:10  43:11 </span><span class="sourceText">var v:[</span><span class="posText">20</span><span class="sourceText">] int;</span>
-<span class="dots">·  ·  |  ·  |  ·  </span><span class="value">IntType</span> &rarr;                                  <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
-<span class="dots">·  ·  |  ·  |  ·  </span><span class="value">20</span>  <span class="type">int</span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value">var</span>"  
 <span class="dots">·  ·  |  </span>sent_func  <span class="type">List&lt;Sent_func&gt;</span> = 
-<span class="dots">·  ·  |  ·  </span>Asignacion &rarr;                                     <span class="pos">45:3  45:16  </span><span class="sourceText"></span><span class="posText">pepe.edad = 20</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  |  </span>Op_bin &rarr;                                      <span class="pos">45:3  45:11  </span><span class="sourceText"></span><span class="posText">pepe.edad</span><span class="sourceText"> = 20;</span>
-<span class="dots">·  ·  |  ·  |  ·  </span>"pepe"  <span class="type">Var.string</span>                         <span class="pos">45:3  45:6   </span><span class="sourceText"></span><span class="posText">pepe</span><span class="sourceText">.edad = 20;</span>
+<span class="dots">·  ·  |  ·  </span>Print &rarr;                                          <span class="pos">51:11  51:11 </span><span class="sourceText">print </span><span class="posText">f</span><span class="sourceText">();    // Función no definida </span>
+<span class="dots">·  ·  |  ·  |  </span>Invocacion &rarr;                                  <span class="pos">51:11  51:11 </span><span class="sourceText">print </span><span class="posText">f</span><span class="sourceText">();    // Función no definida </span>
+<span class="dots">·  ·  |  ·  |  ·  </span>"<span class="value">f</span>"  
+<span class="dots">·  ·  |  ·  |  ·  </span>expr  <span class="type">List&lt;Expr&gt;</span> = 
+<span class="dots">·  ·  |  ·  |  ·  </span>"<span class="value">parametro</span>"  
+<span class="dots">·  ·  |  ·  </span>Invocacion &rarr;                                     <span class="pos">52:5  52:7   </span><span class="sourceText"></span><span class="posText">g(2</span><span class="sourceText">);        // Procedimiento no definido </span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">g</span>"  
+<span class="dots">·  ·  |  ·  |  </span>expr  <span class="type">List&lt;Expr&gt;</span> = 
+<span class="dots">·  ·  |  ·  |  ·  </span>"2"  <span class="type">Lintent.string</span>                        <span class="pos">52:7  52:7   </span><span class="sourceText">g(</span><span class="posText">2</span><span class="sourceText">);        // Procedimiento no definido </span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">llamada</span>"  
+<span class="dots">·  ·  |  ·  </span>Invocacion &rarr;                                     <span class="pos">54:5  54:17  </span><span class="sourceText"></span><span class="posText">dobleSuma(5.6</span><span class="sourceText">);    // No error en esta fase aunque no coincidan parámetros </span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">dobleSuma</span>"  
+<span class="dots">·  ·  |  ·  |  </span>expr  <span class="type">List&lt;Expr&gt;</span> = 
+<span class="dots">·  ·  |  ·  |  ·  </span>"5.6"  <span class="type">Lintreal.string</span>                     <span class="pos">54:15  54:17 </span><span class="sourceText">dobleSuma(</span><span class="posText">5.6</span><span class="sourceText">);    // No error en esta fase aunque no coincidan parámetros </span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">llamada</span>"  
+<span class="dots">·  ·  |  ·  </span>Print &rarr;                                          <span class="pos">55:11  55:18 </span><span class="sourceText">print </span><span class="posText">centro.y</span><span class="sourceText">; // No error en esta fase aunque aunque el campo no está en la struct </span>
+<span class="dots">·  ·  |  ·  |  </span>Op_bin &rarr;                                      <span class="pos">55:11  55:18 </span><span class="sourceText">print </span><span class="posText">centro.y</span><span class="sourceText">; // No error en esta fase aunque aunque el campo no está en la struct </span>
+<span class="dots">·  ·  |  ·  |  ·  </span>"centro"  <span class="type">Var.string</span>                       <span class="pos">55:11  55:16 </span><span class="sourceText">print </span><span class="posText">centro</span><span class="sourceText">.y; // No error en esta fase aunque aunque el campo no está en la struct </span>
 <span class="dots">·  ·  |  ·  |  ·  </span>"<span class="value">.</span>"  
-<span class="dots">·  ·  |  ·  |  ·  </span>"edad"  <span class="type">Var.string</span>                         <span class="pos">45:8  45:11  </span><span class="sourceText">pepe.</span><span class="posText">edad</span><span class="sourceText"> = 20;</span>
-<span class="dots">·  ·  |  ·  |  </span>"20"  <span class="type">Lintent.string</span>                          <span class="pos">45:15  45:16 </span><span class="sourceText">pepe.edad = </span><span class="posText">20</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  </span>Read &rarr;                                           <span class="pos">46:8  46:34  </span><span class="sourceText">read </span><span class="posText">pepe.direccion.codigoPostal</span><span class="sourceText">; </span>
-<span class="dots">·  ·  |  ·  |  </span>Op_bin &rarr;                                      <span class="pos">46:8  46:34  </span><span class="sourceText">read </span><span class="posText">pepe.direccion.codigoPostal</span><span class="sourceText">; </span>
-<span class="dots">·  ·  |  ·  |  ·  </span>Op_bin &rarr;                                   <span class="pos">46:8  46:21  </span><span class="sourceText">read </span><span class="posText">pepe.direccion</span><span class="sourceText">.codigoPostal; </span>
-<span class="dots">·  ·  |  ·  |  ·  |  </span>"pepe"  <span class="type">Var.string</span>                      <span class="pos">46:8  46:11  </span><span class="sourceText">read </span><span class="posText">pepe</span><span class="sourceText">.direccion.codigoPostal; </span>
-<span class="dots">·  ·  |  ·  |  ·  |  </span>"<span class="value">.</span>"  
-<span class="dots">·  ·  |  ·  |  ·  |  </span>"direccion"  <span class="type">Var.string</span>                 <span class="pos">46:13  46:21 </span><span class="sourceText">read pepe.</span><span class="posText">direccion</span><span class="sourceText">.codigoPostal; </span>
-<span class="dots">·  ·  |  ·  |  ·  </span>"<span class="value">.</span>"  
-<span class="dots">·  ·  |  ·  |  ·  </span>"codigoPostal"  <span class="type">Var.string</span>                 <span class="pos">46:23  46:34 </span><span class="sourceText">read pepe.direccion.</span><span class="posText">codigoPostal</span><span class="sourceText">; </span>
-<span class="dots">·  ·  |  ·  </span>Asignacion &rarr;                                     <span class="pos">48:3  48:11  </span><span class="sourceText"></span><span class="posText">local = 0</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  |  </span>"local"  <span class="type">Var.string</span>                           <span class="pos">48:3  48:7   </span><span class="sourceText"></span><span class="posText">local</span><span class="sourceText"> = 0;</span>
-<span class="dots">·  ·  |  ·  |  </span>"0"  <span class="type">Lintent.string</span>                           <span class="pos">48:11  48:11 </span><span class="sourceText">local = </span><span class="posText">0</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  </span>While &rarr;                                          <span class="pos">49:10  51:21 </span><span class="sourceText">while (</span><span class="posText">local < 10) {</span><span class="sourceText"> ... </span><span class="posText">local = local + 1</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  |  </span>Op_bin &rarr;                                      <span class="pos">49:10  49:19 </span><span class="sourceText">while (</span><span class="posText">local < 10</span><span class="sourceText">) {</span>
-<span class="dots">·  ·  |  ·  |  ·  </span>"local"  <span class="type">Var.string</span>                        <span class="pos">49:10  49:14 </span><span class="sourceText">while (</span><span class="posText">local</span><span class="sourceText"> < 10) {</span>
-<span class="dots">·  ·  |  ·  |  ·  </span>"<span class="value"><</span>"  
-<span class="dots">·  ·  |  ·  |  ·  </span>"10"  <span class="type">Lintent.string</span>                       <span class="pos">49:18  49:19 </span><span class="sourceText">while (local < </span><span class="posText">10</span><span class="sourceText">) {</span>
-<span class="dots">·  ·  |  ·  |  </span>sent_func  <span class="type">List&lt;Sent_func&gt;</span> = 
-<span class="dots">·  ·  |  ·  |  ·  </span>Asignacion &rarr;                               <span class="pos">50:5  50:56  </span><span class="sourceText"></span><span class="posText">v[local] = dobleSuma(cast<int>(2.0 + h[0][3]), local</span><span class="sourceText">);</span>
-<span class="dots">·  ·  |  ·  |  ·  |  </span>Op_bin &rarr;                                <span class="pos">50:5  50:11  </span><span class="sourceText"></span><span class="posText">v[local</span><span class="sourceText">] = dobleSuma(cast<int>(2.0 + h[0][3]), local);</span>
-<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>"v"  <span class="type">Var.string</span>                      <span class="pos">50:5  50:5   </span><span class="sourceText"></span><span class="posText">v</span><span class="sourceText">[local] = dobleSuma(cast<int>(2.0 + h[0][3]), local);</span>
-<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>"<span class="value">[]</span>"  
-<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>"local"  <span class="type">Var.string</span>                  <span class="pos">50:7  50:11  </span><span class="sourceText">v[</span><span class="posText">local</span><span class="sourceText">] = dobleSuma(cast<int>(2.0 + h[0][3]), local);</span>
-<span class="dots">·  ·  |  ·  |  ·  |  </span>Invocacion &rarr;                            <span class="pos">50:16  50:56 </span><span class="sourceText">v[local] = </span><span class="posText">dobleSuma(cast<int>(2.0 + h[0][3]), local</span><span class="sourceText">);</span>
-<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>"<span class="value">dobleSuma</span>"  
-<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>expr  <span class="type">List&lt;Expr&gt;</span> = 
-<span class="dots">·  ·  |  ·  |  ·  |  ·  |  </span>Cast &rarr;                            <span class="pos">50:36  50:47 </span><span class="sourceText">v[local] = dobleSuma(cast<int>(</span><span class="posText">2.0 + h[0][3</span><span class="sourceText">]), local);</span>
-<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  </span><span class="value">IntType</span> &rarr;                      <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
-<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  </span>Op_bin &rarr;                       <span class="pos">50:36  50:47 </span><span class="sourceText">v[local] = dobleSuma(cast<int>(</span><span class="posText">2.0 + h[0][3</span><span class="sourceText">]), local);</span>
-<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  </span>"2.0"  <span class="type">Lintreal.string</span>      <span class="pos">50:36  50:38 </span><span class="sourceText">v[local] = dobleSuma(cast<int>(</span><span class="posText">2.0</span><span class="sourceText"> + h[0][3]), local);</span>
-<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  </span>"<span class="value">+</span>"  
-<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  </span>Op_bin &rarr;                    <span class="pos">50:42  50:47 </span><span class="sourceText">v[local] = dobleSuma(cast<int>(2.0 + </span><span class="posText">h[0][3</span><span class="sourceText">]), local);</span>
-<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  ·  </span>Op_bin &rarr;                 <span class="pos">50:42  50:44 </span><span class="sourceText">v[local] = dobleSuma(cast<int>(2.0 + </span><span class="posText">h[0</span><span class="sourceText">][3]), local);</span>
-<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  ·  |  </span>"h"  <span class="type">Var.string</span>       <span class="pos">50:42  50:42 </span><span class="sourceText">v[local] = dobleSuma(cast<int>(2.0 + </span><span class="posText">h</span><span class="sourceText">[0][3]), local);</span>
-<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  ·  |  </span>"<span class="value">[]</span>"  
-<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  ·  |  </span>"0"  <span class="type">Lintent.string</span>   <span class="pos">50:44  50:44 </span><span class="sourceText">v[local] = dobleSuma(cast<int>(2.0 + h[</span><span class="posText">0</span><span class="sourceText">][3]), local);</span>
-<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  ·  </span>"<span class="value">[]</span>"  
-<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  ·  </span>"3"  <span class="type">Lintent.string</span>      <span class="pos">50:47  50:47 </span><span class="sourceText">v[local] = dobleSuma(cast<int>(2.0 + h[0][</span><span class="posText">3</span><span class="sourceText">]), local);</span>
-<span class="dots">·  ·  |  ·  |  ·  |  ·  |  </span>"local"  <span class="type">Var.string</span>               <span class="pos">50:52  50:56 </span><span class="sourceText">v[local] = dobleSuma(cast<int>(2.0 + h[0][3]), </span><span class="posText">local</span><span class="sourceText">);</span>
-<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>"<span class="value">parametro</span>"  
-<span class="dots">·  ·  |  ·  |  ·  </span>Asignacion &rarr;                               <span class="pos">51:5  51:21  </span><span class="sourceText"></span><span class="posText">local = local + 1</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  |  ·  |  </span>"local"  <span class="type">Var.string</span>                     <span class="pos">51:5  51:9   </span><span class="sourceText"></span><span class="posText">local</span><span class="sourceText"> = local + 1;</span>
-<span class="dots">·  ·  |  ·  |  ·  |  </span>Op_bin &rarr;                                <span class="pos">51:13  51:21 </span><span class="sourceText">local = </span><span class="posText">local + 1</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>"local"  <span class="type">Var.string</span>                  <span class="pos">51:13  51:17 </span><span class="sourceText">local = </span><span class="posText">local</span><span class="sourceText"> + 1;</span>
-<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>"<span class="value">+</span>"  
-<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>"1"  <span class="type">Lintent.string</span>                  <span class="pos">51:21  51:21 </span><span class="sourceText">local = local + </span><span class="posText">1</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  </span>If &rarr;                                             <span class="pos">54:7  58:11  </span><span class="sourceText">if (</span><span class="posText">a >= 2 && local < 5) {</span><span class="sourceText"> ... </span><span class="posText">b = 'R'</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  |  </span>Op_bin &rarr;                                      <span class="pos">54:7  54:25  </span><span class="sourceText">if (</span><span class="posText">a >= 2 && local < 5</span><span class="sourceText">) {</span>
-<span class="dots">·  ·  |  ·  |  ·  </span>Op_bin &rarr;                                   <span class="pos">54:7  54:21  </span><span class="sourceText">if (</span><span class="posText">a >= 2 && local</span><span class="sourceText"> < 5) {</span>
-<span class="dots">·  ·  |  ·  |  ·  |  </span>Op_bin &rarr;                                <span class="pos">54:7  54:12  </span><span class="sourceText">if (</span><span class="posText">a >= 2</span><span class="sourceText"> && local < 5) {</span>
-<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>"a"  <span class="type">Var.string</span>                      <span class="pos">54:7  54:7   </span><span class="sourceText">if (</span><span class="posText">a</span><span class="sourceText"> >= 2 && local < 5) {</span>
-<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>"<span class="value">>=</span>"  
-<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>"2"  <span class="type">Lintent.string</span>                  <span class="pos">54:12  54:12 </span><span class="sourceText">if (a >= </span><span class="posText">2</span><span class="sourceText"> && local < 5) {</span>
-<span class="dots">·  ·  |  ·  |  ·  |  </span>"<span class="value">&&</span>"  
-<span class="dots">·  ·  |  ·  |  ·  |  </span>"local"  <span class="type">Var.string</span>                     <span class="pos">54:17  54:21 </span><span class="sourceText">if (a >= 2 && </span><span class="posText">local</span><span class="sourceText"> < 5) {</span>
-<span class="dots">·  ·  |  ·  |  ·  </span>"<span class="value"><</span>"  
-<span class="dots">·  ·  |  ·  |  ·  </span>"5"  <span class="type">Lintent.string</span>                        <span class="pos">54:25  54:25 </span><span class="sourceText">if (a >= 2 && local < </span><span class="posText">5</span><span class="sourceText">) {</span>
-<span class="dots">·  ·  |  ·  |  </span>verdadero  <span class="type">List&lt;Sent_func&gt;</span> = 
-<span class="dots">·  ·  |  ·  |  ·  </span>Invocacion &rarr;                               <span class="pos">55:5  55:23  </span><span class="sourceText"></span><span class="posText">escribeEdad(a+local</span><span class="sourceText">); </span>
-<span class="dots">·  ·  |  ·  |  ·  |  </span>"<span class="value">escribeEdad</span>"  
-<span class="dots">·  ·  |  ·  |  ·  |  </span>expr  <span class="type">List&lt;Expr&gt;</span> = 
-<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>Op_bin &rarr;                             <span class="pos">55:17  55:23 </span><span class="sourceText">escribeEdad(</span><span class="posText">a+local</span><span class="sourceText">); </span>
-<span class="dots">·  ·  |  ·  |  ·  |  ·  |  </span>"a"  <span class="type">Var.string</span>                   <span class="pos">55:17  55:17 </span><span class="sourceText">escribeEdad(</span><span class="posText">a</span><span class="sourceText">+local); </span>
-<span class="dots">·  ·  |  ·  |  ·  |  ·  |  </span>"<span class="value">+</span>"  
-<span class="dots">·  ·  |  ·  |  ·  |  ·  |  </span>"local"  <span class="type">Var.string</span>               <span class="pos">55:19  55:23 </span><span class="sourceText">escribeEdad(a+</span><span class="posText">local</span><span class="sourceText">); </span>
-<span class="dots">·  ·  |  ·  |  ·  |  </span>"<span class="value">llamada</span>"  
-<span class="dots">·  ·  |  ·  |  ·  </span>Return &rarr;                                   <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
-<span class="dots">·  ·  |  ·  |  ·  |  </span><span class="null">null</span>  expr:<span class="type">Expr</span>
-<span class="dots">·  ·  |  ·  |  </span>falso  <span class="type">List&lt;Sent_func&gt;</span> = 
-<span class="dots">·  ·  |  ·  |  ·  </span>Asignacion &rarr;                               <span class="pos">58:5  58:11  </span><span class="sourceText"></span><span class="posText">b = 'R'</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  |  ·  |  </span>"b"  <span class="type">Var.string</span>                         <span class="pos">58:5  58:5   </span><span class="sourceText"></span><span class="posText">b</span><span class="sourceText"> = 'R';</span>
-<span class="dots">·  ·  |  ·  |  ·  |  </span>"'R'"  <span class="type">Lintchar.string</span>                  <span class="pos">58:9  58:11  </span><span class="sourceText">b = </span><span class="posText">'R'</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  </span>If &rarr;                                             <span class="pos">61:7  62:24  </span><span class="sourceText">if (</span><span class="posText">z != 2) {</span><span class="sourceText"> ... </span><span class="posText">escribe(pepe.meses[2</span><span class="sourceText">]);</span>
-<span class="dots">·  ·  |  ·  |  </span>Op_bin &rarr;                                      <span class="pos">61:7  61:12  </span><span class="sourceText">if (</span><span class="posText">z != 2</span><span class="sourceText">) {</span>
-<span class="dots">·  ·  |  ·  |  ·  </span>"z"  <span class="type">Var.string</span>                            <span class="pos">61:7  61:7   </span><span class="sourceText">if (</span><span class="posText">z</span><span class="sourceText"> != 2) {</span>
-<span class="dots">·  ·  |  ·  |  ·  </span>"<span class="value">!=</span>"  
-<span class="dots">·  ·  |  ·  |  ·  </span>"2"  <span class="type">Lintent.string</span>                        <span class="pos">61:12  61:12 </span><span class="sourceText">if (z != </span><span class="posText">2</span><span class="sourceText">) {</span>
-<span class="dots">·  ·  |  ·  |  </span>verdadero  <span class="type">List&lt;Sent_func&gt;</span> = 
-<span class="dots">·  ·  |  ·  |  ·  </span>Invocacion &rarr;                               <span class="pos">62:5  62:24  </span><span class="sourceText"></span><span class="posText">escribe(pepe.meses[2</span><span class="sourceText">]);</span>
-<span class="dots">·  ·  |  ·  |  ·  |  </span>"<span class="value">escribe</span>"  
-<span class="dots">·  ·  |  ·  |  ·  |  </span>expr  <span class="type">List&lt;Expr&gt;</span> = 
-<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>Op_bin &rarr;                             <span class="pos">62:13  62:24 </span><span class="sourceText">escribe(</span><span class="posText">pepe.meses[2</span><span class="sourceText">]);</span>
-<span class="dots">·  ·  |  ·  |  ·  |  ·  |  </span>Op_bin &rarr;                          <span class="pos">62:13  62:22 </span><span class="sourceText">escribe(</span><span class="posText">pepe.meses</span><span class="sourceText">[2]);</span>
-<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  </span>"pepe"  <span class="type">Var.string</span>             <span class="pos">62:13  62:16 </span><span class="sourceText">escribe(</span><span class="posText">pepe</span><span class="sourceText">.meses[2]);</span>
-<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  </span>"<span class="value">.</span>"  
-<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  </span>"meses"  <span class="type">Var.string</span>            <span class="pos">62:18  62:22 </span><span class="sourceText">escribe(pepe.</span><span class="posText">meses</span><span class="sourceText">[2]);</span>
-<span class="dots">·  ·  |  ·  |  ·  |  ·  |  </span>"<span class="value">[]</span>"  
-<span class="dots">·  ·  |  ·  |  ·  |  ·  |  </span>"2"  <span class="type">Lintent.string</span>               <span class="pos">62:24  62:24 </span><span class="sourceText">escribe(pepe.meses[</span><span class="posText">2</span><span class="sourceText">]);</span>
-<span class="dots">·  ·  |  ·  |  ·  |  </span>"<span class="value">llamada</span>"  
-<span class="dots">·  ·  |  ·  |  </span>falso  <span class="type">List&lt;Sent_func&gt;</span> =  <span class="null">null</span>
+<span class="dots">·  ·  |  ·  |  ·  </span>"y"  <span class="type">Var.string</span>                            <span class="pos">55:18  55:18 </span><span class="sourceText">print centro.</span><span class="posText">y</span><span class="sourceText">; // No error en esta fase aunque aunque el campo no está en la struct </span>
+<span class="dots">·  ·  |  </span><span class="null">null</span>  tipo:<span class="type">Tipo</span>
+<span class="dots">·  ·  </span>Funcion &rarr;                                              <span class="pos">58:1  58:9   </span><span class="sourceText"></span><span class="posText">dobleSuma</span><span class="sourceText">() {    // Función repetida </span>
+<span class="dots">·  ·  |  </span>"<span class="value">dobleSuma</span>"  
+<span class="dots">·  ·  |  </span>parametro  <span class="type">List&lt;Parametro&gt;</span> = 
+<span class="dots">·  ·  |  </span>defvar  <span class="type">List&lt;DefVar&gt;</span> = 
+<span class="dots">·  ·  |  </span>sent_func  <span class="type">List&lt;Sent_func&gt;</span> = 
 <span class="dots">·  ·  |  </span><span class="null">null</span>  tipo:<span class="type">Tipo</span>
 
 [ASTPrinter] --------------------------------

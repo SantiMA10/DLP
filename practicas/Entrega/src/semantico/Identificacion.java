@@ -19,10 +19,7 @@ public class Identificacion extends DefaultVisitor {
 	//	class DefVar { String string;  Tipo tipo; }
 	public Object visit(DefVar node, Object param) {
 
-		// super.visit(node, param);
-
-		if (node.getTipo() != null)
-			node.getTipo().accept(this, param);
+		super.visit(node, param);
 
 		return null;
 	}
@@ -30,11 +27,9 @@ public class Identificacion extends DefaultVisitor {
 	//	class Struct { String string;  List<DefVar> defvar; }
 	public Object visit(Struct node, Object param) {
 
-		// super.visit(node, param);
-
-		if (node.getDefvar() != null)
-			for (DefVar child : node.getDefvar())
-				child.accept(this, param);
+		predicado(estructuras.get(node.getString()) == null, "Struct ya definido " + node.getString(), node.getStart());
+		estructuras.put(node.getString(), node);
+		super.visit(node, param);
 
 		return null;
 	}
@@ -42,39 +37,36 @@ public class Identificacion extends DefaultVisitor {
 	//	class Funcion { String string;  List<Parametro> parametro;  List<DefVar> defvar;  List<Sent_func> sent_func;  Tipo tipo; }
 	public Object visit(Funcion node, Object param) {
 
-		// super.visit(node, param);
-
-		if (node.getParametro() != null)
-			for (Parametro child : node.getParametro())
-				child.accept(this, param);
-
-		if (node.getDefvar() != null)
-			for (DefVar child : node.getDefvar())
-				child.accept(this, param);
-
-		if (node.getSent_func() != null)
-			for (Sent_func child : node.getSent_func())
-				child.accept(this, param);
-
-		if (node.getTipo() != null)
-			node.getTipo().accept(this, param);
+		predicado(funciones.get(node.getString()) == null, "Funcion ya definida " + node.getString(), node.getStart());
+		funciones.put(node.getString(), node);
+		super.visit(node, param);
 
 		return null;
 	}
 
 	//	class StructType { String string; }
 	public Object visit(StructType node, Object param) {
+		
+		Struct ref = estructuras.get(node.getString());
+				
+		predicado(ref != null, "Tipo struct no definido " + node.getString(), node.getStart());
+		super.visit(node, param);
+		
+		node.setDefinicion(ref);
+		
 		return null;
+		
 	}
 
 	//	class Invocacion { String string;  List<Expr> expr; }
 	public Object visit(Invocacion node, Object param) {
+		
+		Funcion ref = funciones.get(node.getNombre());
 
-		// super.visit(node, param);
-
-		if (node.getExpr() != null)
-			for (Expr child : node.getExpr())
-				child.accept(this, param);
+		predicado(ref != null, "Funcion no definida " + node.getNombre(), node.getStart());
+		super.visit(node, param);
+		
+		node.setDefinicion(ref);
 
 		return null;
 	}

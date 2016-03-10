@@ -70,7 +70,7 @@ tipo: 'IDENT'				 { $$ = new StructType($1); }
 	| '[' 'LITENT' ']' tipo  { $$ = new ArrayType($4, $2); }
 	;
 
-sentencias_locales : sentencia_local  					{  $$ = new ArrayList<Sent_func>(); ((ArrayList<Sent_func>) $$).add((Sent_func)$1); }
+sentencias_locales :   									{  $$ = new ArrayList<Sent_func>(); }
 				   | sentencias_locales sentencia_local { ((ArrayList<Sent_func>) $1).add((Sent_func)$2); $$ = $1; }
 				   ;
 

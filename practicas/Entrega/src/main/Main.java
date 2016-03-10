@@ -49,8 +49,8 @@ public class Main {
 		if (raiz == null) // Hay errores o el AST no se ha implementado aún
 			return null;
 		
-		new PrintVisitor().visit((Programa)raiz, null);
-		System.out.println();
+		//new PrintVisitor().visit((Programa)raiz, null);
+		//System.out.println();
 		
 		// 2. Fase de Análisis Semántico
 		AnalisisSemantico semántico = new AnalisisSemantico(gestor);
