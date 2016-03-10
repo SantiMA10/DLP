@@ -21,84 +21,173 @@
 <body><pre>
 [ASTPrinter] -------------------------------- line:col  line:col
 
-<span class="dots"></span>Programa &rarr;                                                   <span class="pos">2:8  33:5    </span><span class="sourceText">struct </span><span class="posText">Punto {</span><span class="sourceText"> ... </span><span class="posText">var b</span><span class="sourceText">:char;</span>
+<span class="dots"></span>Programa &rarr;                                                   <span class="pos">9:1  51:61   </span><span class="sourceText"></span><span class="posText">potencia(base:float, exponente:int):float {</span><span class="sourceText"> ... </span><span class="posText">print letraHipoteca(precioVivienda, añosHipoteca, interes</span><span class="sourceText">);</span>
 <span class="dots">·  </span>sentencia  <span class="type">List&lt;Sentencia&gt;</span> = 
-<span class="dots">·  ·  </span>Struct &rarr;                                               <span class="pos">2:8  4:5     </span><span class="sourceText">struct </span><span class="posText">Punto {</span><span class="sourceText"> ... </span><span class="posText">y</span><span class="sourceText">:int;</span>
-<span class="dots">·  ·  |  </span>"<span class="value">Punto</span>"  
+<span class="dots">·  ·  </span>Funcion &rarr;                                              <span class="pos">9:1  25:16   </span><span class="sourceText"></span><span class="posText">potencia(base:float, exponente:int):float {</span><span class="sourceText"> ... </span><span class="posText">return total</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  </span>"<span class="value">potencia</span>"  
+<span class="dots">·  ·  |  </span>parametro  <span class="type">List&lt;Parametro&gt;</span> = 
+<span class="dots">·  ·  |  ·  </span>Parametro &rarr;                                      <span class="pos">9:10  9:13   </span><span class="sourceText">potencia(</span><span class="posText">base</span><span class="sourceText">:float, exponente:int):float {</span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">base</span>"  
+<span class="dots">·  ·  |  ·  |  </span><span class="value">RealType</span> &rarr;                                    <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  ·  </span>Parametro &rarr;                                      <span class="pos">9:22  9:30   </span><span class="sourceText">potencia(base:float, </span><span class="posText">exponente</span><span class="sourceText">:int):float {</span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">exponente</span>"  
+<span class="dots">·  ·  |  ·  |  </span><span class="value">IntType</span> &rarr;                                     <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
 <span class="dots">·  ·  |  </span>defvar  <span class="type">List&lt;DefVar&gt;</span> = 
-<span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">3:5  3:5     </span><span class="sourceText"></span><span class="posText">x</span><span class="sourceText">:int;</span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value">x</span>"  
+<span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">10:9  10:13  </span><span class="sourceText">var </span><span class="posText">total</span><span class="sourceText">:float;</span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">total</span>"  
+<span class="dots">·  ·  |  ·  |  </span><span class="value">RealType</span> &rarr;                                    <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">var</span>"  
+<span class="dots">·  ·  |  </span>sent_func  <span class="type">List&lt;Sent_func&gt;</span> = 
+<span class="dots">·  ·  |  ·  </span>If &rarr;                                             <span class="pos">12:9  21:41  </span><span class="sourceText">if (</span><span class="posText">exponente == 0) {</span><span class="sourceText"> ... </span><span class="posText">exponente = exponente - 1</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  |  </span>Op_bin &rarr;                                      <span class="pos">12:9  12:22  </span><span class="sourceText">if (</span><span class="posText">exponente == 0</span><span class="sourceText">) {</span>
+<span class="dots">·  ·  |  ·  |  ·  </span>"exponente"  <span class="type">Var.string</span>                    <span class="pos">12:9  12:17  </span><span class="sourceText">if (</span><span class="posText">exponente</span><span class="sourceText"> == 0) {</span>
+<span class="dots">·  ·  |  ·  |  ·  </span>"<span class="value">==</span>"  
+<span class="dots">·  ·  |  ·  |  ·  </span>"0"  <span class="type">Lintent.string</span>                        <span class="pos">12:22  12:22 </span><span class="sourceText">if (exponente == </span><span class="posText">0</span><span class="sourceText">) {</span>
+<span class="dots">·  ·  |  ·  |  </span>verdadero  <span class="type">List&lt;Sent_func&gt;</span> = 
+<span class="dots">·  ·  |  ·  |  ·  </span>Asignacion &rarr;                               <span class="pos">13:9  13:19  </span><span class="sourceText"></span><span class="posText">total = 1.0</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  |  ·  |  </span>"total"  <span class="type">Var.string</span>                     <span class="pos">13:9  13:13  </span><span class="sourceText"></span><span class="posText">total</span><span class="sourceText"> = 1.0;</span>
+<span class="dots">·  ·  |  ·  |  ·  |  </span>"1.0"  <span class="type">Lintreal.string</span>                  <span class="pos">13:17  13:19 </span><span class="sourceText">total = </span><span class="posText">1.0</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  |  </span>falso  <span class="type">List&lt;Sent_func&gt;</span> = 
+<span class="dots">·  ·  |  ·  |  ·  </span>If &rarr;                                       <span class="pos">15:13  21:41 </span><span class="sourceText">if (</span><span class="posText">exponente < 0) {</span><span class="sourceText"> ... </span><span class="posText">exponente = exponente - 1</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  |  ·  |  </span>Op_bin &rarr;                                <span class="pos">15:13  15:25 </span><span class="sourceText">if (</span><span class="posText">exponente < 0</span><span class="sourceText">) {</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>"exponente"  <span class="type">Var.string</span>              <span class="pos">15:13  15:21 </span><span class="sourceText">if (</span><span class="posText">exponente</span><span class="sourceText"> < 0) {</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>"<span class="value"><</span>"  
+<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>"0"  <span class="type">Lintent.string</span>                  <span class="pos">15:25  15:25 </span><span class="sourceText">if (exponente < </span><span class="posText">0</span><span class="sourceText">) {</span>
+<span class="dots">·  ·  |  ·  |  ·  |  </span>verdadero  <span class="type">List&lt;Sent_func&gt;</span> = 
+<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>Asignacion &rarr;                         <span class="pos">16:13  16:54 </span><span class="sourceText"></span><span class="posText">total = 1.0 / potencia(base, 0 - exponente</span><span class="sourceText">);</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  </span>"total"  <span class="type">Var.string</span>               <span class="pos">16:13  16:17 </span><span class="sourceText"></span><span class="posText">total</span><span class="sourceText"> = 1.0 / potencia(base, 0 - exponente);</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  </span>Op_bin &rarr;                          <span class="pos">16:21  16:54 </span><span class="sourceText">total = </span><span class="posText">1.0 / potencia(base, 0 - exponente</span><span class="sourceText">);</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  </span>"1.0"  <span class="type">Lintreal.string</span>         <span class="pos">16:21  16:23 </span><span class="sourceText">total = </span><span class="posText">1.0</span><span class="sourceText"> / potencia(base, 0 - exponente);</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  </span>"<span class="value">/</span>"  
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  </span>Invocacion &rarr;                   <span class="pos">16:27  16:54 </span><span class="sourceText">total = 1.0 / </span><span class="posText">potencia(base, 0 - exponente</span><span class="sourceText">);</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  </span>"<span class="value">potencia</span>"  
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  </span>expr  <span class="type">List&lt;Expr&gt;</span> = 
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  ·  </span>"base"  <span class="type">Var.string</span>       <span class="pos">16:36  16:39 </span><span class="sourceText">total = 1.0 / potencia(</span><span class="posText">base</span><span class="sourceText">, 0 - exponente);</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  ·  </span>Op_bin &rarr;                 <span class="pos">16:42  16:54 </span><span class="sourceText">total = 1.0 / potencia(base, </span><span class="posText">0 - exponente</span><span class="sourceText">);</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  ·  |  </span>"0"  <span class="type">Lintent.string</span>   <span class="pos">16:42  16:42 </span><span class="sourceText">total = 1.0 / potencia(base, </span><span class="posText">0</span><span class="sourceText"> - exponente);</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  ·  |  </span>"<span class="value">-</span>"  
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  ·  |  </span>"exponente"  <span class="type">Var.string</span><span class="pos">16:46  16:54 </span><span class="sourceText">total = 1.0 / potencia(base, 0 - </span><span class="posText">exponente</span><span class="sourceText">);</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  </span>"<span class="value">parametro</span>"  
+<span class="dots">·  ·  |  ·  |  ·  |  </span>falso  <span class="type">List&lt;Sent_func&gt;</span> = 
+<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>Asignacion &rarr;                         <span class="pos">18:13  18:24 </span><span class="sourceText"></span><span class="posText">total = base</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  </span>"total"  <span class="type">Var.string</span>               <span class="pos">18:13  18:17 </span><span class="sourceText"></span><span class="posText">total</span><span class="sourceText"> = base;</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  </span>"base"  <span class="type">Var.string</span>                <span class="pos">18:21  18:24 </span><span class="sourceText">total = </span><span class="posText">base</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>While &rarr;                              <span class="pos">19:20  21:41 </span><span class="sourceText">while (</span><span class="posText">exponente > 1) {</span><span class="sourceText"> ... </span><span class="posText">exponente = exponente - 1</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  </span>Op_bin &rarr;                          <span class="pos">19:20  19:32 </span><span class="sourceText">while (</span><span class="posText">exponente > 1</span><span class="sourceText">) {</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  </span>"exponente"  <span class="type">Var.string</span>        <span class="pos">19:20  19:28 </span><span class="sourceText">while (</span><span class="posText">exponente</span><span class="sourceText"> > 1) {</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  </span>"<span class="value">></span>"  
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  </span>"1"  <span class="type">Lintent.string</span>            <span class="pos">19:32  19:32 </span><span class="sourceText">while (exponente > </span><span class="posText">1</span><span class="sourceText">) {</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  </span>sent_func  <span class="type">List&lt;Sent_func&gt;</span> = 
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  </span>Asignacion &rarr;                   <span class="pos">20:17  20:36 </span><span class="sourceText"></span><span class="posText">total = total * base</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  </span>"total"  <span class="type">Var.string</span>         <span class="pos">20:17  20:21 </span><span class="sourceText"></span><span class="posText">total</span><span class="sourceText"> = total * base;</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  </span>Op_bin &rarr;                    <span class="pos">20:25  20:36 </span><span class="sourceText">total = </span><span class="posText">total * base</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  ·  </span>"total"  <span class="type">Var.string</span>      <span class="pos">20:25  20:29 </span><span class="sourceText">total = </span><span class="posText">total</span><span class="sourceText"> * base;</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  ·  </span>"<span class="value">*</span>"  
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  ·  </span>"base"  <span class="type">Var.string</span>       <span class="pos">20:33  20:36 </span><span class="sourceText">total = total * </span><span class="posText">base</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  </span>Asignacion &rarr;                   <span class="pos">21:17  21:41 </span><span class="sourceText"></span><span class="posText">exponente = exponente - 1</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  </span>"exponente"  <span class="type">Var.string</span>     <span class="pos">21:17  21:25 </span><span class="sourceText"></span><span class="posText">exponente</span><span class="sourceText"> = exponente - 1;</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  </span>Op_bin &rarr;                    <span class="pos">21:29  21:41 </span><span class="sourceText">exponente = </span><span class="posText">exponente - 1</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  ·  </span>"exponente"  <span class="type">Var.string</span>  <span class="pos">21:29  21:37 </span><span class="sourceText">exponente = </span><span class="posText">exponente</span><span class="sourceText"> - 1;</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  ·  </span>"<span class="value">-</span>"  
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  ·  </span>"1"  <span class="type">Lintent.string</span>      <span class="pos">21:41  21:41 </span><span class="sourceText">exponente = exponente - </span><span class="posText">1</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  </span>Return &rarr;                                         <span class="pos">25:12  25:16 </span><span class="sourceText">return </span><span class="posText">total</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  |  </span>"total"  <span class="type">Var.string</span>                           <span class="pos">25:12  25:16 </span><span class="sourceText">return </span><span class="posText">total</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  </span><span class="value">RealType</span> &rarr;                                          <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  </span>Funcion &rarr;                                              <span class="pos">29:1  33:90  </span><span class="sourceText"></span><span class="posText">letraHipoteca(capital:float, años:int, interes:float):float {</span><span class="sourceText"> ... </span><span class="posText">return capital * mensual / (100.0 * (1.0 - potencia(1.0 + mensual/100.0, 0 - años * 12</span><span class="sourceText">)));</span>
+<span class="dots">·  ·  |  </span>"<span class="value">letraHipoteca</span>"  
+<span class="dots">·  ·  |  </span>parametro  <span class="type">List&lt;Parametro&gt;</span> = 
+<span class="dots">·  ·  |  ·  </span>Parametro &rarr;                                      <span class="pos">29:15  29:21 </span><span class="sourceText">letraHipoteca(</span><span class="posText">capital</span><span class="sourceText">:float, años:int, interes:float):float {</span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">capital</span>"  
+<span class="dots">·  ·  |  ·  |  </span><span class="value">RealType</span> &rarr;                                    <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  ·  </span>Parametro &rarr;                                      <span class="pos">29:30  29:33 </span><span class="sourceText">letraHipoteca(capital:float, </span><span class="posText">años</span><span class="sourceText">:int, interes:float):float {</span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">años</span>"  
 <span class="dots">·  ·  |  ·  |  </span><span class="value">IntType</span> &rarr;                                     <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value"></span>"  
-<span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">4:5  4:5     </span><span class="sourceText"></span><span class="posText">y</span><span class="sourceText">:int;</span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value">y</span>"  
-<span class="dots">·  ·  |  ·  |  </span><span class="value">IntType</span> &rarr;                                     <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value"></span>"  
-<span class="dots">·  ·  </span>DefVar &rarr;                                               <span class="pos">6:5  6:5     </span><span class="sourceText">var </span><span class="posText">b</span><span class="sourceText">:int;</span>
-<span class="dots">·  ·  |  </span>"<span class="value">b</span>"  
-<span class="dots">·  ·  |  </span><span class="value">IntType</span> &rarr;                                           <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
-<span class="dots">·  ·  |  </span>"<span class="value">var</span>"  
-<span class="dots">·  ·  </span>Funcion &rarr;                                              <span class="pos">8:1  10:7    </span><span class="sourceText"></span><span class="posText">main() {</span><span class="sourceText"> ... </span><span class="posText">f(8</span><span class="sourceText">);</span>
+<span class="dots">·  ·  |  ·  </span>Parametro &rarr;                                      <span class="pos">29:40  29:46 </span><span class="sourceText">letraHipoteca(capital:float, años:int, </span><span class="posText">interes</span><span class="sourceText">:float):float {</span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">interes</span>"  
+<span class="dots">·  ·  |  ·  |  </span><span class="value">RealType</span> &rarr;                                    <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  </span>defvar  <span class="type">List&lt;DefVar&gt;</span> = 
+<span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">30:9  30:15  </span><span class="sourceText">var </span><span class="posText">mensual</span><span class="sourceText">:float;</span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">mensual</span>"  
+<span class="dots">·  ·  |  ·  |  </span><span class="value">RealType</span> &rarr;                                    <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">var</span>"  
+<span class="dots">·  ·  |  </span>sent_func  <span class="type">List&lt;Sent_func&gt;</span> = 
+<span class="dots">·  ·  |  ·  </span>Asignacion &rarr;                                     <span class="pos">32:5  32:28  </span><span class="sourceText"></span><span class="posText">mensual = interes / 12.0</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  |  </span>"mensual"  <span class="type">Var.string</span>                         <span class="pos">32:5  32:11  </span><span class="sourceText"></span><span class="posText">mensual</span><span class="sourceText"> = interes / 12.0;</span>
+<span class="dots">·  ·  |  ·  |  </span>Op_bin &rarr;                                      <span class="pos">32:15  32:28 </span><span class="sourceText">mensual = </span><span class="posText">interes / 12.0</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  |  ·  </span>"interes"  <span class="type">Var.string</span>                      <span class="pos">32:15  32:21 </span><span class="sourceText">mensual = </span><span class="posText">interes</span><span class="sourceText"> / 12.0;</span>
+<span class="dots">·  ·  |  ·  |  ·  </span>"<span class="value">/</span>"  
+<span class="dots">·  ·  |  ·  |  ·  </span>"12.0"  <span class="type">Lintreal.string</span>                    <span class="pos">32:25  32:28 </span><span class="sourceText">mensual = interes / </span><span class="posText">12.0</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  </span>Return &rarr;                                         <span class="pos">33:12  33:90 </span><span class="sourceText">return </span><span class="posText">capital * mensual / (100.0 * (1.0 - potencia(1.0 + mensual/100.0, 0 - años * 12</span><span class="sourceText">)));</span>
+<span class="dots">·  ·  |  ·  |  </span>Op_bin &rarr;                                      <span class="pos">33:12  33:90 </span><span class="sourceText">return </span><span class="posText">capital * mensual / (100.0 * (1.0 - potencia(1.0 + mensual/100.0, 0 - años * 12</span><span class="sourceText">)));</span>
+<span class="dots">·  ·  |  ·  |  ·  </span>Op_bin &rarr;                                   <span class="pos">33:12  33:28 </span><span class="sourceText">return </span><span class="posText">capital * mensual</span><span class="sourceText"> / (100.0 * (1.0 - potencia(1.0 + mensual/100.0, 0 - años * 12)));</span>
+<span class="dots">·  ·  |  ·  |  ·  |  </span>"capital"  <span class="type">Var.string</span>                   <span class="pos">33:12  33:18 </span><span class="sourceText">return </span><span class="posText">capital</span><span class="sourceText"> * mensual / (100.0 * (1.0 - potencia(1.0 + mensual/100.0, 0 - años * 12)));</span>
+<span class="dots">·  ·  |  ·  |  ·  |  </span>"<span class="value">*</span>"  
+<span class="dots">·  ·  |  ·  |  ·  |  </span>"mensual"  <span class="type">Var.string</span>                   <span class="pos">33:22  33:28 </span><span class="sourceText">return capital * </span><span class="posText">mensual</span><span class="sourceText"> / (100.0 * (1.0 - potencia(1.0 + mensual/100.0, 0 - años * 12)));</span>
+<span class="dots">·  ·  |  ·  |  ·  </span>"<span class="value">/</span>"  
+<span class="dots">·  ·  |  ·  |  ·  </span>Op_un &rarr;                                    <span class="pos">33:33  33:90 </span><span class="sourceText">return capital * mensual / (</span><span class="posText">100.0 * (1.0 - potencia(1.0 + mensual/100.0, 0 - años * 12</span><span class="sourceText">)));</span>
+<span class="dots">·  ·  |  ·  |  ·  |  </span>"<span class="value">()</span>"  
+<span class="dots">·  ·  |  ·  |  ·  |  </span>Op_bin &rarr;                                <span class="pos">33:33  33:90 </span><span class="sourceText">return capital * mensual / (</span><span class="posText">100.0 * (1.0 - potencia(1.0 + mensual/100.0, 0 - años * 12</span><span class="sourceText">)));</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>"100.0"  <span class="type">Lintreal.string</span>             <span class="pos">33:33  33:37 </span><span class="sourceText">return capital * mensual / (</span><span class="posText">100.0</span><span class="sourceText"> * (1.0 - potencia(1.0 + mensual/100.0, 0 - años * 12)));</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>"<span class="value">*</span>"  
+<span class="dots">·  ·  |  ·  |  ·  |  ·  </span>Op_un &rarr;                              <span class="pos">33:42  33:90 </span><span class="sourceText">return capital * mensual / (100.0 * (</span><span class="posText">1.0 - potencia(1.0 + mensual/100.0, 0 - años * 12</span><span class="sourceText">)));</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  </span>"<span class="value">()</span>"  
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  </span>Op_bin &rarr;                          <span class="pos">33:42  33:90 </span><span class="sourceText">return capital * mensual / (100.0 * (</span><span class="posText">1.0 - potencia(1.0 + mensual/100.0, 0 - años * 12</span><span class="sourceText">)));</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  </span>"1.0"  <span class="type">Lintreal.string</span>         <span class="pos">33:42  33:44 </span><span class="sourceText">return capital * mensual / (100.0 * (</span><span class="posText">1.0</span><span class="sourceText"> - potencia(1.0 + mensual/100.0, 0 - años * 12)));</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  </span>"<span class="value">-</span>"  
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  </span>Invocacion &rarr;                   <span class="pos">33:48  33:90 </span><span class="sourceText">return capital * mensual / (100.0 * (1.0 - </span><span class="posText">potencia(1.0 + mensual/100.0, 0 - años * 12</span><span class="sourceText">)));</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  </span>"<span class="value">potencia</span>"  
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  </span>expr  <span class="type">List&lt;Expr&gt;</span> = 
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  ·  </span>Op_bin &rarr;                 <span class="pos">33:57  33:75 </span><span class="sourceText">return capital * mensual / (100.0 * (1.0 - potencia(</span><span class="posText">1.0 + mensual/100.0</span><span class="sourceText">, 0 - años * 12)));</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  ·  |  </span>"1.0"  <span class="type">Lintreal.string</span><span class="pos">33:57  33:59 </span><span class="sourceText">return capital * mensual / (100.0 * (1.0 - potencia(</span><span class="posText">1.0</span><span class="sourceText"> + mensual/100.0, 0 - años * 12)));</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  ·  |  </span>"<span class="value">+</span>"  
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  ·  |  </span>Op_bin &rarr;              <span class="pos">33:63  33:75 </span><span class="sourceText">return capital * mensual / (100.0 * (1.0 - potencia(1.0 + </span><span class="posText">mensual/100.0</span><span class="sourceText">, 0 - años * 12)));</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  ·  |  ·  </span>"mensual"  <span class="type">Var.string</span><span class="pos">33:63  33:69 </span><span class="sourceText">return capital * mensual / (100.0 * (1.0 - potencia(1.0 + </span><span class="posText">mensual</span><span class="sourceText">/100.0, 0 - años * 12)));</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  ·  |  ·  </span>"<span class="value">/</span>"  
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  ·  |  ·  </span>"100.0"  <span class="type">Lintreal.string</span><span class="pos">33:71  33:75 </span><span class="sourceText">return capital * mensual / (100.0 * (1.0 - potencia(1.0 + mensual/</span><span class="posText">100.0</span><span class="sourceText">, 0 - años * 12)));</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  ·  </span>Op_bin &rarr;                 <span class="pos">33:78  33:90 </span><span class="sourceText">return capital * mensual / (100.0 * (1.0 - potencia(1.0 + mensual/100.0, </span><span class="posText">0 - años * 12</span><span class="sourceText">)));</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  ·  |  </span>"0"  <span class="type">Lintent.string</span>   <span class="pos">33:78  33:78 </span><span class="sourceText">return capital * mensual / (100.0 * (1.0 - potencia(1.0 + mensual/100.0, </span><span class="posText">0</span><span class="sourceText"> - años * 12)));</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  ·  |  </span>"<span class="value">-</span>"  
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  ·  |  </span>Op_bin &rarr;              <span class="pos">33:82  33:90 </span><span class="sourceText">return capital * mensual / (100.0 * (1.0 - potencia(1.0 + mensual/100.0, 0 - </span><span class="posText">años * 12</span><span class="sourceText">)));</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  ·  |  ·  </span>"años"  <span class="type">Var.string</span> <span class="pos">33:82  33:85 </span><span class="sourceText">return capital * mensual / (100.0 * (1.0 - potencia(1.0 + mensual/100.0, 0 - </span><span class="posText">años</span><span class="sourceText"> * 12)));</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  ·  |  ·  </span>"<span class="value">*</span>"  
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  ·  |  ·  </span>"12"  <span class="type">Lintent.string</span><span class="pos">33:89  33:90 </span><span class="sourceText">return capital * mensual / (100.0 * (1.0 - potencia(1.0 + mensual/100.0, 0 - años * </span><span class="posText">12</span><span class="sourceText">)));</span>
+<span class="dots">·  ·  |  ·  |  ·  |  ·  |  ·  |  </span>"<span class="value">parametro</span>"  
+<span class="dots">·  ·  |  </span><span class="value">RealType</span> &rarr;                                          <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  </span>Funcion &rarr;                                              <span class="pos">37:1  51:61  </span><span class="sourceText"></span><span class="posText">main() {</span><span class="sourceText"> ... </span><span class="posText">print letraHipoteca(precioVivienda, añosHipoteca, interes</span><span class="sourceText">);</span>
 <span class="dots">·  ·  |  </span>"<span class="value">main</span>"  
 <span class="dots">·  ·  |  </span>parametro  <span class="type">List&lt;Parametro&gt;</span> = 
 <span class="dots">·  ·  |  </span>defvar  <span class="type">List&lt;DefVar&gt;</span> = 
-<span class="dots">·  ·  |  </span>sent_func  <span class="type">List&lt;Sent_func&gt;</span> = 
-<span class="dots">·  ·  |  ·  </span>Asignacion &rarr;                                     <span class="pos">9:5  9:9     </span><span class="sourceText"></span><span class="posText">d = b</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  |  </span>"d"  <span class="type">Var.string</span>                               <span class="pos">9:5  9:5     </span><span class="sourceText"></span><span class="posText">d</span><span class="sourceText"> = b;</span>
-<span class="dots">·  ·  |  ·  |  </span>"b"  <span class="type">Var.string</span>                               <span class="pos">9:9  9:9     </span><span class="sourceText">d = </span><span class="posText">b</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  </span>Invocacion &rarr;                                     <span class="pos">10:5  10:7   </span><span class="sourceText"></span><span class="posText">f(8</span><span class="sourceText">);</span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value">f</span>"  
-<span class="dots">·  ·  |  ·  |  </span>expr  <span class="type">List&lt;Expr&gt;</span> = 
-<span class="dots">·  ·  |  ·  |  ·  </span>"8"  <span class="type">Lintent.string</span>                        <span class="pos">10:7  10:7   </span><span class="sourceText">f(</span><span class="posText">8</span><span class="sourceText">);</span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value">llamada</span>"  
-<span class="dots">·  ·  |  </span><span class="null">null</span>  tipo:<span class="type">Tipo</span>
-<span class="dots">·  ·  </span>DefVar &rarr;                                               <span class="pos">13:5  13:5   </span><span class="sourceText">var </span><span class="posText">p</span><span class="sourceText">:int;</span>
-<span class="dots">·  ·  |  </span>"<span class="value">p</span>"  
-<span class="dots">·  ·  |  </span><span class="value">IntType</span> &rarr;                                           <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
-<span class="dots">·  ·  |  </span>"<span class="value">var</span>"  
-<span class="dots">·  ·  </span>Funcion &rarr;                                              <span class="pos">15:1  16:9   </span><span class="sourceText"></span><span class="posText">f(p:int) {</span><span class="sourceText"> ... </span><span class="posText">var p</span><span class="sourceText">:int;</span>
-<span class="dots">·  ·  |  </span>"<span class="value">f</span>"  
-<span class="dots">·  ·  |  </span>parametro  <span class="type">List&lt;Parametro&gt;</span> = 
-<span class="dots">·  ·  |  ·  </span>Parametro &rarr;                                      <span class="pos">15:3  15:3   </span><span class="sourceText">f(</span><span class="posText">p</span><span class="sourceText">:int) {</span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value">p</span>"  
-<span class="dots">·  ·  |  ·  |  </span><span class="value">IntType</span> &rarr;                                     <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
-<span class="dots">·  ·  |  </span>defvar  <span class="type">List&lt;DefVar&gt;</span> = 
-<span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">16:9  16:9   </span><span class="sourceText">var </span><span class="posText">p</span><span class="sourceText">:int;</span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value">p</span>"  
+<span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">38:9  38:22  </span><span class="sourceText">var </span><span class="posText">precioVivienda</span><span class="sourceText">:float;</span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">precioVivienda</span>"  
+<span class="dots">·  ·  |  ·  |  </span><span class="value">RealType</span> &rarr;                                    <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">var</span>"  
+<span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">39:9  39:20  </span><span class="sourceText">var </span><span class="posText">añosHipoteca</span><span class="sourceText">:int;</span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">añosHipoteca</span>"  
 <span class="dots">·  ·  |  ·  |  </span><span class="value">IntType</span> &rarr;                                     <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
 <span class="dots">·  ·  |  ·  |  </span>"<span class="value">var</span>"  
+<span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">40:9  40:15  </span><span class="sourceText">var </span><span class="posText">interes</span><span class="sourceText">:float;</span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">interes</span>"  
+<span class="dots">·  ·  |  ·  |  </span><span class="value">RealType</span> &rarr;                                    <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">var</span>"  
 <span class="dots">·  ·  |  </span>sent_func  <span class="type">List&lt;Sent_func&gt;</span> = 
+<span class="dots">·  ·  |  ·  </span>Asignacion &rarr;                                     <span class="pos">47:5  47:29  </span><span class="sourceText"></span><span class="posText">precioVivienda = 200000.0</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  |  </span>"precioVivienda"  <span class="type">Var.string</span>                  <span class="pos">47:5  47:18  </span><span class="sourceText"></span><span class="posText">precioVivienda</span><span class="sourceText"> = 200000.0;</span>
+<span class="dots">·  ·  |  ·  |  </span>"200000.0"  <span class="type">Lintreal.string</span>                   <span class="pos">47:22  47:29 </span><span class="sourceText">precioVivienda = </span><span class="posText">200000.0</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  </span>Asignacion &rarr;                                     <span class="pos">48:5  48:21  </span><span class="sourceText"></span><span class="posText">añosHipoteca = 30</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  |  </span>"añosHipoteca"  <span class="type">Var.string</span>                    <span class="pos">48:5  48:16  </span><span class="sourceText"></span><span class="posText">añosHipoteca</span><span class="sourceText"> = 30;</span>
+<span class="dots">·  ·  |  ·  |  </span>"30"  <span class="type">Lintent.string</span>                          <span class="pos">48:20  48:21 </span><span class="sourceText">añosHipoteca = </span><span class="posText">30</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  ·  </span>Asignacion &rarr;                                     <span class="pos">49:5  49:18  </span><span class="sourceText"></span><span class="posText">interes = 2.04</span><span class="sourceText">;    </span>
+<span class="dots">·  ·  |  ·  |  </span>"interes"  <span class="type">Var.string</span>                         <span class="pos">49:5  49:11  </span><span class="sourceText"></span><span class="posText">interes</span><span class="sourceText"> = 2.04;    </span>
+<span class="dots">·  ·  |  ·  |  </span>"2.04"  <span class="type">Lintreal.string</span>                       <span class="pos">49:15  49:18 </span><span class="sourceText">interes = </span><span class="posText">2.04</span><span class="sourceText">;    </span>
+<span class="dots">·  ·  |  ·  </span>Print &rarr;                                          <span class="pos">51:11  51:61 </span><span class="sourceText">print </span><span class="posText">letraHipoteca(precioVivienda, añosHipoteca, interes</span><span class="sourceText">);</span>
+<span class="dots">·  ·  |  ·  |  </span>Invocacion &rarr;                                  <span class="pos">51:11  51:61 </span><span class="sourceText">print </span><span class="posText">letraHipoteca(precioVivienda, añosHipoteca, interes</span><span class="sourceText">);</span>
+<span class="dots">·  ·  |  ·  |  ·  </span>"<span class="value">letraHipoteca</span>"  
+<span class="dots">·  ·  |  ·  |  ·  </span>expr  <span class="type">List&lt;Expr&gt;</span> = 
+<span class="dots">·  ·  |  ·  |  ·  |  </span>"precioVivienda"  <span class="type">Var.string</span>            <span class="pos">51:25  51:38 </span><span class="sourceText">print letraHipoteca(</span><span class="posText">precioVivienda</span><span class="sourceText">, añosHipoteca, interes);</span>
+<span class="dots">·  ·  |  ·  |  ·  |  </span>"añosHipoteca"  <span class="type">Var.string</span>              <span class="pos">51:41  51:52 </span><span class="sourceText">print letraHipoteca(precioVivienda, </span><span class="posText">añosHipoteca</span><span class="sourceText">, interes);</span>
+<span class="dots">·  ·  |  ·  |  ·  |  </span>"interes"  <span class="type">Var.string</span>                   <span class="pos">51:55  51:61 </span><span class="sourceText">print letraHipoteca(precioVivienda, añosHipoteca, </span><span class="posText">interes</span><span class="sourceText">);</span>
+<span class="dots">·  ·  |  ·  |  ·  </span>"<span class="value">parametro</span>"  
 <span class="dots">·  ·  |  </span><span class="null">null</span>  tipo:<span class="type">Tipo</span>
-<span class="dots">·  ·  </span>Struct &rarr;                                               <span class="pos">19:8  21:5   </span><span class="sourceText">struct </span><span class="posText">Punto {</span><span class="sourceText"> ... </span><span class="posText">y</span><span class="sourceText">:float;</span>
-<span class="dots">·  ·  |  </span>"<span class="value">Punto</span>"  
-<span class="dots">·  ·  |  </span>defvar  <span class="type">List&lt;DefVar&gt;</span> = 
-<span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">20:5  20:5   </span><span class="sourceText"></span><span class="posText">x</span><span class="sourceText">:float;</span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value">x</span>"  
-<span class="dots">·  ·  |  ·  |  </span><span class="value">RealType</span> &rarr;                                    <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value"></span>"  
-<span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">21:5  21:5   </span><span class="sourceText"></span><span class="posText">y</span><span class="sourceText">:float;</span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value">y</span>"  
-<span class="dots">·  ·  |  ·  |  </span><span class="value">RealType</span> &rarr;                                    <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value"></span>"  
-<span class="dots">·  ·  </span>Struct &rarr;                                               <span class="pos">24:8  25:18  </span><span class="sourceText">struct </span><span class="posText">Persona {</span><span class="sourceText"> ... </span><span class="posText">a: [20]Empresa</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  </span>"<span class="value">Persona</span>"  
-<span class="dots">·  ·  |  </span>defvar  <span class="type">List&lt;DefVar&gt;</span> = 
-<span class="dots">·  ·  |  ·  </span>DefVar &rarr;                                         <span class="pos">25:5  25:18  </span><span class="sourceText"></span><span class="posText">a: [20]Empresa</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value">a</span>"  
-<span class="dots">·  ·  |  ·  |  </span>ArrayType &rarr;                                   <span class="pos">25:9  25:18  </span><span class="sourceText">a: [</span><span class="posText">20]Empresa</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  |  ·  </span>"Empresa"  <span class="type">StructType.string</span>               <span class="pos">25:12  25:18 </span><span class="sourceText">a: [20]</span><span class="posText">Empresa</span><span class="sourceText">;</span>
-<span class="dots">·  ·  |  ·  |  ·  </span><span class="value">20</span>  <span class="type">int</span>
-<span class="dots">·  ·  |  ·  |  </span>"<span class="value"></span>"  
-<span class="dots">·  ·  </span>Funcion &rarr;                                              <span class="pos">29:1  29:1   </span><span class="sourceText"></span><span class="posText">f</span><span class="sourceText">():float {</span>
-<span class="dots">·  ·  |  </span>"<span class="value">f</span>"  
-<span class="dots">·  ·  |  </span>parametro  <span class="type">List&lt;Parametro&gt;</span> = 
-<span class="dots">·  ·  |  </span>defvar  <span class="type">List&lt;DefVar&gt;</span> = 
-<span class="dots">·  ·  |  </span>sent_func  <span class="type">List&lt;Sent_func&gt;</span> = 
-<span class="dots">·  ·  |  </span><span class="value">RealType</span> &rarr;                                          <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
-<span class="dots">·  ·  </span>DefVar &rarr;                                               <span class="pos">33:5  33:5   </span><span class="sourceText">var </span><span class="posText">b</span><span class="sourceText">:char;</span>
-<span class="dots">·  ·  |  </span>"<span class="value">b</span>"  
-<span class="dots">·  ·  |  </span><span class="value">CharType</span> &rarr;                                          <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
-<span class="dots">·  ·  |  </span>"<span class="value">var</span>"  
 
 [ASTPrinter] --------------------------------
 </pre>
