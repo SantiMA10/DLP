@@ -43,7 +43,10 @@ public class Identificacion extends DefaultVisitor {
 
 		predicado(estructuras.get(node.getString()) == null, "Struct ya definido " + node.getString(), node.getStart());
 		estructuras.put(node.getString(), node);
+		
+		variables.set();
 		super.visit(node, param);
+		variables.reset();
 
 		return null;
 	}
@@ -91,7 +94,11 @@ public class Identificacion extends DefaultVisitor {
 	//	class Var { String string; }
 	public Object visit(Var node, Object param) {
 		
-		predicado(variables.getFromAny(node.getString()) != null, "Variable " + node.getString() + " no definida", node.getStart());
+		DefVar ref = variables.getFromAny(node.getString());
+		
+		predicado(ref != null, "Variable " + node.getString() + " no definida", node.getStart());
+		node.setDefinicion(ref);
+		
 		return null;
 	}
 	
