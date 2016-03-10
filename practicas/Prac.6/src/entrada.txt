@@ -1,0 +1,9 @@
+DATA
+	float precio;
+	int ancho;
+CODE
+	ancho = 25 * (2 + 1);
+	print ancho;
+	
+	precio = 5.0;
+	print precio / 2.0;
