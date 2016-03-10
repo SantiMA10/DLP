@@ -1,0 +1,44 @@
+<html>
+<head>
+<style type="text/css">
+.value { font-weight: bold; }
+.dots { color: #888888; }
+.type { color: #BBBBBB; }
+.pos { color: #CCCCCC; }
+.sourceText { color: #BBBBBB; }
+.posText {
+	color: #BBBBBB;
+	text-decoration: underline; font-weight: bold;
+}
+.null {
+	color: #FF0000;
+	font-weight: bold;
+	font-style: italic;
+}
+</style>
+</head>
+
+<body><pre>
+[ASTPrinter] -------------------------------- line:col  line:col
+
+<span class="dots"></span>Programa &rarr;                                                   <span class="pos">2:11  8:20   </span><span class="sourceText">float </span><span class="posText">precio;</span><span class="sourceText"> ... </span><span class="posText">print nodefinida</span><span class="sourceText">;    // Error: variable no definida</span>
+<span class="dots">·  </span>definiciones  <span class="type">List&lt;DefVariable&gt;</span> = 
+<span class="dots">·  ·  </span>DefVariable &rarr;                                          <span class="pos">2:11  2:16   </span><span class="sourceText">float </span><span class="posText">precio</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  </span><span class="value">RealType</span> &rarr;                                          <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  </span>"<span class="value">precio</span>"  
+<span class="dots">·  ·  </span>DefVariable &rarr;                                          <span class="pos">3:9  3:14    </span><span class="sourceText">int </span><span class="posText">precio</span><span class="sourceText">;    // Error: variable ya definida</span>
+<span class="dots">·  ·  |  </span><span class="value">IntType</span> &rarr;                                           <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  </span>"<span class="value">precio</span>"  
+<span class="dots">·  ·  </span>DefVariable &rarr;                                          <span class="pos">4:9  4:13    </span><span class="sourceText">int </span><span class="posText">ancho</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  </span><span class="value">IntType</span> &rarr;                                           <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  </span>"<span class="value">ancho</span>"  
+<span class="dots">·  </span>sentencias  <span class="type">List&lt;Sentencia&gt;</span> = 
+<span class="dots">·  ·  </span>Print &rarr;                                                <span class="pos">7:11  7:16   </span><span class="sourceText">print </span><span class="posText">precio</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  </span>"precio"  <span class="type">Variable.nombre</span>                           <span class="pos">7:11  7:16   </span><span class="sourceText">print </span><span class="posText">precio</span><span class="sourceText">;</span>
+<span class="dots">·  ·  </span>Print &rarr;                                                <span class="pos">8:11  8:20   </span><span class="sourceText">print </span><span class="posText">nodefinida</span><span class="sourceText">;    // Error: variable no definida</span>
+<span class="dots">·  ·  |  </span>"nodefinida"  <span class="type">Variable.nombre</span>                       <span class="pos">8:11  8:20   </span><span class="sourceText">print </span><span class="posText">nodefinida</span><span class="sourceText">;    // Error: variable no definida</span>
+
+[ASTPrinter] --------------------------------
+</pre>
+</body>
+</html>

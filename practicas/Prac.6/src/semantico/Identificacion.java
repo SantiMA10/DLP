@@ -6,28 +6,34 @@ import ast.*;
 import main.*;
 import visitor.*;
 
-
+/**
+ * @author Raúl Izquierdo
+ */
 public class Identificacion extends DefaultVisitor {
 
 	public Identificacion(GestorErrores gestor) {
 		this.gestorErrores = gestor;
 	}
 
-	
-	
-	/*
-	 * Poner aquí los visit necesarios.
-	 * Si se ha usado VGen solo hay que copiarlos de la clase 'visitor/_PlantillaParaVisitors.txt'.
-	 */
-
-	// public Object visit(Programa prog, Object param) {
-	// ...
-	// }
 
 	
-	
-	
-	
+	//	class DefVariable { Tipo tipo;  String nombre; }
+	public Object visit(DefVariable node, Object param) {
+		DefVariable definicion = variables.get(node.getNombre());
+		predicado(definicion == null, "Variable ya definida: " + node.getNombre(), node.getStart());
+		variables.put(node.getNombre(), node);
+		return null;
+	}
+
+	//	class Variable { String nombre; }
+	public Object visit(Variable node, Object param) {
+		DefVariable definicion = variables.get(node.getNombre());
+		predicado(definicion != null, "Variable no definida: " + node.getNombre(), node.getStart());
+		node.setDefinicion(definicion); // Enlazar referencia con definición
+		return null;
+	}
+
+
 	/**
 	 * Método auxiliar opcional para ayudar a implementar los predicados de la Gramática Atribuida.
 	 * 
@@ -49,4 +55,6 @@ public class Identificacion extends DefaultVisitor {
 
 
 	private GestorErrores gestorErrores;
+	private Map<String, DefVariable> variables = new HashMap<String, DefVariable>();
+
 }

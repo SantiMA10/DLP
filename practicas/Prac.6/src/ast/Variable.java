@@ -32,6 +32,16 @@ public class Variable extends AbstractExpresion {
 		return v.visit(this, param);
 	}
 
+	public DefVariable getDefinicion() {
+		return definicion;
+	}
+
+	public void setDefinicion(DefVariable definicion) {
+		this.definicion = definicion;
+	}
+
+	private DefVariable definicion;
+
 	private String nombre;
 }
 
