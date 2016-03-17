@@ -1,0 +1,10 @@
+DATA
+	float f;
+	int i;
+
+CODE
+	i = 2.0;	// Error
+	f = 2;		// Error
+	print 1 + 2.5;	// Error
+	2 = i;			// Error, pero no de tipo
+	
