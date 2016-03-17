@@ -47,7 +47,7 @@ import ast.Position;
 "&&"						{ return Parser.AND; }
 "||"						{ return Parser.OR; }
 [0-9]+						{ return Parser.LITENT; }
-[0-9]+.[0-9]+				{ return Parser.LITREAL; }
+[0-9]+"."[0-9]+				{ return Parser.LITREAL; }
 '[a-zA-ZÒ—0-9]'	| '\\n'		{ return Parser.LITCHAR; }
 
 int 						{ return Parser.INT; }
