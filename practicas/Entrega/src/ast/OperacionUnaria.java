@@ -6,31 +6,22 @@ package ast;
 
 import visitor.*;
 
-//	op_bin:expr -> izq:expr  string:String  der:expr
+//	operacionUnaria:expr -> string:String  der:expr
 
-public class Op_bin extends AbstractExpr {
+public class OperacionUnaria extends AbstractExpr {
 
-	public Op_bin(Expr izq, String string, Expr der) {
-		this.izq = izq;
+	public OperacionUnaria(String string, Expr der) {
 		this.string = string;
 		this.der = der;
 
-		searchForPositions(izq, der);	// Obtener linea/columna a partir de los hijos
+		searchForPositions(der);	// Obtener linea/columna a partir de los hijos
 	}
 
-	public Op_bin(Object izq, Object string, Object der) {
-		this.izq = (Expr) izq;
+	public OperacionUnaria(Object string, Object der) {
 		this.string = (string instanceof Token) ? ((Token)string).getLexeme() : (String) string;
 		this.der = (Expr) der;
 
-		searchForPositions(izq, string, der);	// Obtener linea/columna a partir de los hijos
-	}
-
-	public Expr getIzq() {
-		return izq;
-	}
-	public void setIzq(Expr izq) {
-		this.izq = izq;
+		searchForPositions(string, der);	// Obtener linea/columna a partir de los hijos
 	}
 
 	public String getString() {
@@ -52,7 +43,6 @@ public class Op_bin extends AbstractExpr {
 		return v.visit(this, param);
 	}
 
-	private Expr izq;
 	private String string;
 	private Expr der;
 }

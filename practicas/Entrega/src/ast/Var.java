@@ -33,15 +33,17 @@ public class Var extends AbstractExpr {
 	}
 
 	private String string;
-	
+	private DefVar definicion;
+
+	public void setDefinicion(DefVar ref) {
+		this.definicion = ref;
+		
+	}
+
 	public DefVar getDefinicion() {
 		return definicion;
 	}
-
-	public void setDefinicion(DefVar definicion) {
-		this.definicion = definicion;
-	}
-
-	private DefVar definicion;
+	
+	
 }
 

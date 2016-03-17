@@ -1,12 +1,14 @@
 package visitor;
 
 import java.util.List;
+
 import ast.ArrayType;
 import ast.Asignacion;
 import ast.Cast;
 import ast.CharType;
 import ast.DefVar;
 import ast.Expr;
+import ast.ExpresionNumerica;
 import ast.Funcion;
 import ast.If;
 import ast.IntType;
@@ -14,8 +16,7 @@ import ast.Invocacion;
 import ast.Lintchar;
 import ast.Lintent;
 import ast.Lintreal;
-import ast.Op_bin;
-import ast.Op_un;
+import ast.OperacionUnaria;
 import ast.Parametro;
 import ast.Print;
 import ast.Programa;
@@ -292,7 +293,7 @@ public class PrintVisitor extends DefaultVisitor {
 		}
 
 		//	class Op_bin { Expr izq;  String string;  Expr der; }
-		public Object visit(Op_bin node, Object param) {
+		public Object visit(ExpresionNumerica node, Object param) {
 
 			// super.visit(node, param);
 
@@ -315,7 +316,7 @@ public class PrintVisitor extends DefaultVisitor {
 		}
 
 		//	class Op_un { String string;  Expr der; }
-		public Object visit(Op_un node, Object param) {
+		public Object visit(OperacionUnaria node, Object param) {
 			
 			System.out.print(node.getString().charAt(0));
 			super.visit(node, param);

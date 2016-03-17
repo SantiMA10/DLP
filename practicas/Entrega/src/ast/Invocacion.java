@@ -5,7 +5,6 @@
 package ast;
 
 import java.util.*;
-
 import visitor.*;
 
 //	invocacion:sent_func, expr -> nombre:String  expr:expr*  ambito:String
@@ -58,15 +57,15 @@ public class Invocacion extends AbstractTraceable implements Sent_func, Expr {
 	private String nombre;
 	private List<Expr> expr;
 	private String ambito;
+	private Funcion definicion;
 	
+	public void setDefinicion(Funcion ref) {
+		this.definicion = ref;
+		
+	}
+
 	public Funcion getDefinicion() {
 		return definicion;
 	}
-
-	public void setDefinicion(Funcion definicion) {
-		this.definicion = definicion;
-	}
-
-	private Funcion definicion;
 }
 

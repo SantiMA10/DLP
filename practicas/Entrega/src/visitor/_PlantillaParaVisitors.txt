@@ -230,8 +230,8 @@ public class <nombre clase> extends DefaultVisitor {
 		return null;
 	}
 
-	//	class Op_bin { Expr izq;  String string;  Expr der; }
-	public Object visit(Op_bin node, Object param) {
+	//	class ExpresionLogica { Expr izq;  String string;  Expr der; }
+	public Object visit(ExpresionLogica node, Object param) {
 
 		// super.visit(node, param);
 
@@ -244,8 +244,36 @@ public class <nombre clase> extends DefaultVisitor {
 		return null;
 	}
 
-	//	class Op_un { String string;  Expr der; }
-	public Object visit(Op_un node, Object param) {
+	//	class ExpresionNumerica { Expr izq;  String string;  Expr der; }
+	public Object visit(ExpresionNumerica node, Object param) {
+
+		// super.visit(node, param);
+
+		if (node.getIzq() != null)
+			node.getIzq().accept(this, param);
+
+		if (node.getDer() != null)
+			node.getDer().accept(this, param);
+
+		return null;
+	}
+
+	//	class AccesoArray { Expr izq;  Expr der; }
+	public Object visit(AccesoArray node, Object param) {
+
+		// super.visit(node, param);
+
+		if (node.getIzq() != null)
+			node.getIzq().accept(this, param);
+
+		if (node.getDer() != null)
+			node.getDer().accept(this, param);
+
+		return null;
+	}
+
+	//	class OperacionUnaria { String string;  Expr der; }
+	public Object visit(OperacionUnaria node, Object param) {
 
 		// super.visit(node, param);
 
@@ -255,8 +283,8 @@ public class <nombre clase> extends DefaultVisitor {
 		return null;
 	}
 
-	//	class Acceso_struct { Expr struct;  String string; }
-	public Object visit(Acceso_struct node, Object param) {
+	//	class AccesoStruct { Expr struct;  String string; }
+	public Object visit(AccesoStruct node, Object param) {
 
 		// super.visit(node, param);
 

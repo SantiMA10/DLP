@@ -854,67 +854,67 @@ case 40:
 break;
 case 41:
 //#line 93 "sintac.y"
-{ yyval = new Op_bin( val_peek(2), "*", val_peek(0) ); }
+{ yyval = new ExpresionNumerica( val_peek(2), "*", val_peek(0) ); }
 break;
 case 42:
 //#line 94 "sintac.y"
-{ yyval = new Op_bin( val_peek(2), "/", val_peek(0) ); }
+{ yyval = new ExpresionNumerica( val_peek(2), "/", val_peek(0) ); }
 break;
 case 43:
 //#line 95 "sintac.y"
-{ yyval = new Op_bin( val_peek(2), "+", val_peek(0) ); }
+{ yyval = new ExpresionNumerica( val_peek(2), "+", val_peek(0) ); }
 break;
 case 44:
 //#line 96 "sintac.y"
-{ yyval = new Op_bin( val_peek(2), "-", val_peek(0) ); }
+{ yyval = new ExpresionNumerica( val_peek(2), "-", val_peek(0) ); }
 break;
 case 45:
 //#line 97 "sintac.y"
-{ yyval = new Op_bin( val_peek(2), "<", val_peek(0) ); }
+{ yyval = new ExpresionNumerica( val_peek(2), "<", val_peek(0) ); }
 break;
 case 46:
 //#line 98 "sintac.y"
-{ yyval = new Op_bin( val_peek(2), ">", val_peek(0) ); }
+{ yyval = new ExpresionNumerica( val_peek(2), ">", val_peek(0) ); }
 break;
 case 47:
 //#line 99 "sintac.y"
-{ yyval = new Op_bin( val_peek(2), ">=", val_peek(0) ); }
+{ yyval = new ExpresionNumerica( val_peek(2), ">=", val_peek(0) ); }
 break;
 case 48:
 //#line 100 "sintac.y"
-{ yyval = new Op_bin( val_peek(2), "<=", val_peek(0) ); }
+{ yyval = new ExpresionNumerica( val_peek(2), "<=", val_peek(0) ); }
 break;
 case 49:
 //#line 101 "sintac.y"
-{ yyval = new Op_bin( val_peek(2), "==", val_peek(0) ); }
+{ yyval = new ExpresionNumerica( val_peek(2), "==", val_peek(0) ); }
 break;
 case 50:
 //#line 102 "sintac.y"
-{ yyval = new Op_bin( val_peek(2), "!=", val_peek(0) ); }
+{ yyval = new ExpresionNumerica( val_peek(2), "!=", val_peek(0) ); }
 break;
 case 51:
 //#line 103 "sintac.y"
-{ yyval = new Op_bin( val_peek(2), "&&", val_peek(0) ); }
+{ yyval = new ExpresionLogica( val_peek(2), "&&", val_peek(0) ); }
 break;
 case 52:
 //#line 104 "sintac.y"
-{ yyval = new Op_bin( val_peek(2), "||", val_peek(0) ); }
+{ yyval = new ExpresionLogica( val_peek(2), "||", val_peek(0) ); }
 break;
 case 53:
 //#line 105 "sintac.y"
-{ yyval = new Op_un("!", val_peek(0)); }
+{ yyval = new OperacionUnaria("!", val_peek(0)); }
 break;
 case 54:
 //#line 106 "sintac.y"
-{ yyval = new Op_un("()", val_peek(1)); }
+{ yyval = new OperacionUnaria("()", val_peek(1)); }
 break;
 case 55:
 //#line 107 "sintac.y"
-{ yyval = new Acceso_struct( val_peek(2), val_peek(0) );}
+{ yyval = new AccesoStruct( val_peek(2), val_peek(0) );}
 break;
 case 56:
 //#line 108 "sintac.y"
-{ yyval = new Op_bin( val_peek(3), "[]", val_peek(1) ); }
+{ yyval = new AccesoArray( val_peek(3), val_peek(1) ); }
 break;
 case 57:
 //#line 109 "sintac.y"

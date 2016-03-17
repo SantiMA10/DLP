@@ -90,22 +90,22 @@ expr: 'LITENT'							{ $$ = new Lintent($1); }
 	| 'LITCHAR'							{ $$ = new Lintchar($1); }
 	| 'IDENT'							{ $$ = new Var($1); }
 	| 'CAST' '<' tipo '>' '(' expr ')'	{ $$ = new Cast( $3, $6); }
-	| expr '*' expr						{ $$ = new Op_bin( $1, "*", $3 ); }
-	| expr '/' expr						{ $$ = new Op_bin( $1, "/", $3 ); }
-	| expr '+' expr						{ $$ = new Op_bin( $1, "+", $3 ); }
-	| expr '-' expr						{ $$ = new Op_bin( $1, "-", $3 ); }
-	| expr '<' expr						{ $$ = new Op_bin( $1, "<", $3 ); }
-	| expr '>' expr						{ $$ = new Op_bin( $1, ">", $3 ); }
-	| expr 'MAYOR_IGUAL' expr			{ $$ = new Op_bin( $1, ">=", $3 ); }
-	| expr 'MENOR_IGUAL' expr			{ $$ = new Op_bin( $1, "<=", $3 ); }
-	| expr 'IGUAL' expr					{ $$ = new Op_bin( $1, "==", $3 ); }
-	| expr 'DISTINTO' expr				{ $$ = new Op_bin( $1, "!=", $3 ); }
-	| expr 'AND' expr					{ $$ = new Op_bin( $1, "&&", $3 ); }
-	| expr 'OR' expr					{ $$ = new Op_bin( $1, "||", $3 ); }
-	| '!' expr							{ $$ = new Op_un("!", $2); }
-	| '(' expr ')'						{ $$ = new Op_un("()", $2); }
-	| expr '.' 'IDENT'					{ $$ = new Acceso_struct( $1, $3 );}
-	| expr '[' expr ']'					{ $$ = new Op_bin( $1, "[]", $3 ); }
+	| expr '*' expr						{ $$ = new ExpresionNumerica( $1, "*", $3 ); }
+	| expr '/' expr						{ $$ = new ExpresionNumerica( $1, "/", $3 ); }
+	| expr '+' expr						{ $$ = new ExpresionNumerica( $1, "+", $3 ); }
+	| expr '-' expr						{ $$ = new ExpresionNumerica( $1, "-", $3 ); }
+	| expr '<' expr						{ $$ = new ExpresionNumerica( $1, "<", $3 ); }
+	| expr '>' expr						{ $$ = new ExpresionNumerica( $1, ">", $3 ); }
+	| expr 'MAYOR_IGUAL' expr			{ $$ = new ExpresionNumerica( $1, ">=", $3 ); }
+	| expr 'MENOR_IGUAL' expr			{ $$ = new ExpresionNumerica( $1, "<=", $3 ); }
+	| expr 'IGUAL' expr					{ $$ = new ExpresionNumerica( $1, "==", $3 ); }
+	| expr 'DISTINTO' expr				{ $$ = new ExpresionNumerica( $1, "!=", $3 ); }
+	| expr 'AND' expr					{ $$ = new ExpresionLogica( $1, "&&", $3 ); }
+	| expr 'OR' expr					{ $$ = new ExpresionLogica( $1, "||", $3 ); }
+	| '!' expr							{ $$ = new OperacionUnaria("!", $2); }
+	| '(' expr ')'						{ $$ = new OperacionUnaria("()", $2); }
+	| expr '.' 'IDENT'					{ $$ = new AccesoStruct( $1, $3 );}
+	| expr '[' expr ']'					{ $$ = new AccesoArray( $1, $3 ); }
 	| 'IDENT' '(' paso_parametros_ ')' 	{ $$ = new Invocacion( $1, $3, "parametro" ); }
 	;
 

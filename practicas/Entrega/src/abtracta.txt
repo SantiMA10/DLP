@@ -24,9 +24,11 @@ asignacion:sent_func -> izq:expr der:expr;
 invocacion:sent_func,expr -> nombre:string expr* ambito:string;
 return:sent_func -> expr;
 
-op_bin:expr -> izq:expr string der:expr;
-op_un:expr -> string der:expr;
-acceso_struct:expr -> struct:expr string;
+expresionLogica:expr -> izq:expr string der:expr;
+expresionNumerica:expr -> izq:expr string der:expr;
+accesoArray:expr -> izq:expr der:expr;
+operacionUnaria:expr -> string der:expr;
+accesoStruct:expr -> struct:expr string;
 lintent:expr -> string;
 lintreal:expr -> string;
 lintchar:expr -> string;

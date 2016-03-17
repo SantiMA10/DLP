@@ -278,11 +278,11 @@ public class ASTPrinter extends DefaultVisitor {
 		return null;
 	}
 
-	//	class Op_bin { Expr izq;  String string;  Expr der; }
-	public Object visit(Op_bin node, Object param) {
+	//	class ExpresionLogica { Expr izq;  String string;  Expr der; }
+	public Object visit(ExpresionLogica node, Object param) {
 		int indent = ((Integer)param).intValue();
 
-		printName(indent, "Op_bin", node, false);
+		printName(indent, "ExpresionLogica", node, false);
 
 		visit(indent + 1, "izq", "Expr",node.getIzq());
 		print(indent + 1, "string", "String", node.getString());
@@ -290,22 +290,45 @@ public class ASTPrinter extends DefaultVisitor {
 		return null;
 	}
 
-	//	class Op_un { String string;  Expr der; }
-	public Object visit(Op_un node, Object param) {
+	//	class ExpresionNumerica { Expr izq;  String string;  Expr der; }
+	public Object visit(ExpresionNumerica node, Object param) {
 		int indent = ((Integer)param).intValue();
 
-		printName(indent, "Op_un", node, false);
+		printName(indent, "ExpresionNumerica", node, false);
+
+		visit(indent + 1, "izq", "Expr",node.getIzq());
+		print(indent + 1, "string", "String", node.getString());
+		visit(indent + 1, "der", "Expr",node.getDer());
+		return null;
+	}
+
+	//	class AccesoArray { Expr izq;  Expr der; }
+	public Object visit(AccesoArray node, Object param) {
+		int indent = ((Integer)param).intValue();
+
+		printName(indent, "AccesoArray", node, false);
+
+		visit(indent + 1, "izq", "Expr",node.getIzq());
+		visit(indent + 1, "der", "Expr",node.getDer());
+		return null;
+	}
+
+	//	class OperacionUnaria { String string;  Expr der; }
+	public Object visit(OperacionUnaria node, Object param) {
+		int indent = ((Integer)param).intValue();
+
+		printName(indent, "OperacionUnaria", node, false);
 
 		print(indent + 1, "string", "String", node.getString());
 		visit(indent + 1, "der", "Expr",node.getDer());
 		return null;
 	}
 
-	//	class Acceso_struct { Expr struct;  String string; }
-	public Object visit(Acceso_struct node, Object param) {
+	//	class AccesoStruct { Expr struct;  String string; }
+	public Object visit(AccesoStruct node, Object param) {
 		int indent = ((Integer)param).intValue();
 
-		printName(indent, "Acceso_struct", node, false);
+		printName(indent, "AccesoStruct", node, false);
 
 		visit(indent + 1, "struct", "Expr",node.getStruct());
 		print(indent + 1, "string", "String", node.getString());

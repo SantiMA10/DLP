@@ -6,22 +6,31 @@ package ast;
 
 import visitor.*;
 
-//	op_un:expr -> string:String  der:expr
+//	expresionNumerica:expr -> izq:expr  string:String  der:expr
 
-public class Op_un extends AbstractExpr {
+public class ExpresionNumerica extends AbstractExpr {
 
-	public Op_un(String string, Expr der) {
+	public ExpresionNumerica(Expr izq, String string, Expr der) {
+		this.izq = izq;
 		this.string = string;
 		this.der = der;
 
-		searchForPositions(der);	// Obtener linea/columna a partir de los hijos
+		searchForPositions(izq, der);	// Obtener linea/columna a partir de los hijos
 	}
 
-	public Op_un(Object string, Object der) {
+	public ExpresionNumerica(Object izq, Object string, Object der) {
+		this.izq = (Expr) izq;
 		this.string = (string instanceof Token) ? ((Token)string).getLexeme() : (String) string;
 		this.der = (Expr) der;
 
-		searchForPositions(string, der);	// Obtener linea/columna a partir de los hijos
+		searchForPositions(izq, string, der);	// Obtener linea/columna a partir de los hijos
+	}
+
+	public Expr getIzq() {
+		return izq;
+	}
+	public void setIzq(Expr izq) {
+		this.izq = izq;
 	}
 
 	public String getString() {
@@ -43,6 +52,7 @@ public class Op_un extends AbstractExpr {
 		return v.visit(this, param);
 	}
 
+	private Expr izq;
 	private String string;
 	private Expr der;
 }
