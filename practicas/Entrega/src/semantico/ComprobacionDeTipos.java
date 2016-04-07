@@ -220,13 +220,11 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	//	class ExpresionLogica { Expr izq;  String string;  Expr der; }
 	public Object visit(ExpresionLogica node, Object param) {
 
-		// super.visit(node, param);
+		super.visit(node, param);
 
-		if (node.getIzq() != null)
-			node.getIzq().accept(this, param);
-
-		if (node.getDer() != null)
-			node.getDer().accept(this, param);
+		predicado(!(node.getDer().getTipo() instanceof CharType) &&
+				isIgualTipo(node.getIzq().getTipo(), node.getDer().getTipo()), 
+					"No se puede operar con chars", node.getStart());
 
 		return null;
 	}
@@ -234,13 +232,11 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	//	class ExpresionNumerica { Expr izq;  String string;  Expr der; }
 	public Object visit(ExpresionNumerica node, Object param) {
 
-		// super.visit(node, param);
-
-		if (node.getIzq() != null)
-			node.getIzq().accept(this, param);
-
-		if (node.getDer() != null)
-			node.getDer().accept(this, param);
+		super.visit(node, param);
+		
+		predicado(!(node.getIzq().getTipo() instanceof CharType) 
+				|| !(node.getDer().getTipo() instanceof CharType), 
+					"No se puede operar con chars", node.getStart());
 
 		return null;
 	}
@@ -248,13 +244,14 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	//	class AccesoArray { Expr izq;  Expr der; }
 	public Object visit(AccesoArray node, Object param) {
 
-		// super.visit(node, param);
+		super.visit(node, param);
 
-		if (node.getIzq() != null)
-			node.getIzq().accept(this, param);
-
-		if (node.getDer() != null)
-			node.getDer().accept(this, param);
+		predicado(node.getIzq().getTipo() instanceof ArrayType, "Eso no es una array", node.getStart());
+		predicado(node.getDer().getTipo() instanceof IntType, 
+				"Para acceder a una array necesitas un numero", node.getStart());
+		
+		node.setModificable(false);
+		node.setTipo(((ArrayType)node.getIzq().getTipo()).getTipo());
 
 		return null;
 	}
@@ -262,10 +259,15 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	//	class OperacionUnaria { String string;  Expr der; }
 	public Object visit(OperacionUnaria node, Object param) {
 
-		// super.visit(node, param);
-
-		if (node.getDer() != null)
-			node.getDer().accept(this, param);
+		super.visit(node, param);
+		
+		if(node.getString().equals("!")){
+			predicado(node.getDer().getTipo() instanceof IntType, 
+					"Solo se puede operar con Ints", node.getStart());
+			
+			node.setTipo(node.getDer().getTipo());
+			node.setModificable(false);
+		}
 
 		return null;
 	}
@@ -273,10 +275,11 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	//	class AccesoStruct { Expr struct;  String string; }
 	public Object visit(AccesoStruct node, Object param) {
 
+		super.visit(node, param);
+
 		predicado(node.getStruct().getTipo() instanceof StructType, 
 				"Debe ser un nombre correcto", node.getStart()); 
 		node.setModificable(false);
-		super.visit(node, param);
 
 		return null;
 	}
@@ -308,11 +311,14 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	//	class Cast { Tipo tipo;  Expr expr; }
 	public Object visit(Cast node, Object param) {
 		
-		node.setModificable(false);
-		predicado(node.getTipo().equals(node.getExpr().getTipo()), 
-				"No se puede hacer cast al mismo tipo", node.getStart());
-		
 		super.visit(node, param);
+		
+		node.setModificable(false);
+		predicado(isIgualTipo(node.getTipo(), node.getExpr().getTipo()), 
+				"No se puede hacer cast al mismo tipo", node.getStart());
+		predicado(simple(node.getTipo()), "No se puede hacer cast a tipos complejos",
+				node.getStart());
+		
 
 		return null;
 	}
@@ -347,6 +353,10 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	
 	private boolean simple(Tipo tipo){
 		return tipo instanceof CharType || tipo instanceof IntType || tipo instanceof RealType;
+	}
+	
+	private boolean isIgualTipo(Tipo tipo1, Tipo tipo2){
+		return tipo1.getClass().isInstance(tipo2.getClass());
 	}
 	
 	
