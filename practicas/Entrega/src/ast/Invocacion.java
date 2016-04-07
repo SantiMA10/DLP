@@ -1,10 +1,11 @@
 /**
- * @generated VGen 1.3.3
+  * @generated VGen 1.3.3
  */
 
 package ast;
 
 import java.util.*;
+
 import visitor.*;
 
 //	invocacion:sent_func, expr -> nombre:String  expr:expr*  ambito:String
@@ -58,6 +59,24 @@ public class Invocacion extends AbstractTraceable implements Sent_func, Expr {
 	private List<Expr> expr;
 	private String ambito;
 	private Funcion definicion;
+	private Tipo tipo;
+	private Boolean modificable;
+	
+	public Tipo getTipo() {
+		return tipo;
+	}
+	
+	public void setTipo(Tipo tipo) {
+		this.tipo = tipo;
+	}
+	
+	public Boolean getModificable() {
+		return modificable;
+	}
+	
+	public void setModificable(Boolean modificable) {
+		this.modificable = modificable;
+	}	
 	
 	public void setDefinicion(Funcion ref) {
 		this.definicion = ref;
