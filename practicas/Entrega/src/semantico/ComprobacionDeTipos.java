@@ -66,10 +66,8 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 
 		if (node.getSent_func() != null)
 			for (Sent_func child : node.getSent_func()){
+				child.setFuncion(node);
 				child.accept(this, param);
-				if(child instanceof Return){
-					((Return)child).setFuncion(node);
-				}
 			}
 
 		if (node.getTipo() != null)
@@ -129,12 +127,16 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 			node.getExpr().accept(this, param);
 
 		if (node.getVerdadero() != null)
-			for (Sent_func child : node.getVerdadero())
+			for (Sent_func child : node.getVerdadero()){
+				child.setFuncion(node.getFuncion());
 				child.accept(this, param);
+			}
 
 		if (node.getFalso() != null)
-			for (Sent_func child : node.getFalso())
+			for (Sent_func child : node.getFalso()){
+				child.setFuncion(node.getFuncion());
 				child.accept(this, param);
+			}
 
 		return null;
 	}
@@ -148,8 +150,10 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 			node.getExpr().accept(this, param);
 
 		if (node.getSent_func() != null)
-			for (Sent_func child : node.getSent_func())
+			for (Sent_func child : node.getSent_func()){
+				child.setFuncion(node.getFuncion());
 				child.accept(this, param);
+			}
 
 		return null;
 	}
@@ -271,6 +275,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 
 		predicado(node.getStruct().getTipo() instanceof StructType, 
 				"Debe ser un nombre correcto", node.getStart()); 
+		node.setModificable(false);
 		super.visit(node, param);
 
 		return null;

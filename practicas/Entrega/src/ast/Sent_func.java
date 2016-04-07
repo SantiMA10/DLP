@@ -5,6 +5,9 @@
 package ast;
 
 public interface Sent_func extends AST {
+	
+	public Funcion getFuncion();
+	public void setFuncion(Funcion funcion);
 
 }
 

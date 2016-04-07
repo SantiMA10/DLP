@@ -35,14 +35,6 @@ public class Return extends AbstractSent_func {
 	}
 
 	private Expr expr;
-	private Funcion funcion;
-	public Funcion getFuncion() {
-		return funcion;
-	}
-
-	public void setFuncion(Funcion funcion) {
-		this.funcion = funcion;
-	}
 
 }
 
