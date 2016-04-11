@@ -107,6 +107,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		super.visit(node, param);
 
 		predicado(simple(node.getExpr().getTipo()), "Debe ser un tipo simple", node.getStart());
+		predicado(node.getExpr().getModificable(), "Debe ser moficable para read", node.getStart());
 
 		return null;
 	}
@@ -117,6 +118,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		super.visit(node, param);
 
 		predicado(node.getIzq().getModificable(), "La variable debe ser modificable", node.getStart());
+		predicado(simple(node.getIzq().getTipo()), "La variable debe ser simple", node.getStart());
 		predicado(isIgualTipo(node.getIzq().getTipo(), node.getDer().getTipo()),
 				"Los tipos debe coincidir [" + node.getIzq().getTipo() +", " + node.getDer().getTipo() + "]", node.getStart());
 		
@@ -129,7 +131,8 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		super.visit(node, param);
 		
 		predicado(node.getDefinicion().getParametro().size() == node.getExpr().size(),
-				"Debe coincidir el numero de parametros", node.getStart());
+				"Debe coincidir el numero de parametros [" + node.getDefinicion().getParametro().size() +
+				", " + node.getExpr().size() + "]", node.getStart());
 		
 		if(node.getDefinicion().getParametro().size() == node.getExpr().size()){
 			for(int i = 0; i < node.getExpr().size(); i++){
@@ -162,6 +165,10 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 				predicado(isIgualTipo(node.getExpr().getTipo(), node.getFuncion().getTipo()),
 						"El tipo de retorno debe coincidir", node.getStart());
 			}
+			else{
+				predicado(node.getFuncion().getTipo() == null,
+						"La funcion debe tener un retorno", node.getStart());
+			}
 		}
 
 		return null;
@@ -191,7 +198,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 					"No se puede operar con chars", node.getStart());
 		
 		predicado(isIgualTipo(node.getDer().getTipo(), node.getIzq().getTipo()),
-				"Los dos operadores deben ser del mismo tipo", node.getStart());
+				"Los dos operandos deben ser del mismo tipo", node.getStart());
 		
 		node.setModificable(false);
 		node.setTipo(node.getDer().getTipo());
@@ -207,7 +214,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 
 		predicado(node.getIzq().getTipo() instanceof ArrayType, "Eso no es una array", node.getStart());
 		predicado(node.getDer().getTipo() instanceof IntType, 
-				"Para acceder a una array necesitas un numero", node.getStart());
+				"Para acceder a una array necesitas un entero", node.getStart());
 		
 		node.setModificable(false);
 		if(node.getIzq().getTipo() instanceof ArrayType)
