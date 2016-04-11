@@ -252,6 +252,20 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		predicado(node.getStruct().getTipo() instanceof StructType, 
 				"Debe ser tipo Struct", node.getStart()); 
 		node.setModificable(false);
+		
+		if(node.getStruct().getTipo() instanceof StructType){
+			StructType st = (StructType)node.getStruct().getTipo();
+			Struct s = (Struct)st.getDefinicion();
+			
+			for(DefVar var: s.getDefvar()){
+				if(var.getNombre().equals(node.getString())){
+					node.setTipo(var.getTipo());
+				}
+			}
+			predicado(node.getTipo() != null, 
+					"Campo no definido", node.getStart()); 
+		}
+		
 
 		return null;
 	}
@@ -326,7 +340,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	}
 	
 	private boolean simple(Tipo tipo){
-		return tipo instanceof CharType || tipo instanceof IntType || tipo instanceof RealType;
+		return tipo instanceof CharType || tipo instanceof IntType || tipo instanceof RealType || tipo == null;
 	}
 	
 	private boolean isIgualTipo(Tipo tipo1, Tipo tipo2){
