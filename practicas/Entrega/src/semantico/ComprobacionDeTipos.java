@@ -209,10 +209,15 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	//	class Return { Expr expr; }
 	public Object visit(Return node, Object param) {
 
-		// super.visit(node, param);
-
-		if (node.getExpr() != null)
-			node.getExpr().accept(this, param);
+		super.visit(node, param);
+		
+		if(node.getFuncion().getTipo() == null){
+			predicado(node.getExpr() == null, "La funcion no debe tener return", node.getStart());
+		}
+		else{
+			predicado(isIgualTipo(node.getExpr().getTipo(), node.getFuncion().getTipo()),
+					"El tipo de retorno debe coincidir", node.getStart());
+		}
 
 		return null;
 	}
@@ -222,9 +227,12 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 
 		super.visit(node, param);
 
-		predicado(!(node.getDer().getTipo() instanceof CharType) &&
-				isIgualTipo(node.getIzq().getTipo(), node.getDer().getTipo()), 
-					"No se puede operar con chars", node.getStart());
+		predicado((node.getDer().getTipo() instanceof IntType) &&
+				(node.getIzq().getTipo() instanceof IntType), 
+					"Las operaciones logicas solo son para Ints", node.getStart());
+		
+		node.setModificable(true);
+		node.setTipo(node.getDer().getTipo());
 
 		return null;
 	}
@@ -234,9 +242,15 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 
 		super.visit(node, param);
 		
-		predicado(!(node.getIzq().getTipo() instanceof CharType) 
-				|| !(node.getDer().getTipo() instanceof CharType), 
+		predicado(!(node.getDer().getTipo() instanceof CharType), 
 					"No se puede operar con chars", node.getStart());
+		
+		predicado(isIgualTipo(node.getDer().getTipo(), node.getIzq().getTipo()),
+				"Los dos operadores deben ser del mismo tipo", node.getStart());
+		
+		node.setModificable(false);
+		node.setTipo(node.getDer().getTipo());
+		
 
 		return null;
 	}

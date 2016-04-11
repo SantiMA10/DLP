@@ -86,5 +86,15 @@ public class Invocacion extends AbstractTraceable implements Sent_func, Expr {
 	public Funcion getDefinicion() {
 		return definicion;
 	}
+
+	@Override
+	public Funcion getFuncion() {
+		return definicion;
+	}
+
+	@Override
+	public void setFuncion(Funcion funcion) {
+		definicion = funcion;
+	}
 }
 
