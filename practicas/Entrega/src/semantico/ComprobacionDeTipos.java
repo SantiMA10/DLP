@@ -161,10 +161,9 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	//	class Print { Expr expr; }
 	public Object visit(Print node, Object param) {
 
-		// super.visit(node, param);
+		super.visit(node, param);
 
-		if (node.getExpr() != null)
-			node.getExpr().accept(this, param);
+		predicado(simple(node.getExpr().getTipo()), "Debe ser un tipo simple", node.getStart());
 
 		return null;
 	}
@@ -172,10 +171,9 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	//	class Read { Expr expr; }
 	public Object visit(Read node, Object param) {
 
-		// super.visit(node, param);
+		super.visit(node, param);
 
-		if (node.getExpr() != null)
-			node.getExpr().accept(this, param);
+		predicado(simple(node.getExpr().getTipo()), "Debe ser un tipo simple", node.getStart());
 
 		return null;
 	}
@@ -183,25 +181,34 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	//	class Asignacion { Expr izq;  Expr der; }
 	public Object visit(Asignacion node, Object param) {
 
-		// super.visit(node, param);
+		super.visit(node, param);
 
-		if (node.getIzq() != null)
-			node.getIzq().accept(this, param);
-
-		if (node.getDer() != null)
-			node.getDer().accept(this, param);
-
+		predicado(isIgualTipo(node.getIzq().getTipo(), node.getDer().getTipo()),
+				"Los tipos debe coincidir", node.getStart());
+		predicado(node.getIzq().getModificable(), "La variable debe ser modificable", node.getStart());
+		
 		return null;
 	}
 
 	//	class Invocacion { String nombre;  List<Expr> expr;  String ambito; }
 	public Object visit(Invocacion node, Object param) {
 
-		// super.visit(node, param);
-
-		if (node.getExpr() != null)
-			for (Expr child : node.getExpr())
-				child.accept(this, param);
+		super.visit(node, param);
+		
+		predicado(node.getDefinicion().getParametro().size() == node.getExpr().size(),
+				"Debe coincidir el numero de parametros", node.getStart());
+		
+		for(int i = 0; i < node.getExpr().size(); i++){
+			predicado(isIgualTipo(
+						node.getDefinicion().getParametro().get(i).getTipo(), 
+						node.getExpr().get(i).getTipo()),
+					"Deben coincidir los tipos de los parametros", node.getStart());
+		}
+		
+		node.setTipo(node.getDefinicion().getTipo());
+		if(!node.getAmbito().equals("llamada")){
+			node.setModificable(false);
+		}
 
 		return null;
 	}
