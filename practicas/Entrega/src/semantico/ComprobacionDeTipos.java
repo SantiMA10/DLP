@@ -250,7 +250,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		super.visit(node, param);
 
 		predicado(node.getStruct().getTipo() instanceof StructType, 
-				"Debe ser un nombre correcto", node.getStart()); 
+				"Debe ser tipo Struct", node.getStart()); 
 		node.setModificable(false);
 
 		return null;
