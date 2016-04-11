@@ -59,6 +59,7 @@ public class Invocacion extends AbstractTraceable implements Sent_func, Expr {
 	private List<Expr> expr;
 	private String ambito;
 	private Funcion definicion;
+	private Funcion funcion;
 	private Tipo tipo;
 	private Boolean modificable;
 	
@@ -80,7 +81,6 @@ public class Invocacion extends AbstractTraceable implements Sent_func, Expr {
 	
 	public void setDefinicion(Funcion ref) {
 		this.definicion = ref;
-		
 	}
 
 	public Funcion getDefinicion() {
@@ -89,12 +89,12 @@ public class Invocacion extends AbstractTraceable implements Sent_func, Expr {
 
 	@Override
 	public Funcion getFuncion() {
-		return definicion;
+		return funcion;
 	}
 
 	@Override
 	public void setFuncion(Funcion funcion) {
-		definicion = funcion;
+		this.funcion = funcion;
 	}
 }
 

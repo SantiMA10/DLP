@@ -40,7 +40,7 @@ h():int {
 
 j(a:int, b:float):float {
 	h(2);	// Numero de argumentos incorrecto
-	return; // Debe haber un valor de retorno <---------------------
+	return; // Debe haber un valor de retorno
 }
 
 main() {
@@ -65,12 +65,12 @@ main() {
 	print juan; // Debe ser tipo simple
 	print f / 2.5;
 	
-	j(12, 12.5); // <---------
-	j(12, 12); // Tipo de los parámetros no coincide <---------
-	j(12);		// Número de argumentos no coincide  <---------
-	j(12, 12.5, 4); // Número de argumentos no coincide <---------
+	j(12, 12.5); 
+	j(12, 12); // Tipo de los parámetros no coincide 
+	j(12);		// Número de argumentos no coincide  
+	j(12, 12.5, 4); // Número de argumentos no coincide 
 	
-	print main();	// No tiene tipo de retorno <---------
+	print main();	// No tiene tipo de retorno
 	print j(12, 12.5);
 	print j(12, 12); // Tipo de los parámetros no coincide
 	print j(12);		// Número de argumentos no coincide
@@ -87,19 +87,19 @@ main() {
 	print 2.5 < 2;		// Deben ser del mismo tipo
 	print i == 2;
 	
-	print cast<int>(2.5) + i;   // <--------
-	print cast<Persona>(2.5);	// Tipos simples <--------
-	print cast<int>(juan);		// Expresiones de tipos simples <--------
-	print cast<float>(2.5);		// Deben ser distintos tipos <--------
+	print cast<int>(2.5) + i;   
+	print cast<Persona>(2.5);	// Tipos simples
+	print cast<int>(juan);		// Expresiones de tipos simples 
+	print cast<float>(2.5);		// Deben ser distintos tipos
 	
-	print juan[5];	// Debe ser tipo array <----
-	print 2[5];	// Debe ser tipo array <----
+	print juan[5];	// Debe ser tipo array 
+	print 2[5];	// Debe ser tipo array 
 	print v[5.0];	// Debe ser indice entero 
 	print v[i+2];
 	
-	print juan.edad; // <------
-	print 5.edad;	// Se requiere tipo struct <-----
-	print juan.nombre; // Campo no definido <------
+	print juan.edad;
+	print 5.edad;	// Se requiere tipo struct
+	print juan.nombre; // Campo no definido
 	
 }
 
