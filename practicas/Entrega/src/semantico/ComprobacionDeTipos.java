@@ -15,49 +15,16 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	 * Si se ha usado VGen solo hay que copiarlos de la clase 'visitor/_PlantillaParaVisitors.txt'.
 	 */
 
-//	class Programa { List<Sentencia> sentencia; }
-	public Object visit(Programa node, Object param) {
-
-		// super.visit(node, param);
-
-		if (node.getSentencia() != null)
-			for (Sentencia child : node.getSentencia())
-				child.accept(this, param);
-
-		return null;
-	}
-
-	//	class DefVar { String nombre;  Tipo tipo;  String ambito; }
-	public Object visit(DefVar node, Object param) {
-
-		// super.visit(node, param);
-
-		if (node.getTipo() != null)
-			node.getTipo().accept(this, param);
-
-		return null;
-	}
-
-	//	class Struct { String string;  List<DefVar> defvar; }
-	public Object visit(Struct node, Object param) {
-
-		// super.visit(node, param);
-
-		if (node.getDefvar() != null)
-			for (DefVar child : node.getDefvar())
-				child.accept(this, param);
-
-		return null;
-	}
-
 	//	class Funcion { String string;  List<Parametro> parametro;  List<DefVar> defvar;  List<Sent_func> sent_func;  Tipo tipo; }
 	public Object visit(Funcion node, Object param) {
 
 		// super.visit(node, param);
 
 		if (node.getParametro() != null)
-			for (Parametro child : node.getParametro())
+			for (Parametro child : node.getParametro()){
 				child.accept(this, param);
+				predicado(simple(child.getTipo()), "Los parametros deben ser simples", node.getStart());
+			}
 			
 
 		if (node.getDefvar() != null)
@@ -72,48 +39,10 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 
 		if (node.getTipo() != null)
 			node.getTipo().accept(this, param);
-
-		return null;
-	}
-
-	//	class IntType {  }
-	public Object visit(IntType node, Object param) {
-		return null;
-	}
-
-	//	class RealType {  }
-	public Object visit(RealType node, Object param) {
-		return null;
-	}
-
-	//	class CharType {  }
-	public Object visit(CharType node, Object param) {
-		return null;
-	}
-
-	//	class StructType { String string; }
-	public Object visit(StructType node, Object param) {
-		return null;
-	}
-
-	//	class ArrayType { Tipo tipo;  int size; }
-	public Object visit(ArrayType node, Object param) {
-
-		// super.visit(node, param);
-
-		if (node.getTipo() != null)
-			node.getTipo().accept(this, param);
-
-		return null;
-	}
-
-	//	class Parametro { String string;  Tipo tipo; }
-	public Object visit(Parametro node, Object param) {
-
-		// super.visit(node, param);
-
-		if (node.getTipo() != null)
-			node.getTipo().accept(this, param);
+		
+		if(node.getTipo() != null)
+			predicado(simple(node.getTipo()), "El tipo de retorno debe ser simple", node.getStart());
+		
 
 		return null;
 	}
@@ -187,9 +116,9 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 
 		super.visit(node, param);
 
-		predicado(isIgualTipo(node.getIzq().getTipo(), node.getDer().getTipo()),
-				"Los tipos debe coincidir", node.getStart());
 		predicado(node.getIzq().getModificable(), "La variable debe ser modificable", node.getStart());
+		predicado(isIgualTipo(node.getIzq().getTipo(), node.getDer().getTipo()),
+				"Los tipos debe coincidir [" + node.getIzq().getTipo() +", " + node.getDer().getTipo() + "]", node.getStart());
 		
 		return null;
 	}
@@ -202,12 +131,15 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		predicado(node.getDefinicion().getParametro().size() == node.getExpr().size(),
 				"Debe coincidir el numero de parametros", node.getStart());
 		
-		for(int i = 0; i < node.getExpr().size(); i++){
-			predicado(isIgualTipo(
-						node.getDefinicion().getParametro().get(i).getTipo(), 
-						node.getExpr().get(i).getTipo()),
-					"Deben coincidir los tipos de los parametros", node.getStart());
+		if(node.getDefinicion().getParametro().size() == node.getExpr().size()){
+			for(int i = 0; i < node.getExpr().size(); i++){
+				predicado(isIgualTipo(
+							node.getDefinicion().getParametro().get(i).getTipo(), 
+							node.getExpr().get(i).getTipo()),
+						"Deben coincidir los tipos de los parametros", node.getStart());
+			}
 		}
+		
 		
 		node.setTipo(node.getDefinicion().getTipo());
 		if(!node.getAmbito().equals("llamada")){
@@ -226,8 +158,10 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 			predicado(node.getExpr() == null, "La funcion no debe tener return", node.getStart());
 		}
 		else{
-			predicado(isIgualTipo(node.getExpr().getTipo(), node.getFuncion().getTipo()),
-					"El tipo de retorno debe coincidir", node.getStart());
+			if(node.getExpr() != null){
+				predicado(isIgualTipo(node.getExpr().getTipo(), node.getFuncion().getTipo()),
+						"El tipo de retorno debe coincidir", node.getStart());
+			}
 		}
 
 		return null;
@@ -276,7 +210,8 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 				"Para acceder a una array necesitas un numero", node.getStart());
 		
 		node.setModificable(false);
-		node.setTipo(((ArrayType)node.getIzq().getTipo()).getTipo());
+		if(node.getIzq().getTipo() instanceof ArrayType)
+			node.setTipo(((ArrayType)node.getIzq().getTipo()).getTipo());
 
 		return null;
 	}
@@ -381,7 +316,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	}
 	
 	private boolean isIgualTipo(Tipo tipo1, Tipo tipo2){
-		return tipo1.getClass().isInstance(tipo2.getClass());
+		return tipo1.getClass().isAssignableFrom(tipo2.getClass());
 	}
 	
 	

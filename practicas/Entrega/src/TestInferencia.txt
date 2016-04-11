@@ -40,7 +40,7 @@ h():int {
 
 j(a:int, b:float):float {
 	h(2);	// Numero de argumentos incorrecto
-	return; // Debe haber un valor de retorno
+	return; // Debe haber un valor de retorno <---------------------
 }
 
 main() {
