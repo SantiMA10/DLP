@@ -137,14 +137,15 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 				child.setFuncion(node.getFuncion());
 				child.accept(this, param);
 			}
+		
+		predicado(node.getExpr().getTipo() instanceof IntType,
+				"El tipo de la condición debe ser Int", node.getStart());
 
 		return null;
 	}
 
 	//	class While { Expr expr;  List<Sent_func> sent_func; }
 	public Object visit(While node, Object param) {
-
-		// super.visit(node, param);
 
 		if (node.getExpr() != null)
 			node.getExpr().accept(this, param);
@@ -154,6 +155,9 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 				child.setFuncion(node.getFuncion());
 				child.accept(this, param);
 			}
+		
+		predicado(node.getExpr().getTipo() instanceof IntType,
+				"El tipo de la condición debe ser Int", node.getStart());
 
 		return null;
 	}
