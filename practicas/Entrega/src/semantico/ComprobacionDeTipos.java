@@ -96,7 +96,12 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 
 		super.visit(node, param);
 
-		predicado(simple(node.getExpr().getTipo()), "Debe ser un tipo simple", node.getStart());
+		if(node.getExpr() instanceof Invocacion){
+			predicado(node.getExpr().getTipo() != null, "Debe tener un retorno", node.getStart());
+		}
+		else{
+			predicado(simple(node.getExpr().getTipo()), "Debe ser un tipo simple", node.getStart());
+		}
 
 		return null;
 	}
