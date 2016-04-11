@@ -286,9 +286,11 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		super.visit(node, param);
 		
 		node.setModificable(false);
-		predicado(isIgualTipo(node.getTipo(), node.getExpr().getTipo()), 
-				"No se puede hacer cast al mismo tipo", node.getStart());
+		predicado(!isIgualTipo(node.getTipo(), node.getExpr().getTipo()), 
+				"No se puede hacer cast al mismo tipo ["+node.getTipo()+", "+node.getExpr().getTipo()+"]", node.getStart());
 		predicado(simple(node.getTipo()), "No se puede hacer cast a tipos complejos",
+				node.getStart());
+		predicado(simple(node.getExpr().getTipo()), "No se puede hacer cast de tipos complejos",
 				node.getStart());
 		
 
