@@ -204,7 +204,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		
 		predicado(isIgualTipo(node.getDer().getTipo(), node.getIzq().getTipo()),
 				"Los dos operandos deben ser del mismo tipo", node.getStart());
-		
+				
 		node.setModificable(false);
 		node.setTipo(node.getDer().getTipo());
 		
@@ -236,10 +236,10 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		if(node.getString().equals("!")){
 			predicado(node.getDer().getTipo() instanceof IntType, 
 					"Solo se puede operar con Ints", node.getStart());
-			
-			node.setTipo(node.getDer().getTipo());
-			node.setModificable(false);
 		}
+		
+		node.setTipo(node.getDer().getTipo());
+		node.setModificable(false);
 
 		return null;
 	}
@@ -344,7 +344,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 	}
 	
 	private boolean isIgualTipo(Tipo tipo1, Tipo tipo2){
-		return tipo1.getClass().isAssignableFrom(tipo2.getClass());
+		return tipo1 != null && tipo2 != null ? tipo1.getClass().isAssignableFrom(tipo2.getClass()) : false;
 	}
 	
 	
