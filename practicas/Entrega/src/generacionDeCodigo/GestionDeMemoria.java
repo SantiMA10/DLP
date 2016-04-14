@@ -17,7 +17,7 @@ public class GestionDeMemoria extends DefaultVisitor {
 	public Object visit(Programa node, Object param) {
 
 		// super.visit(node, param);
-		
+
 		int sumaTamañoVariables = 0;
 
 		if (node.getSentencia() != null){
@@ -26,11 +26,29 @@ public class GestionDeMemoria extends DefaultVisitor {
 					((DefVar) child).setDireccion(sumaTamañoVariables);
 					sumaTamañoVariables += ((DefVar) child).getTipo().getMemSize();
 				}
+				child.accept(this, param);
 			}
 		}
-		
+
 		return null;
+
+	}
+
+	//	class Struct { String string;  List<DefVar> defvar; }
+	public Object visit(Struct node, Object param) {
+
+		// super.visit(node, param);
 		
+		int sumaTamañoVariables = 0;
+
+		if (node.getDefvar() != null)
+			for (DefVar child : node.getDefvar()){
+				child.setDireccion(sumaTamañoVariables);
+				sumaTamañoVariables += child.getTipo().getMemSize();
+				child.accept(this, param);
+			}
+
+		return null;
 	}
 
 }
