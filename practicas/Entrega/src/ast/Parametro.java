@@ -45,5 +45,15 @@ public class Parametro extends AbstractTraceable implements AST {
 
 	private String string;
 	private Tipo tipo;
+	private int direccion;
+	
+	public int getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(int direccion) {
+		this.direccion = direccion;
+	}
+	
 }
 
