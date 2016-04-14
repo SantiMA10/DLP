@@ -52,8 +52,19 @@ public class DefVar extends AbstractSentencia {
 		return v.visit(this, param);
 	}
 
+	public int getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(int direccion) {
+		this.direccion = direccion;
+	}
+
 	private String nombre;
 	private Tipo tipo;
 	private String ambito;
+	private int direccion;
+	
+	
 }
 

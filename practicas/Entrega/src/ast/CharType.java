@@ -14,6 +14,10 @@ public class CharType extends AbstractTipo {
 	public Object accept(Visitor v, Object param) { 
 		return v.visit(this, param);
 	}
+	
+	public int getMemSize() {
+		return 1;
+	}
 
 }
 

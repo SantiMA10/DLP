@@ -43,5 +43,14 @@ public class StructType extends AbstractTipo {
 	public Struct getDefinicion() {
 		return definicion;
 	}
+
+	@Override
+	public int getMemSize() {
+		int menSize = 0;
+		for(DefVar defVar : definicion.getDefvar()){
+			menSize += defVar.getTipo().getMemSize();
+		}
+		return menSize;
+	}
 }
 

@@ -45,5 +45,11 @@ public class ArrayType extends AbstractTipo {
 
 	private Tipo tipo;
 	private int size;
+	
+	@Override
+	public int getMemSize() {
+		return tipo.getMemSize()*size;
+	}
+	
 }
 
