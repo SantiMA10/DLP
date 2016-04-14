@@ -1,0 +1,47 @@
+<html>
+<head>
+<style type="text/css">
+.value { font-weight: bold; }
+.dots { color: #888888; }
+.type { color: #BBBBBB; }
+.pos { color: #CCCCCC; }
+.sourceText { color: #BBBBBB; }
+.posText {
+	color: #BBBBBB;
+	text-decoration: underline; font-weight: bold;
+}
+.null {
+	color: #FF0000;
+	font-weight: bold;
+	font-style: italic;
+}
+</style>
+</head>
+
+<body><pre>
+[ASTPrinter] -------------------------------- line:col  line:col
+
+<span class="dots"></span>Programa &rarr;                                                   <span class="pos">2:11  5:10   </span><span class="sourceText">float </span><span class="posText">f1;</span><span class="sourceText"> ... </span><span class="posText">int i2</span><span class="sourceText">;</span>
+<span class="dots">·  </span>definiciones  <span class="type">List&lt;DefVariable&gt;</span> = 
+<span class="dots">·  ·  </span>DefVariable &rarr;                                          <span class="pos">2:11  2:12   </span><span class="sourceText">float </span><span class="posText">f1</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  </span><span class="value">RealType</span> &rarr;                                          <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  </span>"<span class="value">f1</span>"  
+<span class="dots">·  ·  |  </span><span class="value">0</span>  <span class="type">int</span>
+<span class="dots">·  ·  </span>DefVariable &rarr;                                          <span class="pos">3:9  3:10    </span><span class="sourceText">int </span><span class="posText">i1</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  </span><span class="value">IntType</span> &rarr;                                           <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  </span>"<span class="value">i1</span>"  
+<span class="dots">·  ·  |  </span><span class="value">4</span>  <span class="type">int</span>
+<span class="dots">·  ·  </span>DefVariable &rarr;                                          <span class="pos">4:11  4:12   </span><span class="sourceText">float </span><span class="posText">f2</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  </span><span class="value">RealType</span> &rarr;                                          <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  </span>"<span class="value">f2</span>"  
+<span class="dots">·  ·  |  </span><span class="value">6</span>  <span class="type">int</span>
+<span class="dots">·  ·  </span>DefVariable &rarr;                                          <span class="pos">5:9  5:10    </span><span class="sourceText">int </span><span class="posText">i2</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  </span><span class="value">IntType</span> &rarr;                                           <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  </span>"<span class="value">i2</span>"  
+<span class="dots">·  ·  |  </span><span class="value">10</span>  <span class="type">int</span>
+<span class="dots">·  </span>sentencias  <span class="type">List&lt;Sentencia&gt;</span> = 
+
+[ASTPrinter] --------------------------------
+</pre>
+</body>
+</html>
