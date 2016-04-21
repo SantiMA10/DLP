@@ -12,11 +12,11 @@ import main.*;
 %}
 
 /* Precedencias aquí --------------------------------------- */
+%left 'AND' 'OR' '!'
+%left '<' '>' 'MAYOR_IGUAL' 'MENOR_IGUAL' 'IGUAL' 'DISTINTO' 
 %left '+' '-'
 %left '*' '/'
-%left '<' '>'
 %left '.' '[' '('
-%left 'MAYOR_IGUAL' 'MENOR_IGUAL' 'IGUAL' 'DISTINTO' 'AND' 'OR' '!'
 
 %%
 
