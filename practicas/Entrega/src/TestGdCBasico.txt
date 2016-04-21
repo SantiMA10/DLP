@@ -12,11 +12,11 @@ NOTA: Es posible que el alumno deba adaptar ligeramente la sintaxis del lenguaje
 */
 
 var a:int;
-var b:real;
+var b:float;
 
 struct Punto {
-	x:real;
-	y:real;
+	x:float;
+	y:float;
 };
 
 var v:[5]int;
@@ -32,6 +32,6 @@ main() {
 	print b + p.y;	// 6666.6
 	print v[3];		// 3333
 
-	print a > 0 && b < 3333.3;	// 1
+	print (a > 0) && (b < 3333.3);	// 1 los parentesis sobran
 	print cast<int>(b);			// 2222
 }

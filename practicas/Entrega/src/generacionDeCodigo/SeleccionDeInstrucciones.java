@@ -11,10 +11,20 @@ enum Funcion {
 }
 
 public class SeleccionDeInstrucciones extends DefaultVisitor {
+	
+	private Map<String, String> instruccion = new HashMap<String, String>();
 
 	public SeleccionDeInstrucciones(Writer writer, String sourceFile) {
 		this.writer = new PrintWriter(writer);
 		this.sourceFile = sourceFile;
+		
+		instruccion.put("+", "ADD");
+		instruccion.put("-", "SUB");
+		instruccion.put("*", "MUL");
+		instruccion.put("/", "DIV");
+		instruccion.put("&&", "AND");
+		instruccion.put("||", "OR");
+		
 	}
 
 	/*
@@ -41,7 +51,7 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 			node.getIzq().accept(this, Funcion.DIRECCION);
 
 		if (node.getDer() != null)
-			node.getDer().accept(this, param);
+			node.getDer().accept(this, Funcion.VALOR);
 		
 		genera("STORE", node.getDer().getTipo());
 
@@ -51,13 +61,13 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	//	class ExpresionLogica { Expr izq;  String string;  Expr der; }
 	public Object visit(ExpresionLogica node, Object param) {
 
-		// super.visit(node, param);
-
 		if (node.getIzq() != null)
-			node.getIzq().accept(this, param);
+			node.getIzq().accept(this, Funcion.VALOR);
 
 		if (node.getDer() != null)
-			node.getDer().accept(this, param);
+			node.getDer().accept(this, Funcion.VALOR);
+		
+		genera(instruccion.get(node.getString()));
 
 		return null;
 	}
@@ -65,13 +75,13 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	//	class ExpresionNumerica { Expr izq;  String string;  Expr der; }
 	public Object visit(ExpresionNumerica node, Object param) {
 
-		// super.visit(node, param);
-
 		if (node.getIzq() != null)
-			node.getIzq().accept(this, param);
+			node.getIzq().accept(this, Funcion.VALOR);
 
 		if (node.getDer() != null)
-			node.getDer().accept(this, param);
+			node.getDer().accept(this, Funcion.VALOR);
+		
+		genera(instruccion.get(node.getString()));
 
 		return null;
 	}
@@ -152,6 +162,10 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 		
 		if(Funcion.DIRECCION.equals(param)){
 			genera("PUSHA " + node.getDefinicion().getDireccion());
+		}
+		if(Funcion.VALOR.equals(param)){
+			visit(node, Funcion.DIRECCION);
+			genera("LOAD", node.getTipo());
 		}
 		
 		return null;

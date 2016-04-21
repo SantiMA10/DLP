@@ -189,7 +189,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 					"Las operaciones logicas solo son para Ints", node.getStart());
 		
 		node.setModificable(true);
-		node.setTipo(node.getDer().getTipo());
+		node.setTipo(new IntType());
 
 		return null;
 	}
@@ -206,7 +206,14 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 				"Los dos operandos deben ser del mismo tipo", node.getStart());
 				
 		node.setModificable(false);
-		node.setTipo(node.getDer().getTipo());
+		
+		if(node.getString().equals("*") || node.getString().equals("+") || node.getString().equals("-")
+				|| node.getString().equals("/")){
+			node.setTipo(node.getDer().getTipo());
+		}
+		else{
+			node.setTipo(new IntType());
+		}
 		
 
 		return null;
@@ -221,7 +228,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 		predicado(node.getDer().getTipo() instanceof IntType, 
 				"Para acceder a una array necesitas un entero", node.getStart());
 		
-		node.setModificable(false);
+		node.setModificable(true);
 		if(node.getIzq().getTipo() instanceof ArrayType)
 			node.setTipo(((ArrayType)node.getIzq().getTipo()).getTipo());
 
@@ -251,7 +258,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 
 		predicado(node.getStruct().getTipo() instanceof StructType, 
 				"Debe ser tipo Struct", node.getStart()); 
-		node.setModificable(false);
+		node.setModificable(true);
 		
 		if(node.getStruct().getTipo() instanceof StructType){
 			StructType st = (StructType)node.getStruct().getTipo();

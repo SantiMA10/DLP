@@ -52,7 +52,7 @@ public class GestionDeMemoria extends DefaultVisitor {
 	}
 	
 	//	class Funcion { String string;  List<Parametro> parametro;  List<DefVar> defvar;  List<Sent_func> sent_func;  Tipo tipo; }
-	public Object visit(Funcion node, Object param) {
+	public Object visit(ast.Funcion node, Object param) {
 
 		// super.visit(node, param);
 
