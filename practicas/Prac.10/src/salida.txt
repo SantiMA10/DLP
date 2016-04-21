@@ -1,0 +1,28 @@
+#source "entrada.txt"
+#VAR f:float
+#VAR i:int
+#line 6
+pusha 4
+push 5
+storei
+#line 7
+pusha 4
+loadi
+push 2
+divi
+outi
+#line 9
+pusha 0
+pushf 5.0
+storef
+#line 10
+pusha 0
+loadf
+pushf 2.0
+divf
+pushf 1.0
+addf
+pushf 2.0
+mulf
+outf
+halt

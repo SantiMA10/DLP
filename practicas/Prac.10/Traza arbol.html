@@ -1,0 +1,61 @@
+<html>
+<head>
+<style type="text/css">
+.value { font-weight: bold; }
+.dots { color: #888888; }
+.type { color: #BBBBBB; }
+.pos { color: #CCCCCC; }
+.sourceText { color: #BBBBBB; }
+.posText {
+	color: #BBBBBB;
+	text-decoration: underline; font-weight: bold;
+}
+.null {
+	color: #FF0000;
+	font-weight: bold;
+	font-style: italic;
+}
+</style>
+</head>
+
+<body><pre>
+[ASTPrinter] -------------------------------- line:col  line:col
+
+<span class="dots"></span>Programa &rarr;                                                   <span class="pos">2:11  10:31  </span><span class="sourceText">float </span><span class="posText">f;</span><span class="sourceText"> ... </span><span class="posText">print (f / 2.0 + 1.0) * 2.0</span><span class="sourceText">;    // 7.0</span>
+<span class="dots">·  </span>definiciones  <span class="type">List&lt;DefVariable&gt;</span> = 
+<span class="dots">·  ·  </span>DefVariable &rarr;                                          <span class="pos">2:11  2:11   </span><span class="sourceText">float </span><span class="posText">f</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  </span><span class="value">RealType</span> &rarr;                                          <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  </span>"<span class="value">f</span>"  
+<span class="dots">·  ·  |  </span><span class="value">0</span>  <span class="type">int</span>
+<span class="dots">·  ·  </span>DefVariable &rarr;                                          <span class="pos">3:9  3:9     </span><span class="sourceText">int </span><span class="posText">i</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  </span><span class="value">IntType</span> &rarr;                                           <span class="pos"><span class="null">null</span>  <span class="null">null</span>   </span>
+<span class="dots">·  ·  |  </span>"<span class="value">i</span>"  
+<span class="dots">·  ·  |  </span><span class="value">4</span>  <span class="type">int</span>
+<span class="dots">·  </span>sentencias  <span class="type">List&lt;Sentencia&gt;</span> = 
+<span class="dots">·  ·  </span>Asigna &rarr;                                               <span class="pos">6:5  6:9     </span><span class="sourceText"></span><span class="posText">i = 5</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  </span>"i"  <span class="type">Variable.nombre</span>                                <span class="pos">6:5  6:5     </span><span class="sourceText"></span><span class="posText">i</span><span class="sourceText"> = 5;</span>
+<span class="dots">·  ·  |  </span>"5"  <span class="type">LiteralInt.valor</span>                               <span class="pos">6:9  6:9     </span><span class="sourceText">i = </span><span class="posText">5</span><span class="sourceText">;</span>
+<span class="dots">·  ·  </span>Print &rarr;                                                <span class="pos">7:11  7:15   </span><span class="sourceText">print </span><span class="posText">i / 2</span><span class="sourceText">;    // 2</span>
+<span class="dots">·  ·  |  </span>ExprAritmetica &rarr;                                    <span class="pos">7:11  7:15   </span><span class="sourceText">print </span><span class="posText">i / 2</span><span class="sourceText">;    // 2</span>
+<span class="dots">·  ·  |  ·  </span>"i"  <span class="type">Variable.nombre</span>                             <span class="pos">7:11  7:11   </span><span class="sourceText">print </span><span class="posText">i</span><span class="sourceText"> / 2;    // 2</span>
+<span class="dots">·  ·  |  ·  </span>"<span class="value">/</span>"  
+<span class="dots">·  ·  |  ·  </span>"2"  <span class="type">LiteralInt.valor</span>                            <span class="pos">7:15  7:15   </span><span class="sourceText">print i / </span><span class="posText">2</span><span class="sourceText">;    // 2</span>
+<span class="dots">·  ·  </span>Asigna &rarr;                                               <span class="pos">9:5  9:11    </span><span class="sourceText"></span><span class="posText">f = 5.0</span><span class="sourceText">;</span>
+<span class="dots">·  ·  |  </span>"f"  <span class="type">Variable.nombre</span>                                <span class="pos">9:5  9:5     </span><span class="sourceText"></span><span class="posText">f</span><span class="sourceText"> = 5.0;</span>
+<span class="dots">·  ·  |  </span>"5.0"  <span class="type">LiteralReal.valor</span>                            <span class="pos">9:9  9:11    </span><span class="sourceText">f = </span><span class="posText">5.0</span><span class="sourceText">;</span>
+<span class="dots">·  ·  </span>Print &rarr;                                                <span class="pos">10:12  10:31 </span><span class="sourceText">print (</span><span class="posText">f / 2.0 + 1.0) * 2.0</span><span class="sourceText">;    // 7.0</span>
+<span class="dots">·  ·  |  </span>ExprAritmetica &rarr;                                    <span class="pos">10:12  10:31 </span><span class="sourceText">print (</span><span class="posText">f / 2.0 + 1.0) * 2.0</span><span class="sourceText">;    // 7.0</span>
+<span class="dots">·  ·  |  ·  </span>ExprAritmetica &rarr;                                 <span class="pos">10:12  10:24 </span><span class="sourceText">print (</span><span class="posText">f / 2.0 + 1.0</span><span class="sourceText">) * 2.0;    // 7.0</span>
+<span class="dots">·  ·  |  ·  |  </span>ExprAritmetica &rarr;                              <span class="pos">10:12  10:18 </span><span class="sourceText">print (</span><span class="posText">f / 2.0</span><span class="sourceText"> + 1.0) * 2.0;    // 7.0</span>
+<span class="dots">·  ·  |  ·  |  ·  </span>"f"  <span class="type">Variable.nombre</span>                       <span class="pos">10:12  10:12 </span><span class="sourceText">print (</span><span class="posText">f</span><span class="sourceText"> / 2.0 + 1.0) * 2.0;    // 7.0</span>
+<span class="dots">·  ·  |  ·  |  ·  </span>"<span class="value">/</span>"  
+<span class="dots">·  ·  |  ·  |  ·  </span>"2.0"  <span class="type">LiteralReal.valor</span>                   <span class="pos">10:16  10:18 </span><span class="sourceText">print (f / </span><span class="posText">2.0</span><span class="sourceText"> + 1.0) * 2.0;    // 7.0</span>
+<span class="dots">·  ·  |  ·  |  </span>"<span class="value">+</span>"  
+<span class="dots">·  ·  |  ·  |  </span>"1.0"  <span class="type">LiteralReal.valor</span>                      <span class="pos">10:22  10:24 </span><span class="sourceText">print (f / 2.0 + </span><span class="posText">1.0</span><span class="sourceText">) * 2.0;    // 7.0</span>
+<span class="dots">·  ·  |  ·  </span>"<span class="value">*</span>"  
+<span class="dots">·  ·  |  ·  </span>"2.0"  <span class="type">LiteralReal.valor</span>                         <span class="pos">10:29  10:31 </span><span class="sourceText">print (f / 2.0 + 1.0) * </span><span class="posText">2.0</span><span class="sourceText">;    // 7.0</span>
+
+[ASTPrinter] --------------------------------
+</pre>
+</body>
+</html>
