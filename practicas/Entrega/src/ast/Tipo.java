@@ -7,6 +7,7 @@ package ast;
 public interface Tipo extends AST {
 	
 	public int getMemSize();
+	public char getSufijo();
 
 }
 

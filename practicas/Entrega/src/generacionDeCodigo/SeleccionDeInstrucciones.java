@@ -28,9 +28,40 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	//		return null;
 	//	}
 
+//	class Programa { List<Sentencia> sentencia; }
+	public Object visit(Programa node, Object param) {
+
+		// super.visit(node, param);
+
+		if (node.getSentencia() != null)
+			for (Sentencia child : node.getSentencia())
+				child.accept(this, param);
+
+		return null;
+	}
 	
-	
-	
+//	class Funcion { String string;  List<Parametro> parametro;  List<DefVar> defvar;  List<Sent_func> sent_func;  Tipo tipo; }
+	public Object visit(Funcion node, Object param) {
+
+		// super.visit(node, param);
+
+		if (node.getParametro() != null)
+			for (Parametro child : node.getParametro())
+				child.accept(this, param);
+
+		if (node.getDefvar() != null)
+			for (DefVar child : node.getDefvar())
+				child.accept(this, param);
+
+		if (node.getSent_func() != null)
+			for (Sent_func child : node.getSent_func())
+				child.accept(this, param);
+
+		if (node.getTipo() != null)
+			node.getTipo().accept(this, param);
+
+		return null;
+	}
 	
 
 	

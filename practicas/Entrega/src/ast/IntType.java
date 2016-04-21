@@ -19,5 +19,10 @@ public class IntType extends AbstractTipo {
 		return 2;
 	}
 
+	@Override
+	public char getSufijo() {
+		return 'i';
+	}
+
 }
 

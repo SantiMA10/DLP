@@ -52,5 +52,10 @@ public class StructType extends AbstractTipo {
 		}
 		return menSize;
 	}
+
+	@Override
+	public char getSufijo() {
+		return 0;
+	}
 }
 

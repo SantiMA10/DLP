@@ -19,5 +19,10 @@ public class CharType extends AbstractTipo {
 		return 1;
 	}
 
+	@Override
+	public char getSufijo() {
+		return 'b';
+	}
+
 }
 

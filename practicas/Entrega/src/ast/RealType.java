@@ -19,5 +19,10 @@ public class RealType extends AbstractTipo {
 		return 4;
 	}
 
+	@Override
+	public char getSufijo() {
+		return 'f';
+	}
+
 }
 
