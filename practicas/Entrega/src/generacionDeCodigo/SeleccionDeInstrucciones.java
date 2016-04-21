@@ -25,6 +25,13 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 		instruccion.put("&&", "AND");
 		instruccion.put("||", "OR");
 		
+		instruccion.put("<", "LT");
+		instruccion.put(">", "GT");
+		instruccion.put("==", "EQ");
+		instruccion.put("!=", "NE");
+		instruccion.put(">=", "GE");
+		instruccion.put("<=", "LE");
+		
 	}
 
 	/*
