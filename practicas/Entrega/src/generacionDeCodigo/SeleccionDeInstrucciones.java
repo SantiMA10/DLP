@@ -101,8 +101,17 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 		if (node.getIzq() != null)
 			node.getIzq().accept(this, param);
 
+		
+		
+		genera("PUSH BP");
+		genera("PUSH " + ((Var)node.getIzq()).getDefinicion().getDireccion());
+		genera("ADD");
+		genera("PUSH " + node.getIzq().getTipo().getMemSize());
 		if (node.getDer() != null)
-			node.getDer().accept(this, param);
+			node.getDer().accept(this, Funcion.VALOR);
+		genera("MUL");
+		genera("LOAD");
+		
 
 		return null;
 	}
@@ -131,21 +140,21 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 
 	//	class Lintent { String string; }
 	public Object visit(Lintent node, Object param) {
-		genera("PUSH" + node.getString());
+		genera("PUSH " + node.getString());
 		
 		return null;
 	}
 
 	//	class Lintreal { String string; }
 	public Object visit(Lintreal node, Object param) {
-		genera("PUSHF" + node.getString());
+		genera("PUSHF " + node.getString());
 		
 		return null;
 	}
 
 	//	class Lintchar { String string; }
 	public Object visit(Lintchar node, Object param) {
-		genera("PUSHB" + node.getString());
+		genera("PUSHB " + node.getString());
 		
 		return null;
 	}
