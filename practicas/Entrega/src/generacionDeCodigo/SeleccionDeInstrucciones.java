@@ -130,10 +130,16 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	//	class AccesoStruct { Expr struct;  String string; }
 	public Object visit(AccesoStruct node, Object param) {
 
-		// super.visit(node, param);
-
-		if (node.getStruct() != null)
-			node.getStruct().accept(this, param);
+		genera("PUSH BP");
+		genera("PUSH " + ((Var)node.getStruct()).getDefinicion().getDireccion());
+		genera("ADD");
+		List<DefVar> lista = ((Struct)((Var)node.getStruct()).getDefinicion().getTipo()).getDefvar();
+		for(DefVar var : lista){
+			if(var.getNombre().equals(node.getString()))
+				genera("PUSH " + var.getDireccion());
+		}
+		genera("ADD");
+		genera("LOAD");
 
 		return null;
 	}
