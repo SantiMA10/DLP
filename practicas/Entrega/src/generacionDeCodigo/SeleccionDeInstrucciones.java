@@ -110,11 +110,11 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	//	class OperacionUnaria { String string;  Expr der; }
 	public Object visit(OperacionUnaria node, Object param) {
 
-		// super.visit(node, param);
-
-		if (node.getDer() != null)
-			node.getDer().accept(this, param);
-
+		if (node.getDer() != null && node.getString().equals("!")){
+			node.getDer().accept(this, Funcion.VALOR);
+			genera("NOT");
+		}
+		
 		return null;
 	}
 
@@ -153,13 +153,21 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	//	class Cast { Tipo tipo;  Expr expr; }
 	public Object visit(Cast node, Object param) {
 
-		// super.visit(node, param);
-
-		if (node.getTipo() != null)
-			node.getTipo().accept(this, param);
-
 		if (node.getExpr() != null)
-			node.getExpr().accept(this, param);
+			node.getExpr().accept(this, Funcion.VALOR);
+		
+		if(node.getTipo() instanceof IntType && node.getExpr().getTipo() instanceof CharType){
+			genera("b2i");
+		}
+		else if(node.getTipo() instanceof IntType && node.getExpr().getTipo() instanceof RealType){
+			genera("f2i");
+		}
+		else if(node.getTipo() instanceof CharType && node.getExpr().getTipo() instanceof IntType){
+			genera("i2b");
+		}
+		else if(node.getTipo() instanceof RealType && node.getExpr().getTipo() instanceof IntType){
+			genera("i2f");
+		}
 
 		return null;
 	}
