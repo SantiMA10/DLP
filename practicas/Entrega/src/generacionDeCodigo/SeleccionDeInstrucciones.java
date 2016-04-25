@@ -43,7 +43,7 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	public Object visit(Print node, Object param) {
 		
 		if (node.getExpr() != null)
-			node.getExpr().accept(this, param);
+			node.getExpr().accept(this, Funcion.VALOR);
 		genera("OUT", node.getExpr().getTipo());
 
 		return null;
@@ -88,7 +88,7 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 		if (node.getDer() != null)
 			node.getDer().accept(this, Funcion.VALOR);
 		
-		genera(instruccion.get(node.getString()));
+		genera(instruccion.get(node.getString()), node.getIzq().getTipo());
 
 		return null;
 	}
@@ -96,22 +96,18 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	//	class AccesoArray { Expr izq;  Expr der; }
 	public Object visit(AccesoArray node, Object param) {
 
-		// super.visit(node, param);
 
 		if (node.getIzq() != null)
-			node.getIzq().accept(this, param);
-
-		
-		
-		genera("PUSH BP");
-		genera("PUSH " + ((Var)node.getIzq()).getDefinicion().getDireccion());
-		genera("ADD");
-		genera("PUSH " + node.getIzq().getTipo().getMemSize());
-		if (node.getDer() != null)
+			node.getIzq().accept(this, Funcion.DIRECCION);
+		genera("PUSH " + ((ArrayType)((Var)node.getIzq()).getDefinicion().getTipo()).getTipo().getMemSize());
+		if (node.getDer() != null){
 			node.getDer().accept(this, Funcion.VALOR);
+		}
 		genera("MUL");
-		genera("LOAD");
-		
+		genera("ADD");
+		if(Funcion.VALOR.equals(param)){
+			genera("LOAD", ((ArrayType)((Var)node.getIzq()).getDefinicion().getTipo()).getTipo());
+		}
 
 		return null;
 	}
@@ -130,16 +126,19 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	//	class AccesoStruct { Expr struct;  String string; }
 	public Object visit(AccesoStruct node, Object param) {
 
-		genera("PUSH BP");
 		genera("PUSH " + ((Var)node.getStruct()).getDefinicion().getDireccion());
-		genera("ADD");
-		List<DefVar> lista = ((Struct)((Var)node.getStruct()).getDefinicion().getTipo()).getDefvar();
+		List<DefVar> lista = ((StructType)((Var)node.getStruct()).getDefinicion().getTipo()).getDefinicion().getDefvar();
+		Tipo tipo = null;
 		for(DefVar var : lista){
-			if(var.getNombre().equals(node.getString()))
+			if(var.getNombre().equals(node.getString())){
 				genera("PUSH " + var.getDireccion());
+				tipo = var.getTipo();
+			}
 		}
 		genera("ADD");
-		genera("LOAD");
+		if(Funcion.VALOR.equals(param)){
+			genera("LOAD", tipo);
+		}
 
 		return null;
 	}
