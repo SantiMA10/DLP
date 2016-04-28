@@ -60,10 +60,19 @@ public class DefVar extends AbstractSentencia {
 		this.direccion = direccion;
 	}
 
+	public Parametro getParametro() {
+		return parametro;
+	}
+
+	public void setParametro(Parametro parametro) {
+		this.parametro = parametro;
+	}
+
 	private String nombre;
 	private Tipo tipo;
 	private String ambito;
 	private int direccion;
+	private Parametro parametro;
 	
 	
 }

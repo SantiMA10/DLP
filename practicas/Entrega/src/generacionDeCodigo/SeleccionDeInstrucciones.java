@@ -328,6 +328,12 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 				genera("ADD");
 
 			}
+			else if(node.getDefinicion().getAmbito().equals("param")){
+				genera("PUSHA BP");
+				genera("PUSH " + node.getDefinicion().getParametro().getDireccion());
+				genera("ADD");
+
+			}
 			else{
 				genera("PUSHA " + node.getDefinicion().getDireccion());
 			}

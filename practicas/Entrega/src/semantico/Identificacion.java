@@ -29,7 +29,9 @@ public class Identificacion extends DefaultVisitor {
 	//	class Parametro { String string;  Tipo tipo; }
 	public Object visit(Parametro node, Object param) {
 
-		DefVar defVar = new DefVar(node.getString(), node.getTipo(), "var");
+		
+		DefVar defVar = new DefVar(node.getString(), node.getTipo(), "param");
+		defVar.setParametro(node);
 		predicado(variables.getFromTop(defVar.getNombre()) == null, "Variable ya definida " + defVar.getNombre(), node.getStart());
 		variables.put(defVar.getNombre(), defVar);
 		

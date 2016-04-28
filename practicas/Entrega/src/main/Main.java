@@ -22,7 +22,7 @@ import ast.*;
  * 
  */
 public class Main {
-	public static final String programa = "src/TestGdC1.txt";	// Entrada a usar durante el desarrollo
+	public static final String programa = "src/TestGdC2.txt";	// Entrada a usar durante el desarrollo
 
 	public static void main(String[] args) throws Exception {
 		GestorErrores gestor = new GestorErrores();
