@@ -31,7 +31,7 @@ sentencias: 						{ $$ = new ArrayList<Sentencia>(); }
 		  | sentencias sentencia  	{ ((ArrayList<Sentencia>) $1).add((Sentencia)$2); $$ = $1; }
 		  ;
 
-sentencia: 'VAR' definicion 		{ ((DefVar)$2).setAmbito("var"); $$ = $2; }
+sentencia: 'VAR' definicion 		{ ((DefVar)$2).setAmbito("global"); $$ = $2; }
 		 | struct 					{ $$ = $1; }
 		 | funcion 					{ $$ = $1; }
 		 ;
