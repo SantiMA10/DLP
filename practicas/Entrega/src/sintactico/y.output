@@ -527,12 +527,12 @@ state 49
 	"MENOR_IGUAL"  reduce 39
 	"IGUAL"  reduce 39
 	"DISTINTO"  reduce 39
+	'.'  reduce 39
+	'['  reduce 39
 	'+'  reduce 39
 	'-'  reduce 39
 	'*'  reduce 39
 	'/'  reduce 39
-	'.'  reduce 39
-	'['  reduce 39
 	'='  reduce 39
 
 
@@ -660,12 +660,12 @@ state 61
 	"MENOR_IGUAL"  shift 79
 	"IGUAL"  shift 80
 	"DISTINTO"  shift 81
-	'+'  shift 82
-	'-'  shift 83
-	'*'  shift 84
-	'/'  shift 85
-	'.'  shift 86
-	'['  shift 87
+	'.'  shift 82
+	'['  shift 83
+	'+'  shift 84
+	'-'  shift 85
+	'*'  shift 86
+	'/'  shift 87
 	'='  shift 88
 	.  error
 
@@ -706,12 +706,12 @@ state 63
 	"MENOR_IGUAL"  reduce 39
 	"IGUAL"  reduce 39
 	"DISTINTO"  reduce 39
+	'.'  reduce 39
+	'['  reduce 39
 	'+'  reduce 39
 	'-'  reduce 39
 	'*'  reduce 39
 	'/'  reduce 39
-	'.'  reduce 39
-	'['  reduce 39
 	';'  reduce 39
 	')'  reduce 39
 	','  reduce 39
@@ -744,12 +744,12 @@ state 64
 	"MENOR_IGUAL"  shift 79
 	"IGUAL"  shift 80
 	"DISTINTO"  shift 81
-	'+'  shift 82
-	'-'  shift 83
-	'*'  shift 84
-	'/'  shift 85
-	'.'  shift 86
-	'['  shift 87
+	'.'  shift 82
+	'['  shift 83
+	'+'  shift 84
+	'-'  shift 85
+	'*'  shift 86
+	'/'  shift 87
 	')'  shift 91
 	.  error
 
@@ -818,12 +818,12 @@ state 67
 	"MENOR_IGUAL"  shift 79
 	"IGUAL"  shift 80
 	"DISTINTO"  shift 81
-	'+'  shift 82
-	'-'  shift 83
-	'*'  shift 84
-	'/'  shift 85
-	'.'  shift 86
-	'['  shift 87
+	'.'  shift 82
+	'['  shift 83
+	'+'  shift 84
+	'-'  shift 85
+	'*'  shift 86
+	'/'  shift 87
 	';'  shift 95
 	.  error
 
@@ -853,12 +853,12 @@ state 68
 	"MENOR_IGUAL"  shift 79
 	"IGUAL"  shift 80
 	"DISTINTO"  shift 81
-	'+'  shift 82
-	'-'  shift 83
-	'*'  shift 84
-	'/'  shift 85
-	'.'  shift 86
-	'['  shift 87
+	'.'  shift 82
+	'['  shift 83
+	'+'  shift 84
+	'-'  shift 85
+	'*'  shift 86
+	'/'  shift 87
 	';'  shift 96
 	.  error
 
@@ -925,12 +925,12 @@ state 72
 	"MENOR_IGUAL"  shift 79
 	"IGUAL"  shift 80
 	"DISTINTO"  shift 81
-	'+'  shift 82
-	'-'  shift 83
-	'*'  shift 84
-	'/'  shift 85
-	'.'  shift 86
-	'['  shift 87
+	'.'  shift 82
+	'['  shift 83
+	'+'  shift 84
+	'-'  shift 85
+	'*'  shift 86
+	'/'  shift 87
 	';'  shift 99
 	.  error
 
@@ -1069,22 +1069,14 @@ state 81
 
 
 state 82
-	expr : expr '+' . expr  (43)
+	expr : expr '.' . "IDENT"  (55)
 
-	'('  shift 47
-	'!'  shift 48
-	"IDENT"  shift 63
-	"LITENT"  shift 51
-	"LITREAL"  shift 57
-	"LITCHAR"  shift 58
-	"CAST"  shift 59
+	"IDENT"  shift 109
 	.  error
-
-	expr  goto 109
 
 
 state 83
-	expr : expr '-' . expr  (44)
+	expr : expr '[' . expr ']'  (56)
 
 	'('  shift 47
 	'!'  shift 48
@@ -1099,7 +1091,7 @@ state 83
 
 
 state 84
-	expr : expr '*' . expr  (41)
+	expr : expr '+' . expr  (43)
 
 	'('  shift 47
 	'!'  shift 48
@@ -1114,7 +1106,7 @@ state 84
 
 
 state 85
-	expr : expr '/' . expr  (42)
+	expr : expr '-' . expr  (44)
 
 	'('  shift 47
 	'!'  shift 48
@@ -1129,14 +1121,22 @@ state 85
 
 
 state 86
-	expr : expr '.' . "IDENT"  (55)
+	expr : expr '*' . expr  (41)
 
-	"IDENT"  shift 113
+	'('  shift 47
+	'!'  shift 48
+	"IDENT"  shift 63
+	"LITENT"  shift 51
+	"LITREAL"  shift 57
+	"LITCHAR"  shift 58
+	"CAST"  shift 59
 	.  error
+
+	expr  goto 113
 
 
 state 87
-	expr : expr '[' . expr ']'  (56)
+	expr : expr '/' . expr  (42)
 
 	'('  shift 47
 	'!'  shift 48
@@ -1237,12 +1237,12 @@ state 92
 	"MENOR_IGUAL"  shift 79
 	"IGUAL"  shift 80
 	"DISTINTO"  shift 81
-	'+'  shift 82
-	'-'  shift 83
-	'*'  shift 84
-	'/'  shift 85
-	'.'  shift 86
-	'['  shift 87
+	'.'  shift 82
+	'['  shift 83
+	'+'  shift 84
+	'-'  shift 85
+	'*'  shift 86
+	'/'  shift 87
 	')'  reduce 60
 	','  reduce 60
 
@@ -1301,12 +1301,12 @@ state 97
 	"MENOR_IGUAL"  shift 79
 	"IGUAL"  shift 80
 	"DISTINTO"  shift 81
-	'+'  shift 82
-	'-'  shift 83
-	'*'  shift 84
-	'/'  shift 85
-	'.'  shift 86
-	'['  shift 87
+	'.'  shift 82
+	'['  shift 83
+	'+'  shift 84
+	'-'  shift 85
+	'*'  shift 86
+	'/'  shift 87
 	')'  shift 120
 	.  error
 
@@ -1336,12 +1336,12 @@ state 98
 	"MENOR_IGUAL"  shift 79
 	"IGUAL"  shift 80
 	"DISTINTO"  shift 81
-	'+'  shift 82
-	'-'  shift 83
-	'*'  shift 84
-	'/'  shift 85
-	'.'  shift 86
-	'['  shift 87
+	'.'  shift 82
+	'['  shift 83
+	'+'  shift 84
+	'-'  shift 85
+	'*'  shift 86
+	'/'  shift 87
 	')'  shift 121
 	.  error
 
@@ -1382,12 +1382,12 @@ state 101
 	"MENOR_IGUAL"  shift 79
 	"IGUAL"  shift 80
 	"DISTINTO"  shift 81
-	'+'  shift 82
-	'-'  shift 83
-	'*'  shift 84
-	'/'  shift 85
-	'.'  shift 86
-	'['  shift 87
+	'.'  shift 82
+	'['  shift 83
+	'+'  shift 84
+	'-'  shift 85
+	'*'  shift 86
+	'/'  shift 87
 	"AND"  reduce 51
 	"OR"  reduce 51
 	';'  reduce 51
@@ -1420,12 +1420,12 @@ state 102
 	"MENOR_IGUAL"  shift 79
 	"IGUAL"  shift 80
 	"DISTINTO"  shift 81
-	'+'  shift 82
-	'-'  shift 83
-	'*'  shift 84
-	'/'  shift 85
-	'.'  shift 86
-	'['  shift 87
+	'.'  shift 82
+	'['  shift 83
+	'+'  shift 84
+	'-'  shift 85
+	'*'  shift 86
+	'/'  shift 87
 	"AND"  reduce 52
 	"OR"  reduce 52
 	';'  reduce 52
@@ -1456,12 +1456,12 @@ state 103
 	"MENOR_IGUAL"  shift 79
 	"IGUAL"  shift 80
 	"DISTINTO"  shift 81
-	'+'  shift 82
-	'-'  shift 83
-	'*'  shift 84
-	'/'  shift 85
-	'.'  shift 86
-	'['  shift 87
+	'.'  shift 82
+	'['  shift 83
+	'+'  shift 84
+	'-'  shift 85
+	'*'  shift 86
+	'/'  shift 87
 	"AND"  reduce 45
 	"OR"  reduce 45
 	'<'  reduce 45
@@ -1494,12 +1494,12 @@ state 104
 	"MENOR_IGUAL"  shift 79
 	"IGUAL"  shift 80
 	"DISTINTO"  shift 81
-	'+'  shift 82
-	'-'  shift 83
-	'*'  shift 84
-	'/'  shift 85
-	'.'  shift 86
-	'['  shift 87
+	'.'  shift 82
+	'['  shift 83
+	'+'  shift 84
+	'-'  shift 85
+	'*'  shift 86
+	'/'  shift 87
 	"AND"  reduce 46
 	"OR"  reduce 46
 	'<'  reduce 46
@@ -1530,12 +1530,12 @@ state 105
 
 	"IGUAL"  shift 80
 	"DISTINTO"  shift 81
-	'+'  shift 82
-	'-'  shift 83
-	'*'  shift 84
-	'/'  shift 85
-	'.'  shift 86
-	'['  shift 87
+	'.'  shift 82
+	'['  shift 83
+	'+'  shift 84
+	'-'  shift 85
+	'*'  shift 86
+	'/'  shift 87
 	"AND"  reduce 47
 	"OR"  reduce 47
 	'<'  reduce 47
@@ -1568,12 +1568,12 @@ state 106
 
 	"IGUAL"  shift 80
 	"DISTINTO"  shift 81
-	'+'  shift 82
-	'-'  shift 83
-	'*'  shift 84
-	'/'  shift 85
-	'.'  shift 86
-	'['  shift 87
+	'.'  shift 82
+	'['  shift 83
+	'+'  shift 84
+	'-'  shift 85
+	'*'  shift 86
+	'/'  shift 87
 	"AND"  reduce 48
 	"OR"  reduce 48
 	'<'  reduce 48
@@ -1604,12 +1604,10 @@ state 107
 	expr : expr . '.' "IDENT"  (55)
 	expr : expr . '[' expr ']'  (56)
 
-	'+'  shift 82
-	'-'  shift 83
-	'*'  shift 84
-	'/'  shift 85
-	'.'  shift 86
-	'['  shift 87
+	'+'  shift 84
+	'-'  shift 85
+	'*'  shift 86
+	'/'  shift 87
 	"AND"  reduce 49
 	"OR"  reduce 49
 	'<'  reduce 49
@@ -1618,6 +1616,8 @@ state 107
 	"MENOR_IGUAL"  reduce 49
 	"IGUAL"  reduce 49
 	"DISTINTO"  reduce 49
+	'.'  reduce 49
+	'['  reduce 49
 	';'  reduce 49
 	')'  reduce 49
 	','  reduce 49
@@ -1642,12 +1642,10 @@ state 108
 	expr : expr . '.' "IDENT"  (55)
 	expr : expr . '[' expr ']'  (56)
 
-	'+'  shift 82
-	'-'  shift 83
-	'*'  shift 84
-	'/'  shift 85
-	'.'  shift 86
-	'['  shift 87
+	'+'  shift 84
+	'-'  shift 85
+	'*'  shift 86
+	'/'  shift 87
 	"AND"  reduce 50
 	"OR"  reduce 50
 	'<'  reduce 50
@@ -1656,6 +1654,8 @@ state 108
 	"MENOR_IGUAL"  reduce 50
 	"IGUAL"  reduce 50
 	"DISTINTO"  reduce 50
+	'.'  reduce 50
+	'['  reduce 50
 	';'  reduce 50
 	')'  reduce 50
 	','  reduce 50
@@ -1664,164 +1664,12 @@ state 108
 
 
 state 109
-	expr : expr . '*' expr  (41)
-	expr : expr . '/' expr  (42)
-	expr : expr . '+' expr  (43)
-	expr : expr '+' expr .  (43)
-	expr : expr . '-' expr  (44)
-	expr : expr . '<' expr  (45)
-	expr : expr . '>' expr  (46)
-	expr : expr . "MAYOR_IGUAL" expr  (47)
-	expr : expr . "MENOR_IGUAL" expr  (48)
-	expr : expr . "IGUAL" expr  (49)
-	expr : expr . "DISTINTO" expr  (50)
-	expr : expr . "AND" expr  (51)
-	expr : expr . "OR" expr  (52)
-	expr : expr . '.' "IDENT"  (55)
-	expr : expr . '[' expr ']'  (56)
-
-	'*'  shift 84
-	'/'  shift 85
-	'.'  shift 86
-	'['  shift 87
-	"AND"  reduce 43
-	"OR"  reduce 43
-	'<'  reduce 43
-	'>'  reduce 43
-	"MAYOR_IGUAL"  reduce 43
-	"MENOR_IGUAL"  reduce 43
-	"IGUAL"  reduce 43
-	"DISTINTO"  reduce 43
-	'+'  reduce 43
-	'-'  reduce 43
-	';'  reduce 43
-	')'  reduce 43
-	','  reduce 43
-	']'  reduce 43
-	'='  reduce 43
-
-
-state 110
-	expr : expr . '*' expr  (41)
-	expr : expr . '/' expr  (42)
-	expr : expr . '+' expr  (43)
-	expr : expr . '-' expr  (44)
-	expr : expr '-' expr .  (44)
-	expr : expr . '<' expr  (45)
-	expr : expr . '>' expr  (46)
-	expr : expr . "MAYOR_IGUAL" expr  (47)
-	expr : expr . "MENOR_IGUAL" expr  (48)
-	expr : expr . "IGUAL" expr  (49)
-	expr : expr . "DISTINTO" expr  (50)
-	expr : expr . "AND" expr  (51)
-	expr : expr . "OR" expr  (52)
-	expr : expr . '.' "IDENT"  (55)
-	expr : expr . '[' expr ']'  (56)
-
-	'*'  shift 84
-	'/'  shift 85
-	'.'  shift 86
-	'['  shift 87
-	"AND"  reduce 44
-	"OR"  reduce 44
-	'<'  reduce 44
-	'>'  reduce 44
-	"MAYOR_IGUAL"  reduce 44
-	"MENOR_IGUAL"  reduce 44
-	"IGUAL"  reduce 44
-	"DISTINTO"  reduce 44
-	'+'  reduce 44
-	'-'  reduce 44
-	';'  reduce 44
-	')'  reduce 44
-	','  reduce 44
-	']'  reduce 44
-	'='  reduce 44
-
-
-state 111
-	expr : expr . '*' expr  (41)
-	expr : expr '*' expr .  (41)
-	expr : expr . '/' expr  (42)
-	expr : expr . '+' expr  (43)
-	expr : expr . '-' expr  (44)
-	expr : expr . '<' expr  (45)
-	expr : expr . '>' expr  (46)
-	expr : expr . "MAYOR_IGUAL" expr  (47)
-	expr : expr . "MENOR_IGUAL" expr  (48)
-	expr : expr . "IGUAL" expr  (49)
-	expr : expr . "DISTINTO" expr  (50)
-	expr : expr . "AND" expr  (51)
-	expr : expr . "OR" expr  (52)
-	expr : expr . '.' "IDENT"  (55)
-	expr : expr . '[' expr ']'  (56)
-
-	'.'  shift 86
-	'['  shift 87
-	"AND"  reduce 41
-	"OR"  reduce 41
-	'<'  reduce 41
-	'>'  reduce 41
-	"MAYOR_IGUAL"  reduce 41
-	"MENOR_IGUAL"  reduce 41
-	"IGUAL"  reduce 41
-	"DISTINTO"  reduce 41
-	'+'  reduce 41
-	'-'  reduce 41
-	'*'  reduce 41
-	'/'  reduce 41
-	';'  reduce 41
-	')'  reduce 41
-	','  reduce 41
-	']'  reduce 41
-	'='  reduce 41
-
-
-state 112
-	expr : expr . '*' expr  (41)
-	expr : expr . '/' expr  (42)
-	expr : expr '/' expr .  (42)
-	expr : expr . '+' expr  (43)
-	expr : expr . '-' expr  (44)
-	expr : expr . '<' expr  (45)
-	expr : expr . '>' expr  (46)
-	expr : expr . "MAYOR_IGUAL" expr  (47)
-	expr : expr . "MENOR_IGUAL" expr  (48)
-	expr : expr . "IGUAL" expr  (49)
-	expr : expr . "DISTINTO" expr  (50)
-	expr : expr . "AND" expr  (51)
-	expr : expr . "OR" expr  (52)
-	expr : expr . '.' "IDENT"  (55)
-	expr : expr . '[' expr ']'  (56)
-
-	'.'  shift 86
-	'['  shift 87
-	"AND"  reduce 42
-	"OR"  reduce 42
-	'<'  reduce 42
-	'>'  reduce 42
-	"MAYOR_IGUAL"  reduce 42
-	"MENOR_IGUAL"  reduce 42
-	"IGUAL"  reduce 42
-	"DISTINTO"  reduce 42
-	'+'  reduce 42
-	'-'  reduce 42
-	'*'  reduce 42
-	'/'  reduce 42
-	';'  reduce 42
-	')'  reduce 42
-	','  reduce 42
-	']'  reduce 42
-	'='  reduce 42
-
-
-state 113
 	expr : expr '.' "IDENT" .  (55)
 
 	.  reduce 55
 
 
-state 114
+state 110
 	expr : expr . '*' expr  (41)
 	expr : expr . '/' expr  (42)
 	expr : expr . '+' expr  (43)
@@ -1846,14 +1694,130 @@ state 114
 	"MENOR_IGUAL"  shift 79
 	"IGUAL"  shift 80
 	"DISTINTO"  shift 81
-	'+'  shift 82
-	'-'  shift 83
-	'*'  shift 84
-	'/'  shift 85
-	'.'  shift 86
-	'['  shift 87
+	'.'  shift 82
+	'['  shift 83
+	'+'  shift 84
+	'-'  shift 85
+	'*'  shift 86
+	'/'  shift 87
 	']'  shift 123
 	.  error
+
+
+state 111
+	expr : expr . '*' expr  (41)
+	expr : expr . '/' expr  (42)
+	expr : expr . '+' expr  (43)
+	expr : expr '+' expr .  (43)
+	expr : expr . '-' expr  (44)
+	expr : expr . '<' expr  (45)
+	expr : expr . '>' expr  (46)
+	expr : expr . "MAYOR_IGUAL" expr  (47)
+	expr : expr . "MENOR_IGUAL" expr  (48)
+	expr : expr . "IGUAL" expr  (49)
+	expr : expr . "DISTINTO" expr  (50)
+	expr : expr . "AND" expr  (51)
+	expr : expr . "OR" expr  (52)
+	expr : expr . '.' "IDENT"  (55)
+	expr : expr . '[' expr ']'  (56)
+
+	'*'  shift 86
+	'/'  shift 87
+	"AND"  reduce 43
+	"OR"  reduce 43
+	'<'  reduce 43
+	'>'  reduce 43
+	"MAYOR_IGUAL"  reduce 43
+	"MENOR_IGUAL"  reduce 43
+	"IGUAL"  reduce 43
+	"DISTINTO"  reduce 43
+	'.'  reduce 43
+	'['  reduce 43
+	'+'  reduce 43
+	'-'  reduce 43
+	';'  reduce 43
+	')'  reduce 43
+	','  reduce 43
+	']'  reduce 43
+	'='  reduce 43
+
+
+state 112
+	expr : expr . '*' expr  (41)
+	expr : expr . '/' expr  (42)
+	expr : expr . '+' expr  (43)
+	expr : expr . '-' expr  (44)
+	expr : expr '-' expr .  (44)
+	expr : expr . '<' expr  (45)
+	expr : expr . '>' expr  (46)
+	expr : expr . "MAYOR_IGUAL" expr  (47)
+	expr : expr . "MENOR_IGUAL" expr  (48)
+	expr : expr . "IGUAL" expr  (49)
+	expr : expr . "DISTINTO" expr  (50)
+	expr : expr . "AND" expr  (51)
+	expr : expr . "OR" expr  (52)
+	expr : expr . '.' "IDENT"  (55)
+	expr : expr . '[' expr ']'  (56)
+
+	'*'  shift 86
+	'/'  shift 87
+	"AND"  reduce 44
+	"OR"  reduce 44
+	'<'  reduce 44
+	'>'  reduce 44
+	"MAYOR_IGUAL"  reduce 44
+	"MENOR_IGUAL"  reduce 44
+	"IGUAL"  reduce 44
+	"DISTINTO"  reduce 44
+	'.'  reduce 44
+	'['  reduce 44
+	'+'  reduce 44
+	'-'  reduce 44
+	';'  reduce 44
+	')'  reduce 44
+	','  reduce 44
+	']'  reduce 44
+	'='  reduce 44
+
+
+state 113
+	expr : expr . '*' expr  (41)
+	expr : expr '*' expr .  (41)
+	expr : expr . '/' expr  (42)
+	expr : expr . '+' expr  (43)
+	expr : expr . '-' expr  (44)
+	expr : expr . '<' expr  (45)
+	expr : expr . '>' expr  (46)
+	expr : expr . "MAYOR_IGUAL" expr  (47)
+	expr : expr . "MENOR_IGUAL" expr  (48)
+	expr : expr . "IGUAL" expr  (49)
+	expr : expr . "DISTINTO" expr  (50)
+	expr : expr . "AND" expr  (51)
+	expr : expr . "OR" expr  (52)
+	expr : expr . '.' "IDENT"  (55)
+	expr : expr . '[' expr ']'  (56)
+
+	.  reduce 41
+
+
+state 114
+	expr : expr . '*' expr  (41)
+	expr : expr . '/' expr  (42)
+	expr : expr '/' expr .  (42)
+	expr : expr . '+' expr  (43)
+	expr : expr . '-' expr  (44)
+	expr : expr . '<' expr  (45)
+	expr : expr . '>' expr  (46)
+	expr : expr . "MAYOR_IGUAL" expr  (47)
+	expr : expr . "MENOR_IGUAL" expr  (48)
+	expr : expr . "IGUAL" expr  (49)
+	expr : expr . "DISTINTO" expr  (50)
+	expr : expr . "AND" expr  (51)
+	expr : expr . "OR" expr  (52)
+	expr : expr . '.' "IDENT"  (55)
+	expr : expr . '[' expr ']'  (56)
+
+	.  reduce 42
 
 
 state 115
@@ -1881,12 +1845,12 @@ state 115
 	"MENOR_IGUAL"  shift 79
 	"IGUAL"  shift 80
 	"DISTINTO"  shift 81
-	'+'  shift 82
-	'-'  shift 83
-	'*'  shift 84
-	'/'  shift 85
-	'.'  shift 86
-	'['  shift 87
+	'.'  shift 82
+	'['  shift 83
+	'+'  shift 84
+	'-'  shift 85
+	'*'  shift 86
+	'/'  shift 87
 	';'  shift 124
 	.  error
 
@@ -1917,12 +1881,12 @@ state 118
 	"MENOR_IGUAL"  reduce 57
 	"IGUAL"  reduce 57
 	"DISTINTO"  reduce 57
+	'.'  reduce 57
+	'['  reduce 57
 	'+'  reduce 57
 	'-'  reduce 57
 	'*'  reduce 57
 	'/'  reduce 57
-	'.'  reduce 57
-	'['  reduce 57
 	'='  reduce 57
 
 
@@ -2012,12 +1976,12 @@ state 127
 	"MENOR_IGUAL"  shift 79
 	"IGUAL"  shift 80
 	"DISTINTO"  shift 81
-	'+'  shift 82
-	'-'  shift 83
-	'*'  shift 84
-	'/'  shift 85
-	'.'  shift 86
-	'['  shift 87
+	'.'  shift 82
+	'['  shift 83
+	'+'  shift 84
+	'-'  shift 85
+	'*'  shift 86
+	'/'  shift 87
 	')'  reduce 61
 	','  reduce 61
 
@@ -2128,12 +2092,12 @@ state 133
 	"MENOR_IGUAL"  shift 79
 	"IGUAL"  shift 80
 	"DISTINTO"  shift 81
-	'+'  shift 82
-	'-'  shift 83
-	'*'  shift 84
-	'/'  shift 85
-	'.'  shift 86
-	'['  shift 87
+	'.'  shift 82
+	'['  shift 83
+	'+'  shift 84
+	'-'  shift 85
+	'*'  shift 86
+	'/'  shift 87
 	')'  shift 136
 	.  error
 

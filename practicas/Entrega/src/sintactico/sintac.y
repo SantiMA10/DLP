@@ -15,10 +15,10 @@ import main.*;
 %left 'AND' 'OR' 
 %left '<' '>' 
 %left 'MAYOR_IGUAL' 'MENOR_IGUAL'
-%left 'IGUAL' 'DISTINTO' 
+%left 'IGUAL' 'DISTINTO' '.' '[' 
 %left '+' '-'
 %left '*' '/'
-%left '.' '[' '(' '!'
+%left '(' '!'
 
 %%
 

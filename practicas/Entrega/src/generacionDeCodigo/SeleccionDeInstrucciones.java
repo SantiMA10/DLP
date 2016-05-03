@@ -1,10 +1,40 @@
 package generacionDeCodigo;
 
-import java.io.*;
-import java.util.*;
+import java.io.PrintWriter;
+import java.io.Writer;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
-import ast.*;
-import visitor.*;
+import visitor.DefaultVisitor;
+import ast.AccesoArray;
+import ast.AccesoStruct;
+import ast.ArrayType;
+import ast.Asignacion;
+import ast.Cast;
+import ast.CharType;
+import ast.DefVar;
+import ast.Expr;
+import ast.ExpresionLogica;
+import ast.ExpresionNumerica;
+import ast.If;
+import ast.IntType;
+import ast.Invocacion;
+import ast.Lintchar;
+import ast.Lintent;
+import ast.Lintreal;
+import ast.OperacionUnaria;
+import ast.Parametro;
+import ast.Print;
+import ast.Programa;
+import ast.Read;
+import ast.RealType;
+import ast.Return;
+import ast.Sent_func;
+import ast.StructType;
+import ast.Tipo;
+import ast.Var;
+import ast.While;
 
 enum Funcion {
 	DIRECCION, VALOR
@@ -126,21 +156,33 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	//	class If { Expr expr;  List<Sent_func> verdadero;  List<Sent_func> falso; }
 	public Object visit(If node, Object param) {
 
+		int contadorIfs = this.contadorIfs;
+		this.contadorIfs++;
 		// super.visit(node, param);
 		node.getExpr().accept(this, Funcion.VALOR);
-		genera("JZ else" + contadorIfs);
+		
+		if(node.getFalso() != null){
+			genera("JZ else" + contadorIfs);
+		}
+		else{
+			genera("JZ finif" + contadorIfs);
+		}
+		
+		for(int i = 0; i < node.getVerdadero().size(); i++){
+			node.getVerdadero().get(i).accept(this, param);
+			if(i == node.getVerdadero().size() -1 && !(node.getVerdadero().get(i) instanceof Return)){
+				genera("JMP finif" + contadorIfs);
+			}
+		}
 
-
-		for (Sent_func child : node.getVerdadero())
-			child.accept(this, param);
-		genera("JMP finif" + contadorIfs);
-
-		genera("else"+contadorIfs+":");
-		for (Sent_func child : node.getFalso())
-			child.accept(this, param);
+		if(node.getFalso() != null){
+			genera("else"+contadorIfs+":");
+			for (Sent_func child : node.getFalso())
+				child.accept(this, param);
+		}
 
 		genera("finif" + contadorIfs + ":");
-		contadorIfs++;
+		
 
 		return null;
 	}
@@ -148,9 +190,11 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	//	class While { Expr expr;  List<Sent_func> sent_func; }
 	public Object visit(While node, Object param) {
 
+		int contadorWhile = this.contadorWhile;
+		this.contadorWhile++;
 		genera("while" + contadorWhile+":");
 		node.getExpr().accept(this, Funcion.VALOR);
-		genera("JS finwhile" + contadorWhile);
+		genera("JZ finwhile" + contadorWhile);
 
 		for (Sent_func child : node.getSent_func())
 			child.accept(this, param);
@@ -163,7 +207,6 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	
 	//	class Read { Expr expr; }
 	public Object visit(Read node, Object param) {
-
 
 		node.getExpr().accept(this, Funcion.DIRECCION);
 		genera("IN");
@@ -213,10 +256,10 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 
 	//	class ExpresionNumerica { Expr izq;  String string;  Expr der; }
 	public Object visit(ExpresionNumerica node, Object param) {
-
+		
 		if (node.getIzq() != null)
 			node.getIzq().accept(this, Funcion.VALOR);
-
+		
 		if (node.getDer() != null)
 			node.getDer().accept(this, Funcion.VALOR);
 
@@ -231,14 +274,14 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 
 		if (node.getIzq() != null)
 			node.getIzq().accept(this, Funcion.DIRECCION);
-		genera("PUSH " + ((ArrayType)((Var)node.getIzq()).getDefinicion().getTipo()).getTipo().getMemSize());
+		genera("PUSH " + ((ArrayType)(node.getIzq().getTipo())).getTipo().getMemSize());
 		if (node.getDer() != null){
 			node.getDer().accept(this, Funcion.VALOR);
 		}
 		genera("MUL");
 		genera("ADD");
 		if(Funcion.VALOR.equals(param)){
-			genera("LOAD", ((ArrayType)((Var)node.getIzq()).getDefinicion().getTipo()).getTipo());
+			genera("LOAD", ((ArrayType)node.getIzq().getTipo()).getTipo());
 		}
 
 		return null;
@@ -247,8 +290,8 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	//	class OperacionUnaria { String string;  Expr der; }
 	public Object visit(OperacionUnaria node, Object param) {
 
+		node.getDer().accept(this, Funcion.VALOR);
 		if (node.getDer() != null && node.getString().equals("!")){
-			node.getDer().accept(this, Funcion.VALOR);
 			genera("NOT");
 		}
 
@@ -258,8 +301,9 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	//	class AccesoStruct { Expr struct;  String string; }
 	public Object visit(AccesoStruct node, Object param) {
 
-		genera("PUSH " + ((Var)node.getStruct()).getDefinicion().getDireccion());
-		List<DefVar> lista = ((StructType)((Var)node.getStruct()).getDefinicion().getTipo()).getDefinicion().getDefvar();
+		node.getStruct().accept(this, Funcion.DIRECCION);
+		//genera("PUSH " + ((Var)node.getStruct()).getDefinicion().getDireccion());
+		List<DefVar> lista = ((StructType)(node.getStruct()).getTipo()).getDefinicion().getDefvar();
 		Tipo tipo = null;
 		for(DefVar var : lista){
 			if(var.getNombre().equals(node.getString())){
@@ -291,7 +335,7 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 
 	//	class Lintchar { String string; }
 	public Object visit(Lintchar node, Object param) {
-		genera("PUSHB " + node.getString());
+		genera("PUSHB " + (int)(node.getString().charAt(1)));
 
 		return null;
 	}
@@ -348,6 +392,7 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 
 	// Método auxiliar recomendado -------------
 	private void genera(String instruccion) {
+		System.out.println(instruccion);
 		writer.println(instruccion);
 	}
 
