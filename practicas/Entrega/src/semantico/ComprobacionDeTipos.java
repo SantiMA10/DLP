@@ -203,7 +203,7 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 					"No se puede operar con chars", node.getStart());
 		
 		predicado(isIgualTipo(node.getDer().getTipo(), node.getIzq().getTipo()),
-				"Los dos operandos deben ser del mismo tipo", node.getStart());
+				"Los dos operandos deben ser del mismo tipo" + node.getDer().getTipo() + ", "+node.getIzq().getTipo(), node.getStart());
 				
 		node.setModificable(false);
 		
@@ -320,6 +320,8 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 
 	//	class Var { String string; }
 	public Object visit(Var node, Object param) {
+		
+		super.visit(node.getDefinicion(), param);
 		
 		node.setModificable(true);
 		node.setTipo(node.getDefinicion().getTipo());

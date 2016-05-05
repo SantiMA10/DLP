@@ -271,7 +271,6 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	//	class AccesoArray { Expr izq;  Expr der; }
 	public Object visit(AccesoArray node, Object param) {
 
-
 		if (node.getIzq() != null)
 			node.getIzq().accept(this, Funcion.DIRECCION);
 		genera("PUSH " + ((ArrayType)(node.getIzq().getTipo())).getTipo().getMemSize());
@@ -335,7 +334,12 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 
 	//	class Lintchar { String string; }
 	public Object visit(Lintchar node, Object param) {
-		genera("PUSHB " + (int)(node.getString().charAt(1)));
+		if("'\\n'".equals(node.getString())){
+			genera("PUSHB 10");
+		}
+		else{
+			genera("PUSHB " + (int)(node.getString().charAt(1)));
+		}
 
 		return null;
 	}
