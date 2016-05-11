@@ -124,8 +124,10 @@ public class ComprobacionDeTipos extends DefaultVisitor {
 
 		predicado(node.getIzq().getModificable(), "La variable debe ser modificable", node.getStart());
 		predicado(simple(node.getIzq().getTipo()), "La variable debe ser simple", node.getStart());
-		predicado(isIgualTipo(node.getIzq().getTipo(), node.getDer().getTipo()),
-				"Los tipos debe coincidir [" + node.getIzq().getTipo() +", " + node.getDer().getTipo() + "]", node.getStart());
+		for(Expr expr : node.getDer()){
+			predicado(isIgualTipo(node.getIzq().getTipo(), expr.getTipo()),
+					"Los tipos debe coincidir [" + node.getIzq().getTipo() +", " + expr.getTipo() + "]", node.getStart());
+		}
 		
 		return null;
 	}

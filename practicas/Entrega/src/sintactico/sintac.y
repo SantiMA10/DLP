@@ -76,7 +76,7 @@ sentencias_locales :   									{  $$ = new ArrayList<Sent_func>(); }
 				   | sentencias_locales sentencia_local { ((ArrayList<Sent_func>) $1).add((Sent_func)$2); $$ = $1; }
 				   ;
 
-sentencia_local: expr '=' expr ';'																	{ $$ = new Asignacion($1, $3); }
+sentencia_local: expr '=' asignado ';'																{ $$ = new Asignacion($1, $3); }
 			   | 'PRINT' expr ';'																	{ $$ = new Print($2); }
 			   | 'READ' expr ';'																	{ $$ = new Read($2); }
 			   | 'IF' '(' expr ')' '{' sentencias_locales '}'										{ $$ = new If($3, $6, null ); }
@@ -86,6 +86,10 @@ sentencia_local: expr '=' expr ';'																	{ $$ = new Asignacion($1, $3)
 			   | 'RETURN' expr ';'																	{ $$ = new Return($2); }
 			   | 'RETURN' ';'																		{ $$ = new Return(null); }
 			   ;
+
+asignado: expr 					{ $$ = new ArrayList<Expr>(); ((ArrayList<Expr>) $$).add((Expr)$1); }
+		| asignado '=' expr		{ ((ArrayList<Expr>) $1).add((Expr)$3); $$ = $1;  }
+		;
 
 expr: 'LITENT'							{ $$ = new Lintent($1); }
 	| 'LITREAL'							{ $$ = new Lintreal($1); }

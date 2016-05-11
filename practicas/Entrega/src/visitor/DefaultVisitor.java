@@ -108,12 +108,11 @@ public class DefaultVisitor implements Visitor {
 		return null;
 	}
 
-	//	class Asignacion { Expr izq;  Expr der; }
+	//	class Asignacion { Expr izq;  List<Expr> der; }
 	public Object visit(Asignacion node, Object param) {
 		if (node.getIzq() != null)
 			node.getIzq().accept(this, param);
-		if (node.getDer() != null)
-			node.getDer().accept(this, param);
+		visitChildren(node.getDer(), param);
 		return null;
 	}
 

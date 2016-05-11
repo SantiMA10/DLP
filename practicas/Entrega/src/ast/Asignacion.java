@@ -4,22 +4,24 @@
 
 package ast;
 
+import java.util.*;
 import visitor.*;
 
-//	asignacion:sent_func -> izq:expr  der:expr
+//	asignacion:sent_func -> izq:expr  der:expr*
 
 public class Asignacion extends AbstractSent_func {
 
-	public Asignacion(Expr izq, Expr der) {
+	public Asignacion(Expr izq, List<Expr> der) {
 		this.izq = izq;
 		this.der = der;
 
 		searchForPositions(izq, der);	// Obtener linea/columna a partir de los hijos
 	}
 
+	@SuppressWarnings("unchecked")
 	public Asignacion(Object izq, Object der) {
 		this.izq = (Expr) izq;
-		this.der = (Expr) der;
+		this.der = (List<Expr>) der;
 
 		searchForPositions(izq, der);	// Obtener linea/columna a partir de los hijos
 	}
@@ -31,10 +33,10 @@ public class Asignacion extends AbstractSent_func {
 		this.izq = izq;
 	}
 
-	public Expr getDer() {
+	public List<Expr> getDer() {
 		return der;
 	}
-	public void setDer(Expr der) {
+	public void setDer(List<Expr> der) {
 		this.der = der;
 	}
 
@@ -44,6 +46,6 @@ public class Asignacion extends AbstractSent_func {
 	}
 
 	private Expr izq;
-	private Expr der;
+	private List<Expr> der;
 }
 

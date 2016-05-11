@@ -1,0 +1,19 @@
+main(){
+
+	var local1:int;
+	var local2:int;
+	var local3:int;
+	var local4:int;
+	var local5:int;
+	var local6:int;
+	
+	local1 = local2 = local3 = local4 = local5 = local6 = 5;
+	
+	print local1;
+	print local2;
+	print local3;
+	print local4;
+	print local5;
+	print local6;
+
+}

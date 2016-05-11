@@ -253,7 +253,7 @@ public class PrintVisitor extends DefaultVisitor {
 			System.out.print(" = ");
 
 			if (node.getDer() != null)
-				node.getDer().accept(this, param);
+				visitChildren(node.getDer(), param);
 			
 			System.out.println(";");
 			

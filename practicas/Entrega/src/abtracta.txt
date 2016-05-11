@@ -20,7 +20,7 @@ if:sent_func -> expr verdadero:sent_func* falso:sent_func*;
 while:sent_func -> expr sent_func*;
 print:sent_func -> expr;
 read:sent_func -> expr;
-asignacion:sent_func -> izq:expr der:expr;
+asignacion:sent_func -> izq:expr der:expr*;
 invocacion:sent_func,expr -> nombre:string expr* ambito:string;
 return:sent_func -> expr;
 

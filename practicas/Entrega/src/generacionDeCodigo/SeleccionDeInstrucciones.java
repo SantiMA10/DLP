@@ -228,14 +228,17 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	public Object visit(Asignacion node, Object param) {
 
 		// super.visit(node, param);
+		
+		Expr valor = node.getDer().get(node.getDer().size() - 1);
 
-		if (node.getIzq() != null)
-			node.getIzq().accept(this, Funcion.DIRECCION);
-
-		if (node.getDer() != null)
-			node.getDer().accept(this, Funcion.VALOR);
-
-		genera("STORE", node.getDer().getTipo());
+		for(int i = node.getDer().size() - 2; i >= 0; i--){
+			node.getDer().get(i).accept(this, Funcion.DIRECCION);
+			valor.accept(this, Funcion.VALOR);
+			genera("STORE", valor.getTipo());
+		}
+		node.getIzq().accept(this, Funcion.DIRECCION);
+		valor.accept(this, Funcion.VALOR);
+		genera("STORE", valor.getTipo());
 
 		return null;
 	}
