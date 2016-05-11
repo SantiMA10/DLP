@@ -94,6 +94,18 @@ public class DefaultVisitor implements Visitor {
 		return null;
 	}
 
+	//	class For { Asignacion i;  Expr condicion;  Asignacion cambio;  List<Sent_func> sent_func; }
+	public Object visit(For node, Object param) {
+		if (node.getI() != null)
+			node.getI().accept(this, param);
+		if (node.getCondicion() != null)
+			node.getCondicion().accept(this, param);
+		if (node.getCambio() != null)
+			node.getCambio().accept(this, param);
+		visitChildren(node.getSent_func(), param);
+		return null;
+	}
+
 	//	class Print { Expr expr; }
 	public Object visit(Print node, Object param) {
 		if (node.getExpr() != null)

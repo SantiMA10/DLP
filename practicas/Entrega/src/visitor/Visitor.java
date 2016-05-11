@@ -19,6 +19,7 @@ public interface Visitor {
 	public Object visit(Parametro node, Object param);
 	public Object visit(If node, Object param);
 	public Object visit(While node, Object param);
+	public Object visit(For node, Object param);
 	public Object visit(Print node, Object param);
 	public Object visit(Read node, Object param);
 	public Object visit(Asignacion node, Object param);

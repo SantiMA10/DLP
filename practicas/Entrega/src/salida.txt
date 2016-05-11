@@ -262,14 +262,14 @@ PUSH -2
 ADD
 PUSH 0
 STOREi
-while1:
+for0:
 PUSHA BP
 PUSH -2
 ADD
 LOADi
 PUSH 8
 LTi
-JZ finwhile1
+JZ finfor0
 PUSHB 40
 OUTb
 PUSHA BP
@@ -341,8 +341,8 @@ LOADi
 PUSH 1
 ADDi
 STOREi
-JMP while1
-finwhile1:
+JMP for0
+finfor0:
 PUSHA 3
 PUSH 4
 PUSH 1
@@ -380,27 +380,27 @@ PUSH -2
 ADD
 PUSH 0
 STOREi
-while2:
+while1:
 PUSHA BP
 PUSH -2
 ADD
 LOADi
 PUSH 2
 LTi
-JZ finwhile2
+JZ finwhile1
 PUSHA BP
 PUSH -4
 ADD
 PUSH 0
 STOREi
-while3:
+while2:
 PUSHA BP
 PUSH -4
 ADD
 LOADi
 PUSH 2
 LTi
-JZ finwhile3
+JZ finwhile2
 PUSHA 3
 PUSH 4
 PUSHA BP
@@ -440,8 +440,8 @@ LOADi
 PUSH 1
 ADDi
 STOREi
-JMP while3
-finwhile3:
+JMP while2
+finwhile2:
 PUSHA BP
 PUSH -2
 ADD
@@ -452,34 +452,34 @@ LOADi
 PUSH 1
 ADDi
 STOREi
-JMP while2
-finwhile2:
+JMP while1
+finwhile1:
 PUSHA BP
 PUSH -2
+ADD
+PUSH 0
+STOREi
+while3:
+PUSHA BP
+PUSH -2
+ADD
+LOADi
+PUSH 2
+LTi
+JZ finwhile3
+PUSHA BP
+PUSH -4
 ADD
 PUSH 0
 STOREi
 while4:
 PUSHA BP
-PUSH -2
+PUSH -4
 ADD
 LOADi
 PUSH 2
 LTi
 JZ finwhile4
-PUSHA BP
-PUSH -4
-ADD
-PUSH 0
-STOREi
-while5:
-PUSHA BP
-PUSH -4
-ADD
-LOADi
-PUSH 2
-LTi
-JZ finwhile5
 PUSHA 3
 PUSH 4
 PUSHA BP
@@ -513,8 +513,8 @@ LOADi
 PUSH 1
 ADDi
 STOREi
-JMP while5
-finwhile5:
+JMP while4
+finwhile4:
 PUSHA BP
 PUSH -2
 ADD
@@ -525,6 +525,6 @@ LOADi
 PUSH 1
 ADDi
 STOREi
-JMP while4
-finwhile4:
+JMP while3
+finwhile3:
 RET 0, 4, 0

@@ -117,7 +117,6 @@ public class ASTPrinter extends DefaultVisitor {
 		print(indent + 1, "nombre", "String", node.getNombre());
 		visit(indent + 1, "tipo", "Tipo",node.getTipo());
 		print(indent + 1, "ambito", "String", node.getAmbito());
-		print(indent + 1, "direccion", "int", node.getDireccion());
 		return null;
 	}
 
@@ -200,7 +199,6 @@ public class ASTPrinter extends DefaultVisitor {
 
 		print(indent + 1, "string", "String", node.getString());
 		visit(indent + 1, "tipo", "Tipo",node.getTipo());
-		print(indent + 1, "direccion", "int", node.getDireccion());
 		return null;
 	}
 
@@ -227,6 +225,19 @@ public class ASTPrinter extends DefaultVisitor {
 		return null;
 	}
 
+	//	class For { Asignacion i;  Expr condicion;  Asignacion cambio;  List<Sent_func> sent_func; }
+	public Object visit(For node, Object param) {
+		int indent = ((Integer)param).intValue();
+
+		printName(indent, "For", node, false);
+
+		visit(indent + 1, "i", "Asignacion",node.getI());
+		visit(indent + 1, "condicion", "Expr",node.getCondicion());
+		visit(indent + 1, "cambio", "Asignacion",node.getCambio());
+		visit(indent + 1, "sent_func", "List<Sent_func>",node.getSent_func());
+		return null;
+	}
+
 	//	class Print { Expr expr; }
 	public Object visit(Print node, Object param) {
 		int indent = ((Integer)param).intValue();
@@ -247,14 +258,14 @@ public class ASTPrinter extends DefaultVisitor {
 		return null;
 	}
 
-	//	class Asignacion { Expr izq;  Expr der; }
+	//	class Asignacion { Expr izq;  List<Expr> der; }
 	public Object visit(Asignacion node, Object param) {
 		int indent = ((Integer)param).intValue();
 
 		printName(indent, "Asignacion", node, false);
 
 		visit(indent + 1, "izq", "Expr",node.getIzq());
-		visit(indent + 1, "der", "Expr",node.getDer());
+		visit(indent + 1, "der", "List<Expr>",node.getDer());
 		return null;
 	}
 

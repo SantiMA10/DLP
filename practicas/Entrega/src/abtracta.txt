@@ -18,6 +18,7 @@ parametro -> string tipo;
 
 if:sent_func -> expr verdadero:sent_func* falso:sent_func*;
 while:sent_func -> expr sent_func*;
+for:sent_func -> i:asignacion condicion:expr cambio:asignacion sent_func*;
 print:sent_func -> expr;
 read:sent_func -> expr;
 asignacion:sent_func -> izq:expr der:expr*;

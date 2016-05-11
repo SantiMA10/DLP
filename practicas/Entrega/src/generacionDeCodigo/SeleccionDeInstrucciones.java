@@ -17,6 +17,7 @@ import ast.DefVar;
 import ast.Expr;
 import ast.ExpresionLogica;
 import ast.ExpresionNumerica;
+import ast.For;
 import ast.If;
 import ast.IntType;
 import ast.Invocacion;
@@ -45,6 +46,7 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 	private Map<String, String> instruccion = new HashMap<String, String>();
 	private int contadorIfs = 0;
 	private int contadorWhile = 0;
+	private int contadorFor = 0;
 
 	public SeleccionDeInstrucciones(Writer writer, String sourceFile) {
 		this.writer = new PrintWriter(writer);
@@ -393,6 +395,30 @@ public class SeleccionDeInstrucciones extends DefaultVisitor {
 			visit(node, Funcion.DIRECCION);
 			genera("LOAD", node.getTipo());
 		}
+
+		return null;
+	}
+	
+	//	class For { Asignacion i;  Expr condicion;  Asignacion cambio;  List<Expr> expr; }
+	public Object visit(For node, Object param) {
+
+		// super.visit(node, param);
+		int contadorFor = this.contadorFor;
+		this.contadorFor++;
+		node.getI().accept(this, param);
+		
+		genera("for" + contadorFor + ":");
+		node.getCondicion().accept(this, param);
+		genera("JZ finfor" + contadorFor);
+
+		if (node.getSent_func() != null)
+			for (Sent_func child : node.getSent_func())
+				child.accept(this, param);
+		
+		node.getCambio().accept(this, param);
+		genera("JMP for" + contadorFor);
+		
+		genera("finfor" + contadorFor + ":");
 
 		return null;
 	}

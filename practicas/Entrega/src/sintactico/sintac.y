@@ -84,6 +84,14 @@ sentencia_local: expr '=' asignado ';'																{ $$ = new Asignacion($1, 
 			   | 'WHILE' '(' expr ')' '{' sentencias_locales '}'									{ $$ = new While($3, $6); }
 			   | 'IDENT' '(' paso_parametros_ ')' ';'												{ $$ = new Invocacion($1, $3, "llamada"); }
 			   | 'RETURN' expr ';'																	{ $$ = new Return($2); }
+			   | 'FOR' '(' expr '=' expr ';' expr ';' expr '=' expr ')' '{' sentencias_locales '}'	
+			   									{ 	
+			   										ArrayList<Expr> list1 = new ArrayList<Expr>(); 
+			   										list1.add((Expr)$5);
+			   										ArrayList<Expr> list2 = new ArrayList<Expr>(); 
+			   										list2.add((Expr)$11);
+			   										$$ = new For(new Asignacion($3, list1), $7, new Asignacion($9, list2), $14); 
+			   									}
 			   | 'RETURN' ';'																		{ $$ = new Return(null); }
 			   ;
 

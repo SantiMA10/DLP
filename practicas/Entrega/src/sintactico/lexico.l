@@ -62,6 +62,7 @@ struct						{ return Parser.STRUCT; }
 var 						{ return Parser.VAR; }
 cast 						{ return Parser.CAST; }
 return 						{ return Parser.RETURN; }
+for							{ return Parser.FOR; }
 
 [a-zA-ZÒ—][a-zA-Z0-9Ò—]*	{ return Parser.IDENT; }
 
