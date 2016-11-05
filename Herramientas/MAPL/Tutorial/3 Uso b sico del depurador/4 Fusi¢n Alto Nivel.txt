@@ -1,0 +1,93 @@
+#source "Fusion Alto Nivel.Source.txt"
+
+#var f:real
+#var cont:int
+
+
+#line 24
+pusha 4
+push 2
+store
+
+#line 26
+pusha 0
+pushf 2.5
+storef
+
+#line 28
+inicioWhile1:
+
+#line 29
+pusha 4
+load
+push 0
+gt
+jz finWhile1
+
+#line 30
+pusha 4
+pusha 4
+load
+push 1
+sub
+store
+
+jmp inicioWhile1
+#line 31
+finWhile1:
+
+#line 34
+pusha 4
+in
+store
+
+#line 37
+pusha 4
+load
+push 20
+lt
+pusha 0
+loadf
+pushf 12.5
+gtf
+or
+
+jz else1
+
+#line 38
+push 5
+out
+jmp finIF1
+
+#line 40
+else1:
+
+#line 41
+pusha 4
+load 
+push 7
+add
+out
+
+#line 42
+finIF1:
+
+
+
+#line 48
+pusha 0
+loadf
+pusha 4
+load
+i2f
+addf
+outf
+
+#line 51
+pusha 0
+loadf
+pusha 4
+load
+i2f
+addf
+outf

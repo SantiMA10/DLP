@@ -1,0 +1,18 @@
+CATEGORIES
+expresion, sentencia, tipo
+
+NODES
+programa -> nombre:string definiciones:defVariable* sentencias:sentencia*;
+
+defVariable -> tipo nombre:string;
+
+intType:tipo ->  ;
+realType:tipo -> ;
+
+print:sentencia -> expresion;
+asignacion:sentencia -> left:expresion right:expresion;
+return:sentencia -> expresion;
+
+exprAritmetica:expresion -> left:expresion operador:string right:expresion;
+variable:expresion -> string;
+literalInt:expresion -> valor:string;

@@ -1,0 +1,20 @@
+---------------------------
+Versión 1.2
+
+1) Aspectos sin corregir:
+
+- Si el programa de entrada tiene un bucle infinito (cosa que no debería) hay que detectar antes de que se acabe la memoria que ésto va a ocurrir. Si se espera a la excepción 'OutOfMemory' de .NET el sistema intenta utilizar memoria virtual y la paginación hace que el ordenador se ralentice enormemente. En espera de que añadan a .NET otra forma de saber si se acaba la memoria sin esperar a que tire de paginación.
+
+- Si el programa de entrada tiene un bucle infinito (cosa que no debería) al ejecutarlo la memoria del depurador se acaba y éste se detiene pero el thread de ejecución no avisa al thread del interfaz de usuario para que se lo comunique al usuario. El programa parece ejecutando pero está parado. Problema derivado del anterior.
+
+
+2) Aspectos sin implementar
+- Opciones sin implementar en la ventana principal (en gris): Estadísticas, Agrupaciones, Ayuda.
+- Opciones sin implementar en la barra de botones (en gris): Dirección y Variable.
+¿Voluntarios?
+
+
+---------------------
+raul@uniovi.es
+Área de Lenguajes y Sistemas Informáticos
+Universidad de Oviedo

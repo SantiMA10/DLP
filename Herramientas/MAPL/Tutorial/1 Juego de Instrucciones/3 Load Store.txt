@@ -1,0 +1,29 @@
+' Movimiento de bytes
+
+' 1) De la pila a la memoria
+' (asignar valor a una variable)
+
+pusha 0	'Dirección 0
+push 9999	'Valor 9999
+store		'Mover 2 bytes a memoria
+
+pusha 2		
+pushf 1111
+storef		'Mover 4 bytes a memoria
+
+
+' 2) De la memoria a la pila
+' (coger valor de una variable)
+
+pusha 0	'Dirección 0
+load		'Cargar 2 bytes
+
+pusha 2
+loadf		'Cargar 4 bytes
+
+popf
+pop
+
+halt
+
+

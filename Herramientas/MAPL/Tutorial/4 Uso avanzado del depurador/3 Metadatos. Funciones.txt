@@ -1,0 +1,58 @@
+' 1) Metadatos (avanzado II)
+' El depurador incluye directivas para
+' indicar el nombre, parámetros, 
+' variables locales y tipo de retorno
+' de las funciones.
+
+' Directivas:
+' #func <nombre>
+' #param <nombre>:<tipo>
+' #ret <tipo> / #ret void
+' #local <nombre>:<tipo>
+'
+' Pueden colocarse en cualquier lugar
+' del fichero (la información de cada
+' función puede ir junto con su 
+' código - antes o después - o bien
+' se puede juntar la información de
+' todas las funciones).
+'
+#func Calcula
+#param numero:int
+#param radio:real
+#ret int
+#local persona: {
+ edad:int
+ altura:int
+}
+
+push 12
+push 24
+pushf 35.50
+call Calcula
+add
+out
+halt
+
+
+' Ventaja 1. Nada más entrar en una 
+' función ya se muestra el nombre, 
+' tipo y direccion relativa (BP) de
+' cada parámetro (en violeta de 1016
+' a 1021)
+Calcula:
+nop
+enter 4
+
+' Ventaja 2. Se muestran los nombres de
+' las variables locales y su dirección
+' relativa
+nop
+
+pusha bp
+push 8
+add
+load
+
+ret 2, 4, 6
+

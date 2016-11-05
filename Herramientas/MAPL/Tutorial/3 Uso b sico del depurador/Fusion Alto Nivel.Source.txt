@@ -1,0 +1,54 @@
+/* Enlace con fichero fuente
+
+ Con #source y #line se puede asociar
+ cada instrucción con la línea del 
+ fichero fuente por la cual se genera.
+ El depurador usa esta información para
+ presentar ambos ficheros entrelazados
+ como aparecen aquí. Así se facilita
+ la revisión del código generado.
+
+ Usar Notepad para ver cómo se han
+ utilizado #source y #line en
+ el fichero "4 Fusión Alto Nivel.txt".
+
+ El enlazado de ficheros se utiliza
+ aquí para mostrar el código a generar
+ ante sentencias comunes.
+*/
+
+float f;
+int cont;
+
+// Asignaciones ---------------------
+cont = 2;
+
+f = 2.5;
+
+// Bucles ---------------------------
+while (cont > 0) {
+	cont = cont - 1;
+}
+
+// Lectura de entrada estándar ------
+read cont; 
+
+// Condiciones ----------------------
+if (cont < 20 || f > 12.5) {
+	print 5; // Escritura 
+} 
+else {
+	print cont + 7; 
+}
+
+
+// Conversiones (casts) -------------
+
+// 1. Conversión explícita
+print f + (float) cont;	
+
+// 2. Conversión implícita
+print f + cont;		
+
+// Ambas generan el mismo código
+

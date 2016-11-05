@@ -1,0 +1,91 @@
+' Instrucciones
+' - Detenerse en la instrucción que
+'    sigue a cada explicación.
+' - F7 para ejecutar una instrucción
+' - F6 para retroceder
+'
+pushf 12.3
+
+' 1) Valores lógicos.
+' En la Vista de la Pila se muestran
+' los bytes que hay en ella (columna 2)
+' y el valor que representan (12,3 en
+' la columna 3)
+
+' Haga doble-click sobre '0004 nop' 
+' para continuar
+
+f2i
+push 24
+add
+
+' 2) Origen de los valores.
+' En cada valor de la pila se
+' muestra cómo se ha llegado a él
+' (el 36 se obtuvo de una suma):
+' 	36 = int(12,3) + 24
+'
+nop
+
+' 3) Acciones sobre un valor.
+' Para obtener más información sobre
+' un valor y sus acciones:
+' - Situar el ratón sobre el valor 36
+' - Aparecerá un icono de ayuda
+' - Pulsar sobre el icono.
+'
+' Las acciones posibles dependen
+' del tipo de valor.
+' Con el valor 36 se puede:
+' - Mostrar la instrucción que 
+'   introdujo el valor en la pila.
+' - Retroceder la ejecución a
+'   dicho momento.
+'
+' Ejecute ambas acciones y luego 
+' continúe con F7 hasta '0019 nop' 
+
+pop
+pusha 0
+push 24
+store
+
+pusha 2
+pushf 5
+storef
+
+pusha 2
+pushf 2.5
+pusha 0
+load
+i2f
+
+mulf
+storef
+
+' 4) Inferencia de variables.
+' Cuando se realiza un acceso a 
+' memoria se marca dicha posición
+' con un nombre "VarN" para que se
+' pueda comprobar si se está accediendo
+' a lugares adecuados de la memoria.
+'
+' En este caso se ha accedido a las
+' direcciones 0 y 2 (Var0 y Var2).
+'
+' A partir de ese momento se comprueba
+' que los accesos posteriores sean
+' del mismo tipo.
+nop
+
+' 5) Acciones sobre una variable.
+' Pulsando sobre el icono de ayuda de
+' "Var2" se obtiene la información:
+' - Qué instrucción fue la primera en
+'   acceder a esa memoria (inferencia).
+' - Cuál fue la última.
+' - Cómo se obtuvo el valor que guarda.
+' - Acciones para mostrar/volver al
+'   momento de la primera escritura
+'   (inferencia) o de la última.
+nop

@@ -1,0 +1,107 @@
+' 1) Incidencias
+'
+' Un intérprete se detiene ante 
+' situaciones que impiden continuar
+' con la ejecución (errores):
+' - Accessos a memoria fuera de rango
+' - División por cero
+' - Pila llena o vacía
+' - IP con valor fuera de rango
+'
+' Cuando un programa tiene fallos,
+' estos son más difíciles de detectar
+' si, en vez de producir los errores
+' anteriores, continúan la ejecución
+' sin que se advierta que algo se ha
+' hecho mal (escribir en la dirección
+' incorrecta, tipo no adecuado, etc).
+'
+' Para detectar estas situaciones el
+' depurador recoge información durante
+' la ejecución que le permite detectar
+' situaciones anómalas (warnings) que
+' suelen indicar que el programa tiene
+' fallos.
+'
+' Es necesario saber cómo actuar cuando
+' el depurado señale estos warnings.
+nop
+
+' Ejemplo 1. Se toman dos char como un
+' entero.
+' Ejecutar hasta el "0005 nop" y mirar
+' en el panel de Incidencias 
+pushb 12
+pushb 13
+push 4
+add
+nop
+
+' Ejemplo 2. El segundo pop no retira
+' un valor completo
+pop
+pushf 34.78
+pop
+nop
+
+' Ejemplo 3. La suma de direcciones no
+' tiene sentido
+pop
+pusha 32
+pusha 44
+add
+nop
+
+' Ejemplo 4. Lectura de variable sin
+' inicializar
+pop
+pusha 0
+load
+nop
+
+' Ejemplo 5. Acceso incorrecto a una
+' variable. 
+pop
+pusha 0
+pushb 27
+storeb
+' Pulsando el icono de ayuda de
+' "Var0" aparece la opción de mostrar o
+' volver a la instrucción que realizó 
+' la escritura que corrompió el valor
+nop
+
+' Ejemplo 6. Acceso a memoria que no
+' se corresponde con una variable.
+push 4
+push 5
+pusha 1021
+push 0
+store
+' Pulsar icono de ayuda en la dirección
+' 1020 o en la 1022 para más opciones
+nop
+
+' 2) Vista de Incidencias (warnings).
+' No es necesario ir instrucción a 
+' instrucción para comprobar si hay
+' fallos en un programa. Lo normal será
+' ejecutar todo el programa (F5) y 
+' observar el panel de incidencias.
+' Si aparece alguna se tienen dos
+' opciones:
+' - Mostrar la instrucción que causó
+'   la incidencia (click sobre ella)
+' - Volver al momento de la incidencia
+'   para ver qué había en la pila
+'   (doble-click)
+'
+' Haga "click" sobre alguna incidencia
+' para saber qué instrucción la produjo
+' y finalmente haga "doble+click" sobre 
+' alguna incidencia para retroceder la
+' ejecución al momento en el que se
+' produjo y poder observar la pila
+nop
+
+halt

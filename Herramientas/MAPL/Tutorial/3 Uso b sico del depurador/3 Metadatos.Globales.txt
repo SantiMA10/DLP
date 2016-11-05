@@ -1,0 +1,59 @@
+' 1) Metadatos (básico)
+' Con la inferencia de variables (ver
+' "1 Info sobre valores.mp") había que
+' esperar a los accesos a memoria para
+' que las variables se dibujaran.
+'
+' Se puede indicar al depurador la
+' posición y el nombre de las variables
+' para facilitar la depuración:
+
+#var edad:int
+#var inicial:char
+#var vector:3 * int	' Array de 3 int
+
+' Nótese que las variables ya están
+' dibujadas en la Memoria Estática y
+' con los mismos nombres que en el
+' programa de alto nivel (en vez de
+' llamarse todas "VarN")
+nop
+
+' Sintaxis:
+' #var <nombre>:<tipo>
+
+' Tipos básicos:
+' - int
+' - real/float (sinónimos)
+' - byte/char (sinónimos)
+' - n * <tipo> (array de n elementos)
+'
+' En la versión avanzada del tutorial
+' aparecerán el resto de los tipos 
+' (estructuras, punteros y tipos de 
+' usuario)
+nop
+pusha 3
+
+' Otra ventaja de describir las
+' variables con #var es que se va
+' indicando en la pila a qué variable
+' apunta una dirección. Se muestra en
+' la pila que el 3 es la dirección
+' de vector[0]
+'
+push 2
+add
+
+' Ahora es la dirección de vector[1]
+push 1
+add
+
+' Y además el verificador avisa si se
+' tiene una dirección inválida por no
+' coincidir con el inicio de ninguna
+' variable
+nop
+
+pop
+halt

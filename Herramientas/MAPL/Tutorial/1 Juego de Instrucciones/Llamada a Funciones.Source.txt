@@ -1,0 +1,15 @@
+
+void america
+{
+	print 1492;
+}
+
+
+void main()
+{
+	print 1;
+
+	america();
+
+	print 2;
+}

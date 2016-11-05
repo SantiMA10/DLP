@@ -1,0 +1,58 @@
+' - Pulse F7 para ejecutar cada 
+'   instrucción
+' - Pulse F6 para retroceder
+
+' 1. Manipulación básica de la pila
+push 10	'Meter entero en la pila
+pop		'Sacar valor de la pila
+
+pushf 5.4	'Meter valor real
+dupf		'Duplicar valor de la cima
+popf
+popf
+
+pushb 100	'Meter byte/char (sinónimos)
+dupb		'Duplicar valor de la cima
+popb
+popb
+
+' 2. Operaciones Aritméticas
+push 10
+push 20
+add		'Sumar valores de la cima
+
+pushf 3.4
+pushf 5.2
+subf		'Restar
+
+pushf 5
+pushf 2
+divf		'Dividir reales
+
+push 5
+push 2
+div		'Dividir enteros
+
+pop
+
+' 3. Conversiones
+pushb 30
+b2i	'Convertir byte a int (b=byte/i=int)
+i2f	'Convertir int a float
+mulf
+
+f2i	'float a int
+i2b	'int a byte
+
+' 4. Entrada/Salida
+outb	'Escribir en pantalla carácter
+outf	'Escribir float
+
+inf	'Leer float y dejarlo en la pila
+f2i
+mod	'Dividir y meter el resto
+out
+
+nop	'No Operation. No hace nada
+
+halt	'Fin del programa (opcional)

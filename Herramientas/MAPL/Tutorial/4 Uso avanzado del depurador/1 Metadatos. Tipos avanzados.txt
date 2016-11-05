@@ -1,0 +1,128 @@
+' Instrucciones
+' - Detenerse en la instrucción que
+'    sigue a cada explicación.
+' - F7 para ejecutar una instrucción
+' - F6 para retroceder
+
+' Metadatos (avanzado I)
+' El depurador incluye directivas
+' para indicar el nombre y tipo de
+' los símbolos del programa.
+
+#var contador:int
+#var letra:char
+nop
+
+' 1) Definiciónes de tipos avanzados
+' #var <nombre>:<tipo>
+
+' Tipos disponibles:
+' - int
+' - real/float (sinónimos)
+' - byte/char (sinónimos)
+' - address (dirección/puntero)
+' - n * <tipo> (array de n elementos)
+' - { <campos> } (struct)
+' - <tipo_usuario> (definido con #type)
+
+#var juan: {	' Estructura
+	edad:int
+	sueldo:real
+}
+
+#var modelo: 2 * {   ' Array de 2 Struct
+	letra:char
+	valor:int
+}
+
+#var inicio:address	  ' Puntero
+
+' El resultado de las directivas
+' anteriores se muestra en el panel
+' de memoria estática.
+nop
+
+' 2) Definición de tipos de usuario:
+' #type <nombre>:<tipo>
+
+#type Vector:3*int
+#var origen:Vector
+nop
+
+#type Punto: {
+  x:int
+  y:int
+}
+#type Circulo: {
+  centro:Punto
+  radio:real
+}
+#type Circulos: 2 * Circulo
+
+#var mapa: Circulos
+' Equivalente a:
+' #var mapa: 2 * {
+'	centro: {
+'		x:int
+'		y:int
+'	}
+' 	radio:real
+' }	
+'
+nop
+
+' Estas directivas son opcionales.
+' Sin embargo es muy sencillo hacer
+' que el Generador de Código las añada
+' y con ello:
+' - Se muestra la disposición de las
+'   variables desde el inicio sin
+'   esperar a su primer acceso.
+' - Se muestra su nombre real en vez
+'   de "VarN".
+' - Si es una estructura se muestran
+'   los nombres de los campos.
+' - Si es un array se muestra el
+'   índice de cada elemento.
+' - Se tiene más información para la
+'   detección de errores.
+nop
+
+pusha 23
+push 8
+add
+push 2
+add
+' A medida que se va operando con una
+' dirección se muestra qué variable
+' la ocupa:
+'  33 --> mapa[1].centro.y
+nop
+
+
+push 1
+sub
+' El verificador avisa si se ha sumado 
+' un desplazamiento incorrecto
+nop
+
+
+push 1
+add
+push 24
+store
+
+
+pusha 50
+load
+' El tener información de todas las
+' variables permite detectar accessos
+' a memoria no reservada.
+' Si no se hubieran declarado las
+' variables con #var, se hubiera
+' inferido erroneamente que en la
+' dirección 50 había una variable. En
+' cambio de esta manera se ha detectado
+' que la dirección no es correcta.
+nop
+
