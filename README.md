@@ -1,10 +1,10 @@
 # DLP
 
-##Descripcion
+## Descripcion
 
 Lenguaje diseño como entrega para la asignatura Diseño de Lenguajes de Programación de Ingeniería Informática del Software por la Universidad de Oviedo.
 
-##Contenido 
+## Contenido 
 
 El enuncionado de referencia se encuentra en la raíz del repositorio.
 
@@ -12,7 +12,7 @@ Para el desarrollo de la prática se utilizaron dos herramientas:
 * VGen para general la gramática abstracta.
 * MAPL para ejecutar el código maquina que genera el lenguaje.
 
-##Licencia
+## Licencia
 
 The MIT License (MIT)
 
